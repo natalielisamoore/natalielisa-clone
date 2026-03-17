@@ -65,8 +65,8 @@
 
       // Very short metallic tink — inharmonic partials, fast decay
       const partials = [
-        { ratio: 1.0,   vol: 0.18, decay: 0.12 },
-        { ratio: 2.756, vol: 0.08, decay: 0.07 },
+        { ratio: 1.0,   vol: 0.04, decay: 0.08 },
+        { ratio: 2.756, vol: 0.02, decay: 0.05 },
       ];
 
       partials.forEach(({ ratio, vol, decay }) => {
@@ -154,8 +154,8 @@
       lastSparkleTime = now;
     }
 
-    // Sound — rapid tiny tinks, close together
-    if (soundReady && now - lastSoundTime > 40 + Math.random() * 60) {
+    // Sound — tight clusters following the mouse
+    if (soundReady && now - lastSoundTime > 18 + Math.random() * 25) {
       playFairyChime();
       lastSoundTime = now;
     }
