@@ -30,36 +30,51 @@
   document.addEventListener('keydown',   initAudio);
   document.addEventListener('mousemove', initAudio, { once: true });
 
-  function playTinkle() {
+  function playFairyChime() {
     if (!soundReady || !audioCtx || audioCtx.state !== 'running') return;
     try {
-      const now  = audioCtx.currentTime;
-      const freq = 1400 + Math.random() * 1600;   // 1400–3000 Hz — bright, airy
+      const now = audioCtx.currentTime;
 
-      const osc       = audioCtx.createOscillator();
-      const gain      = audioCtx.createGain();
-      const delay     = audioCtx.createDelay(0.6);
-      const delayGain = audioCtx.createGain();
+      // Pentatonic scale — notes always sound harmonious, never jarring
+      const notes = [1047, 1175, 1319, 1568, 1760, 2093, 2349, 2637];
+      const base  = notes[Math.floor(Math.random() * notes.length)];
 
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(freq, now);
-      osc.frequency.exponentialRampToValueAtTime(freq * 0.6, now + 0.3);
+      // Shared soft reverb (two gentle echoes)
+      const rev1 = audioCtx.createDelay(1.0);  rev1.delayTime.value = 0.18;
+      const rev2 = audioCtx.createDelay(1.0);  rev2.delayTime.value = 0.36;
+      const revG1 = audioCtx.createGain();      revG1.gain.value = 0.18;
+      const revG2 = audioCtx.createGain();      revG2.gain.value = 0.09;
+      rev1.connect(revG1); revG1.connect(audioCtx.destination);
+      rev2.connect(revG2); revG2.connect(audioCtx.destination);
 
-      gain.gain.setValueAtTime(0, now);
-      gain.gain.linearRampToValueAtTime(0.09, now + 0.005);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.6);
+      // Bell partials: fundamental + octave + soft inharmonic shimmer
+      const partials = [
+        { ratio: 1,    vol: 0.055 },
+        { ratio: 2,    vol: 0.025 },
+        { ratio: 4.07, vol: 0.010 },  // inharmonic — gives bell its 'ring'
+      ];
 
-      delay.delayTime.value = 0.1;
-      delayGain.gain.value  = 0.3;
+      partials.forEach(({ ratio, vol }) => {
+        const osc  = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
 
-      osc.connect(gain);
-      gain.connect(audioCtx.destination);
-      gain.connect(delay);
-      delay.connect(delayGain);
-      delayGain.connect(audioCtx.destination);
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(base * ratio, now);
 
-      osc.start(now);
-      osc.stop(now + 0.7);
+        // Lightning-fast attack, long airy decay — like a crystal bell
+        gain.gain.setValueAtTime(0,   now);
+        gain.gain.linearRampToValueAtTime(vol, now + 0.003);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + 2.0);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        gain.connect(rev1);
+        gain.connect(rev2);
+
+        osc.start(now);
+        osc.stop(now + 2.1);
+      });
+
     } catch (e) {}
   }
 
@@ -130,7 +145,7 @@
 
     // Sound — organic randomised timing
     if (soundReady && now - lastSoundTime > 100 + Math.random() * 160) {
-      playTinkle();
+      playFairyChime();
       lastSoundTime = now;
     }
   });
