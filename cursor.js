@@ -59,22 +59,14 @@
     try {
       const now = audioCtx.currentTime;
 
-      // Pentatonic scale — always harmonious together
-      const notes = [1200, 1350, 1500, 1800, 2000, 2400, 2700];
+      // High pentatonic — tiny, bright, like a miniature bell
+      const notes = [2800, 3200, 3600, 4000, 4500, 5000, 5600];
       const base  = notes[Math.floor(Math.random() * notes.length)];
 
-      // Soft reverb tail — airy space behind each ping
-      const rev  = audioCtx.createDelay(1.0); rev.delayTime.value = 0.22;
-      const revG = audioCtx.createGain();      revG.gain.value = 0.14;
-      rev.connect(revG); revG.connect(audioCtx.destination);
-
-      // Inharmonic partials — the EXACT ratios that give aluminum/metal its character
-      // (real struck metal doesn't have clean octaves — these non-integer ratios are key)
+      // Very short metallic tink — inharmonic partials, fast decay
       const partials = [
-        { ratio: 1.0,   vol: 0.20,  decay: 0.55 },  // fundamental ping
-        { ratio: 2.756, vol: 0.10,  decay: 0.30 },  // classic metallic overtone
-        { ratio: 5.404, vol: 0.05,  decay: 0.18 },  // high sparkle shimmer
-        { ratio: 8.933, vol: 0.02,  decay: 0.10 },  // ultra-high glitter dust
+        { ratio: 1.0,   vol: 0.18, decay: 0.12 },
+        { ratio: 2.756, vol: 0.08, decay: 0.07 },
       ];
 
       partials.forEach(({ ratio, vol, decay }) => {
@@ -84,16 +76,14 @@
         osc.type = 'sine';
         osc.frequency.setValueAtTime(base * ratio, now);
 
-        // Instant percussive attack (metal hits instantly), each partial decays at own rate
-        gain.gain.setValueAtTime(vol,    now);
+        gain.gain.setValueAtTime(vol, now);
         gain.gain.exponentialRampToValueAtTime(0.0001, now + decay);
 
         osc.connect(gain);
         gain.connect(audioCtx.destination);
-        gain.connect(rev);
 
         osc.start(now);
-        osc.stop(now + decay + 0.05);
+        osc.stop(now + decay + 0.02);
       });
 
     } catch (e) {}
@@ -164,8 +154,8 @@
       lastSparkleTime = now;
     }
 
-    // Sound — organic randomised timing
-    if (soundReady && now - lastSoundTime > 100 + Math.random() * 160) {
+    // Sound — rapid tiny tinks, close together
+    if (soundReady && now - lastSoundTime > 40 + Math.random() * 60) {
       playFairyChime();
       lastSoundTime = now;
     }
