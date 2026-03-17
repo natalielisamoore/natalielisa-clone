@@ -186,24 +186,44 @@
   }
 
   // ─────────────────────────────────────────────────────────────────
-  // APPROACH 1 — Bell Acoustics / Inharmonic Partials
+  // APPROACH 1 — Bell Acoustics / Inharmonic Partials (+ reverb tail, softer)
   // ─────────────────────────────────────────────────────────────────
   function play1() {
     if (!ready) return;
     const PARTIAL_RATIOS  = [1, 2.756, 5.404];
     const PARTIAL_WEIGHTS = [1.0, 0.35, 0.12];
     const now = audioCtx.currentTime;
+
+    // Long shimmer reverb bus — 55ms delay, slow feedback decay (~1.8s tail)
+    const revDelay = audioCtx.createDelay(0.12);
+    revDelay.delayTime.value = 0.055;
+    const revFB  = audioCtx.createGain();  revFB.gain.value  = 0.38; // slower fade = longer tail
+    const revHP  = audioCtx.createBiquadFilter();
+    revHP.type = 'highpass'; revHP.frequency.value = 2800; // only shimmer highs
+    const revOut = audioCtx.createGain();  revOut.gain.value = 0.22; // reverb quieter than dry
+    revDelay.connect(revHP);
+    revHP.connect(revOut);
+    revOut.connect(audioCtx.destination);
+    revDelay.connect(revFB);
+    revFB.connect(revDelay);
+    // Disconnect after tail fades (~2s)
+    setTimeout(() => {
+      try { revDelay.disconnect(); revFB.disconnect();
+            revHP.disconnect();    revOut.disconnect(); } catch (_) {}
+    }, 2200);
+
     const pingCount = 4 + Math.floor(Math.random() * 3);
     for (let i = 0; i < pingCount; i++) {
       const offset    = i * (0.008 + Math.random() * 0.014);
       const fund      = 1900 + Math.random() * 1700;
-      const decay     = 0.18 + Math.random() * 0.22;
-      const masterVol = 0.016 + Math.random() * 0.012;
+      const decay     = 0.22 + Math.random() * 0.28;   // slightly longer bell tail
+      const masterVol = 0.009 + Math.random() * 0.007; // softer: 0.009–0.016
       const pingGain  = audioCtx.createGain();
       pingGain.gain.setValueAtTime(0, now + offset);
       pingGain.gain.linearRampToValueAtTime(masterVol, now + offset + 0.0015);
       pingGain.gain.exponentialRampToValueAtTime(0.00012, now + offset + decay);
-      pingGain.connect(audioCtx.destination);
+      pingGain.connect(audioCtx.destination); // dry
+      pingGain.connect(revDelay);             // into reverb
       for (let p = 0; p < PARTIAL_RATIOS.length; p++) {
         const pFreq = fund * PARTIAL_RATIOS[p];
         if (pFreq > 20000) continue;
