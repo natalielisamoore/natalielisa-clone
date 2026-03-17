@@ -56,6 +56,8 @@
     const img = row.querySelector('.list-image-parent');
     if (!img) return;
 
+    // Clear Webflow's frozen inline opacity so CSS hover rule can take over
+    img.style.opacity = '';
     // Seed the image with an entry transform (JS-controlled)
     img.style.transform = 'translateY(14px) scale(1.07)';
 
