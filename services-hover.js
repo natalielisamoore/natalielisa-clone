@@ -21,14 +21,10 @@
       height: 100% !important;
     }
 
-    /* Image panel: JS controls transform; CSS handles opacity + entry transition */
+    /* Image panel: JS drives opacity + transform directly via inline style */
     .content-section .list-image-parent {
-      opacity: 0;
       will-change: transform, opacity;
-      transition: opacity 0.4s ease 0.08s;
-    }
-    .content-section .list-parent.sh-hovered .list-image-parent {
-      opacity: 1;
+      transition: opacity 0.4s ease;
     }
 
     /* LEARN MORE tag */
@@ -44,8 +40,8 @@
 
   /* ── Arc config ── */
   const X_RANGE  = 28;   // px left/right travel
-  const Y_ARC    = 14;   // px upward lift at the centre of the arc
-  const LERP_SPD = 0.10; // smoothing (lower = floatier)
+  const Y_ARC    = 14;   // px upward lift at centre
+  const LERP_SPD = 0.10;
 
   /* ── Per-row state ── */
   const rows = [];
@@ -56,10 +52,8 @@
     const img = row.querySelector('.list-image-parent');
     if (!img) return;
 
-    // Clear Webflow's frozen inline opacity so CSS hover rule can take over
-    img.style.opacity = '';
-    // Seed the image with an entry transform (JS-controlled)
-    img.style.transform = 'translateY(14px) scale(1.07)';
+    // JS owns opacity + transform — clear Webflow's frozen inline values first
+    img.style.cssText = 'opacity: 0; transform: translateY(14px) scale(1.07); transition: opacity 0.4s ease;';
 
     const state = { tx: 0, ty: 14, cx: 0, cy: 14, hovered: false };
     rows.push({ row, img, state });
@@ -67,12 +61,13 @@
     row.addEventListener('mouseenter', () => {
       row.classList.add('sh-hovered');
       state.hovered = true;
+      img.style.opacity = '1';
     });
 
     row.addEventListener('mouseleave', () => {
       row.classList.remove('sh-hovered');
       state.hovered = false;
-      // Spring back to resting
+      img.style.opacity = '0';
       state.tx = 0;
       state.ty = 0;
     });
@@ -82,11 +77,9 @@
       const rect     = row.getBoundingClientRect();
       const progress = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
 
-      // X: linear left→right across ±X_RANGE
       state.tx = (progress - 0.5) * 2 * X_RANGE;
 
-      // Y: rainbow arc — parabola peaking at centre (progress=0.5)
-      // At edges: 0, at centre: -Y_ARC (upward)
+      // Rainbow arc: parabola, highest at centre
       const arc = 1 - Math.pow((progress - 0.5) * 2, 2);
       state.ty  = -arc * Y_ARC;
     });
