@@ -342,15 +342,15 @@
     const PARTIAL_WEIGHTS = [1.0, 0.28, 0.09];
 
     // Shimmer bus
-    const shimmerDelay = audioCtx.createDelay(0.06);
-    shimmerDelay.delayTime.value = 0.028;
+    const shimmerDelay = audioCtx.createDelay(0.12);
+    shimmerDelay.delayTime.value = 0.055;
     const shimmerFB = audioCtx.createGain();
-    shimmerFB.gain.value = 0.20;
+    shimmerFB.gain.value = 0.44;  // higher = longer tail (~2.5s)
     const shimmerHP = audioCtx.createBiquadFilter();
     shimmerHP.type = 'highpass';
     shimmerHP.frequency.value = 3200;
     const shimmerOut = audioCtx.createGain();
-    shimmerOut.gain.value = 0.15;
+    shimmerOut.gain.value = 0.20;
     shimmerDelay.connect(shimmerHP);
     shimmerHP.connect(shimmerOut);
     shimmerOut.connect(audioCtx.destination);
@@ -359,9 +359,9 @@
     setTimeout(() => {
       try { shimmerDelay.disconnect(); shimmerFB.disconnect();
             shimmerHP.disconnect();    shimmerOut.disconnect(); } catch (_) {}
-    }, 1100);
+    }, 2800);
 
-    const pingCount = 4 + Math.floor(Math.random() * 3);
+    const pingCount = 2 + Math.floor(Math.random() * 2);   // 2–3 pings
     for (let i = 0; i < pingCount; i++) {
       const offset    = i * (0.007 + Math.random() * 0.013);
       const decay     = 0.18 + Math.random() * 0.25;
