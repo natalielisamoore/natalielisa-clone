@@ -9,7 +9,7 @@
   if (!section) return;
 
   /* ── Config ── */
-  const MAX_TRAVEL = 60; // px max shift in either direction
+  const MAX_TRAVEL = 18; // px max shift in either direction
 
   /* ── State ── */
   let currentOne = 0;
