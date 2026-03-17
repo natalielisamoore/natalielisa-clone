@@ -1,209 +1,171 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><title>Web Design — Natalie Lisa Moore</title><meta content="width=device-width, initial-scale=1" name="viewport"/><link href="../fonts.css" rel="stylesheet" type="text/css"/><link href="../style.css" rel="stylesheet" type="text/css"/><link href="https://cdn.prod.website-files.com/65c5586c812f9f3723ee3036/66569c76c0de5ae7fa67127a_n-favicon.png" rel="shortcut icon" type="image/x-icon"/><style>
-::-webkit-scrollbar{width:0px}
-body{-webkit-font-smoothing:antialiased;overflow-x:hidden}
+<!DOCTYPE html><!-- This site was created in Webflow. https://webflow.com --><!-- Last Published: Tue Mar 17 2026 20:49:38 GMT+0000 (Coordinated Universal Time) --><html data-wf-domain="natalielisa.com" data-wf-page="696305ec5def178938b4198c" data-wf-site="65c5586c812f9f3723ee3036" lang="en"><head><meta charset="utf-8"/><title>Web Design</title><meta content="Web Design" property="og:title"/><meta content="Web Design" property="twitter:title"/><meta content="width=device-width, initial-scale=1" name="viewport"/><meta content="Webflow" name="generator"/><link href="../fonts.css" rel="stylesheet" type="text/css"/><link href="../style.css" rel="stylesheet" type="text/css"/><script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script><link href="https://cdn.prod.website-files.com/65c5586c812f9f3723ee3036/66569c76c0de5ae7fa67127a_n-favicon.png" rel="shortcut icon" type="image/x-icon"/><link href="https://cdn.prod.website-files.com/65c5586c812f9f3723ee3036/6654bec1c59579bef8ee9cde_favicon.png" rel="apple-touch-icon"/><style>
+.no-scroll {
+    overflow:hidden;
+}
 
-/* ── Hero ── */
-.wd-hero{min-height:100vh;background:var(--ivory);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:0 2em;position:relative;overflow:hidden}
-.wd-hero-eyebrow{font-family:Ppneuemontreal Book,sans-serif;font-size:.85em;letter-spacing:.25em;text-transform:uppercase;opacity:.45;margin-bottom:1.8em}
-.wd-hero-heading{font-family:Ppplayground,sans-serif;font-size:clamp(3.5em,9vw,8.5em);line-height:1em;color:#000;margin:0;font-weight:400}
-.wd-hero-sub{font-family:Ppneuemontreal Book,sans-serif;font-size:1.05em;max-width:480px;margin:2em auto 0;line-height:1.7em;opacity:.6}
-.wd-scroll-hint{position:absolute;bottom:2.5em;font-family:Ppneuemontreal Book,sans-serif;font-size:.72em;letter-spacing:.18em;text-transform:uppercase;opacity:.35}
+body {
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+  overflow-y: scroll;
+overflow-x: hidden;
+}
+  
+::-webkit-scrollbar {
+    width: 0px;
+}
+  
+::-webkit-scrollbar-thumb {
+    background: #FF0000;
+}
+  
+  .nav-parent {
+     -webkit-perspective:<some value> !important; 
+-webkit-backface-visibility:none !important;
+ -webkit-transform-style: preserve !important;
+    -webkit-transform: translate3d(0, 0, 0);
+  }
+  
+  .burger-menu-parent {
+         -webkit-perspective:<some value> !important; 
+-webkit-backface-visibility:none !important;
+ -webkit-transform-style: preserve !important;
+    -webkit-transform: translate3d(0, 0, 0);
+  }
+  .flex-cc-h.menu {
+       -webkit-perspective:<some value> !important; 
+-webkit-backface-visibility:none !important;
+ -webkit-transform-style: preserve !important;
+    -webkit-transform: translate3d(0, 0, 0);
+  }
+  
+    @media screen and (min-width: 1600px) { 
+.tab-txt-wrap {
+    height: 80px;
+}
+      .tab-title {
 
-/* ── Intro ── */
-.wd-intro{background:var(--ivory);padding:6em 2em;max-width:860px;margin:0 auto;text-align:center}
-.wd-intro p{font-family:Ppneuemontreal Book,sans-serif;font-size:1.45em;line-height:1.75em;color:#000}
-.wd-intro p+p{margin-top:1.4em;font-size:1.1em;opacity:.65}
+    font-size: 80px;
+        line-height: 80px;
+      }
+      .nav {
+        height: 140px;
+      }
+      .burger-menu-parent {
+        padding: 15px;
+      }
+      
+  }
+</style>
 
-/* ── Work strip ── */
-.wd-work-strip{background:var(--ivory);padding:1em 0 5em}
-.wd-work-label{font-family:Ppneuemontreal Book,sans-serif;font-size:.8em;letter-spacing:.22em;text-transform:uppercase;opacity:.4;padding:0 3em;margin-bottom:1.8em}
-.wd-work-scroll{display:flex;gap:1.4em;overflow-x:auto;padding:0 3em 1em;scrollbar-width:none;cursor:grab;user-select:none}
-.wd-work-scroll:active{cursor:grabbing}
-.wd-work-scroll::-webkit-scrollbar{display:none}
-.wd-work-card{flex:0 0 36vw;height:50vh;border-radius:18px;background-size:cover;background-position:center;position:relative;overflow:hidden;border:1px solid rgba(0,0,0,.08)}
-.wd-work-card-label{position:absolute;bottom:1.2em;left:1.3em;font-family:Ppneuemontreal Book,sans-serif;font-size:.75em;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:rgba(0,0,0,.32);padding:.3em .85em;border-radius:50px;backdrop-filter:blur(6px)}
 
-/* ── Why Squarespace color blocks ── */
-.wd-why{background:var(--ivory);padding:5em 0 6em}
-.wd-why-heading{font-family:Ppplayground,sans-serif;font-size:clamp(2.5em,5vw,4.2em);font-weight:400;text-align:center;margin-bottom:1.2em;padding:0 2em}
-.wd-block{width:100%;border-top:1.5px solid #000;overflow:hidden;transition:background-color .45s ease}
-.wd-block:last-child{border-bottom:1.5px solid #000}
-.wd-block-trigger{display:flex;justify-content:space-between;align-items:center;padding:1.5em 3em;cursor:pointer}
-.wd-block-title{font-family:Ppneuemontreal Book,sans-serif;font-size:clamp(1.1em,2.2vw,1.65em);font-weight:400;margin:0}
-.wd-block-icon{width:26px;height:26px;position:relative;flex-shrink:0}
-.wd-block-icon::before,.wd-block-icon::after{content:'';position:absolute;background:#000}
-.wd-block-icon::before{width:2px;height:100%;left:50%;top:0;transform:translateX(-50%);transition:transform .3s ease,opacity .3s ease}
-.wd-block-icon::after{width:100%;height:2px;top:50%;left:0;transform:translateY(-50%)}
-.wd-block.is-open .wd-block-icon::before{transform:translateX(-50%) rotate(90deg);opacity:0}
-.wd-block-content{max-height:0;overflow:hidden;transition:max-height .52s cubic-bezier(.77,0,.175,1),padding .4s ease;padding:0 3em}
-.wd-block.is-open .wd-block-content{max-height:500px;padding:0 3em 2.8em}
-.wd-block-content p{font-family:Ppneuemontreal Book,sans-serif;font-size:1.05em;line-height:1.8em;max-width:720px}
-.wd-block.is-open.wd-lavender{background-color:var(--lavender)}
-.wd-block.is-open.wd-chartreuse{background-color:var(--chartuese)}
-.wd-block.is-open.wd-coral{background-color:var(--coral)}
-.wd-block.is-open.wd-pink{background-color:var(--light-pink)}
 
-/* ── Testimonial ── */
-.wd-testimonial{background:#0e0e0e;color:#fff;padding:8em 3em;text-align:center}
-.wd-testimonial-label{font-family:Ppneuemontreal Book,sans-serif;font-size:.78em;letter-spacing:.28em;text-transform:uppercase;opacity:.35;margin-bottom:2.8em}
-.wd-testimonial-quote{font-family:Ppplayground,sans-serif;font-size:clamp(2em,4.5vw,4em);font-weight:400;line-height:1.25em;max-width:920px;margin:0 auto 2.2em}
-.wd-testimonial-highlight{color:var(--light-pink)}
-.wd-testimonial-attribution{font-family:Ppneuemontreal Book,sans-serif;font-size:.88em;letter-spacing:.1em;opacity:.4;text-transform:uppercase}
 
-/* ── FAQ ── */
-.wd-faq-wrap{background:var(--ivory);padding:6em 3em;max-width:900px;margin:0 auto}
-.wd-faq-heading{font-family:Ppplayground,sans-serif;font-size:clamp(2.5em,5vw,4em);font-weight:400;margin-bottom:1.5em}
-.wd-faq-item{border-top:1.5px solid #000}
-.wd-faq-item:last-child{border-bottom:1.5px solid #000}
-.wd-faq-trigger{display:flex;justify-content:space-between;align-items:center;padding:1.3em 0;cursor:pointer;gap:2em}
-.wd-faq-question{font-family:Ppneuemontreal Book,sans-serif;font-size:1.05em;font-weight:400}
-.wd-faq-icon{width:22px;height:22px;position:relative;flex-shrink:0}
-.wd-faq-icon::before,.wd-faq-icon::after{content:'';position:absolute;background:#000}
-.wd-faq-icon::before{width:2px;height:100%;left:50%;transform:translateX(-50%);transition:transform .3s ease,opacity .3s ease}
-.wd-faq-icon::after{width:100%;height:2px;top:50%;transform:translateY(-50%)}
-.wd-faq-item.is-open .wd-faq-icon::before{transform:translateX(-50%) rotate(90deg);opacity:0}
-.wd-faq-answer{max-height:0;overflow:hidden;transition:max-height .45s ease,padding .35s ease}
-.wd-faq-item.is-open .wd-faq-answer{max-height:400px;padding-bottom:1.6em}
-.wd-faq-answer p{font-family:Ppneuemontreal Book,sans-serif;font-size:1em;line-height:1.8em;opacity:.7}
 
-/* ── CTA ── */
-.wd-cta{background:var(--ivory);text-align:center;padding:7em 2em 9em}
-.wd-cta-heading{font-family:Ppplayground,sans-serif;font-size:clamp(3em,7vw,7em);font-weight:400;line-height:1.05em;margin:0 0 .3em}
-.wd-cta-underline{display:inline-block;width:140px;height:3px;background:var(--chartuese);margin-bottom:2.2em;border-radius:2px}
-.wd-cta-btn{display:inline-block;background:#000;color:#fff;font-family:Ppneuemontreal Book,sans-serif;font-size:.9em;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;padding:1em 3.2em;border-radius:50px;transition:background .25s,color .25s}
-.wd-cta-btn:hover{background:var(--chartuese);color:#000}
-</style></head><body>
 
-<!-- NAV -->
-<div data-animation="default" class="navbar1_component w-nav" role="banner"><div class="navbar1_container"><a href="../" class="navbar1_logo-link w-nav-brand"><img width="210" loading="lazy" alt="" src="../images/nav-logo.svg" class="navbar1_logo"/></a><div class="ham-cart-wrapper"><div data-w-id="7a5712d2-428a-76c4-82bd-60e573de2262" class="hamburber"><div class="burgerline top"></div><div class="burgerline middle"></div><div class="burgerline bottom"></div></div></div></div><div class="blacklinenavigator"></div></div>
 
-<!-- MENU PANEL -->
-<div class="menu-parent"><div class="menu-panel-left"><a data-w-id="c11a179f-79a2-9cc1-bc65-93d3d0d93969" href="../" class="menu-link-parent link1 w-inline-block"><div class="menu-text one">Home</div><img loading="lazy" src="../images/664aa81165e01ed75b2d58c7_Asset17.svg" alt="" class="arrow-menu"/><div class="card-whipe pinkshade-bg"></div><div class="menu-img-parent img1"><div class="img-child img-1"></div></div></a><a data-w-id="c11a179f-79a2-9cc1-bc65-93d3d0d93970" href="../work/" class="menu-link-parent w-inline-block"><div class="menu-text two">Work</div><img loading="lazy" src="../images/664aa81165e01ed75b2d58c7_Asset17.svg" alt="" class="arrow-menu"/><div class="card-whipe pinkshade-bg"></div><div class="menu-img-parent img2"><div class="img-child img-2"></div></div></a><a data-w-id="c11a179f-79a2-9cc1-bc65-93d3d0d9397e" href="../about/" class="menu-link-parent w-inline-block"><div class="menu-text four">About</div><img loading="lazy" src="../images/664aa81165e01ed75b2d58c7_Asset17.svg" alt="" class="arrow-menu"/><div class="card-whipe pinkshade-bg"></div><div class="menu-img-parent img4"><div class="img-child img-5"></div></div></a><a data-w-id="c11a179f-79a2-9cc1-bc65-93d3d0d93985" href="../contact/" class="menu-link-parent w-inline-block"><div class="menu-text five">Contact</div><img loading="lazy" src="../images/664aa81165e01ed75b2d58c7_Asset17.svg" alt="" class="arrow-menu"/><div class="card-whipe pinkshade-bg"></div><div class="menu-img-parent img5"><div class="img-child img-4"></div></div></a><a data-w-id="c11a179f-79a2-9cc1-bc65-93d3d0d93977" href="../playground/" class="menu-link-parent w-inline-block"><div class="menu-text three">Paintings</div><img loading="lazy" src="../images/664aa81165e01ed75b2d58c7_Asset17.svg" alt="" class="arrow-menu"/><div class="card-whipe pinkshade-bg"></div><div class="menu-img-parent img3"><div class="img-child img-3"></div></div></a></div><div class="rightpanel"><div class="imgbg"><img src="../images/65f381b584def4d6ffa4f815_natalie-in-space.jpg" loading="lazy" alt="" class="image-12"/></div></div></div>
 
-<!-- HERO -->
-<section class="wd-hero">
-  <div class="wd-hero-eyebrow">Web Design</div>
-  <h1 class="wd-hero-heading">Your website<br/>should feel<br/>like a world.</h1>
-  <p class="wd-hero-sub">Custom Squarespace websites that don't just look stunning — they work for you.</p>
-  <div class="wd-scroll-hint">Scroll to explore ↓</div>
-</section>
 
-<!-- INTRO -->
-<div class="wd-intro">
-  <p>Your website should do more than showcase your services. It should <strong>build trust</strong>, communicate your unique value, and guide visitors seamlessly toward booking with you.</p>
-  <p>I design custom Squarespace websites that are cohesive, intuitive, and deeply aligned with your brand — because your website is the final expression of your visual identity. I typically offer web design alongside branding to ensure the site feels seamless and intentional.</p>
-</div>
 
-<!-- WORK SHOWCASE STRIP -->
-<div class="wd-work-strip">
-  <div class="wd-work-label">Selected Work</div>
-  <div class="wd-work-scroll" id="wd-scroll">
-    <div class="wd-work-card" style="background-image:url('https://cdn.prod.website-files.com/65c5586c812f9f3723ee3036/66e249bd70bf9965b5967290_nat-laptop-mockup.jpg')"><div class="wd-work-card-label">Web Design</div></div>
-    <div class="wd-work-card" style="background-image:url('https://cdn.prod.website-files.com/65c5586c812f9f3723ee3036/65fb66f37f8c01bb3e7c9dc1_flow-paper-mockup5.web.jpg')"><div class="wd-work-card-label">Flow Brain Health</div></div>
-    <div class="wd-work-card" style="background-image:url('https://cdn.prod.website-files.com/65c5586c812f9f3723ee3036/65f8e0ea958b55d42035c667_crimsen-logo-design.png');background-color:#f5f0eb"><div class="wd-work-card-label">Crimsen</div></div>
-    <div class="wd-work-card" style="background-image:url('https://cdn.prod.website-files.com/65c5586c812f9f3723ee3036/65f90d562d51648a320bee93_Calmunion-Angel-Logo_Files-02.jpg')"><div class="wd-work-card-label">Calmunion</div></div>
-    <div class="wd-work-card" style="background-image:url('https://cdn.prod.website-files.com/65c5586c812f9f3723ee3036/65f909e8769b470586262d42_forestheart-socials-01.jpg')"><div class="wd-work-card-label">Forestheart</div></div>
-  </div>
-</div>
+<script type="text/javascript">window.__WEBFLOW_CURRENCY_SETTINGS = {"currencyCode":"CAD","symbol":"$","decimal":".","fractionDigits":2,"group":",","template":"{{wf {\"path\":\"symbol\",\"type\":\"PlainText\"} }} {{wf {\"path\":\"amount\",\"type\":\"CommercePrice\"} }} {{wf {\"path\":\"currencyCode\",\"type\":\"PlainText\"} }}","hideDecimalForWholeNumbers":false};</script></head><body><div data-animation="default" class="navbar1_component w-nav" data-easing2="ease" fs-scrolldisable-element="smart-nav" data-easing="ease" data-collapse="medium" data-w-id="7a5712d2-428a-76c4-82bd-60e573de2251" role="banner" data-duration="400"><div class="navbar1_container"><a href="../" class="navbar1_logo-link w-nav-brand"><img width="210" loading="lazy" alt="" src="../images/nav-logo.svg" class="navbar1_logo"/></a><div class="ham-cart-wrapper"><div data-w-id="7a5712d2-428a-76c4-82bd-60e573de2262" class="hamburber"><div class="burgerline top"></div><div class="burgerline middle"></div><div class="burgerline bottom"></div></div></div></div><div class="blacklinenavigator"></div></div><div class="menu-parent"><div class="menu-panel-left"><a data-w-id="c11a179f-79a2-9cc1-bc65-93d3d0d93969" href="../" class="menu-link-parent link1 w-inline-block"><div class="menu-text one">Home</div><img loading="lazy" src="../images/664aa81165e01ed75b2d58c7_Asset17.svg" alt="" class="arrow-menu"/><div class="card-whipe pinkshade-bg"></div><div class="menu-img-parent img1"><div class="img-child img-1"></div></div></a><a data-w-id="c11a179f-79a2-9cc1-bc65-93d3d0d93970" href="../work/" class="menu-link-parent w-inline-block"><div class="menu-text two">Work</div><img loading="lazy" src="../images/664aa81165e01ed75b2d58c7_Asset17.svg" alt="" class="arrow-menu"/><div class="card-whipe pinkshade-bg"></div><div class="menu-img-parent img2"><div class="img-child img-2"></div></div></a><a data-w-id="c11a179f-79a2-9cc1-bc65-93d3d0d9397e" href="../about/" class="menu-link-parent w-inline-block"><div class="menu-text four">About</div><img loading="lazy" src="../images/664aa81165e01ed75b2d58c7_Asset17.svg" alt="" class="arrow-menu"/><div class="card-whipe pinkshade-bg"></div><div class="menu-img-parent img4"><div class="img-child img-5"></div></div></a><a data-w-id="c11a179f-79a2-9cc1-bc65-93d3d0d93985" href="../contact/" class="menu-link-parent w-inline-block"><div class="menu-text five">Contact</div><img loading="lazy" src="../images/664aa81165e01ed75b2d58c7_Asset17.svg" alt="" class="arrow-menu"/><div class="card-whipe pinkshade-bg"></div><div class="menu-img-parent img5"><div class="img-child img-4"></div></div></a><a data-w-id="c11a179f-79a2-9cc1-bc65-93d3d0d93977" href="../playground/" class="menu-link-parent w-inline-block"><div class="menu-text three">Paintings</div><img loading="lazy" src="../images/664aa81165e01ed75b2d58c7_Asset17.svg" alt="" class="arrow-menu"/><div class="card-whipe pinkshade-bg"></div><div class="menu-img-parent img3"><div class="img-child img-3"></div></div></a></div><div class="rightpanel"><div class="imgbg"><img sizes="100vw" srcset="https://cdn.prod.website-files.com/65c5586c812f9f3723ee3036/65f381b584def4d6ffa4f815_natalie-in-space-p-500.jpg 500w, https://cdn.prod.website-files.com/65c5586c812f9f3723ee3036/65f381b584def4d6ffa4f815_natalie-in-space-p-800.jpg 800w, https://cdn.prod.website-files.com/65c5586c812f9f3723ee3036/65f381b584def4d6ffa4f815_natalie-in-space-p-1080.jpg 1080w, https://cdn.prod.website-files.com/65c5586c812f9f3723ee3036/65f381b584def4d6ffa4f815_natalie-in-space.jpg 1500w" alt="" src="https://cdn.prod.website-files.com/65c5586c812f9f3723ee3036/65f381b584def4d6ffa4f815_natalie-in-space.jpg" loading="lazy" class="image-12"/></div></div></div><section><div class="div-block-119"><div class="div-block-120"><h1 class="heading-49">I create custom Squarespace websites that don’t just look stunning—they work for you.</h1></div></div></section><section class="web-intro"><div class="w-layout-blockcontainer container-1440 w-container"><div data-w-id="246e53c5-d5dd-a278-cda1-40942cbb7c20" class="webservices-intro"><h1 class="heading-50">Your website should do <span class="text-span-10">more than</span> showcase <br/>‍<span class="text-span-11">your services</span>, it should build trust, <br/>‍<span class="communicate-textspan">communicate</span> your unique value, and guide visitors <span class="gradient-textspan">seamlessly</span> toward booking <br/>with <span class="you-textspan">you. </span></h1></div><div class="webdesign-photowrap"><div class="w-layout-grid grid-12"><div class="div-block-121"></div><div class="div-block-122"></div></div></div><div class="why-squarespace"><h1 class="heading-52">I design custom Squarespace websites that are cohesive, intuitive, and deeply aligned with your brand. Because your website is the final expression of your visual identity, I typically offer web design alongside my branding and/or photography services. This ensures the site feels seamless, intentional, an reflective of the world we’ve built together.</h1></div><div class="squarespace-wrap"><div class="whysquarespacept2"><h1 class="heading-53">Why Squarespace?</h1></div><div class="div-block-123"><div class="w-layout-grid grid-13"><div class="dropdownwrapper"><div data-w-id="25d5569c-b7e1-7015-2809-c8dda243c4dd" class="dropdowntrigger"><h1 class="heading-54">Built for beautiful, professional websites</h1></div><div style="height:0px" class="dropdowncontent2"><p class="paragraph-19">Squarespace offers stunning templates designed by award-winning professionals, perfect for showcasing your brand in a visually appealing way. With drag-and-drop functionality and customisable design tools, Squarespace makes it easy to create a beautiful website. However, to truly stand out and maintain a cohesive brand identity, working with an expert designer ensures your website is polished, professional, and optimized for your specific needs.</p></div></div><div class="dropdownwrapper2"><div data-w-id="a2c63f25-d220-6c86-2a43-94e50003d987" class="dropdowntrigger2"><h1 class="heading-55">All-In-One platform for business growth</h1></div><div style="height:0px" class="dropdowncontent2"><p class="paragraph-20">Squarespace is more than just a website builder—it’s a complete platform with built-in ecommerce, blogging, and appointment scheduling. Its tools allow businesses to expand into new areas effortlessly. A professional designer can further streamline this process, integrating these features in a way that matches your brand’s look and feel while keeping user experience smooth and intuitive.</p></div></div><div class="dropdownwrapper3"><div data-w-id="70f403af-f3e8-1e39-ec64-b448fd13574a" class="dropdowntrigger3"><h1 class="heading-56">SEO and Marketing Features at Your Fingertips</h1></div><div style="height:0px" class="dropdowncontent3"><p class="paragraph-21">With built-in SEO tools, email marketing integration, and social media sharing options, Squarespace helps you grow your online presence. A professional designer can amplify these tools by ensuring your site structure is SEO-friendly, and by creating conversion-optimized landing pages, which helps drive traffic and increase sales.</p></div></div><div class="dropdownwrapper4"><div data-w-id="d98374aa-3002-a615-09f4-bb1e7caf910c" class="dropdowntrigger4"><h1 class="heading-57">Secure, Reliable Hosting with 24/7 Support</h1></div><div style="height:0px" class="dropdowncontent4"><p class="paragraph-22">Squarespace provides secure hosting and around-the-clock customer support, allowing you to focus on running your business without worrying about website maintenance. When you work with a designer, you’re ensuring that your site is not only visually stunning but also built with best practices for performance, security, and mobile responsiveness, keeping your site fast and secure.</p></div></div></div></div></div></div></section><div class="whattheyaresaying-wrapper"><div class="div-block-128"><h1 class="heading-58">What they&#x27;re saying!</h1></div><div class="div-block-129"><p class="paragraph-18">I am obsessed with my website by Natalie Moore and her work speaks for itself so I will speak more to the process of working with her. <span class="text-span-bold-pink">It was such a beautiful in depth personal soulful creative experience.</span> She is edgy and brilliant, present, passionate and sophisticated. I would say I am highly creative but rather disorganized, she reigned me in and deftly crafted the correct frame for my offering while listening to my input, worked with me to extract the jewels and transformed my ideas into something so edgy, elegant and SO ME! Her flow is focused and playful and her attention to detail plus devotion to design is inspired.  Honestly I can&#x27;t recommend her enough.<br/><br/><br/>Qristine Hrvatin<br/>Hypnotherapist &amp; Guide</p></div></div><section class="faq"><div class="container-1440 w-container"><div class="div-block-131"><h1 class="heading-59">FAQ</h1></div><div class="cloneable-container-default"><div data-duration-in="300" data-duration-out="100" data-current="Tab 1" data-easing="ease" class="accordion-tabs---brix preview-page w-tabs"><div class="tabs-container---brix w-tab-content"><div data-w-tab="Tab 1" class="tab---brix w-tab-pane w--tab-active"><div class="accordion-item-wrapper---brix tabs-accordion---brix"><div data-w-id="33b4e9a4-ef49-f194-0d6f-02e36df66d5e" class="accordion-item---brix tabs-accordion---brix"><div class="accordion-trigger---brix"><div class="accordion-item-title---brix">What Squarespace services do you offer?</div><div class="open-close-icon-wrapper---brix"><div style="background-color:rgb(23,15,73)" class="open-close-line---brix"></div><div style="-webkit-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(90deg) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(90deg) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(90deg) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(90deg) skew(0, 0)" class="open-close-line---brix second-line---brix"></div></div></div><div style="height:0px;-webkit-transform:translate3d(0, 0, 0) scale3d(0.9, 0.9, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(0.9, 0.9, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(0.9, 0.9, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(0.9, 0.9, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="accordion-content---brix"><p class="accordion-paragraph---brix"><span class="text-span-bold-black"><strong>Squarespace Maintenance:</strong></span> Ongoing updates, performance monitoring, new design features, and content revisions to ensure your website runs smoothly.<br/><span class="text-span-bold-black">‍<strong>Custom Website Design:</strong></span> Unique, fully customised Squarespace websites built to reflect your brand identity and maximize user engagement.<br/><span class="text-span-bold-black">‍<strong>Website Strategy:</strong></span> A comprehensive analysis of your site’s current performance, including SEO, brand consistency, and user experience, along with actionable steps to drive growth and achieve your business goals.</p></div></div><div data-w-id="33b4e9a4-ef49-f194-0d6f-02e36df66d68" class="accordion-item---brix tabs-accordion---brix"><div class="accordion-trigger---brix"><div class="accordion-item-title---brix">How long does it take to build a custom Squarespace website?</div><div class="open-close-icon-wrapper---brix"><div style="background-color:rgb(23,15,73)" class="open-close-line---brix"></div><div style="-webkit-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(90deg) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(90deg) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(90deg) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(90deg) skew(0, 0)" class="open-close-line---brix second-line---brix"></div></div></div><div style="height:0px;-webkit-transform:translate3d(0, 0, 0) scale3d(0.9, 0.9, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(0.9, 0.9, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(0.9, 0.9, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(0.9, 0.9, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="accordion-content---brix"><p class="accordion-paragraph---brix">The timeline for a custom website varies depending on your needs. On average, a fully customised site can take between 4–6 weeks, from initial consultation to launch. I’ll provide a detailed timeline after we discuss your project scope</p></div></div><div data-w-id="33b4e9a4-ef49-f194-0d6f-02e36df66d72" class="accordion-item---brix tabs-accordion---brix"><div class="accordion-trigger---brix"><div class="accordion-item-title---brix">How much do services cost?</div><div class="open-close-icon-wrapper---brix"><div style="background-color:rgb(23,15,73)" class="open-close-line---brix"></div><div style="-webkit-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(90deg) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(90deg) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(90deg) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(90deg) skew(0, 0)" class="open-close-line---brix second-line---brix"></div></div></div><div style="height:0px;-webkit-transform:translate3d(0, 0, 0) scale3d(0.9, 0.9, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(0.9, 0.9, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(0.9, 0.9, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(0.9, 0.9, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="accordion-content---brix"><p class="accordion-paragraph---brix">Pricing depends on the complexity and scope of your project.<br/><br/>Custom websites start at <strong>$2500.</strong> Website strategy sessions are priced at <strong>$350. I offer discounts of you add branding to your package. </strong>For a personalized quote, contact me for a free consultation. </p></div></div><div data-w-id="33b4e9a4-ef49-f194-0d6f-02e36df66d7c" class="accordion-item---brix tabs-accordion---brix"><div class="accordion-trigger---brix"><div class="accordion-item-title---brix">Will I be able to update my Squarespace website on my own after it&#x27;s built?</div><div class="open-close-icon-wrapper---brix"><div style="background-color:rgb(23,15,73)" class="open-close-line---brix"></div><div style="-webkit-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(90deg) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(90deg) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(90deg) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(90deg) skew(0, 0)" class="open-close-line---brix second-line---brix"></div></div></div><div style="height:0px;-webkit-transform:translate3d(0, 0, 0) scale3d(0.9, 0.9, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(0.9, 0.9, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(0.9, 0.9, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(0.9, 0.9, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="accordion-content---brix"><p class="accordion-paragraph---brix">Absolutely! Squarespace is designed to be user-friendly, and I’ll provide you with guidance after.  However, I’m always available for ongoing maintenance if you prefer.</p></div></div></div></div></div></div></div></div></section><div class="letsgetstarted"><a href="../contact/" class="button-4 w-button">BEGIN INQUIRY</a></div><section class="footer"><div class="footer-warpper"><div class="footer-parent"><div class="logo-sqrl"><img src="../images/66df7d06a89c23cac069cab9_Asset5.svg" loading="lazy" width="1042" alt="" class="squirrel-logo-footer"/></div><div class="work-together-parent"><div class="text-block-15">LET&#x27;S WORK<span class="script-txt"> Together</span></div></div><div class="getintouch-blck"><a href="../contact/" class="getintouch-blck-child w-inline-block"><div class="arrow-parent"><img src="../images/65fba8473c871871705623cd_Asset15.png" loading="lazy" width="22" alt=""/></div><div class="div-block-13"><div class="text-block-16">GET IN TOUCH</div></div></a></div><div class="rightside-footer-parent"><div class="nat-plus-img"><img src="../images/663029bb22cd0cc88b11fa91_nm-plus2.png" loading="lazy" width="510" sizes="(max-width: 767px) 100vw, 510px" alt="" srcset="../images/663029bb22cd0cc88b11fa91_nm-plus2-p-500.png 500w, ../images/663029bb22cd0cc88b11fa91_nm-plus2-p-800.png 800w, ../images/663029bb22cd0cc88b11fa91_nm-plus2.png 1042w" class="image-6"/></div><div class="rightside-footer-child"><div class="link-list"><div hoverstagger="link" class="link-text-wrapper"><a href="../" hoverstagger="text" class="link one">HOME</a><a href="../" hoverstagger="text" class="link one is-2">HOME</a></div><div hoverstagger="link" class="link-text-wrapper"><a hoverstagger="text" href="../work/" class="link link2foot">WORK</a><a hoverstagger="text" href="../work/" class="link link2foot is-2">WORK</a></div><div hoverstagger="link" class="link-text-wrapper"><a hoverstagger="text" href="../about/" class="link link3foot">ABOUT</a><a hoverstagger="text" href="../about/" class="link link3foot is-2">ABOUT</a></div><div hoverstagger="link" class="link-text-wrapper"><a hoverstagger="text" href="../contact/" class="link">CONTACT</a><a hoverstagger="text" href="../contact/" class="link is-2">CONTACT</a></div></div></div></div></div></div><div class="credits"><div class="text-block-25"><strong class="bold-text">© 2024 MOORE DESIGN ALL RIGHTS RESERVED.</strong></div><div class="text-block-26"><strong class="bold-text-2">SITE DESIGN BY ME :)</strong></div></div></section><script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=65c5586c812f9f3723ee3036" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script><script src="https://cdn.prod.website-files.com/65c5586c812f9f3723ee3036/js/webflow.schunk.1a807f015b216e46.js" type="text/javascript" integrity="sha384-oY4R8SfnVBTWnix6ULiWbZs/5tyRyxEiWcG+WrT3unnu5pmfsIYJEraZcyFVlvND" crossorigin="anonymous"></script><script src="https://cdn.prod.website-files.com/65c5586c812f9f3723ee3036/js/webflow.schunk.a1ad0cebaba83040.js" type="text/javascript" integrity="sha384-ztr/Ejp3+1QOA0Drlr1gccPqp+KWIoSa1lDyug9XEowSwe09Ag5dkci2rh7IjJeN" crossorigin="anonymous"></script><script src="https://cdn.prod.website-files.com/65c5586c812f9f3723ee3036/js/webflow.f35f07b4.2715c0d6a8bd6bb7.js" type="text/javascript" integrity="sha384-UYKgLzE747AiHyUwraBX1zTnIF0yxAs5jsDFu+Dlerp3NFVnHCSmVimptmjvrwCL" crossorigin="anonymous"></script><script>
+$('a.Button-3').click(function (e) {
+    e.preventDefault();                   // prevent default anchor behavior
+    var goTo = this.getAttribute("href"); // store anchor href
 
-<!-- WHY SQUARESPACE -->
-<div class="wd-why">
-  <h2 class="wd-why-heading">Why Squarespace?</h2>
-
-  <div class="wd-block wd-lavender">
-    <div class="wd-block-trigger"><h3 class="wd-block-title">Built for beautiful, professional websites</h3><div class="wd-block-icon"></div></div>
-    <div class="wd-block-content"><p>Squarespace offers stunning templates designed by award-winning professionals, perfect for showcasing your brand. With customisable design tools and drag-and-drop functionality, it's easy to create something beautiful — and working with an expert designer ensures it's polished, professional, and distinctly yours.</p></div>
-  </div>
-
-  <div class="wd-block wd-chartreuse">
-    <div class="wd-block-trigger"><h3 class="wd-block-title">All-in-one platform for business growth</h3><div class="wd-block-icon"></div></div>
-    <div class="wd-block-content"><p>Squarespace is more than a website builder — it's a complete platform with built-in ecommerce, blogging, and appointment scheduling. A professional designer integrates these features seamlessly so your site looks cohesive and your user experience stays smooth and intuitive.</p></div>
-  </div>
-
-  <div class="wd-block wd-coral">
-    <div class="wd-block-trigger"><h3 class="wd-block-title">SEO and marketing features built in</h3><div class="wd-block-icon"></div></div>
-    <div class="wd-block-content"><p>With built-in SEO tools, email marketing integration, and social sharing options, Squarespace helps you grow your online presence. I amplify these tools by ensuring your site structure is SEO-friendly and your pages are built to convert.</p></div>
-  </div>
-
-  <div class="wd-block wd-pink">
-    <div class="wd-block-trigger"><h3 class="wd-block-title">Secure, reliable hosting with 24/7 support</h3><div class="wd-block-icon"></div></div>
-    <div class="wd-block-content"><p>Squarespace provides secure hosting and around-the-clock support so you can focus on running your business. When you work with a designer, your site is built to best practices for performance, security, and mobile responsiveness from day one.</p></div>
-  </div>
-</div>
-
-<!-- TESTIMONIAL -->
-<div class="wd-testimonial">
-  <div class="wd-testimonial-label">What they're saying</div>
-  <blockquote class="wd-testimonial-quote">"<span class="wd-testimonial-highlight">It was such a beautiful, in depth, personal, soulful creative experience.</span> She is edgy and brilliant, present, passionate and sophisticated. Honestly I can't recommend her enough."</blockquote>
-  <div class="wd-testimonial-attribution">Qristine Hrvatin &nbsp;·&nbsp; Hypnotherapist &amp; Guide</div>
-</div>
-
-<!-- FAQ -->
-<div class="wd-faq-wrap">
-  <h2 class="wd-faq-heading">FAQ</h2>
-
-  <div class="wd-faq-item">
-    <div class="wd-faq-trigger"><span class="wd-faq-question">What Squarespace services do you offer?</span><div class="wd-faq-icon"></div></div>
-    <div class="wd-faq-answer"><p><strong>Custom Website Design</strong> — Unique, fully customised Squarespace websites built to reflect your brand identity and maximise user engagement.<br/><br/><strong>Website Strategy</strong> — A comprehensive analysis of your site's performance: SEO, brand consistency, user experience, and actionable steps to drive growth.<br/><br/><strong>Squarespace Maintenance</strong> — Ongoing updates, performance monitoring, and content revisions to keep your site running smoothly.</p></div>
-  </div>
-
-  <div class="wd-faq-item">
-    <div class="wd-faq-trigger"><span class="wd-faq-question">How long does it take to build a custom website?</span><div class="wd-faq-icon"></div></div>
-    <div class="wd-faq-answer"><p>On average, a fully customised site takes between 4–6 weeks from initial consultation to launch. I'll provide a detailed timeline after we discuss your project scope.</p></div>
-  </div>
-
-  <div class="wd-faq-item">
-    <div class="wd-faq-trigger"><span class="wd-faq-question">How much do services cost?</span><div class="wd-faq-icon"></div></div>
-    <div class="wd-faq-answer"><p>Custom websites start at <strong>$2,500.</strong> Website strategy sessions are priced at <strong>$350.</strong> I offer discounts when you add branding to your package. For a personalised quote, reach out for a free consultation.</p></div>
-  </div>
-
-  <div class="wd-faq-item">
-    <div class="wd-faq-trigger"><span class="wd-faq-question">Will I be able to update my website on my own after it's built?</span><div class="wd-faq-icon"></div></div>
-    <div class="wd-faq-answer"><p>Absolutely. Squarespace is designed to be user-friendly, and I'll walk you through everything before we wrap up. I'm also available for ongoing maintenance if you'd prefer to hand that off.</p></div>
-  </div>
-</div>
-
-<!-- CTA -->
-<div class="wd-cta">
-  <h2 class="wd-cta-heading">Let's build something<br/>beautiful.</h2>
-  <div class="wd-cta-underline"></div><br/>
-  <a href="../contact/" class="wd-cta-btn">Begin Inquiry</a>
-</div>
-
-<!-- FOOTER -->
-<section class="footer"><div class="footer-warpper"><div class="footer-parent"><div class="logo-sqrl"><img src="../images/66df7d06a89c23cac069cab9_Asset5.svg" loading="lazy" width="1042" alt="" class="squirrel-logo-footer"/></div><div class="work-together-parent"><div class="text-block-15">LET'S WORK<span class="script-txt"> Together</span></div></div><div class="getintouch-blck"><a href="../contact/" class="getintouch-blck-child w-inline-block"><div class="arrow-parent"><img src="../images/65fba8473c871871705623cd_Asset15.png" loading="lazy" width="22" alt=""/></div><div class="div-block-13"><div class="text-block-16">GET IN TOUCH</div></div></a></div><div class="rightside-footer-parent"><div class="nat-plus-img"><img src="../images/663029bb22cd0cc88b11fa91_nm-plus2.png" loading="lazy" width="510" alt="" class="image-6"/></div><div class="rightside-footer-child"><div class="link-list"><div hoverstagger="link" class="link-text-wrapper"><a href="../" hoverstagger="text" class="link one">HOME</a><a href="../" hoverstagger="text" class="link one is-2">HOME</a></div><div hoverstagger="link" class="link-text-wrapper"><a hoverstagger="text" href="../work/" class="link link2foot">WORK</a><a hoverstagger="text" href="../work/" class="link link2foot is-2">WORK</a></div><div hoverstagger="link" class="link-text-wrapper"><a hoverstagger="text" href="../about/" class="link link3foot">ABOUT</a><a hoverstagger="text" href="../about/" class="link link3foot is-2">ABOUT</a></div><div hoverstagger="link" class="link-text-wrapper"><a hoverstagger="text" href="../contact/" class="link">CONTACT</a><a hoverstagger="text" href="../contact/" class="link is-2">CONTACT</a></div></div></div></div></div></div><div class="credits"><div class="text-block-25"><strong class="bold-text">© 2024 MOORE DESIGN ALL RIGHTS RESERVED.</strong></div><div class="text-block-26"><strong class="bold-text-2">SITE DESIGN BY ME :)</strong></div></div></section>
+    setTimeout(function(){
+         window.location = goTo;
+    },700);       
+}); 
+  (function(d) {
+    var config = {
+      kitId: 'vqw1kwc',
+      scriptTimeout: 700,
+      async: true
+    },
+    h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+  })(document);  
+</script>
 
 <script>
-// Work strip drag scroll
-(function(){
-  var el = document.getElementById('wd-scroll');
-  var down = false, startX, scrollLeft;
-  el.addEventListener('mousedown', function(e){ down=true; el.classList.add('active'); startX=e.pageX-el.offsetLeft; scrollLeft=el.scrollLeft; });
-  el.addEventListener('mouseleave', function(){ down=false; });
-  el.addEventListener('mouseup', function(){ down=false; });
-  el.addEventListener('mousemove', function(e){ if(!down)return; e.preventDefault(); var x=e.pageX-el.offsetLeft; el.scrollLeft=scrollLeft-(x-startX)*1.2; });
-})();
+$('.open').on('tap', function(){ $('body').toggleClass('no-scroll');
+});
+</script>
 
-// Color block accordion
-document.querySelectorAll('.wd-block').forEach(function(block){
-  block.querySelector('.wd-block-trigger').addEventListener('click', function(){
-    var isOpen = block.classList.contains('is-open');
-    document.querySelectorAll('.wd-block').forEach(function(b){ b.classList.remove('is-open'); });
-    if(!isOpen) block.classList.add('is-open');
+
+<script>
+$(window).bind("pageshow", function(event) {
+    if (event.originalEvent.persisted) {
+        window.location.reload() 
+    }
+});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+<script src="https://unpkg.com/split-type"></script>
+<script>
+let splitType = new SplitType("[hoverstagger='text']", {
+  types: "words,chars",
+  tagName: "span"
+});
+
+$("[hoverstagger='link']").each(function (index) {
+  let text1 = $(this).find("[hoverstagger='text']").eq(0);
+  let text2 = $(this).find("[hoverstagger='text']").eq(1);
+
+  let tl = gsap.timeline({
+    paused: true,
+    defaults: {
+      duration: 0.5,
+      ease: "power2.out"
+    }
+  });
+  tl.fromTo(text1.find(".char:nth-child(odd)"), { yPercent: 100 }, { yPercent: 0 });
+  tl.fromTo(text2.find(".char:nth-child(odd)"), { yPercent: 0 }, { yPercent: -100 }, 0);
+  tl.fromTo(text1.find(".char:nth-child(even)"), { yPercent: 0 }, { yPercent: 100 }, 0);
+  tl.fromTo(text2.find(".char:nth-child(even)"), { yPercent: -100 }, { yPercent: 0 }, 0);
+
+  $(this).on("mouseenter", function () {
+    tl.restart();
+  });
+});
+</script><script>
+// FAQ + Why Squarespace accordion
+document.querySelectorAll('.accordion-item---brix').forEach(function(item) {
+  var trigger = item.querySelector('.accordion-trigger---brix');
+  var content = item.querySelector('.accordion-content---brix');
+  if (!trigger || !content) return;
+  content.style.cssText = 'height:0;overflow:hidden;transition:height 0.35s ease;opacity:1;transform:none;';
+  trigger.style.cursor = 'pointer';
+  trigger.addEventListener('click', function() {
+    var isOpen = content.dataset.open === '1';
+    // close all siblings
+    item.closest('.cloneable-container-default, .div-block-123').querySelectorAll('.accordion-content---brix, .dropdowncontent2, .dropdowncontent3, .dropdowncontent4').forEach(function(c) {
+      c.style.height = '0';
+      c.dataset.open = '';
+    });
+    if (!isOpen) {
+      content.style.height = content.scrollHeight + 'px';
+      content.dataset.open = '1';
+    }
   });
 });
 
-// FAQ accordion
-document.querySelectorAll('.wd-faq-item').forEach(function(item){
-  item.querySelector('.wd-faq-trigger').addEventListener('click', function(){
-    var isOpen = item.classList.contains('is-open');
-    document.querySelectorAll('.wd-faq-item').forEach(function(i){ i.classList.remove('is-open'); });
-    if(!isOpen) item.classList.add('is-open');
+// Why Squarespace dropdowns
+[['dropdowntrigger','dropdowncontent2'],['dropdowntrigger2','dropdowncontent2'],['dropdowntrigger3','dropdowncontent3'],['dropdowntrigger4','dropdowncontent4']].forEach(function(pair, i) {
+  var triggers = document.querySelectorAll('.'+pair[0]);
+  triggers.forEach(function(trigger) {
+    var wrapper = trigger.parentElement;
+    var content = wrapper.querySelector('.'+pair[1]);
+    if (!content) return;
+    content.style.cssText = 'height:0;overflow:hidden;transition:height 0.35s ease;';
+    trigger.style.cursor = 'pointer';
+    trigger.addEventListener('click', function() {
+      var isOpen = content.dataset.open === '1';
+      document.querySelectorAll('.dropdowncontent2, .dropdowncontent3, .dropdowncontent4').forEach(function(c){ c.style.height='0'; c.dataset.open=''; });
+      if (!isOpen) { content.style.height = content.scrollHeight + 'px'; content.dataset.open = '1'; }
+    });
   });
 });
 </script>
 <script src="../menu.js"></script>
 <script src="../cursor.js"></script>
 <script src="../ambient.js"></script>
-<script src="../magnetic.js"></script>
-</body></html>
+<script src="../magnetic.js"></script></body></html>
