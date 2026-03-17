@@ -35,44 +35,41 @@
     try {
       const now = audioCtx.currentTime;
 
-      // Pentatonic scale — notes always sound harmonious, never jarring
-      const notes = [1047, 1175, 1319, 1568, 1760, 2093, 2349, 2637];
+      // Pentatonic scale — always harmonious together
+      const notes = [1200, 1350, 1500, 1800, 2000, 2400, 2700];
       const base  = notes[Math.floor(Math.random() * notes.length)];
 
-      // Shared soft reverb (two gentle echoes)
-      const rev1 = audioCtx.createDelay(1.0);  rev1.delayTime.value = 0.18;
-      const rev2 = audioCtx.createDelay(1.0);  rev2.delayTime.value = 0.36;
-      const revG1 = audioCtx.createGain();      revG1.gain.value = 0.18;
-      const revG2 = audioCtx.createGain();      revG2.gain.value = 0.09;
-      rev1.connect(revG1); revG1.connect(audioCtx.destination);
-      rev2.connect(revG2); revG2.connect(audioCtx.destination);
+      // Soft reverb tail — airy space behind each ping
+      const rev  = audioCtx.createDelay(1.0); rev.delayTime.value = 0.22;
+      const revG = audioCtx.createGain();      revG.gain.value = 0.14;
+      rev.connect(revG); revG.connect(audioCtx.destination);
 
-      // Bell partials: fundamental + octave + soft inharmonic shimmer
+      // Inharmonic partials — the EXACT ratios that give aluminum/metal its character
+      // (real struck metal doesn't have clean octaves — these non-integer ratios are key)
       const partials = [
-        { ratio: 1,    vol: 0.055 },
-        { ratio: 2,    vol: 0.025 },
-        { ratio: 4.07, vol: 0.010 },  // inharmonic — gives bell its 'ring'
+        { ratio: 1.0,   vol: 0.06,  decay: 0.55 },  // fundamental ping
+        { ratio: 2.756, vol: 0.028, decay: 0.30 },  // classic metallic overtone
+        { ratio: 5.404, vol: 0.012, decay: 0.18 },  // high sparkle shimmer
+        { ratio: 8.933, vol: 0.005, decay: 0.10 },  // ultra-high glitter dust
       ];
 
-      partials.forEach(({ ratio, vol }) => {
+      partials.forEach(({ ratio, vol, decay }) => {
         const osc  = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
 
         osc.type = 'sine';
         osc.frequency.setValueAtTime(base * ratio, now);
 
-        // Lightning-fast attack, long airy decay — like a crystal bell
-        gain.gain.setValueAtTime(0,   now);
-        gain.gain.linearRampToValueAtTime(vol, now + 0.003);
-        gain.gain.exponentialRampToValueAtTime(0.0001, now + 2.0);
+        // Instant percussive attack (metal hits instantly), each partial decays at own rate
+        gain.gain.setValueAtTime(vol,    now);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + decay);
 
         osc.connect(gain);
         gain.connect(audioCtx.destination);
-        gain.connect(rev1);
-        gain.connect(rev2);
+        gain.connect(rev);
 
         osc.start(now);
-        osc.stop(now + 2.1);
+        osc.stop(now + decay + 0.05);
       });
 
     } catch (e) {}
