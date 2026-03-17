@@ -21,7 +21,7 @@
       height: 100% !important;
     }
 
-    /* Image panel: JS drives opacity + transform directly via inline style */
+    /* Image panel: JS drives opacity + transform directly */
     .content-section .list-image-parent {
       will-change: transform, opacity;
       transition: opacity 0.4s ease;
@@ -35,15 +35,62 @@
     .content-section .list-parent.sh-hovered .tag.bg-white {
       opacity: 1 !important;
     }
+
+    /* Dropdown slide-open via max-height */
+    .branding-dropdown {
+      display: block !important;
+      max-height: 0 !important;
+      overflow: hidden !important;
+      margin-bottom: 0 !important;
+      transition: max-height 0.55s cubic-bezier(0.77, 0, 0.175, 1),
+                  margin-bottom 0.55s ease !important;
+    }
+    .branding-dropdown.sd-open {
+      max-height: 700px !important;
+      margin-bottom: 3em !important;
+    }
+
+    /* Close button is a cursor pointer */
+    .close-x { cursor: pointer; }
   `;
   document.head.appendChild(style);
 
-  /* ── Arc config ── */
-  const X_RANGE  = 28;   // px left/right travel
-  const Y_ARC    = 14;   // px upward lift at centre
+  /* ── Dropdown click logic ── */
+  const allDropdowns = document.querySelectorAll('.content-section .branding-dropdown');
+
+  function closeAll() {
+    allDropdowns.forEach(d => d.classList.remove('sd-open'));
+  }
+
+  document.querySelectorAll('.content-section .container-m .list-parent').forEach(row => {
+    if (row.classList.contains('paintings')) return;
+
+    // The dropdown immediately follows each list-parent in the DOM
+    const dropdown = row.nextElementSibling;
+    if (!dropdown || !dropdown.classList.contains('branding-dropdown')) return;
+
+    row.addEventListener('click', e => {
+      e.preventDefault();
+      const isOpen = dropdown.classList.contains('sd-open');
+      closeAll();
+      if (!isOpen) dropdown.classList.add('sd-open');
+    });
+
+    // Close-X button inside this dropdown
+    const closeBtn = dropdown.querySelector('.close-x');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', e => {
+        e.stopPropagation();
+        dropdown.classList.remove('sd-open');
+      });
+    }
+  });
+
+  /* ── Arc hover config ── */
+  const X_RANGE  = 28;
+  const Y_ARC    = 14;
   const LERP_SPD = 0.10;
 
-  /* ── Per-row state ── */
   const rows = [];
 
   document.querySelectorAll('.content-section .list-parent').forEach(row => {
@@ -52,7 +99,6 @@
     const img = row.querySelector('.list-image-parent');
     if (!img) return;
 
-    // JS owns opacity + transform — clear Webflow's frozen inline values first
     img.style.cssText = 'opacity: 0; transform: translateY(14px) scale(1.07); transition: opacity 0.4s ease;';
 
     const state = { tx: 0, ty: 14, cx: 0, cy: 14, hovered: false };
@@ -76,10 +122,7 @@
       if (!state.hovered) return;
       const rect     = row.getBoundingClientRect();
       const progress = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-
       state.tx = (progress - 0.5) * 2 * X_RANGE;
-
-      // Rainbow arc: parabola, highest at centre
       const arc = 1 - Math.pow((progress - 0.5) * 2, 2);
       state.ty  = -arc * Y_ARC;
     });
