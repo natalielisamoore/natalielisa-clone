@@ -1,0 +1,98 @@
+/* PP Neue Montreal */
+@font-face {
+  font-family: 'PP Neue Montreal';
+  src: url('fonts/PPNeueMontreal-Thin.otf') format('opentype');
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PP Neue Montreal';
+  src: url('fonts/ppneuemontreal-book-webfont.woff2') format('woff2'),
+       url('fonts/ppneuemontreal-book-webfont.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PP Neue Montreal';
+  src: url('fonts/PPNeueMontreal-Italic.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'PP Neue Montreal';
+  src: url('fonts/ppneuemontreal-medium-webfont.woff2') format('woff2'),
+       url('fonts/ppneuemontreal-medium-webfont.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PP Neue Montreal';
+  src: url('fonts/PPNeueMontreal-SemiBolditalic.otf') format('opentype');
+  font-weight: 600;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'PP Neue Montreal';
+  src: url('fonts/PPNeueMontreal-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* PP Playground */
+@font-face {
+  font-family: 'PP Playground';
+  src: url('fonts/PPPlayground-Thin.otf') format('opentype');
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PP Playground';
+  src: url('fonts/PPPlayground-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PP Playground';
+  src: url('fonts/PPPlayground-Medium.woff2') format('woff2'),
+       url('fonts/PPPlayground-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+
+/* TRJN DaVinci */
+@font-face {
+  font-family: 'TRJN DaVinci';
+  src: url('fonts/TRJNDaVinci-Display.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TRJN DaVinci';
+  src: url('fonts/TRJNDaVinci-Text.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TRJN DaVinci Italic';
+  src: url('fonts/trjndavinciitalic-display-webfont.woff2') format('woff2'),
+       url('fonts/trjndavinciitalic-display-webfont.woff') format('woff');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'TRJN DaVinci';
+  src: url('fonts/trjndavinci-mediumitalic-webfont.woff2') format('woff2'),
+       url('fonts/trjndavinci-mediumitalic-webfont.woff') format('woff');
+  font-weight: 500;
+  font-style: italic;
+}
