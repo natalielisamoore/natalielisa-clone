@@ -20,6 +20,14 @@
   });
 
   function openMenu() {
+    // Force menu on top regardless of DOM order (homepage has elements above it)
+    menu.style.position  = 'fixed';
+    menu.style.zIndex    = '99999';
+    menu.style.top       = '0';
+    menu.style.left      = '0';
+    menu.style.width     = '100%';
+    menu.style.height    = '100%';
+
     // Prepare hidden state, then make visible before transition
     menu.style.opacity   = '0';
     panel.style.transform = 'translateX(-100%)';
