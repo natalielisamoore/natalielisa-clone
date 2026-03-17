@@ -4890,14 +4890,21 @@ p {
   inset: auto auto -23% 35%;
 }
 
+@keyframes natImgPan {
+  0%   { background-position: 20% 50%; }
+  50%  { background-position: 80% 50%; }
+  100% { background-position: 20% 50%; }
+}
+
 .nat-img {
   background-image: url("https://cdn.prod.website-files.com/65c5586c812f9f3723ee3036/69633283cc385e79edccf713_IMG_0023-2-web.jpg");
-  background-position: 50%;
-  background-size: cover;
+  background-position: 50% 50%;
+  background-size: 130%;
   border: 1px solid #000;
   border-radius: 20px;
   width: 470px;
   height: 620px;
+  animation: natImgPan 4s ease-in-out infinite;
 }
 
 .close-x {
