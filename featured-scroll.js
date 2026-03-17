@@ -2,89 +2,137 @@
   'use strict';
 
   function init() {
-    var section  = document.querySelector('.featured-work-new');
-    var height1  = document.querySelector('.featured-work-new .sectionheight1');
-    var sticky   = document.querySelector('.featured-work-new .sticky-element1');
-    var camera   = document.querySelector('.featured-work-new .camera');
-    var track    = document.querySelector('.featured-work-new .track1');
+    var height1 = document.querySelector('.featured-work-new .sectionheight1');
+    var sticky  = document.querySelector('.featured-work-new .sticky-element1');
+    var camera  = document.querySelector('.featured-work-new .camera');
+    var track   = document.querySelector('.featured-work-new .track1');
 
-    if (!section || !track || !camera) return;
+    if (!track || !camera) return;
 
     // ── Override Webflow's scroll-pin layout ──────────────────────────────
-    // Original design: sectionheight1 is very tall so sticky-element1 pins
-    // while scrolling. Off-domain the scroll animations don't fire, so we
-    // collapse it into a normal-height horizontal strip.
-    if (height1) {
-      height1.style.height    = 'auto';
-      height1.style.minHeight = '0';
-    }
-    if (sticky) {
-      sticky.style.position = 'relative';
-      sticky.style.top      = 'auto';
-    }
+    if (height1) { height1.style.height = 'auto'; height1.style.minHeight = '0'; }
+    if (sticky)  { sticky.style.position = 'relative'; sticky.style.top = 'auto'; }
 
-    // ── Make camera a clipping viewport ──────────────────────────────────
+    // ── Camera: clipping viewport ─────────────────────────────────────────
     camera.style.overflow   = 'hidden';
-    camera.style.cursor     = 'e-resize';
     camera.style.userSelect = 'none';
+    camera.style.cursor     = 'grab';
 
-    // ── Make track a single horizontal row ───────────────────────────────
-    track.style.display        = 'flex';
-    track.style.flexDirection  = 'row';
-    track.style.alignItems     = 'flex-start';
-    track.style.flexWrap       = 'nowrap';
-    track.style.willChange     = 'transform';
-    track.style.transition     = 'none';
+    // ── Track: horizontal flex row ────────────────────────────────────────
+    track.style.display       = 'flex';
+    track.style.flexDirection = 'row';
+    track.style.alignItems    = 'flex-start';
+    track.style.flexWrap      = 'nowrap';
+    track.style.willChange    = 'transform';
 
-    // ── Scroll state ─────────────────────────────────────────────────────
-    var pos       = 0;
-    var hovering  = false;
-    var raf       = null;
-    var SPEED     = 1.4;  // px per frame (~84px/s at 60fps)
-    var EASE_BACK = 0.04; // spring ease when returning to 0
+    // ── Drag state ────────────────────────────────────────────────────────
+    var pos        = 0;   // current translateX offset (positive = scrolled left)
+    var dragging   = false;
+    var startX     = 0;
+    var startPos   = 0;
+    var velX       = 0;   // velocity for momentum
+    var lastX      = 0;
+    var lastT      = 0;
+    var raf        = null;
 
     function maxScroll() {
       return Math.max(0, track.scrollWidth - camera.offsetWidth);
     }
 
-    function tick() {
-      if (hovering) {
-        var max = maxScroll();
-        if (max > 0 && pos < max) {
-          pos += SPEED;
-          if (pos > max) pos = max;
-        }
-      } else {
-        // Gently ease back to 0 when mouse leaves
-        if (pos > 0.5) {
-          pos += (0 - pos) * EASE_BACK;
-        } else {
-          pos = 0;
-        }
-      }
+    function clamp(v, lo, hi) {
+      return Math.max(lo, Math.min(hi, v));
+    }
 
-      track.style.transform = 'translateX(-' + pos + 'px)';
+    function applyPos(p) {
+      track.style.transition = 'none';
+      track.style.transform  = 'translateX(-' + p + 'px)';
+    }
 
-      if (hovering || pos > 0.5) {
-        raf = requestAnimationFrame(tick);
+    // Momentum coast after drag release
+    function coast() {
+      velX *= 0.92;   // friction
+      pos   = clamp(pos + velX, 0, maxScroll());
+      applyPos(pos);
+      if (Math.abs(velX) > 0.5) {
+        raf = requestAnimationFrame(coast);
       } else {
         raf = null;
       }
     }
 
-    function startTick() {
-      if (!raf) raf = requestAnimationFrame(tick);
-    }
-
-    camera.addEventListener('mouseenter', function () {
-      hovering = true;
-      startTick();
+    // ── Mouse events ──────────────────────────────────────────────────────
+    camera.addEventListener('mousedown', function (e) {
+      if (raf) { cancelAnimationFrame(raf); raf = null; }
+      dragging = true;
+      startX   = e.clientX;
+      startPos = pos;
+      velX     = 0;
+      lastX    = e.clientX;
+      lastT    = Date.now();
+      camera.style.cursor = 'grabbing';
+      e.preventDefault();
     });
 
-    camera.addEventListener('mouseleave', function () {
-      hovering = false;
-      startTick(); // keep running so it eases back
+    window.addEventListener('mousemove', function (e) {
+      if (!dragging) return;
+      var dx  = startX - e.clientX;   // positive = dragging left = scroll right content
+      pos = clamp(startPos + dx, 0, maxScroll());
+      applyPos(pos);
+
+      // Track velocity
+      var now = Date.now();
+      var dt  = now - lastT || 1;
+      velX    = (e.clientX - lastX) / dt * -14;  // scale to px/frame at 60fps
+      lastX   = e.clientX;
+      lastT   = now;
     });
+
+    window.addEventListener('mouseup', function () {
+      if (!dragging) return;
+      dragging = false;
+      camera.style.cursor = 'grab';
+      // Release with momentum
+      if (Math.abs(velX) > 1) {
+        raf = requestAnimationFrame(coast);
+      }
+    });
+
+    // ── Touch support ─────────────────────────────────────────────────────
+    camera.addEventListener('touchstart', function (e) {
+      if (raf) { cancelAnimationFrame(raf); raf = null; }
+      var t = e.touches[0];
+      dragging = true;
+      startX   = t.clientX;
+      startPos = pos;
+      velX     = 0;
+      lastX    = t.clientX;
+      lastT    = Date.now();
+    }, { passive: true });
+
+    camera.addEventListener('touchmove', function (e) {
+      if (!dragging) return;
+      var t   = e.touches[0];
+      var dx  = startX - t.clientX;
+      pos = clamp(startPos + dx, 0, maxScroll());
+      applyPos(pos);
+      var now = Date.now();
+      var dt  = now - lastT || 1;
+      velX    = (t.clientX - lastX) / dt * -14;
+      lastX   = t.clientX;
+      lastT   = now;
+    }, { passive: true });
+
+    camera.addEventListener('touchend', function () {
+      dragging = false;
+      if (Math.abs(velX) > 1) {
+        raf = requestAnimationFrame(coast);
+      }
+    });
+
+    // Prevent child links from firing on drag
+    camera.addEventListener('click', function (e) {
+      if (Math.abs(pos - startPos) > 8) e.preventDefault();
+    }, true);
   }
 
   if (document.readyState === 'loading') {
