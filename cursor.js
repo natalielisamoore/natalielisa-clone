@@ -59,34 +59,141 @@
     try {
       const now = audioCtx.currentTime;
 
-      // Fire a scatter of 5–7 tiny glitter micro-tones, each slightly offset in time
-      // — like light bouncing off individual glitter particles
-      const count = 5 + Math.floor(Math.random() * 3);
-      for (let i = 0; i < count; i++) {
-        const offset = i * (0.012 + Math.random() * 0.01);   // stagger: ~12–22ms apart
-        const freq   = 2400 + Math.random() * 2800;          // 2400–5200 Hz — bright, airy
-        const detune = (Math.random() - 0.5) * 180;          // shimmer via slight detuning
-        const decay  = 0.12 + Math.random() * 0.18;          // 120–300ms — short sparkle
-        const vol    = 0.022 + Math.random() * 0.018;        // soft, 0.022–0.04
+      // ── Psychoacoustic design ─────────────────────────────────────────────
+      //
+      // 1. SPARKLE SWEET SPOT (3000–6000 Hz):
+      //    Equal-loudness contours (Fletcher–Munson) show peak ear sensitivity
+      //    at 3–6 kHz. Pitches here register as "bright" and "airy." Above
+      //    ~7 kHz the character shifts to hiss; below ~2.5 kHz it feels heavy.
+      //    All fundamentals here are anchored in 2800–5600 Hz.
+      //
+      // 2. CONSONANT PITCH POOL (pentatonic, not fully random):
+      //    Fully random frequencies create dissonant intervals the brain codes
+      //    as "glitch." Real fairy-wand SFX (Tinkerbell, film/game audio) use
+      //    clusters approximating a major or pentatonic chord so that any random
+      //    subset sounds pleasant. We use C-major pentatonic from C5→C7, shifted
+      //    up ×2.83 (~1.5 octaves) to land in the sparkle band.
+      const SCALE_HZ = [523,659,784,880,988,1047,1319,1568,1760,1976,2093,2637,3136]
+                         .map(f => f * 2.83);
+      const POOL = SCALE_HZ.filter(f => f >= 2800 && f <= 7400);
+      // → approx [2796, 3322, 3738, 4184, 4694, 5596, 7400] — all in the sweet band
 
-        const osc  = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
+      // 3. INHARMONIC PARTIALS (Euler–Bernoulli struck-bar ratios):
+      //    Real tiny bells / glockenspiels have overtones at 1 : 2.756 : 5.404.
+      //    These ratios are irrational relative to the fundamental, producing the
+      //    glassy shimmer of real struck metal rather than a clean harmonic tone.
+      //    Adding them eliminates the "pure sine = synthesizer" cue immediately.
+      const PARTIAL_RATIOS  = [1, 2.756, 5.404];
+      const PARTIAL_WEIGHTS = [1.0, 0.28, 0.09];
 
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(freq, now + offset);
-        // Gentle upward pitch sweep — the "magic wand" glitter rising quality
-        osc.frequency.linearRampToValueAtTime(freq * 1.18, now + offset + decay);
-        osc.detune.setValueAtTime(detune, now + offset);
+      // 4. NOISE TRANSIENT AT ATTACK:
+      //    The single largest perceptual gap between a real struck surface and an
+      //    electronic oscillator is a broadband noise burst at onset (< 5 ms).
+      //    The auditory cortex uses this transient to classify a sound as physical.
+      //    Without it, even perfectly shaped sine envelopes register as synthetic.
 
-        gain.gain.setValueAtTime(0, now + offset);
-        gain.gain.linearRampToValueAtTime(vol, now + offset + 0.004);  // instant attack
-        gain.gain.exponentialRampToValueAtTime(0.0001, now + offset + decay);
+      // 5. SHIMMER TAIL (highpass feedback delay):
+      //    A 28 ms feedback delay filtered above 3200 Hz creates perceived depth —
+      //    the "fairy dust settling" quality — without the cost of a full IR reverb.
 
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
+      // ── Shimmer bus (shared for the whole cluster) ────────────────────────
+      const shimmerDelay = audioCtx.createDelay(0.12);
+      shimmerDelay.delayTime.value = 0.055;
 
-        osc.start(now + offset);
-        osc.stop(now + offset + decay + 0.02);
+      const shimmerFB = audioCtx.createGain();
+      shimmerFB.gain.value = 0.72;     // long tail ~8s
+
+      const shimmerHP = audioCtx.createBiquadFilter();
+      shimmerHP.type = 'highpass';
+      shimmerHP.frequency.value = 3200; // shimmer only the bright content
+
+      const shimmerOut = audioCtx.createGain();
+      shimmerOut.gain.value = 0.20;    // shimmer quieter than dry
+
+      shimmerDelay.connect(shimmerHP);
+      shimmerHP.connect(shimmerOut);
+      shimmerOut.connect(audioCtx.destination);
+      shimmerDelay.connect(shimmerFB);
+      shimmerFB.connect(shimmerDelay);
+
+      setTimeout(() => {
+        try {
+          shimmerDelay.disconnect(); shimmerFB.disconnect();
+          shimmerHP.disconnect();    shimmerOut.disconnect();
+        } catch (_) {}
+      }, 8500);
+
+      // ── Ping cluster ──────────────────────────────────────────────────────
+      const pingCount = 1 + Math.floor(Math.random() * 2);  // 1–2 pings
+
+      for (let i = 0; i < pingCount; i++) {
+        // Stagger: tighter at start, spreading out — mimics glitter scatter
+        const offset    = i * (0.007 + Math.random() * 0.013);  // 7–20 ms apart
+        const decay     = 0.18 + Math.random() * 0.25;          // 180–430 ms bell tail
+        const masterVol = 0.013 + Math.random() * 0.010;        // soft: 0.013–0.023
+
+        // Random consonant fundamental from the sparkle-band pentatonic pool
+        const fund = POOL[Math.floor(Math.random() * POOL.length)];
+
+        // Per-ping envelope — shared across all partials of this ping
+        const pingGain = audioCtx.createGain();
+        pingGain.gain.setValueAtTime(0, now + offset);
+        // Attack < 1.2 ms — struck bells have essentially instantaneous onset;
+        // no upward pitch bend (bells droop downward as the bar cools and stiffens)
+        pingGain.gain.linearRampToValueAtTime(masterVol, now + offset + 0.0012);
+        pingGain.gain.exponentialRampToValueAtTime(0.00010, now + offset + decay);
+
+        pingGain.connect(audioCtx.destination);   // dry path
+        pingGain.connect(shimmerDelay);            // wet path → shimmer bus
+
+        // ── Inharmonic sine partials ────────────────────────────────────────
+        for (let p = 0; p < PARTIAL_RATIOS.length; p++) {
+          const pFreq = fund * PARTIAL_RATIOS[p];
+          if (pFreq > 20000) continue; // skip ultrasonic content
+
+          const osc         = audioCtx.createOscillator();
+          const partialGain = audioCtx.createGain();
+
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(pFreq, now + offset);
+          // ±12 cents micro-detune per partial — organic shimmer, not pitch wander
+          osc.detune.setValueAtTime((Math.random() - 0.5) * 24, now + offset);
+
+          partialGain.gain.setValueAtTime(PARTIAL_WEIGHTS[p], now + offset);
+          osc.connect(partialGain);
+          partialGain.connect(pingGain);
+
+          osc.start(now + offset);
+          osc.stop(now + offset + decay + 0.04);
+        }
+
+        // ── Noise transient (physical strike simulation) ───────────────────
+        // 3 ms burst of highpass-filtered white noise at attack onset.
+        // This is the broadband "click" cue the auditory cortex uses to classify
+        // a sound as a real physical impact rather than an electronic oscillator.
+        const nLen  = Math.ceil(audioCtx.sampleRate * 0.003);
+        const nBuf  = audioCtx.createBuffer(1, nLen, audioCtx.sampleRate);
+        const nData = nBuf.getChannelData(0);
+        for (let s = 0; s < nLen; s++) nData[s] = Math.random() * 2 - 1;
+
+        const nSrc  = audioCtx.createBufferSource();
+        nSrc.buffer = nBuf;
+
+        const nHP   = audioCtx.createBiquadFilter();
+        nHP.type    = 'highpass';
+        nHP.frequency.value = 4200; // pass only the bright transient content
+
+        const nGain = audioCtx.createGain();
+        nGain.gain.setValueAtTime(0, now + offset);
+        nGain.gain.linearRampToValueAtTime(masterVol * 0.5, now + offset + 0.0005);
+        nGain.gain.exponentialRampToValueAtTime(0.00010, now + offset + 0.003);
+
+        nSrc.connect(nHP);
+        nHP.connect(nGain);
+        nGain.connect(audioCtx.destination);
+
+        nSrc.start(now + offset);
+        nSrc.stop(now + offset + 0.005);
       }
     } catch (e) {}
   }
