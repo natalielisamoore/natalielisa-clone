@@ -59,33 +59,35 @@
     try {
       const now = audioCtx.currentTime;
 
-      // High pentatonic — tiny, bright, like a miniature bell
-      const notes = [2800, 3200, 3600, 4000, 4500, 5000, 5600];
-      const base  = notes[Math.floor(Math.random() * notes.length)];
+      // Fire a scatter of 5–7 tiny glitter micro-tones, each slightly offset in time
+      // — like light bouncing off individual glitter particles
+      const count = 5 + Math.floor(Math.random() * 3);
+      for (let i = 0; i < count; i++) {
+        const offset = i * (0.012 + Math.random() * 0.01);   // stagger: ~12–22ms apart
+        const freq   = 2400 + Math.random() * 2800;          // 2400–5200 Hz — bright, airy
+        const detune = (Math.random() - 0.5) * 180;          // shimmer via slight detuning
+        const decay  = 0.12 + Math.random() * 0.18;          // 120–300ms — short sparkle
+        const vol    = 0.022 + Math.random() * 0.018;        // soft, 0.022–0.04
 
-      // Very short metallic tink — inharmonic partials, fast decay
-      const partials = [
-        { ratio: 1.0,   vol: 0.04, decay: 0.08 },
-        { ratio: 2.756, vol: 0.02, decay: 0.05 },
-      ];
-
-      partials.forEach(({ ratio, vol, decay }) => {
         const osc  = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
 
         osc.type = 'sine';
-        osc.frequency.setValueAtTime(base * ratio, now);
+        osc.frequency.setValueAtTime(freq, now + offset);
+        // Gentle upward pitch sweep — the "magic wand" glitter rising quality
+        osc.frequency.linearRampToValueAtTime(freq * 1.18, now + offset + decay);
+        osc.detune.setValueAtTime(detune, now + offset);
 
-        gain.gain.setValueAtTime(vol, now);
-        gain.gain.exponentialRampToValueAtTime(0.0001, now + decay);
+        gain.gain.setValueAtTime(0, now + offset);
+        gain.gain.linearRampToValueAtTime(vol, now + offset + 0.004);  // instant attack
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + offset + decay);
 
         osc.connect(gain);
         gain.connect(audioCtx.destination);
 
-        osc.start(now);
-        osc.stop(now + decay + 0.02);
-      });
-
+        osc.start(now + offset);
+        osc.stop(now + offset + decay + 0.02);
+      }
     } catch (e) {}
   }
 
