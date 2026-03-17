@@ -11,24 +11,48 @@
 
   /* ── Audio ── */
   async function initAudio() {
-    if (audioCtx) {
-      // Resume if suspended (some browsers start suspended)
-      if (audioCtx.state === 'suspended') await audioCtx.resume();
-      soundReady = audioCtx.state === 'running';
-      return;
-    }
     try {
-      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      if (audioCtx.state === 'suspended') await audioCtx.resume();
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        console.log('[cursor] AudioContext created, state:', audioCtx.state);
+      }
+      if (audioCtx.state === 'suspended') {
+        await audioCtx.resume();
+        console.log('[cursor] AudioContext resumed, state:', audioCtx.state);
+      }
       soundReady = audioCtx.state === 'running';
-    } catch (e) {}
+      console.log('[cursor] soundReady:', soundReady);
+    } catch (e) {
+      console.error('[cursor] Audio init error:', e);
+    }
   }
 
   // Try on any interaction
-  document.addEventListener('click',     initAudio);
-  document.addEventListener('touchstart',initAudio);
-  document.addEventListener('keydown',   initAudio);
-  document.addEventListener('mousemove', initAudio, { once: true });
+  document.addEventListener('click',      initAudio);
+  document.addEventListener('touchstart', initAudio);
+  document.addEventListener('keydown',    initAudio);
+  document.addEventListener('mousemove',  initAudio, { once: true });
+
+  // Show a subtle "click for sound" hint so the user knows to click
+  window.addEventListener('load', () => {
+    const hint = document.createElement('div');
+    hint.textContent = '🔔 click anywhere for sound';
+    hint.style.cssText = `
+      position: fixed; bottom: 20px; right: 20px;
+      background: rgba(0,0,0,0.55); color: #fff;
+      font-size: 12px; padding: 6px 12px; border-radius: 20px;
+      z-index: 99999; pointer-events: none;
+      opacity: 1; transition: opacity 1s;
+    `;
+    document.body.appendChild(hint);
+    // Fade out after first click
+    document.addEventListener('click', () => {
+      hint.style.opacity = '0';
+      setTimeout(() => hint.remove(), 1000);
+    }, { once: true });
+    // Also auto-fade after 5s
+    setTimeout(() => { hint.style.opacity = '0'; setTimeout(() => hint.remove(), 1000); }, 5000);
+  });
 
   function playFairyChime() {
     if (!soundReady || !audioCtx || audioCtx.state !== 'running') return;
@@ -47,10 +71,10 @@
       // Inharmonic partials — the EXACT ratios that give aluminum/metal its character
       // (real struck metal doesn't have clean octaves — these non-integer ratios are key)
       const partials = [
-        { ratio: 1.0,   vol: 0.06,  decay: 0.55 },  // fundamental ping
-        { ratio: 2.756, vol: 0.028, decay: 0.30 },  // classic metallic overtone
-        { ratio: 5.404, vol: 0.012, decay: 0.18 },  // high sparkle shimmer
-        { ratio: 8.933, vol: 0.005, decay: 0.10 },  // ultra-high glitter dust
+        { ratio: 1.0,   vol: 0.20,  decay: 0.55 },  // fundamental ping
+        { ratio: 2.756, vol: 0.10,  decay: 0.30 },  // classic metallic overtone
+        { ratio: 5.404, vol: 0.05,  decay: 0.18 },  // high sparkle shimmer
+        { ratio: 8.933, vol: 0.02,  decay: 0.10 },  // ultra-high glitter dust
       ];
 
       partials.forEach(({ ratio, vol, decay }) => {
