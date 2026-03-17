@@ -36,55 +36,10 @@
       opacity: 1 !important;
     }
 
-    /* Dropdown slide-open via max-height */
-    .branding-dropdown {
-      display: block !important;
-      max-height: 0 !important;
-      overflow: hidden !important;
-      margin-bottom: 0 !important;
-      transition: max-height 0.55s cubic-bezier(0.77, 0, 0.175, 1),
-                  margin-bottom 0.55s ease !important;
-    }
-    .branding-dropdown.sd-open {
-      max-height: 700px !important;
-      margin-bottom: 3em !important;
-    }
-
-    /* Close button is a cursor pointer */
-    .close-x { cursor: pointer; }
+    /* Keep dropdowns hidden */
+    .branding-dropdown { display: none !important; }
   `;
   document.head.appendChild(style);
-
-  /* ── Dropdown click logic ── */
-  const allDropdowns = document.querySelectorAll('.content-section .branding-dropdown');
-
-  function closeAll() {
-    allDropdowns.forEach(d => d.classList.remove('sd-open'));
-  }
-
-  document.querySelectorAll('.content-section .container-m .list-parent').forEach(row => {
-    if (row.classList.contains('paintings')) return;
-
-    // The dropdown immediately follows each list-parent in the DOM
-    const dropdown = row.nextElementSibling;
-    if (!dropdown || !dropdown.classList.contains('branding-dropdown')) return;
-
-    row.addEventListener('click', e => {
-      e.preventDefault();
-      const isOpen = dropdown.classList.contains('sd-open');
-      closeAll();
-      if (!isOpen) dropdown.classList.add('sd-open');
-    });
-
-    // Close-X button inside this dropdown
-    const closeBtn = dropdown.querySelector('.close-x');
-    if (closeBtn) {
-      closeBtn.addEventListener('click', e => {
-        e.stopPropagation();
-        dropdown.classList.remove('sd-open');
-      });
-    }
-  });
 
   /* ── Arc hover config ── */
   const X_RANGE  = 28;
