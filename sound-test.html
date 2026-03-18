@@ -61,6 +61,7 @@
   .bar-2 { background: linear-gradient(135deg, #0f1a1a 0%, #0a2828 100%); }
   .bar-3 { background: linear-gradient(135deg, #1a1a0a 0%, #28250a 100%); }
   .bar-4 { background: linear-gradient(135deg, #1a0a14 0%, #280a1a 100%); }
+  .bar-5 { background: linear-gradient(135deg, #0a0a1f 0%, #12003a 100%); }
 
   .bar-label {
     font-size: 11px;
@@ -81,6 +82,7 @@
   .bar-2 .bar-title { color: #a8ffd4; }
   .bar-3 .bar-title { color: #ffd4a8; }
   .bar-4 .bar-title { color: #ffa8d4; }
+  .bar-5 .bar-title { color: #c8b4ff; }
 
   .bar-desc {
     font-size: 13px;
@@ -103,6 +105,7 @@
   .bar-2 .pulse { background: radial-gradient(circle, #a8ffd488, transparent); box-shadow: 0 0 12px #a8ffd4; }
   .bar-3 .pulse { background: radial-gradient(circle, #ffd4a888, transparent); box-shadow: 0 0 12px #ffd4a8; }
   .bar-4 .pulse { background: radial-gradient(circle, #ffa8d488, transparent); box-shadow: 0 0 12px #ffa8d4; }
+  .bar-5 .pulse { background: radial-gradient(circle, #c8b4ff88, transparent); box-shadow: 0 0 18px #c8b4ff; }
 
   @keyframes pulse-out {
     0%   { transform: translate(-50%, -50%) scale(0);  opacity: 1; width: 6px; height: 6px; }
@@ -160,6 +163,12 @@
     <div class="bar-label">Approach 4</div>
     <div class="bar-title">Psychoacoustics — Tinkerbell Method</div>
     <div class="bar-desc">Pitches locked to C-major pentatonic (shifted to sparkle band) so any cluster sounds consonant. Inharmonic partials + 3ms noise transient at attack onset (physical strike cue). Shimmer tail via 28ms feedback delay. Most "fairy" of the four.</div>
+  </div>
+
+  <div class="bar bar-5" id="bar5">
+    <div class="bar-label">Approach 4B</div>
+    <div class="bar-title">Tinkerbell — Long Tail & Deep Reverb</div>
+    <div class="bar-desc">Same pentatonic psychoacoustic design as #4 but with heavier reverb: feedback raised to 0.88 (≈14s tail), wet level doubled, and a second low-frequency shimmer layer added. The sound decays into a longer, more cavernous shimmer cloud.</div>
   </div>
 
 </div>
@@ -413,6 +422,112 @@
   }
 
   // ─────────────────────────────────────────────────────────────────
+  // APPROACH 4B — Tinkerbell: longer tail, deeper reverb
+  // ─────────────────────────────────────────────────────────────────
+  function play5() {
+    if (!ready) return;
+    const now = audioCtx.currentTime;
+
+    const SCALE_HZ = [523,659,784,880,988,1047,1319,1568,1760,1976,2093,2637,3136]
+                       .map(f => f * 2.83);
+    const POOL = SCALE_HZ.filter(f => f >= 2800 && f <= 7400);
+    const PARTIAL_RATIOS  = [1, 2.756, 5.404];
+    const PARTIAL_WEIGHTS = [1.0, 0.28, 0.09];
+
+    // High shimmer bus — same as #4 but feedback 0.88 (~14s tail), more wet
+    const shimmerDelay = audioCtx.createDelay(0.12);
+    shimmerDelay.delayTime.value = 0.055;
+    const shimmerFB = audioCtx.createGain();
+    shimmerFB.gain.value = 0.88;         // longer tail ~14s
+    const shimmerHP = audioCtx.createBiquadFilter();
+    shimmerHP.type = 'highpass';
+    shimmerHP.frequency.value = 3200;
+    const shimmerOut = audioCtx.createGain();
+    shimmerOut.gain.value = 0.42;        // more wet than #4 (was 0.20)
+    shimmerDelay.connect(shimmerHP);
+    shimmerHP.connect(shimmerOut);
+    shimmerOut.connect(audioCtx.destination);
+    shimmerDelay.connect(shimmerFB);
+    shimmerFB.connect(shimmerDelay);
+
+    // Second shimmer layer — lower delay, creates spacious depth
+    const shimmerDelay2 = audioCtx.createDelay(0.12);
+    shimmerDelay2.delayTime.value = 0.083;
+    const shimmerFB2 = audioCtx.createGain();
+    shimmerFB2.gain.value = 0.78;
+    const shimmerLP2 = audioCtx.createBiquadFilter();
+    shimmerLP2.type = 'lowpass';
+    shimmerLP2.frequency.value = 5000;
+    const shimmerOut2 = audioCtx.createGain();
+    shimmerOut2.gain.value = 0.18;
+    shimmerDelay2.connect(shimmerLP2);
+    shimmerLP2.connect(shimmerOut2);
+    shimmerOut2.connect(audioCtx.destination);
+    shimmerDelay2.connect(shimmerFB2);
+    shimmerFB2.connect(shimmerDelay2);
+
+    setTimeout(() => {
+      try {
+        shimmerDelay.disconnect();  shimmerFB.disconnect();
+        shimmerHP.disconnect();     shimmerOut.disconnect();
+        shimmerDelay2.disconnect(); shimmerFB2.disconnect();
+        shimmerLP2.disconnect();    shimmerOut2.disconnect();
+      } catch (_) {}
+    }, 15000);
+
+    const pingCount = 1 + Math.floor(Math.random() * 2);
+    for (let i = 0; i < pingCount; i++) {
+      const offset    = i * (0.007 + Math.random() * 0.013);
+      const decay     = 0.18 + Math.random() * 0.25;
+      const masterVol = 0.013 + Math.random() * 0.010;
+      const fund      = POOL[Math.floor(Math.random() * POOL.length)];
+
+      const pingGain = audioCtx.createGain();
+      pingGain.gain.setValueAtTime(0, now + offset);
+      pingGain.gain.linearRampToValueAtTime(masterVol, now + offset + 0.0012);
+      pingGain.gain.exponentialRampToValueAtTime(0.00010, now + offset + decay);
+      pingGain.connect(audioCtx.destination);
+      pingGain.connect(shimmerDelay);
+      pingGain.connect(shimmerDelay2);
+
+      for (let p = 0; p < PARTIAL_RATIOS.length; p++) {
+        const pFreq = fund * PARTIAL_RATIOS[p];
+        if (pFreq > 20000) continue;
+        const osc       = audioCtx.createOscillator();
+        const partGain  = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(pFreq, now + offset);
+        osc.detune.setValueAtTime((Math.random() - 0.5) * 24, now + offset);
+        partGain.gain.setValueAtTime(PARTIAL_WEIGHTS[p], now + offset);
+        osc.connect(partGain);
+        partGain.connect(pingGain);
+        osc.start(now + offset);
+        osc.stop(now + offset + decay + 0.04);
+      }
+
+      // Noise transient
+      const nLen  = Math.ceil(audioCtx.sampleRate * 0.003);
+      const nBuf  = audioCtx.createBuffer(1, nLen, audioCtx.sampleRate);
+      const nData = nBuf.getChannelData(0);
+      for (let s = 0; s < nLen; s++) nData[s] = Math.random() * 2 - 1;
+      const nSrc  = audioCtx.createBufferSource();
+      nSrc.buffer = nBuf;
+      const nHP   = audioCtx.createBiquadFilter();
+      nHP.type = 'highpass';
+      nHP.frequency.value = 4200;
+      const nGain = audioCtx.createGain();
+      nGain.gain.setValueAtTime(0, now + offset);
+      nGain.gain.linearRampToValueAtTime(masterVol * 0.5, now + offset + 0.0005);
+      nGain.gain.exponentialRampToValueAtTime(0.00010, now + offset + 0.003);
+      nSrc.connect(nHP);
+      nHP.connect(nGain);
+      nGain.connect(audioCtx.destination);
+      nSrc.start(now + offset);
+      nSrc.stop(now + offset + 0.005);
+    }
+  }
+
+  // ─────────────────────────────────────────────────────────────────
   // Mouse tracking + pulse visual per bar
   // ─────────────────────────────────────────────────────────────────
   const bars = [
@@ -420,6 +535,7 @@
     { el: document.getElementById('bar2'), fn: play2, last: 0 },
     { el: document.getElementById('bar3'), fn: play3, last: 0 },
     { el: document.getElementById('bar4'), fn: play4, last: 0 },
+    { el: document.getElementById('bar5'), fn: play5, last: 0 },
   ];
 
   bars.forEach(function (b) {
