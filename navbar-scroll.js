@@ -5,16 +5,17 @@
   var blackbar = document.querySelector('.blacklinenavigator');
   if (!nav) return;
 
-  /* ── Initial hidden state ── */
-  var TRANSITION = 'opacity 0.5s ease, transform 0.5s ease';
+  var TRANSITION = 'opacity 0.5s ease, transform 0.5s ease, max-height 0.5s ease';
 
   function setHidden() {
+    nav.style.transition = 'none';
     nav.style.opacity    = '0';
     nav.style.transform  = 'translateY(-12px)';
-    nav.style.transition = 'none';
+    nav.style.maxHeight  = '0';
+    nav.style.overflow   = 'hidden';
     if (blackbar) {
-      blackbar.style.opacity    = '0';
       blackbar.style.transition = 'none';
+      blackbar.style.opacity    = '0';
     }
   }
 
@@ -22,6 +23,8 @@
     nav.style.transition = TRANSITION;
     nav.style.opacity    = '1';
     nav.style.transform  = 'translateY(0)';
+    nav.style.maxHeight  = '120px';
+    nav.style.overflow   = '';
     if (blackbar) {
       blackbar.style.transition = 'opacity 0.5s ease';
       blackbar.style.opacity    = '1';
@@ -30,7 +33,6 @@
 
   setHidden();
 
-  /* ── Show on first scroll ── */
   var shown = false;
 
   function onScroll() {
