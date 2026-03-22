@@ -168,7 +168,7 @@
 
     // ── Controls bar (dots left, arrows right) ────────────────────────────
     var bar = document.createElement('div');
-    bar.style.cssText = 'display:flex;justify-content:space-between;align-items:center;padding:20px 2em 4px 4px;';
+    bar.style.cssText = 'display:flex;justify-content:space-between;align-items:center;padding:20px 2em 4px 2em;';
 
     // Dots
     var dotsWrap = document.createElement('div');
@@ -188,7 +188,7 @@
           'width:9px',
           'height:9px',
           'border-radius:50%',
-          'background:#deff38',
+          'background:#f3c8fe',
           'opacity:0.3',
           'transition:opacity 0.3s',
           'cursor:pointer',
