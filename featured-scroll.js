@@ -26,18 +26,31 @@
     track.style.willChange    = 'transform';
 
     // ── State ─────────────────────────────────────────────────────────────
-    var pos      = 0;
-    var dragging = false;
-    var startX   = 0;
-    var startPos = 0;
-    var velX     = 0;
-    var lastX    = 0;
-    var lastT    = 0;
-    var raf      = null;
-    var didDrag  = false;
+    var pos           = 0;
+    var dragging      = false;
+    var startX        = 0;
+    var startPos      = 0;
+    var velX          = 0;
+    var lastX         = 0;
+    var lastT         = 0;
+    var raf           = null;
+    var linksDisabled = false;
 
     var DRAG_THRESHOLD = 8;
     var STEP           = 420;
+
+    var links = track.querySelectorAll('a');
+
+    function disableLinks() {
+      if (linksDisabled) return;
+      linksDisabled = true;
+      links.forEach(function (a) { a.style.pointerEvents = 'none'; });
+    }
+
+    function enableLinks() {
+      linksDisabled = false;
+      links.forEach(function (a) { a.style.pointerEvents = ''; });
+    }
 
     function maxScroll() {
       return Math.max(0, track.scrollWidth - camera.offsetWidth);
@@ -78,7 +91,6 @@
     camera.addEventListener('mousedown', function (e) {
       if (raf) { cancelAnimationFrame(raf); raf = null; }
       dragging = true;
-      didDrag  = false;
       startX   = e.clientX;
       startPos = pos;
       velX     = 0;
@@ -90,7 +102,7 @@
 
     window.addEventListener('mousemove', function (e) {
       if (!dragging) return;
-      if (Math.abs(e.clientX - startX) > DRAG_THRESHOLD) didDrag = true;
+      if (Math.abs(e.clientX - startX) > DRAG_THRESHOLD) disableLinks();
       var dx = startX - e.clientX;
       pos = clamp(startPos + dx, 0, maxScroll());
       applyPos(pos);
@@ -105,21 +117,16 @@
       if (!dragging) return;
       dragging = false;
       camera.style.cursor = 'grab';
+      if (linksDisabled) {
+        // Re-enable after click event has fired against the disabled links
+        setTimeout(enableLinks, 100);
+      }
       if (Math.abs(velX) > 1) {
         raf = requestAnimationFrame(coast);
       } else {
         updateUI();
       }
     });
-
-    // Block link navigation if drag occurred
-    camera.addEventListener('click', function (e) {
-      if (didDrag) {
-        e.preventDefault();
-        e.stopPropagation();
-        didDrag = false;
-      }
-    }, true);
 
     // ── Touch support ─────────────────────────────────────────────────────
     var touchStartX = 0;
