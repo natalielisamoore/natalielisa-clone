@@ -25,7 +25,7 @@
     track.style.flexWrap      = 'nowrap';
     track.style.willChange    = 'transform';
 
-    // ── Drag state ────────────────────────────────────────────────────────
+    // ── State ─────────────────────────────────────────────────────────────
     var pos      = 0;
     var dragging = false;
     var startX   = 0;
@@ -34,10 +34,10 @@
     var lastX    = 0;
     var lastT    = 0;
     var raf      = null;
-    var didDrag  = false;  // true if mouse moved enough to count as a drag
+    var didDrag  = false;
 
-    var DRAG_THRESHOLD = 8;   // px of movement before it's considered a drag
-    var STEP           = 420; // px per arrow click
+    var DRAG_THRESHOLD = 8;
+    var STEP           = 420;
 
     function maxScroll() {
       return Math.max(0, track.scrollWidth - camera.offsetWidth);
@@ -58,9 +58,10 @@
       track.style.transition = 'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)';
       track.style.transform  = 'translateX(-' + target + 'px)';
       pos = target;
+      updateUI();
     }
 
-    // Momentum coast after drag release
+    // Momentum coast
     function coast() {
       velX *= 0.92;
       pos   = clamp(pos + velX, 0, maxScroll());
@@ -69,6 +70,7 @@
         raf = requestAnimationFrame(coast);
       } else {
         raf = null;
+        updateUI();
       }
     }
 
@@ -88,13 +90,10 @@
 
     window.addEventListener('mousemove', function (e) {
       if (!dragging) return;
-      var moved = Math.abs(e.clientX - startX);
-      if (moved > DRAG_THRESHOLD) didDrag = true;
-
+      if (Math.abs(e.clientX - startX) > DRAG_THRESHOLD) didDrag = true;
       var dx = startX - e.clientX;
       pos = clamp(startPos + dx, 0, maxScroll());
       applyPos(pos);
-
       var now = Date.now();
       var dt  = now - lastT || 1;
       velX    = (e.clientX - lastX) / dt * -14;
@@ -108,10 +107,12 @@
       camera.style.cursor = 'grab';
       if (Math.abs(velX) > 1) {
         raf = requestAnimationFrame(coast);
+      } else {
+        updateUI();
       }
     });
 
-    // Block link navigation if drag occurred — capture phase, before link fires
+    // Block link navigation if drag occurred
     camera.addEventListener('click', function (e) {
       if (didDrag) {
         e.preventDefault();
@@ -125,21 +126,21 @@
     camera.addEventListener('touchstart', function (e) {
       if (raf) { cancelAnimationFrame(raf); raf = null; }
       var t = e.touches[0];
-      dragging   = true;
-      didDrag    = false;
-      startX     = t.clientX;
+      dragging    = true;
+      didDrag     = false;
+      startX      = t.clientX;
       touchStartX = t.clientX;
-      startPos   = pos;
-      velX       = 0;
-      lastX      = t.clientX;
-      lastT      = Date.now();
+      startPos    = pos;
+      velX        = 0;
+      lastX       = t.clientX;
+      lastT       = Date.now();
     }, { passive: true });
 
     camera.addEventListener('touchmove', function (e) {
       if (!dragging) return;
-      var t   = e.touches[0];
+      var t = e.touches[0];
       if (Math.abs(t.clientX - touchStartX) > DRAG_THRESHOLD) didDrag = true;
-      var dx  = startX - t.clientX;
+      var dx = startX - t.clientX;
       pos = clamp(startPos + dx, 0, maxScroll());
       applyPos(pos);
       var now = Date.now();
@@ -153,50 +154,90 @@
       dragging = false;
       if (Math.abs(velX) > 1) {
         raf = requestAnimationFrame(coast);
+      } else {
+        updateUI();
       }
     });
 
-    // ── Arrow buttons ─────────────────────────────────────────────────────
-    var arrows = document.createElement('div');
-    arrows.style.cssText = [
-      'display:flex',
-      'justify-content:center',
-      'align-items:center',
-      'gap:16px',
-      'padding:24px 0 8px',
-      'pointer-events:auto',
-    ].join(';');
+    // ── Controls bar (dots left, arrows right) ────────────────────────────
+    var bar = document.createElement('div');
+    bar.style.cssText = 'display:flex;justify-content:space-between;align-items:center;padding:20px 4px 4px;';
+
+    // Dots
+    var dotsWrap = document.createElement('div');
+    dotsWrap.style.cssText = 'display:flex;gap:8px;align-items:center;';
+
+    var dotEls = [];
+
+    function buildDots() {
+      dotsWrap.innerHTML = '';
+      dotEls = [];
+      var total = Math.round(maxScroll() / STEP) + 1;
+      total = Math.max(total, 1);
+      for (var i = 0; i < total; i++) {
+        var d = document.createElement('span');
+        d.style.cssText = [
+          'display:inline-block',
+          'width:9px',
+          'height:9px',
+          'border-radius:50%',
+          'background:#deff38',
+          'opacity:0.3',
+          'transition:opacity 0.3s',
+          'cursor:pointer',
+        ].join(';');
+        (function (idx) {
+          d.addEventListener('click', function () { smoothTo(idx * STEP); });
+        })(i);
+        dotsWrap.appendChild(d);
+        dotEls.push(d);
+      }
+    }
+
+    function updateUI() {
+      if (!dotEls.length) return;
+      var idx = Math.round(pos / STEP);
+      idx = clamp(idx, 0, dotEls.length - 1);
+      for (var i = 0; i < dotEls.length; i++) {
+        dotEls[i].style.opacity = i === idx ? '1' : '0.3';
+      }
+    }
+
+    // Arrows
+    var arrowsWrap = document.createElement('div');
+    arrowsWrap.style.cssText = 'display:flex;gap:10px;align-items:center;';
 
     function makeArrow(label, dir) {
       var btn = document.createElement('button');
       btn.setAttribute('aria-label', label);
-      btn.textContent = dir === -1 ? '←' : '→';
+      btn.innerHTML = dir === -1
+        ? '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="10,3 5,8 10,13"/></svg>'
+        : '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="6,3 11,8 6,13"/></svg>';
       btn.style.cssText = [
         'background:none',
         'border:1.5px solid currentColor',
         'border-radius:50%',
-        'width:44px',
-        'height:44px',
-        'font-size:18px',
-        'line-height:1',
+        'width:46px',
+        'height:46px',
         'cursor:pointer',
         'color:inherit',
         'display:flex',
         'align-items:center',
         'justify-content:center',
-        'transition:background 0.2s, color 0.2s',
+        'transition:background 0.2s, border-color 0.2s, color 0.2s',
         'flex-shrink:0',
+        'padding:0',
       ].join(';');
 
       btn.addEventListener('mouseenter', function () {
-        btn.style.background = '#deff38';
-        btn.style.borderColor = '#deff38';
-        btn.style.color = '#000';
+        btn.style.background   = '#deff38';
+        btn.style.borderColor  = '#deff38';
+        btn.style.color        = '#000';
       });
       btn.addEventListener('mouseleave', function () {
-        btn.style.background = 'none';
-        btn.style.borderColor = 'currentColor';
-        btn.style.color = 'inherit';
+        btn.style.background   = 'none';
+        btn.style.borderColor  = 'currentColor';
+        btn.style.color        = 'inherit';
       });
       btn.addEventListener('click', function () {
         smoothTo(pos + dir * STEP);
@@ -204,11 +245,18 @@
       return btn;
     }
 
-    arrows.appendChild(makeArrow('Scroll left', -1));
-    arrows.appendChild(makeArrow('Scroll right', 1));
+    arrowsWrap.appendChild(makeArrow('Previous', -1));
+    arrowsWrap.appendChild(makeArrow('Next', 1));
 
-    // Insert arrows after the camera element
-    camera.parentNode.insertBefore(arrows, camera.nextSibling);
+    bar.appendChild(dotsWrap);
+    bar.appendChild(arrowsWrap);
+    camera.parentNode.insertBefore(bar, camera.nextSibling);
+
+    // Build dots after layout settles
+    setTimeout(function () {
+      buildDots();
+      updateUI();
+    }, 100);
   }
 
   if (document.readyState === 'loading') {
