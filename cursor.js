@@ -7,7 +7,6 @@
   let audioCtx        = null;
   let soundReady      = false;
   let lastSparkleTime = 0;
-  let lastSoundTime   = 0;
 
   /* ── Audio ── */
   async function initAudio() {
@@ -262,12 +261,11 @@
       for (let i = 0; i < count; i++) createSparkle(x, y);
       lastSparkleTime = now;
     }
+  });
 
-    // Sound — tight clusters following the mouse
-    if (soundReady && now - lastSoundTime > 18 + Math.random() * 25) {
-      playFairyChime();
-      lastSoundTime = now;
-    }
+  /* ── Sound on click only ── */
+  document.addEventListener('click', function (e) {
+    playFairyChime();
   });
 
 })();
