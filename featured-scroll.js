@@ -34,6 +34,7 @@
     var lastX      = 0;
     var lastT      = 0;
     var raf        = null;
+    var dragDist   = 0;   // total pixel movement for click vs drag detection
 
     function maxScroll() {
       return Math.max(0, track.scrollWidth - camera.offsetWidth);
@@ -66,6 +67,7 @@
       dragging = true;
       startX   = e.clientX;
       startPos = pos;
+      dragDist = 0;
       velX     = 0;
       lastX    = e.clientX;
       lastT    = Date.now();
@@ -78,6 +80,9 @@
       var dx  = startX - e.clientX;   // positive = dragging left = scroll right content
       pos = clamp(startPos + dx, 0, maxScroll());
       applyPos(pos);
+
+      // Track total pixel movement for drag detection
+      dragDist += Math.abs(e.clientX - lastX);
 
       // Track velocity
       var now = Date.now();
@@ -129,9 +134,9 @@
       }
     });
 
-    // Prevent child links from firing on drag
+    // Prevent child links from firing on drag — require 12px+ total movement
     camera.addEventListener('click', function (e) {
-      if (Math.abs(pos - startPos) > 8) e.preventDefault();
+      if (dragDist > 12) e.preventDefault();
     }, true);
   }
 

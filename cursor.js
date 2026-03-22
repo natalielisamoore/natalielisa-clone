@@ -7,6 +7,7 @@
   let audioCtx        = null;
   let soundReady      = false;
   let lastSparkleTime = 0;
+  let lastSoundTime   = 0;
 
   /* ── Audio ── */
   async function initAudio() {
@@ -263,9 +264,16 @@
     }
   });
 
-  /* ── Sound on click only ── */
-  document.addEventListener('click', function (e) {
-    playFairyChime();
-  });
+  /* ── Sound on hover over Featured Work section only ── */
+  var workSection = document.querySelector('.featured-work-new');
+  if (workSection) {
+    workSection.addEventListener('mousemove', function () {
+      var now = Date.now();
+      if (soundReady && now - lastSoundTime > 18 + Math.random() * 25) {
+        playFairyChime();
+        lastSoundTime = now;
+      }
+    });
+  }
 
 })();
