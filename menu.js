@@ -42,9 +42,9 @@
     rightPan.style.opacity = '1';
 
     // Burger → X
-    if (topLine) topLine.style.transform = 'translateY(7px) rotate(45deg)';
-    if (midLine) midLine.style.opacity   = '0';
-    if (btmLine) btmLine.style.transform = 'translateY(-7px) rotate(-45deg)';
+    if (topLine) { topLine.style.transformOrigin = 'center'; topLine.style.transform = 'translateY(6px) rotate(45deg)'; }
+    if (midLine) midLine.style.opacity = '0';
+    if (btmLine) { btmLine.style.transformOrigin = 'center'; btmLine.style.transform = 'translateY(-6px) rotate(-45deg)'; }
 
     document.body.style.overflow = 'hidden';
     isOpen = true;
