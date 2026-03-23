@@ -59,20 +59,17 @@
   ].join(';');
   document.body.appendChild(panel);
 
-  var hideTimer = null;
+  var FALLBACK = IMG['img-1']; // default image shown when no link is hovered
 
-  function showPanel(url) {
-    clearTimeout(hideTimer);
+  function openPanel() {
+    panel.style.backgroundImage = 'url("' + FALLBACK + '")';
     panel.style.visibility = 'visible';
-    panel.style.backgroundImage = 'url("' + url + '")';
     panel.style.opacity = '1';
   }
 
-  function hidePanel() {
+  function closePanel() {
     panel.style.opacity = '0';
-    hideTimer = setTimeout(function () {
-      panel.style.visibility = 'hidden';
-    }, 400);
+    setTimeout(function () { panel.style.visibility = 'hidden'; }, 400);
   }
 
   function init() {
@@ -81,7 +78,6 @@
     if (!links.length) return;
 
     links.forEach(function (link) {
-      /* Detect which img-child class this link uses */
       var imgChild = link.querySelector('.img-child');
       var imgKey   = null;
       if (imgChild) {
@@ -91,16 +87,22 @@
       }
 
       link.addEventListener('mouseenter', function () {
-        if (imgKey) showPanel(IMG[imgKey]);
+        if (imgKey) panel.style.backgroundImage = 'url("' + IMG[imgKey] + '")';
       });
-      link.addEventListener('mouseleave', hidePanel);
+      link.addEventListener('mouseleave', function () {
+        panel.style.backgroundImage = 'url("' + FALLBACK + '")';
+      });
     });
 
-    /* Also hide panel when menu closes */
+    /* Show/hide panel with the menu */
     if (menuEl) {
       new MutationObserver(function () {
         var d = menuEl.style.display;
-        if (d === 'none' || d === '') hidePanel();
+        if (d === 'flex' || d === 'block') {
+          openPanel();
+        } else if (d === 'none' || d === '') {
+          closePanel();
+        }
       }).observe(menuEl, { attributes: true, attributeFilter: ['style'] });
     }
   }
