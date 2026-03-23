@@ -52,6 +52,7 @@
     'right:0',
     'width:50%',
     'height:100vh',
+    'background-color:#faf7f2',
     'background-size:cover',
     'background-position:center',
     'background-repeat:no-repeat',
