@@ -41,6 +41,10 @@
   };
 
   /* ── Right-side panel lives on body, outside the transformed menu-parent ── */
+  var FALLBACK = IMG['img-1'];
+  var SLIDE    = 'transform 0.5s cubic-bezier(0.77,0,0.175,1)';
+
+  /* Panel starts off-screen to the right, slides in like a curtain */
   var panel = document.createElement('div');
   panel.style.cssText = [
     'position:fixed',
@@ -51,26 +55,12 @@
     'background-size:cover',
     'background-position:center',
     'background-repeat:no-repeat',
-    'opacity:0',
-    'transition:opacity 0.35s ease',
+    'transform:translateX(100%)',
+    'transition:' + SLIDE,
     'pointer-events:none',
     'z-index:100000',
-    'visibility:hidden',
   ].join(';');
   document.body.appendChild(panel);
-
-  var FALLBACK = IMG['img-1']; // default image shown when no link is hovered
-
-  function openPanel() {
-    panel.style.backgroundImage = 'url("' + FALLBACK + '")';
-    panel.style.visibility = 'visible';
-    panel.style.opacity = '1';
-  }
-
-  function closePanel() {
-    panel.style.opacity = '0';
-    setTimeout(function () { panel.style.visibility = 'hidden'; }, 400);
-  }
 
   function init() {
     var links  = document.querySelectorAll('.menu-link-parent');
@@ -94,14 +84,24 @@
       });
     });
 
-    /* Show/hide panel with the menu */
+    /* Mirror the menu open/close using opacity as the timing signal */
+    var wasOpen = false;
     if (menuEl) {
       new MutationObserver(function () {
+        var o = menuEl.style.opacity;
         var d = menuEl.style.display;
-        if (d === 'flex' || d === 'block') {
-          openPanel();
-        } else if (d === 'none' || d === '') {
-          closePanel();
+
+        if (d === 'flex' && o === '1' && !wasOpen) {
+          /* Menu just finished opening — slide right panel in */
+          wasOpen = true;
+          panel.style.backgroundImage = 'url("' + FALLBACK + '")';
+          panel.style.transform = 'translateX(0)';
+        } else if (o === '0' && wasOpen) {
+          /* Menu starting to close — slide right panel out simultaneously */
+          wasOpen = false;
+          panel.style.transform = 'translateX(100%)';
+        } else if (d === 'none') {
+          wasOpen = false;
         }
       }).observe(menuEl, { attributes: true, attributeFilter: ['style'] });
     }
