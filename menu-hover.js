@@ -26,6 +26,8 @@
     /* Hide original image panels — position:fixed fails inside transformed ancestor */
     '.menu-img-parent { display: none !important; }',
     '.rightpanel      { display: none !important; }',
+    /* Make menu-parent background transparent so body-level image panel shows through */
+    '.menu-parent     { background-color: transparent !important; }',
   ].join('\n');
   document.head.appendChild(style);
 
@@ -52,7 +54,7 @@
     'opacity:0',
     'transition:opacity 0.35s ease',
     'pointer-events:none',
-    'z-index:9999',
+    'z-index:100000',
     'visibility:hidden',
   ].join(';');
   document.body.appendChild(panel);
