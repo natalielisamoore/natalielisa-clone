@@ -96,41 +96,49 @@
       //    A 28 ms feedback delay filtered above 3200 Hz creates perceived depth —
       //    the "fairy dust settling" quality — without the cost of a full IR reverb.
 
-      // ── Shimmer bus (shared for the whole cluster) ────────────────────────
-      const shimmerDelay = audioCtx.createDelay(0.12);
-      shimmerDelay.delayTime.value = 0.055;
+      // ── Airy Cathedral reverb: three buses at different delay times ──────
+      // Bus A: short pre-delay, high feedback (~18s tail)
+      const dA = audioCtx.createDelay(0.15);
+      dA.delayTime.value = 0.035;
+      const fbA = audioCtx.createGain(); fbA.gain.value = 0.90;
+      const hpA = audioCtx.createBiquadFilter(); hpA.type = 'highpass'; hpA.frequency.value = 3200;
+      const outA = audioCtx.createGain(); outA.gain.value = 0.45;
+      dA.connect(hpA); hpA.connect(outA); outA.connect(audioCtx.destination);
+      dA.connect(fbA); fbA.connect(dA);
 
-      const shimmerFB = audioCtx.createGain();
-      shimmerFB.gain.value = 0.72;     // long tail ~8s
+      // Bus B: mid delay, spacious hall layer
+      const dB = audioCtx.createDelay(0.20);
+      dB.delayTime.value = 0.095;
+      const fbB = audioCtx.createGain(); fbB.gain.value = 0.82;
+      const hpB = audioCtx.createBiquadFilter(); hpB.type = 'highpass'; hpB.frequency.value = 2400;
+      const outB = audioCtx.createGain(); outB.gain.value = 0.28;
+      dB.connect(hpB); hpB.connect(outB); outB.connect(audioCtx.destination);
+      dB.connect(fbB); fbB.connect(dB);
 
-      const shimmerHP = audioCtx.createBiquadFilter();
-      shimmerHP.type = 'highpass';
-      shimmerHP.frequency.value = 3200; // shimmer only the bright content
-
-      const shimmerOut = audioCtx.createGain();
-      shimmerOut.gain.value = 0.20;    // shimmer quieter than dry
-
-      shimmerDelay.connect(shimmerHP);
-      shimmerHP.connect(shimmerOut);
-      shimmerOut.connect(audioCtx.destination);
-      shimmerDelay.connect(shimmerFB);
-      shimmerFB.connect(shimmerDelay);
+      // Bus C: long pre-delay — "back wall" of the room
+      const dC = audioCtx.createDelay(0.30);
+      dC.delayTime.value = 0.18;
+      const fbC = audioCtx.createGain(); fbC.gain.value = 0.75;
+      const lpC = audioCtx.createBiquadFilter(); lpC.type = 'lowpass'; lpC.frequency.value = 4500;
+      const outC = audioCtx.createGain(); outC.gain.value = 0.18;
+      dC.connect(lpC); lpC.connect(outC); outC.connect(audioCtx.destination);
+      dC.connect(fbC); fbC.connect(dC);
 
       setTimeout(() => {
         try {
-          shimmerDelay.disconnect(); shimmerFB.disconnect();
-          shimmerHP.disconnect();    shimmerOut.disconnect();
+          dA.disconnect(); fbA.disconnect(); hpA.disconnect(); outA.disconnect();
+          dB.disconnect(); fbB.disconnect(); hpB.disconnect(); outB.disconnect();
+          dC.disconnect(); fbC.disconnect(); lpC.disconnect(); outC.disconnect();
         } catch (_) {}
-      }, 8500);
+      }, 20000);
 
-      // ── Ping cluster ──────────────────────────────────────────────────────
-      const pingCount = 1 + Math.floor(Math.random() * 2);  // 1–2 pings
+      // ── Single isolated ping (cathedral — no clusters) ───────────────────
+      const pingCount = 1;
 
       for (let i = 0; i < pingCount; i++) {
-        // Stagger: tighter at start, spreading out — mimics glitter scatter
-        const offset    = i * (0.007 + Math.random() * 0.013);  // 7–20 ms apart
-        const decay     = 0.18 + Math.random() * 0.25;          // 180–430 ms bell tail
-        const masterVol = 0.013 + Math.random() * 0.010;        // soft: 0.013–0.023
+        const offset    = 0;
+        const decay     = 0.30 + Math.random() * 0.20;          // 300–500 ms bell tail
+        const masterVol = 0.014 + Math.random() * 0.008;        // soft: 0.014–0.022
 
         // Random consonant fundamental from the sparkle-band pentatonic pool
         const fund = POOL[Math.floor(Math.random() * POOL.length)];
@@ -144,7 +152,9 @@
         pingGain.gain.exponentialRampToValueAtTime(0.00010, now + offset + decay);
 
         pingGain.connect(audioCtx.destination);   // dry path
-        pingGain.connect(shimmerDelay);            // wet path → shimmer bus
+        pingGain.connect(dA);                      // wet path → reverb buses
+        pingGain.connect(dB);
+        pingGain.connect(dC);
 
         // ── Inharmonic sine partials ────────────────────────────────────────
         for (let p = 0; p < PARTIAL_RATIOS.length; p++) {
@@ -269,7 +279,7 @@
   if (workSection) {
     workSection.addEventListener('mousemove', function () {
       var now = Date.now();
-      if (soundReady && now - lastSoundTime > 18 + Math.random() * 25) {
+      if (soundReady && now - lastSoundTime > 150 + Math.random() * 60) {
         playFairyChime();
         lastSoundTime = now;
       }
