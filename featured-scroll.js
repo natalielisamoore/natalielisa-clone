@@ -260,7 +260,7 @@
 
     if (heading && heading.parentNode === camera) {
       var headingRow = document.createElement('div');
-      headingRow.style.cssText = 'display:flex;justify-content:space-between;align-items:center;width:100%;margin-bottom:1.5em;box-sizing:border-box;';
+      headingRow.style.cssText = 'display:flex;justify-content:space-between;align-items:center;width:100%;margin-bottom:3em;box-sizing:border-box;';
       camera.insertBefore(headingRow, heading);
       headingRow.appendChild(heading);
       headingRow.appendChild(controls);
