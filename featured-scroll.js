@@ -166,11 +166,7 @@
       }
     });
 
-    // ── Controls bar (dots left, arrows right) ────────────────────────────
-    var bar = document.createElement('div');
-    bar.style.cssText = 'display:flex;justify-content:space-between;align-items:center;padding:20px 2em 4px 2em;';
-
-    // Dots
+    // ── Dots ──────────────────────────────────────────────────────────────
     var dotsWrap = document.createElement('div');
     dotsWrap.style.cssText = 'display:flex;gap:8px;align-items:center;';
 
@@ -210,7 +206,7 @@
       }
     }
 
-    // Arrows
+    // ── Arrows ────────────────────────────────────────────────────────────
     var arrowsWrap = document.createElement('div');
     arrowsWrap.style.cssText = 'display:flex;gap:10px;align-items:center;';
 
@@ -255,9 +251,26 @@
     arrowsWrap.appendChild(makeArrow('Previous', -1));
     arrowsWrap.appendChild(makeArrow('Next', 1));
 
-    bar.appendChild(dotsWrap);
-    bar.appendChild(arrowsWrap);
-    camera.parentNode.insertBefore(bar, camera.nextSibling);
+    // ── Move heading + controls into a single flex row at the top ─────────
+    var heading = camera.querySelector('.heading-14');
+    var controls = document.createElement('div');
+    controls.style.cssText = 'display:flex;gap:16px;align-items:center;flex-shrink:0;';
+    controls.appendChild(dotsWrap);
+    controls.appendChild(arrowsWrap);
+
+    if (heading && heading.parentNode === camera) {
+      var headingRow = document.createElement('div');
+      headingRow.style.cssText = 'display:flex;justify-content:space-between;align-items:center;width:100%;margin-bottom:1.5em;box-sizing:border-box;';
+      camera.insertBefore(headingRow, heading);
+      headingRow.appendChild(heading);
+      headingRow.appendChild(controls);
+    } else {
+      // Fallback: insert controls bar above track
+      var bar = document.createElement('div');
+      bar.style.cssText = 'display:flex;justify-content:flex-end;align-items:center;gap:16px;padding:0 0 1em 0;';
+      bar.appendChild(controls);
+      camera.insertBefore(bar, track);
+    }
 
     // Build dots after layout settles
     setTimeout(function () {
