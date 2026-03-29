@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Book a Session | HeartsQuest</title>
+  <meta name="description" content="Book a Sound Soul Insights session, ask about workshops, or just say hello — Christine Ahh would love to hear from you.">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .contact-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 70vh;
+    }
+    .contact-info {
+      background: var(--navy);
+      padding: 5rem 4rem 5rem 5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .contact-info h2 {
+      font-family: var(--font-script);
+      font-weight: 400;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      color: var(--teal-light);
+      margin-bottom: 1.5rem;
+    }
+    .contact-info p {
+      font-size: 0.9rem;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 0.9rem;
+      font-weight: 300;
+    }
+    .contact-offers {
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .contact-offer {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.2rem;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 4px;
+      background: rgba(255,255,255,0.03);
+    }
+    .contact-offer img {
+      width: 28px;
+      opacity: 0.55;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .contact-offer div h4 {
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 0.25rem;
+    }
+    .contact-offer div p {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.5);
+      margin: 0;
+    }
+    .contact-form-wrap {
+      background: var(--cream);
+      padding: 5rem 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .contact-form-wrap h3 {
+      font-family: var(--font-serif);
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: var(--teal-deep);
+      margin-bottom: 2rem;
+    }
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-mid);
+      margin-bottom: 0.4rem;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1.5px solid rgba(0,0,0,0.1);
+      border-radius: 3px;
+      background: var(--white);
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      color: var(--text-dark);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--teal);
+    }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    .form-submit {
+      background: var(--teal);
+      color: var(--white);
+      border: none;
+      padding: 0.9rem 2rem;
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 0.5rem;
+    }
+    .form-submit:hover { background: var(--teal-deep); }
+    @media (max-width: 800px) {
+      .contact-wrap { grid-template-columns: 1fr; }
+      .contact-info { padding: 3rem 2rem; }
+      .contact-form-wrap { padding: 3rem 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header" id="siteHeader">
+    <a href="index.html" class="logo">HeartsQuest</a>
+    <nav class="main-nav">
+      <button class="menu-btn" id="menuBtn">MENU</button>
+      <div class="nav-icons">
+        <a href="song.html" class="nav-icon-link"><span class="nav-icon"><img src="assets/icons/icon-song.svg" alt="Song"></span><span class="nav-label">SONG</span></a>
+        <a href="sound.html" class="nav-icon-link"><span class="nav-icon"><img src="assets/icons/icon-sound.svg" alt="Sound"></span><span class="nav-label">SOUND</span></a>
+        <a href="soul.html" class="nav-icon-link"><span class="nav-icon"><img src="assets/icons/icon-soul.svg" alt="Soul"></span><span class="nav-label">SOUL</span></a>
+        <a href="story.html" class="nav-icon-link"><span class="nav-icon"><img src="assets/icons/icon-story.svg" alt="Story"></span><span class="nav-label">STORY</span></a>
+        <a href="fortune-teller.html" class="nav-icon-link"><span class="nav-icon"><img src="assets/icons/icon-fortune.svg" alt="Fortune Teller"></span><span class="nav-label">FORTUNE</span></a>
+      </div>
+    </nav>
+  </header>
+
+  <div class="nav-overlay" id="navOverlay">
+    <button class="nav-close" id="navClose">✕</button>
+    <nav class="mobile-nav">
+      <a href="song.html">Song</a>
+      <a href="sound.html">Sound</a>
+      <a href="soul.html">Soul</a>
+      <a href="story.html">Story</a>
+      <a href="fortune-teller.html">Fortune Teller</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+
+  <!-- CONTACT BODY -->
+  <div style="padding-top: 70px;">
+    <div class="contact-wrap">
+      <div class="contact-info">
+        <h2>Let's connect</h2>
+        <p>Whether you're curious about a Sound Soul session, want to join a singing circle, or just want to say hello — I'd love to hear from you.</p>
+        <p>Based in a seaside village near Seattle. Available online worldwide.</p>
+        <div class="contact-offers">
+          <div class="contact-offer">
+            <img src="assets/icons/icon-soul.svg" alt="Soul">
+            <div>
+              <h4>Sound Soul Insights — $100</h4>
+              <p>75-minute private session via Zoom or FaceTime. 25% off web launch special.</p>
+            </div>
+          </div>
+          <div class="contact-offer">
+            <img src="assets/icons/icon-sound.svg" alt="Sound">
+            <div>
+              <h4>Sound Baths & Workshops</h4>
+              <p>Undersky Sound Bath (Wednesdays, Bainbridge Island) · Harmonic Happiness (monthly, Poulsbo)</p>
+            </div>
+          </div>
+          <div class="contact-offer">
+            <img src="assets/icons/icon-song.svg" alt="Song">
+            <div>
+              <h4>Mermaid Temple Retreat</h4>
+              <p>May 22–24, 2026 · Lemolo WA · Limited spots</p>
+            </div>
+          </div>
+          <div class="contact-offer">
+            <img src="assets/icons/icon-story.svg" alt="Story">
+            <div>
+              <h4>Oracle Decks & Books</h4>
+              <p>HeartsQuest deck · Holy Sh*t! deck · Twins of Tessar novel</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form-wrap">
+        <h3>Send a message</h3>
+        <form class="contact-form" action="https://formspree.io/f/placeholder" method="POST">
+          <div class="form-group">
+            <label for="name">Your name</label>
+            <input type="text" id="name" name="name" required placeholder="First & last name">
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required placeholder="your@email.com">
+          </div>
+          <div class="form-group">
+            <label for="interest">I'm interested in…</label>
+            <select id="interest" name="interest">
+              <option value="">Please select</option>
+              <option value="soul-session">Sound Soul Insights Session</option>
+              <option value="sound-bath">Sound Baths / Workshops</option>
+              <option value="mermaid-retreat">Mermaid Temple Retreat</option>
+              <option value="oracle-deck">Oracle Deck</option>
+              <option value="other">Just saying hello</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Tell me a little about what you're looking for…"></textarea>
+          </div>
+          <button type="submit" class="form-submit">SEND MESSAGE &gt;</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <a href="index.html" class="footer-logo">HeartsQuest</a>
+      <nav class="footer-nav">
+        <a href="song.html">Song</a>
+        <a href="sound.html">Sound</a>
+        <a href="soul.html">Soul</a>
+        <a href="story.html">Story</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/heartsquest" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.tiktok.com/@heartsquest" target="_blank" rel="noopener">TikTok</a>
+        <a href="https://heartsquest.substack.com" target="_blank" rel="noopener">Substack</a>
+      </div>
+      <p class="footer-copy">© 2026 HeartsQuest LLC. All Rights Reserved.</p>
+      <nav class="footer-legal"><a href="terms.html">Terms</a><a href="privacy.html">Privacy</a></nav>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

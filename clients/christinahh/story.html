@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Story — Novels, Oracle Decks & Performance Art | HeartsQuest</title>
+  <meta name="description" content="Christine Ahh's novels, oracle decks, graphic novel, and one-woman show — stories to light the way, with heart.">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .story-card {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 3rem;
+      align-items: start;
+      padding: 4rem 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .story-card:last-child { border-bottom: none; }
+    .story-card.reverse { grid-template-columns: 1fr 280px; }
+    .story-card.reverse .card-image { order: 2; }
+    .story-card.reverse .card-text { order: 1; }
+    .card-image img { border-radius: 4px; width: 100%; object-fit: cover; box-shadow: 0 8px 30px rgba(0,0,0,0.3); }
+    .card-text h2 { font-family: var(--font-script); font-weight: 400; font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 0.5rem; }
+    .card-text .subtitle { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 1.2rem; }
+    .card-text p { font-size: 0.9rem; line-height: 1.85; margin-bottom: 0.9rem; font-weight: 300; }
+    @media (max-width: 700px) {
+      .story-card, .story-card.reverse { grid-template-columns: 1fr; }
+      .story-card.reverse .card-image { order: 0; }
+      .story-card.reverse .card-text { order: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header" id="siteHeader">
+    <a href="index.html" class="logo">HeartsQuest</a>
+    <nav class="main-nav">
+      <button class="menu-btn" id="menuBtn">MENU</button>
+      <div class="nav-icons">
+        <a href="song.html" class="nav-icon-link"><span class="nav-icon"><img src="assets/icons/icon-song.svg" alt="Song"></span><span class="nav-label">SONG</span></a>
+        <a href="sound.html" class="nav-icon-link"><span class="nav-icon"><img src="assets/icons/icon-sound.svg" alt="Sound"></span><span class="nav-label">SOUND</span></a>
+        <a href="soul.html" class="nav-icon-link"><span class="nav-icon"><img src="assets/icons/icon-soul.svg" alt="Soul"></span><span class="nav-label">SOUL</span></a>
+        <a href="story.html" class="nav-icon-link"><span class="nav-icon"><img src="assets/icons/icon-story.svg" alt="Story"></span><span class="nav-label">STORY</span></a>
+        <a href="fortune-teller.html" class="nav-icon-link"><span class="nav-icon"><img src="assets/icons/icon-fortune.svg" alt="Fortune Teller"></span><span class="nav-label">FORTUNE</span></a>
+      </div>
+    </nav>
+  </header>
+
+  <div class="nav-overlay" id="navOverlay">
+    <button class="nav-close" id="navClose">✕</button>
+    <nav class="mobile-nav">
+      <a href="song.html">Song</a>
+      <a href="sound.html">Sound</a>
+      <a href="soul.html">Soul</a>
+      <a href="story.html">Story</a>
+      <a href="fortune-teller.html">Fortune Teller</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+
+  <!-- HERO -->
+  <section class="page-hero hero">
+    <div class="hero-image" style="background-image: url('assets/images/hero-story.png'); background-position: center 25%;"></div>
+    <div class="hero-overlay" style="background: linear-gradient(to bottom, rgba(20,10,5,0.5) 0%, rgba(20,10,5,0.7) 100%);"></div>
+    <div class="hero-content">
+      <h1 class="hero-headline">Story</h1>
+    </div>
+  </section>
+
+  <!-- INTRO -->
+  <section class="content-section bg-teal-grad">
+    <div style="max-width: 760px; margin: 0 auto; padding: 0 2rem; text-align: center;">
+      <h2 style="font-family: var(--font-serif); font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 400; color: var(--white); line-height: 1.5; margin-bottom: 1.5rem; font-style: italic;">Your life is a story.</h2>
+      <p style="font-size:0.93rem; line-height:1.85; color:rgba(255,255,255,0.88); font-weight:300; margin-bottom:0.9rem;">We are the stories we tell ourselves. What story wants to live through you?</p>
+      <p style="font-size:0.93rem; line-height:1.85; color:rgba(255,255,255,0.88); font-weight:300;">Our culture's violence makes me heartsick. So I write characters who learn to meet conflict with compassion — to melt fear with love. My novels, oracle cards, graphic novel, and one-woman show feature magical realism and fantasy elements inspired by deep writing intensives with Octavia E. Butler and Ursula K. Le Guin.</p>
+      <a href="https://heartsquest.substack.com" target="_blank" rel="noopener" class="cta-link cta-light" style="margin-top:1.5rem; display:inline-block;">JOIN THE MUSELETTER &gt;</a>
+    </div>
+  </section>
+
+  <!-- SPARK STORY -->
+  <section class="content-section bg-dark">
+    <div class="story-card">
+      <div class="card-image">
+        <div class="video-wrap" style="border-radius:4px; overflow:hidden;">
+          <iframe src="https://www.youtube.com/embed/jVzEbEqT_dU?list=PL6W79dDRocPco8VmMhvgZLjkJY1Q6JXFc&index=3"
+            title="Spark Story — Christine Ahh"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
+        </div>
+      </div>
+      <div class="card-text">
+        <p class="subtitle" style="color: var(--teal-light);">One-Woman Musical</p>
+        <h2 style="color: var(--white);">Spark Story</h2>
+        <p style="color:rgba(255,255,255,0.85);">A unique one-woman musical about Love versus Fear. Deep down we all want to be seen, to connect, to create, and to love. But our brains are wired for survival and fear.</p>
+        <p style="color:rgba(255,255,255,0.85);">This is a story of how one girl ended up with a crew of inner characters who run her ragged. Good Girl demands perfection. Hungry Girl goes after chocolate, wine, and binge-watching. All to cover up existential dread, worry, and self-doubt.</p>
+        <p style="font-style:italic; color: var(--teal-light); font-weight: 300; font-size:0.88rem;">Spark Story is coming back by request in 2026!</p>
+        <div style="margin-top: 1.5rem; display:flex; flex-direction:column; gap:0.75rem;">
+          <blockquote style="font-size:0.85rem; line-height:1.6; color:rgba(255,255,255,0.7); font-style:italic; font-weight:300; border-left: 2px solid var(--teal-light); padding-left:0.8rem;">"Your story reminded me of what I want most – to be at home, in me." <cite style="font-style:normal; display:block; font-size:0.75rem; color:var(--teal-light); margin-top:0.3rem; font-weight:600;">~ Isabel Belda, Buenos Aires</cite></blockquote>
+          <blockquote style="font-size:0.85rem; line-height:1.6; color:rgba(255,255,255,0.7); font-style:italic; font-weight:300; border-left: 2px solid var(--teal-light); padding-left:0.8rem;">"Your piece really moved me, caused a definite shift. I am not the same person." <cite style="font-style:normal; display:block; font-size:0.75rem; color:var(--teal-light); margin-top:0.3rem; font-weight:600;">~ Amma Li Grace</cite></blockquote>
+        </div>
+        <a href="https://www.youtube.com/playlist?list=PL6W79dDRocPco8VmMhvgZLjkJY1Q6JXFc" target="_blank" rel="noopener" class="cta-link cta-light" style="margin-top:1.5rem; display:inline-block;">SEE MORE SPARK STORY &gt;</a>
+      </div>
+    </div>
+
+    <!-- THE LIGHT THAT NEVER LEAVES -->
+    <div class="story-card reverse">
+      <div class="card-text">
+        <p class="subtitle" style="color: var(--teal-light);">Novel in Progress</p>
+        <h2 style="color: var(--white);">The Light That Never Leaves</h2>
+        <p style="color:rgba(255,255,255,0.85); font-style:italic;">"Your Soul never abandons you, even if you abandon yourself."</p>
+        <p style="color:rgba(255,255,255,0.85);">It's 1973. Thirteen-year-old Sam builds a rock-solid wall around her heart to escape violent chaos at home. Her dissociated Soul hovers close, relentlessly trying to reconnect as Sam spirals into drugs, sex, and danger. Can Soul break through in time to save her?</p>
+        <p style="color:rgba(255,255,255,0.85);">A supernatural coming-of-age story — raw, visionary, and ultimately an act of profound love.</p>
+        <a href="contact.html" class="cta-link cta-light" style="margin-top:1.5rem; display:inline-block;">REQUEST A PREVIEW &gt;</a>
+      </div>
+      <div class="card-image">
+        <img src="assets/images/christine-ocean.jpg" alt="Christine by the Salish Sea">
+      </div>
+    </div>
+
+    <!-- ORACLE DECKS -->
+    <div class="story-card">
+      <div class="card-image">
+        <img src="assets/images/hero-story.png" alt="Christine performing Spark Story">
+      </div>
+      <div class="card-text">
+        <p class="subtitle" style="color: var(--teal-light);">Oracle Decks</p>
+        <h2 style="color: var(--white);">Creative Healing Oracle Decks</h2>
+        <p style="color:rgba(255,255,255,0.85);"><strong style="color:var(--white);">Holy Sh*t! 52 Inspiring Self-Care Tools for People Who Poo</strong> — A deck of playful, practical meditations for the bathroom. Pull a card to reset your monkey mind, restore your body, release funky emotions, or revitalize your spirit.</p>
+        <p style="color:rgba(255,255,255,0.85);"><strong style="color:var(--white);">HeartsQuest: Creative Tools to Navigate Change</strong> — An oracle for anyone in a big transition, to access inner wisdom. Get comfort and clarity for uncertainty, anxiety, and stuckness. Currently sold out.</p>
+        <a href="contact.html" class="cta-link cta-light" style="margin-top:1.5rem; display:inline-block;">GET A DECK &gt;</a>
+      </div>
+    </div>
+
+    <!-- TWINS OF TESSAR -->
+    <div class="story-card reverse">
+      <div class="card-text">
+        <p class="subtitle" style="color: var(--teal-light);">YA Fantasy Novel</p>
+        <h2 style="color: var(--white);">Twins of Tessar</h2>
+        <p style="color:rgba(255,255,255,0.85);">When 13-year-old Yolanda looks in her mirror, she's shocked to see a boy's face instead of her own. The strange boy shows up in reflections everywhere — on the TV and even the toaster — calling her by name. When he appears in a lake under a full moon, Yolanda plunges in after him, stepping into an ancient spirit world.</p>
+        <p style="color:rgba(255,255,255,0.85);">She escapes with Ming, a warrior princess, and together they flee to a distant mountaintop where Yolanda unleashes her power — the vision to see the truth. But can she trust it enough to see the real boy behind the reflection?</p>
+        <div style="margin-top:1.2rem; display:flex; flex-direction:column; gap:0.6rem;">
+          <blockquote style="font-size:0.85rem; line-height:1.6; color:rgba(255,255,255,0.65); font-style:italic; font-weight:300;">"This fast-paced tale was un-put-downable. Highly recommended to fantasy enthusiasts."</blockquote>
+          <blockquote style="font-size:0.85rem; line-height:1.6; color:rgba(255,255,255,0.65); font-style:italic; font-weight:300;">"The characters were colorful, the plot engaging and the imagery delightful. A page turner."</blockquote>
+        </div>
+        <a href="https://www.amazon.com/Twins-Tessar-Christine-Kate-Castigliano/dp/098224990X" target="_blank" rel="noopener" class="cta-link cta-light" style="margin-top:1.5rem; display:inline-block;">PREVIEW ON AMAZON &gt;</a>
+      </div>
+      <div class="card-image">
+        <img src="assets/images/mermaids-water.png" alt="Twins of Tessar">
+      </div>
+    </div>
+  </section>
+
+  <section class="section-museletter">
+    <div class="museletter-inner">
+      <h3>Sounding the Soul</h3>
+      <p>A weekly museletter — stories to light the way, with heart.</p>
+      <form class="museletter-form" action="https://heartsquest.substack.com" method="get" target="_blank">
+        <input type="email" name="email" placeholder="your@email.com" required>
+        <button type="submit">JOIN &gt;</button>
+      </form>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <a href="index.html" class="footer-logo">HeartsQuest</a>
+      <nav class="footer-nav">
+        <a href="song.html">Song</a>
+        <a href="sound.html">Sound</a>
+        <a href="soul.html">Soul</a>
+        <a href="story.html">Story</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/heartsquest" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.tiktok.com/@heartsquest" target="_blank" rel="noopener">TikTok</a>
+        <a href="https://heartsquest.substack.com" target="_blank" rel="noopener">Substack</a>
+      </div>
+      <p class="footer-copy">© 2026 HeartsQuest LLC. All Rights Reserved.</p>
+      <nav class="footer-legal"><a href="terms.html">Terms</a><a href="privacy.html">Privacy</a></nav>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

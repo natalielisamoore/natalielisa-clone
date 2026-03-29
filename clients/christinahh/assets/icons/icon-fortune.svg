@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="100%" height="100%" viewBox="0 0 350 350" version="1.1" xmlns="http://www.w3.org/2000/svg" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+  <!-- Crystal ball -->
+  <circle cx="175" cy="155" r="100" style="fill:#1B2040;"/>
+  <!-- Shimmer ring -->
+  <circle cx="175" cy="155" r="100" style="fill:none;stroke:#7B6FAE;stroke-width:6;"/>
+  <!-- Inner glow -->
+  <circle cx="175" cy="155" r="78" style="fill:#2e2a5a;"/>
+  <!-- Star center -->
+  <polygon points="175,108 182,138 214,138 189,156 198,186 175,169 152,186 161,156 136,138 168,138" style="fill:#7B6FAE;"/>
+  <!-- Highlight -->
+  <ellipse cx="150" cy="125" rx="18" ry="11" style="fill:rgba(255,255,255,0.18);transform-origin:150px 125px;transform:rotate(-30deg);"/>
+  <!-- Base pedestal -->
+  <ellipse cx="175" cy="263" rx="58" ry="12" style="fill:#1B2040;"/>
+  <ellipse cx="175" cy="263" rx="58" ry="12" style="fill:none;stroke:#7B6FAE;stroke-width:4;"/>
+  <rect x="162" y="252" width="26" height="18" style="fill:#1B2040;"/>
+  <rect x="160" y="252" width="30" height="4" style="fill:#7B6FAE;"/>
+  <!-- Stem connecting ball to base -->
+  <rect x="169" y="255" width="12" height="10" style="fill:#2e2a5a;"/>
+</svg>
