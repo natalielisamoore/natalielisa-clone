@@ -24,6 +24,8 @@
       --gray:    #555;
       --border:  rgba(255,255,255,0.07);
       --sans:    'PP Neue Montreal', 'Helvetica Neue', Arial, sans-serif;
+      --play:    'PP Playground', 'PP Neue Montreal', sans-serif;
+      --davinci: 'TRJN DaVinci', serif;
     }
 
     html { scroll-behavior: smooth; }
@@ -114,22 +116,18 @@
     }
 
     .hero-headline {
-      font-family: var(--sans);
-      font-weight: 700;
-      font-size: clamp(4.5rem, 9vw, 10.5rem);
-      line-height: 0.88;
-      letter-spacing: -0.025em;
+      font-family: var(--play);
+      font-weight: 500;
+      font-size: clamp(4rem, 8.5vw, 10rem);
+      line-height: 1.0;
+      letter-spacing: 0;
     }
 
-    /* "SHOP" — neon outline, transparent fill */
     .hero-headline .line-shop {
       display: block;
-      color: transparent;
-      -webkit-text-stroke: 2px var(--lime);
-      paint-order: stroke fill;
+      color: var(--lime);
     }
 
-    /* "SQUIGGLES" — solid white */
     .hero-headline .line-squiggles {
       display: block;
       color: var(--white);
@@ -219,9 +217,10 @@
     }
 
     .marquee-inner span {
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.25em;
+      font-family: var(--play);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
       padding-right: 2.5rem;
       flex-shrink: 0;
@@ -248,14 +247,15 @@
     }
 
     .collection-title {
+      font-family: var(--davinci);
       font-size: clamp(2.8rem, 5.5vw, 6rem);
-      font-weight: 700;
-      line-height: 0.95;
-      letter-spacing: -0.025em;
+      font-weight: 400;
+      line-height: 1.05;
+      letter-spacing: 0;
     }
 
     .collection-title em {
-      font-style: normal;
+      font-style: italic;
       color: var(--lime);
     }
 
@@ -276,7 +276,7 @@
     .product-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 3px;
+      gap: 2.5rem;
     }
 
     .product-card {
@@ -325,10 +325,12 @@
     }
 
     .product-name {
-      font-size: 17px;
-      font-weight: 500;
-      letter-spacing: 0.01em;
-      line-height: 1.2;
+      font-family: var(--davinci);
+      font-size: 18px;
+      font-weight: 400;
+      font-style: italic;
+      letter-spacing: 0;
+      line-height: 1.3;
       margin-bottom: 0.4rem;
     }
 
@@ -410,10 +412,11 @@
     }
 
     .about-headline {
+      font-family: var(--play);
       font-size: clamp(2.2rem, 3.5vw, 3.8rem);
-      font-weight: 700;
-      line-height: 1.05;
-      letter-spacing: -0.02em;
+      font-weight: 500;
+      line-height: 1.1;
+      letter-spacing: 0;
       margin-bottom: 2rem;
     }
 
@@ -467,9 +470,10 @@
     }
 
     .logo-banner-tag {
-      font-size: 11px;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
+      font-family: var(--davinci);
+      font-style: italic;
+      font-size: 16px;
+      letter-spacing: 0.05em;
       color: var(--gray);
       position: relative;
     }
@@ -584,7 +588,7 @@
 <!-- ── NAV ─────────────────────────────────────────────────────────────── -->
 <nav class="s-nav">
   <a href="../squiggles/" class="s-nav-link">← Portfolio</a>
-  <img src="assets/SquigglesLogo_2-01.svg" alt="Squiggles" class="s-nav-logo"/>
+  <img src="assets/Asset6.svg" alt="Squiggles" class="s-nav-logo"/>
   <a href="../" class="s-nav-link">Natalie Lisa Moore</a>
 </nav>
 
@@ -829,7 +833,7 @@
 
 <!-- ── LOGO BANNER ────────────────────────────────────────────────────────── -->
 <section class="logo-banner">
-  <img src="assets/SquigglesLogo_2-01.svg" alt="Squiggles"/>
+  <img src="assets/Asset5.svg" alt="Squiggles"/>
   <p class="logo-banner-tag">Handmade on Salt Spring Island &nbsp;·&nbsp; Est. 2024</p>
 </section>
 
