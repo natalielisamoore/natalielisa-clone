@@ -567,6 +567,69 @@ h1.hero-headline {
 }
 
 /* ============================================================
+   FORTUNE TELLER INVITATION
+   ============================================================ */
+.section-fortune-invite {
+  background: #0e1428;
+  padding: 7rem 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.section-fortune-invite::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 20% 30%, rgba(62,143,160,0.15) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 45% at 80% 70%, rgba(123,111,174,0.13) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.fortune-invite-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.fortune-invite-eyebrow {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(109,192,208,0.7);
+  margin-bottom: 0.75rem;
+}
+
+.section-fortune-invite .script-heading {
+  color: var(--white);
+  font-size: clamp(2.6rem, 6vw, 4.2rem);
+  line-height: 1.15;
+  margin-bottom: 1.25rem;
+}
+
+.fortune-invite-body {
+  font-size: 0.92rem;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.6);
+  font-weight: 300;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.section-fortune-invite .cta-link.cta-light {
+  color: var(--teal-light);
+  border-bottom-color: var(--teal-light);
+  margin-top: 2rem;
+}
+.section-fortune-invite .cta-link.cta-light:hover {
+  color: var(--white);
+  border-bottom-color: var(--white);
+}
+
+/* ============================================================
    MUSELETTER SIGNUP STRIP
    ============================================================ */
 .section-museletter {
