@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Sound Test — Magic Wand Chime Comparison</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0d0d14;
+    color: #fff;
+    font-family: 'Georgia', serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    padding: 40px 20px;
+  }
+
+  h1 {
+    font-size: 22px;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    color: #f3c8fe;
+    margin-bottom: 8px;
+    text-align: center;
+  }
+
+  p.sub {
+    font-size: 13px;
+    color: #888;
+    letter-spacing: 0.06em;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .bars {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    max-width: 760px;
+  }
+
+  .bar {
+    position: relative;
+    border-radius: 16px;
+    padding: 28px 32px;
+    cursor: crosshair;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.08);
+    transition: border-color 0.3s;
+    user-select: none;
+  }
+
+  .bar:hover { border-color: rgba(255,255,255,0.2); }
+
+  .bar-1 { background: linear-gradient(135deg, #1a0f2e 0%, #2a1045 100%); }
+  .bar-2 { background: linear-gradient(135deg, #0f1a1a 0%, #0a2828 100%); }
+  .bar-3 { background: linear-gradient(135deg, #1a1a0a 0%, #28250a 100%); }
+  .bar-4 { background: linear-gradient(135deg, #1a0a14 0%, #280a1a 100%); }
+  .bar-5 { background: linear-gradient(135deg, #0a0a1f 0%, #12003a 100%); }
+  .bar-6 { background: linear-gradient(135deg, #0f0a1a 0%, #1a0530 100%); }
+  .bar-7 { background: linear-gradient(135deg, #001a1a 0%, #002828 100%); }
+
+  .bar-label {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.5;
+    margin-bottom: 6px;
+  }
+
+  .bar-title {
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+  }
+
+  .bar-1 .bar-title { color: #d4a8ff; }
+  .bar-2 .bar-title { color: #a8ffd4; }
+  .bar-3 .bar-title { color: #ffd4a8; }
+  .bar-4 .bar-title { color: #ffa8d4; }
+  .bar-5 .bar-title { color: #c8b4ff; }
+  .bar-6 .bar-title { color: #e8c4ff; }
+  .bar-7 .bar-title { color: #b4f0f0; }
+
+  .bar-desc {
+    font-size: 13px;
+    color: #aaa;
+    line-height: 1.6;
+    max-width: 500px;
+  }
+
+  /* Pulse ring on trigger */
+  .pulse {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    width: 6px; height: 6px;
+    transform: translate(-50%, -50%) scale(0);
+    animation: pulse-out 0.6s ease-out forwards;
+  }
+
+  .bar-1 .pulse { background: radial-gradient(circle, #d4a8ff88, transparent); box-shadow: 0 0 12px #d4a8ff; }
+  .bar-2 .pulse { background: radial-gradient(circle, #a8ffd488, transparent); box-shadow: 0 0 12px #a8ffd4; }
+  .bar-3 .pulse { background: radial-gradient(circle, #ffd4a888, transparent); box-shadow: 0 0 12px #ffd4a8; }
+  .bar-4 .pulse { background: radial-gradient(circle, #ffa8d488, transparent); box-shadow: 0 0 12px #ffa8d4; }
+  .bar-5 .pulse { background: radial-gradient(circle, #c8b4ff88, transparent); box-shadow: 0 0 18px #c8b4ff; }
+  .bar-6 .pulse { background: radial-gradient(circle, #e8c4ff88, transparent); box-shadow: 0 0 22px #e8c4ff; }
+  .bar-7 .pulse { background: radial-gradient(circle, #b4f0f088, transparent); box-shadow: 0 0 22px #b4f0f0; }
+
+  @keyframes pulse-out {
+    0%   { transform: translate(-50%, -50%) scale(0);  opacity: 1; width: 6px; height: 6px; }
+    100% { transform: translate(-50%, -50%) scale(1);  opacity: 0; width: 80px; height: 80px; }
+  }
+
+  #unlock {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    z-index: 999;
+    cursor: pointer;
+  }
+
+  #unlock p { color: #f3c8fe; font-size: 18px; letter-spacing: 0.1em; }
+  #unlock span { color: #888; font-size: 13px; }
+</style>
+</head>
+<body>
+
+<div id="unlock">
+  <p>✦ click anywhere to enable sound ✦</p>
+  <span>then move your mouse over each bar</span>
+</div>
+
+<h1>Magic Wand Chime — 6 Approaches</h1>
+<p class="sub">Move your mouse slowly across each bar to hear the difference</p>
+
+<div class="bars">
+
+  <div class="bar bar-1" id="bar1">
+    <div class="bar-label">Approach 1</div>
+    <div class="bar-title">Bell Acoustics — Inharmonic Partials</div>
+    <div class="bar-desc">Real glockenspiel / mark tree physics. Each ping = 3 sine partials at struck-bar ratios (1 : 2.756 : 5.404). Fundamentals 1900–3600 Hz. Sharp attack, exponential bell tail (180–400ms). No pitch bend.</div>
+  </div>
+
+  <div class="bar bar-2" id="bar2">
+    <div class="bar-label">Approach 2</div>
+    <div class="bar-title">FM Synthesis — Carrier + Modulator</div>
+    <div class="bar-desc">Chowning (1973) bell technique. Modulator drives carrier frequency at a non-integer 1:2.756 ratio — creates glassy spectral sidebands. Modulation index decays 50–80ms: "ping then dissolve to air." Carriers 3000–6500 Hz.</div>
+  </div>
+
+  <div class="bar bar-3" id="bar3">
+    <div class="bar-label">Approach 3</div>
+    <div class="bar-title">Filtered Noise — Crystal / Glass</div>
+    <div class="bar-desc">White noise through narrow bandpass filters (Q 35–80). No oscillators — each sparkle is resonated noise. Airy and breathy, like crystal or glass catching light. 7–10 particles, 50–130ms decay, 3500–10000 Hz.</div>
+  </div>
+
+  <div class="bar bar-4" id="bar4">
+    <div class="bar-label">Approach 4</div>
+    <div class="bar-title">Psychoacoustics — Tinkerbell Method</div>
+    <div class="bar-desc">Pitches locked to C-major pentatonic (shifted to sparkle band) so any cluster sounds consonant. Inharmonic partials + 3ms noise transient at attack onset (physical strike cue). Shimmer tail via 28ms feedback delay. Most "fairy" of the four.</div>
+  </div>
+
+  <div class="bar bar-5" id="bar5">
+    <div class="bar-label">Approach 4B</div>
+    <div class="bar-title">Tinkerbell — Long Tail & Deep Reverb</div>
+    <div class="bar-desc">Same pentatonic psychoacoustic design as #4 but with heavier reverb: feedback raised to 0.88 (≈14s tail), wet level doubled, and a second low-frequency shimmer layer added. The sound decays into a longer, more cavernous shimmer cloud.</div>
+  </div>
+
+  <div class="bar bar-6" id="bar6">
+    <div class="bar-label">Approach 6</div>
+    <div class="bar-title">Airy Cathedral — Triple Reverb Hall</div>
+    <div class="bar-desc">Single isolated ping (no clusters) with three reverb buses at different delay times: short (35ms), mid (95ms), long (180ms). Each bus creates a distinct echo layer — together they build a cathedral hall. Feedback 0.90 (≈18s tail). Twinkles fire ~150ms apart — slow, deliberate, airy.</div>
+  </div>
+
+  <div class="bar bar-7" id="bar7">
+    <div class="bar-label">Approach 7</div>
+    <div class="bar-title">Lonely Starfield — Maximum Reverb, Ultra Sparse</div>
+    <div class="bar-desc">One ping at a time, firing ~220ms apart — enough silence between each to let the previous tail breathe. Primary reverb feedback at 0.93 (≈20s+ tail) with 60% wet mix. A warmer sub-shimmer bus adds low-end body to the decay cloud. The reverb from one strike hasn't finished before the next begins.</div>
+  </div>
+
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  let audioCtx = null;
+  let ready    = false;
+
+  // Unlock on first click
+  document.getElementById('unlock').addEventListener('click', function () {
+    this.remove();
+    initAudio();
+  });
+
+  async function initAudio() {
+    try {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (audioCtx.state === 'suspended') await audioCtx.resume();
+      ready = audioCtx.state === 'running';
+    } catch (e) { console.error(e); }
+  }
+
+  // ─────────────────────────────────────────────────────────────────
+  // APPROACH 1 — Bell Acoustics / Inharmonic Partials (+ reverb tail, softer)
+  // ─────────────────────────────────────────────────────────────────
+  function play1() {
+    if (!ready) return;
+    const PARTIAL_RATIOS  = [1, 2.756, 5.404];
+    const PARTIAL_WEIGHTS = [1.0, 0.35, 0.12];
+    const now = audioCtx.currentTime;
+
+    // Long shimmer reverb bus — 55ms delay, slow feedback decay (~1.8s tail)
+    const revDelay = audioCtx.createDelay(0.12);
+    revDelay.delayTime.value = 0.055;
+    const revFB  = audioCtx.createGain();  revFB.gain.value  = 0.38; // slower fade = longer tail
+    const revHP  = audioCtx.createBiquadFilter();
+    revHP.type = 'highpass'; revHP.frequency.value = 2800; // only shimmer highs
+    const revOut = audioCtx.createGain();  revOut.gain.value = 0.22; // reverb quieter than dry
+    revDelay.connect(revHP);
+    revHP.connect(revOut);
+    revOut.connect(audioCtx.destination);
+    revDelay.connect(revFB);
+    revFB.connect(revDelay);
+    // Disconnect after tail fades (~2s)
+    setTimeout(() => {
+      try { revDelay.disconnect(); revFB.disconnect();
+            revHP.disconnect();    revOut.disconnect(); } catch (_) {}
+    }, 2200);
+
+    const pingCount = 4 + Math.floor(Math.random() * 3);
+    for (let i = 0; i < pingCount; i++) {
+      const offset    = i * (0.008 + Math.random() * 0.014);
+      const fund      = 1900 + Math.random() * 1700;
+      const decay     = 0.22 + Math.random() * 0.28;   // slightly longer bell tail
+      const masterVol = 0.009 + Math.random() * 0.007; // softer: 0.009–0.016
+      const pingGain  = audioCtx.createGain();
+      pingGain.gain.setValueAtTime(0, now + offset);
+      pingGain.gain.linearRampToValueAtTime(masterVol, now + offset + 0.0015);
+      pingGain.gain.exponentialRampToValueAtTime(0.00012, now + offset + decay);
+      pingGain.connect(audioCtx.destination); // dry
+      pingGain.connect(revDelay);             // into reverb
+      for (let p = 0; p < PARTIAL_RATIOS.length; p++) {
+        const pFreq = fund * PARTIAL_RATIOS[p];
+        if (pFreq > 20000) continue;
+        const osc        = audioCtx.createOscillator();
+        const partGain   = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(pFreq, now + offset);
+        osc.detune.setValueAtTime((Math.random() - 0.5) * 30, now + offset);
+        partGain.gain.setValueAtTime(PARTIAL_WEIGHTS[p], now + offset);
+        osc.connect(partGain);
+        partGain.connect(pingGain);
+        osc.start(now + offset);
+        osc.stop(now + offset + decay + 0.03);
+      }
+    }
+  }
+
+  // ─────────────────────────────────────────────────────────────────
+  // APPROACH 2 — FM Synthesis
+  // ─────────────────────────────────────────────────────────────────
+  function play2() {
+    if (!ready) return;
+    const FM_RATIO = 2.756;
+    const now      = audioCtx.currentTime;
+    const count    = 5 + Math.floor(Math.random() * 4);
+    for (let i = 0; i < count; i++) {
+      const offset    = i * (0.010 + Math.random() * 0.012);
+      const carrierHz = 3000 + Math.random() * 3500;
+      const modHz     = carrierHz * FM_RATIO;
+      const indexPeak = 1.5 + Math.random() * 1.0;
+      const modDepth  = indexPeak * modHz;
+      const decay     = 0.10 + Math.random() * 0.16;
+      const vol       = 0.015 + Math.random() * 0.017;
+      const glide     = carrierHz * (1.08 + Math.random() * 0.04);
+      const indexDecay = 0.05 + Math.random() * 0.03;
+
+      const mod     = audioCtx.createOscillator();
+      const modGain = audioCtx.createGain();
+      mod.type = 'sine';
+      mod.frequency.setValueAtTime(modHz, now + offset);
+      modGain.gain.setValueAtTime(modDepth, now + offset);
+      modGain.gain.exponentialRampToValueAtTime(0.001, now + offset + indexDecay);
+
+      const carrier     = audioCtx.createOscillator();
+      const carrierGain = audioCtx.createGain();
+      carrier.type = 'sine';
+      carrier.frequency.setValueAtTime(carrierHz, now + offset);
+      carrier.frequency.linearRampToValueAtTime(glide, now + offset + decay);
+      carrierGain.gain.setValueAtTime(0, now + offset);
+      carrierGain.gain.linearRampToValueAtTime(vol, now + offset + 0.003);
+      carrierGain.gain.exponentialRampToValueAtTime(0.0001, now + offset + decay);
+
+      mod.connect(modGain);
+      modGain.connect(carrier.frequency);
+      carrier.connect(carrierGain);
+      carrierGain.connect(audioCtx.destination);
+
+      const end = now + offset + decay + 0.02;
+      mod.start(now + offset);    mod.stop(end);
+      carrier.start(now + offset); carrier.stop(end);
+    }
+  }
+
+  // ─────────────────────────────────────────────────────────────────
+  // APPROACH 3 — Filtered Noise / Crystal
+  // ─────────────────────────────────────────────────────────────────
+  function play3() {
+    if (!ready) return;
+    const now   = audioCtx.currentTime;
+    const count = 7 + Math.floor(Math.random() * 4);
+    for (let i = 0; i < count; i++) {
+      const offset = i * (0.008 + Math.random() * 0.014);
+      const freq   = 3500 + Math.random() * 6500;
+      const decay  = 0.05 + Math.random() * 0.08;
+      const vol    = 0.018 + Math.random() * 0.016;
+      const q      = 35 + Math.random() * 45;
+
+      const bufLen  = Math.ceil(audioCtx.sampleRate * 0.2);
+      const nBuf    = audioCtx.createBuffer(1, bufLen, audioCtx.sampleRate);
+      const nData   = nBuf.getChannelData(0);
+      for (let s = 0; s < bufLen; s++) nData[s] = Math.random() * 2 - 1;
+
+      const nSrc   = audioCtx.createBufferSource();
+      nSrc.buffer  = nBuf;
+
+      const filter = audioCtx.createBiquadFilter();
+      filter.type             = 'bandpass';
+      filter.frequency.value  = freq;
+      filter.Q.value          = q;
+
+      const gain = audioCtx.createGain();
+      gain.gain.setValueAtTime(0, now + offset);
+      gain.gain.linearRampToValueAtTime(vol, now + offset + 0.002);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + offset + decay);
+
+      nSrc.connect(filter);
+      filter.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      nSrc.start(now + offset);
+      nSrc.stop(now + offset + decay + 0.01);
+    }
+  }
+
+  // ─────────────────────────────────────────────────────────────────
+  // APPROACH 4 — Psychoacoustics / Tinkerbell Method
+  // ─────────────────────────────────────────────────────────────────
+  function play4() {
+    if (!ready) return;
+    const now = audioCtx.currentTime;
+
+    const SCALE_HZ = [523,659,784,880,988,1047,1319,1568,1760,1976,2093,2637,3136]
+                       .map(f => f * 2.83);
+    const POOL = SCALE_HZ.filter(f => f >= 2800 && f <= 7400);
+    const PARTIAL_RATIOS  = [1, 2.756, 5.404];
+    const PARTIAL_WEIGHTS = [1.0, 0.28, 0.09];
+
+    // Shimmer bus
+    const shimmerDelay = audioCtx.createDelay(0.12);
+    shimmerDelay.delayTime.value = 0.055;
+    const shimmerFB = audioCtx.createGain();
+    shimmerFB.gain.value = 0.72;  // long tail ~8s
+    const shimmerHP = audioCtx.createBiquadFilter();
+    shimmerHP.type = 'highpass';
+    shimmerHP.frequency.value = 3200;
+    const shimmerOut = audioCtx.createGain();
+    shimmerOut.gain.value = 0.20;
+    shimmerDelay.connect(shimmerHP);
+    shimmerHP.connect(shimmerOut);
+    shimmerOut.connect(audioCtx.destination);
+    shimmerDelay.connect(shimmerFB);
+    shimmerFB.connect(shimmerDelay);
+    setTimeout(() => {
+      try { shimmerDelay.disconnect(); shimmerFB.disconnect();
+            shimmerHP.disconnect();    shimmerOut.disconnect(); } catch (_) {}
+    }, 8500);
+
+    const pingCount = 1 + Math.floor(Math.random() * 2);   // 1–2 pings
+    for (let i = 0; i < pingCount; i++) {
+      const offset    = i * (0.007 + Math.random() * 0.013);
+      const decay     = 0.18 + Math.random() * 0.25;
+      const masterVol = 0.013 + Math.random() * 0.010;
+      const fund      = POOL[Math.floor(Math.random() * POOL.length)];
+
+      const pingGain = audioCtx.createGain();
+      pingGain.gain.setValueAtTime(0, now + offset);
+      pingGain.gain.linearRampToValueAtTime(masterVol, now + offset + 0.0012);
+      pingGain.gain.exponentialRampToValueAtTime(0.00010, now + offset + decay);
+      pingGain.connect(audioCtx.destination);
+      pingGain.connect(shimmerDelay);
+
+      for (let p = 0; p < PARTIAL_RATIOS.length; p++) {
+        const pFreq = fund * PARTIAL_RATIOS[p];
+        if (pFreq > 20000) continue;
+        const osc       = audioCtx.createOscillator();
+        const partGain  = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(pFreq, now + offset);
+        osc.detune.setValueAtTime((Math.random() - 0.5) * 24, now + offset);
+        partGain.gain.setValueAtTime(PARTIAL_WEIGHTS[p], now + offset);
+        osc.connect(partGain);
+        partGain.connect(pingGain);
+        osc.start(now + offset);
+        osc.stop(now + offset + decay + 0.04);
+      }
+
+      // Noise transient
+      const nLen  = Math.ceil(audioCtx.sampleRate * 0.003);
+      const nBuf  = audioCtx.createBuffer(1, nLen, audioCtx.sampleRate);
+      const nData = nBuf.getChannelData(0);
+      for (let s = 0; s < nLen; s++) nData[s] = Math.random() * 2 - 1;
+      const nSrc  = audioCtx.createBufferSource();
+      nSrc.buffer = nBuf;
+      const nHP   = audioCtx.createBiquadFilter();
+      nHP.type = 'highpass';
+      nHP.frequency.value = 4200;
+      const nGain = audioCtx.createGain();
+      nGain.gain.setValueAtTime(0, now + offset);
+      nGain.gain.linearRampToValueAtTime(masterVol * 0.5, now + offset + 0.0005);
+      nGain.gain.exponentialRampToValueAtTime(0.00010, now + offset + 0.003);
+      nSrc.connect(nHP);
+      nHP.connect(nGain);
+      nGain.connect(audioCtx.destination);
+      nSrc.start(now + offset);
+      nSrc.stop(now + offset + 0.005);
+    }
+  }
+
+  // ─────────────────────────────────────────────────────────────────
+  // APPROACH 4B — Tinkerbell: longer tail, deeper reverb
+  // ─────────────────────────────────────────────────────────────────
+  function play5() {
+    if (!ready) return;
+    const now = audioCtx.currentTime;
+
+    const SCALE_HZ = [523,659,784,880,988,1047,1319,1568,1760,1976,2093,2637,3136]
+                       .map(f => f * 2.83);
+    const POOL = SCALE_HZ.filter(f => f >= 2800 && f <= 7400);
+    const PARTIAL_RATIOS  = [1, 2.756, 5.404];
+    const PARTIAL_WEIGHTS = [1.0, 0.28, 0.09];
+
+    // High shimmer bus — same as #4 but feedback 0.88 (~14s tail), more wet
+    const shimmerDelay = audioCtx.createDelay(0.12);
+    shimmerDelay.delayTime.value = 0.055;
+    const shimmerFB = audioCtx.createGain();
+    shimmerFB.gain.value = 0.88;         // longer tail ~14s
+    const shimmerHP = audioCtx.createBiquadFilter();
+    shimmerHP.type = 'highpass';
+    shimmerHP.frequency.value = 3200;
+    const shimmerOut = audioCtx.createGain();
+    shimmerOut.gain.value = 0.42;        // more wet than #4 (was 0.20)
+    shimmerDelay.connect(shimmerHP);
+    shimmerHP.connect(shimmerOut);
+    shimmerOut.connect(audioCtx.destination);
+    shimmerDelay.connect(shimmerFB);
+    shimmerFB.connect(shimmerDelay);
+
+    // Second shimmer layer — lower delay, creates spacious depth
+    const shimmerDelay2 = audioCtx.createDelay(0.12);
+    shimmerDelay2.delayTime.value = 0.083;
+    const shimmerFB2 = audioCtx.createGain();
+    shimmerFB2.gain.value = 0.78;
+    const shimmerLP2 = audioCtx.createBiquadFilter();
+    shimmerLP2.type = 'lowpass';
+    shimmerLP2.frequency.value = 5000;
+    const shimmerOut2 = audioCtx.createGain();
+    shimmerOut2.gain.value = 0.18;
+    shimmerDelay2.connect(shimmerLP2);
+    shimmerLP2.connect(shimmerOut2);
+    shimmerOut2.connect(audioCtx.destination);
+    shimmerDelay2.connect(shimmerFB2);
+    shimmerFB2.connect(shimmerDelay2);
+
+    setTimeout(() => {
+      try {
+        shimmerDelay.disconnect();  shimmerFB.disconnect();
+        shimmerHP.disconnect();     shimmerOut.disconnect();
+        shimmerDelay2.disconnect(); shimmerFB2.disconnect();
+        shimmerLP2.disconnect();    shimmerOut2.disconnect();
+      } catch (_) {}
+    }, 15000);
+
+    const pingCount = 1 + Math.floor(Math.random() * 2);
+    for (let i = 0; i < pingCount; i++) {
+      const offset    = i * (0.007 + Math.random() * 0.013);
+      const decay     = 0.18 + Math.random() * 0.25;
+      const masterVol = 0.013 + Math.random() * 0.010;
+      const fund      = POOL[Math.floor(Math.random() * POOL.length)];
+
+      const pingGain = audioCtx.createGain();
+      pingGain.gain.setValueAtTime(0, now + offset);
+      pingGain.gain.linearRampToValueAtTime(masterVol, now + offset + 0.0012);
+      pingGain.gain.exponentialRampToValueAtTime(0.00010, now + offset + decay);
+      pingGain.connect(audioCtx.destination);
+      pingGain.connect(shimmerDelay);
+      pingGain.connect(shimmerDelay2);
+
+      for (let p = 0; p < PARTIAL_RATIOS.length; p++) {
+        const pFreq = fund * PARTIAL_RATIOS[p];
+        if (pFreq > 20000) continue;
+        const osc       = audioCtx.createOscillator();
+        const partGain  = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(pFreq, now + offset);
+        osc.detune.setValueAtTime((Math.random() - 0.5) * 24, now + offset);
+        partGain.gain.setValueAtTime(PARTIAL_WEIGHTS[p], now + offset);
+        osc.connect(partGain);
+        partGain.connect(pingGain);
+        osc.start(now + offset);
+        osc.stop(now + offset + decay + 0.04);
+      }
+
+      // Noise transient
+      const nLen  = Math.ceil(audioCtx.sampleRate * 0.003);
+      const nBuf  = audioCtx.createBuffer(1, nLen, audioCtx.sampleRate);
+      const nData = nBuf.getChannelData(0);
+      for (let s = 0; s < nLen; s++) nData[s] = Math.random() * 2 - 1;
+      const nSrc  = audioCtx.createBufferSource();
+      nSrc.buffer = nBuf;
+      const nHP   = audioCtx.createBiquadFilter();
+      nHP.type = 'highpass';
+      nHP.frequency.value = 4200;
+      const nGain = audioCtx.createGain();
+      nGain.gain.setValueAtTime(0, now + offset);
+      nGain.gain.linearRampToValueAtTime(masterVol * 0.5, now + offset + 0.0005);
+      nGain.gain.exponentialRampToValueAtTime(0.00010, now + offset + 0.003);
+      nSrc.connect(nHP);
+      nHP.connect(nGain);
+      nGain.connect(audioCtx.destination);
+      nSrc.start(now + offset);
+      nSrc.stop(now + offset + 0.005);
+    }
+  }
+
+  // ─────────────────────────────────────────────────────────────────
+  // APPROACH 6 — Airy Cathedral: triple reverb buses, sparse single pings
+  // ─────────────────────────────────────────────────────────────────
+  function play6() {
+    if (!ready) return;
+    const now = audioCtx.currentTime;
+
+    const SCALE_HZ = [523,659,784,880,988,1047,1319,1568,1760,1976,2093,2637,3136]
+                       .map(f => f * 2.83);
+    const POOL = SCALE_HZ.filter(f => f >= 2800 && f <= 7400);
+    const PARTIAL_RATIOS  = [1, 2.756, 5.404];
+    const PARTIAL_WEIGHTS = [1.0, 0.28, 0.09];
+
+    // Bus A: short pre-delay, high feedback (~18s tail)
+    const dA = audioCtx.createDelay(0.15);
+    dA.delayTime.value = 0.035;
+    const fbA = audioCtx.createGain(); fbA.gain.value = 0.90;
+    const hpA = audioCtx.createBiquadFilter(); hpA.type = 'highpass'; hpA.frequency.value = 3200;
+    const outA = audioCtx.createGain(); outA.gain.value = 0.45;
+    dA.connect(hpA); hpA.connect(outA); outA.connect(audioCtx.destination);
+    dA.connect(fbA); fbA.connect(dA);
+
+    // Bus B: mid delay, spacious hall layer
+    const dB = audioCtx.createDelay(0.20);
+    dB.delayTime.value = 0.095;
+    const fbB = audioCtx.createGain(); fbB.gain.value = 0.82;
+    const hpB = audioCtx.createBiquadFilter(); hpB.type = 'highpass'; hpB.frequency.value = 2400;
+    const outB = audioCtx.createGain(); outB.gain.value = 0.28;
+    dB.connect(hpB); hpB.connect(outB); outB.connect(audioCtx.destination);
+    dB.connect(fbB); fbB.connect(dB);
+
+    // Bus C: long pre-delay — "back wall" of the room
+    const dC = audioCtx.createDelay(0.30);
+    dC.delayTime.value = 0.18;
+    const fbC = audioCtx.createGain(); fbC.gain.value = 0.75;
+    const lpC = audioCtx.createBiquadFilter(); lpC.type = 'lowpass'; lpC.frequency.value = 4500;
+    const outC = audioCtx.createGain(); outC.gain.value = 0.18;
+    dC.connect(lpC); lpC.connect(outC); outC.connect(audioCtx.destination);
+    dC.connect(fbC); fbC.connect(dC);
+
+    setTimeout(() => {
+      try {
+        dA.disconnect(); fbA.disconnect(); hpA.disconnect(); outA.disconnect();
+        dB.disconnect(); fbB.disconnect(); hpB.disconnect(); outB.disconnect();
+        dC.disconnect(); fbC.disconnect(); lpC.disconnect(); outC.disconnect();
+      } catch (_) {}
+    }, 20000);
+
+    // Single isolated ping
+    const decay     = 0.30 + Math.random() * 0.20;
+    const masterVol = 0.014 + Math.random() * 0.008;
+    const fund      = POOL[Math.floor(Math.random() * POOL.length)];
+
+    const pingGain = audioCtx.createGain();
+    pingGain.gain.setValueAtTime(0, now);
+    pingGain.gain.linearRampToValueAtTime(masterVol, now + 0.0012);
+    pingGain.gain.exponentialRampToValueAtTime(0.00010, now + decay);
+    pingGain.connect(audioCtx.destination);
+    pingGain.connect(dA);
+    pingGain.connect(dB);
+    pingGain.connect(dC);
+
+    for (let p = 0; p < PARTIAL_RATIOS.length; p++) {
+      const pFreq = fund * PARTIAL_RATIOS[p];
+      if (pFreq > 20000) continue;
+      const osc      = audioCtx.createOscillator();
+      const partGain = audioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(pFreq, now);
+      osc.detune.setValueAtTime((Math.random() - 0.5) * 24, now);
+      partGain.gain.setValueAtTime(PARTIAL_WEIGHTS[p], now);
+      osc.connect(partGain);
+      partGain.connect(pingGain);
+      osc.start(now);
+      osc.stop(now + decay + 0.05);
+    }
+
+    const nLen  = Math.ceil(audioCtx.sampleRate * 0.003);
+    const nBuf  = audioCtx.createBuffer(1, nLen, audioCtx.sampleRate);
+    const nData = nBuf.getChannelData(0);
+    for (let s = 0; s < nLen; s++) nData[s] = Math.random() * 2 - 1;
+    const nSrc  = audioCtx.createBufferSource();
+    nSrc.buffer = nBuf;
+    const nHP   = audioCtx.createBiquadFilter();
+    nHP.type = 'highpass'; nHP.frequency.value = 4200;
+    const nGain = audioCtx.createGain();
+    nGain.gain.setValueAtTime(0, now);
+    nGain.gain.linearRampToValueAtTime(masterVol * 0.4, now + 0.0005);
+    nGain.gain.exponentialRampToValueAtTime(0.00010, now + 0.003);
+    nSrc.connect(nHP); nHP.connect(nGain); nGain.connect(audioCtx.destination);
+    nSrc.start(now); nSrc.stop(now + 0.005);
+  }
+
+  // ─────────────────────────────────────────────────────────────────
+  // APPROACH 7 — Lonely Starfield: maximum reverb, ultra sparse
+  // ─────────────────────────────────────────────────────────────────
+  function play7() {
+    if (!ready) return;
+    const now = audioCtx.currentTime;
+
+    const SCALE_HZ = [523,659,784,880,988,1047,1319,1568,1760,1976,2093,2637,3136]
+                       .map(f => f * 2.83);
+    const POOL = SCALE_HZ.filter(f => f >= 2800 && f <= 7400);
+    const PARTIAL_RATIOS  = [1, 2.756, 5.404];
+    const PARTIAL_WEIGHTS = [1.0, 0.28, 0.09];
+
+    // Primary shimmer — 0.93 feedback (~20s+ tail), 60% wet
+    const dA = audioCtx.createDelay(0.12);
+    dA.delayTime.value = 0.068;
+    const fbA = audioCtx.createGain(); fbA.gain.value = 0.93;
+    const hpA = audioCtx.createBiquadFilter(); hpA.type = 'highpass'; hpA.frequency.value = 3200;
+    const outA = audioCtx.createGain(); outA.gain.value = 0.60;
+    dA.connect(hpA); hpA.connect(outA); outA.connect(audioCtx.destination);
+    dA.connect(fbA); fbA.connect(dA);
+
+    // Sub shimmer — warmer tail, adds body to the decay cloud
+    const dB = audioCtx.createDelay(0.20);
+    dB.delayTime.value = 0.130;
+    const fbB = audioCtx.createGain(); fbB.gain.value = 0.86;
+    const lpB = audioCtx.createBiquadFilter(); lpB.type = 'lowpass'; lpB.frequency.value = 3000;
+    const outB = audioCtx.createGain(); outB.gain.value = 0.32;
+    dB.connect(lpB); lpB.connect(outB); outB.connect(audioCtx.destination);
+    dB.connect(fbB); fbB.connect(dB);
+
+    setTimeout(() => {
+      try {
+        dA.disconnect(); fbA.disconnect(); hpA.disconnect(); outA.disconnect();
+        dB.disconnect(); fbB.disconnect(); lpB.disconnect(); outB.disconnect();
+      } catch (_) {}
+    }, 25000);
+
+    // Single ping — very isolated and spacious
+    const decay     = 0.40 + Math.random() * 0.20;
+    const masterVol = 0.012 + Math.random() * 0.008;
+    const fund      = POOL[Math.floor(Math.random() * POOL.length)];
+
+    const pingGain = audioCtx.createGain();
+    pingGain.gain.setValueAtTime(0, now);
+    pingGain.gain.linearRampToValueAtTime(masterVol, now + 0.0012);
+    pingGain.gain.exponentialRampToValueAtTime(0.00010, now + decay);
+    pingGain.connect(audioCtx.destination);
+    pingGain.connect(dA);
+    pingGain.connect(dB);
+
+    for (let p = 0; p < PARTIAL_RATIOS.length; p++) {
+      const pFreq = fund * PARTIAL_RATIOS[p];
+      if (pFreq > 20000) continue;
+      const osc      = audioCtx.createOscillator();
+      const partGain = audioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(pFreq, now);
+      osc.detune.setValueAtTime((Math.random() - 0.5) * 24, now);
+      partGain.gain.setValueAtTime(PARTIAL_WEIGHTS[p], now);
+      osc.connect(partGain);
+      partGain.connect(pingGain);
+      osc.start(now);
+      osc.stop(now + decay + 0.06);
+    }
+
+    const nLen  = Math.ceil(audioCtx.sampleRate * 0.003);
+    const nBuf  = audioCtx.createBuffer(1, nLen, audioCtx.sampleRate);
+    const nData = nBuf.getChannelData(0);
+    for (let s = 0; s < nLen; s++) nData[s] = Math.random() * 2 - 1;
+    const nSrc  = audioCtx.createBufferSource();
+    nSrc.buffer = nBuf;
+    const nHP   = audioCtx.createBiquadFilter();
+    nHP.type = 'highpass'; nHP.frequency.value = 4200;
+    const nGain = audioCtx.createGain();
+    nGain.gain.setValueAtTime(0, now);
+    nGain.gain.linearRampToValueAtTime(masterVol * 0.4, now + 0.0005);
+    nGain.gain.exponentialRampToValueAtTime(0.00010, now + 0.003);
+    nSrc.connect(nHP); nHP.connect(nGain); nGain.connect(audioCtx.destination);
+    nSrc.start(now); nSrc.stop(now + 0.005);
+  }
+
+  // ─────────────────────────────────────────────────────────────────
+  // Mouse tracking + pulse visual per bar
+  // ─────────────────────────────────────────────────────────────────
+  const bars = [
+    { el: document.getElementById('bar1'), fn: play1, last: 0 },
+    { el: document.getElementById('bar2'), fn: play2, last: 0 },
+    { el: document.getElementById('bar3'), fn: play3, last: 0 },
+    { el: document.getElementById('bar4'), fn: play4, last: 0 },
+    { el: document.getElementById('bar5'), fn: play5, last: 0 },
+    { el: document.getElementById('bar6'), fn: play6, last: 0, gap: 150 },
+    { el: document.getElementById('bar7'), fn: play7, last: 0, gap: 220 },
+  ];
+
+  bars.forEach(function (b) {
+    b.el.addEventListener('mousemove', function (e) {
+      if (!ready) return;
+      const now = Date.now();
+      const minGap = (b.gap || 20) + Math.random() * (b.gap ? 60 : 25);
+      if (now - b.last < minGap) return;
+      b.last = now;
+      b.fn();
+
+      // Visual pulse
+      const rect   = b.el.getBoundingClientRect();
+      const dot    = document.createElement('div');
+      dot.className = 'pulse';
+      dot.style.left = (e.clientX - rect.left) + 'px';
+      dot.style.top  = (e.clientY - rect.top)  + 'px';
+      b.el.appendChild(dot);
+      setTimeout(() => dot.remove(), 650);
+    });
+  });
+
+})();
+</script>
+</body>
+</html>
