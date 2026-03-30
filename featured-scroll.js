@@ -10,11 +10,13 @@
     if (!track || !camera) return;
 
     // ── Override Webflow's scroll-pin layout ──────────────────────────────
-    if (height1) { height1.style.height = 'auto'; height1.style.minHeight = '0'; }
-    if (sticky)  { sticky.style.position = 'relative'; sticky.style.top = 'auto'; }
+    if (height1) { height1.style.height = 'auto'; height1.style.minHeight = '0'; height1.style.paddingBottom = '0'; }
+    if (sticky)  { sticky.style.position = 'relative'; sticky.style.top = 'auto'; sticky.style.height = 'auto'; sticky.style.minHeight = '0'; }
 
     // ── Camera: clipping viewport ─────────────────────────────────────────
     camera.style.overflow   = 'hidden';
+    camera.style.height     = 'auto';
+    camera.style.minHeight  = '0';
     camera.style.userSelect = 'none';
     camera.style.cursor     = 'grab';
 
@@ -168,7 +170,7 @@
 
     // ── Controls bar (dots left, arrows right) ────────────────────────────
     var bar = document.createElement('div');
-    bar.style.cssText = 'display:flex;justify-content:space-between;align-items:center;padding:4px 2em 4px 2em;margin-top:-80px;position:relative;z-index:10;';
+    bar.style.cssText = 'display:flex;justify-content:space-between;align-items:center;padding:12px 2em 8px 2em;position:relative;z-index:10;';
 
     // Dots
     var dotsWrap = document.createElement('div');
