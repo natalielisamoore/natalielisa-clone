@@ -255,18 +255,9 @@
     arrowsWrap.appendChild(makeArrow('Previous', -1));
     arrowsWrap.appendChild(makeArrow('Next', 1));
 
-    // Arrows — lifted into the heading row, inline with "Featured Work" title
-    var heading = camera.querySelector('.heading-14');
-    if (heading && heading.parentNode === camera) {
-      var headingRow = document.createElement('div');
-      headingRow.style.cssText = 'display:flex;justify-content:space-between;align-items:center;';
-      camera.insertBefore(headingRow, heading);
-      headingRow.appendChild(heading);
-      headingRow.appendChild(arrowsWrap);
-    }
-
-    // Dots bar — stays below, spacing unchanged
+    // Bar — dots left, arrows right, sits directly below the cards
     bar.appendChild(dotsWrap);
+    bar.appendChild(arrowsWrap);
     camera.parentNode.insertBefore(bar, camera.nextSibling);
 
     // Build dots after layout settles
