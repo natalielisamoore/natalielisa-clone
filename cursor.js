@@ -33,26 +33,6 @@
   document.addEventListener('keydown',    initAudio);
   document.addEventListener('mousemove',  initAudio, { once: true });
 
-  // Show a subtle "click for sound" hint so the user knows to click
-  window.addEventListener('load', () => {
-    const hint = document.createElement('div');
-    hint.textContent = '🔔 click anywhere for sound';
-    hint.style.cssText = `
-      position: fixed; bottom: 20px; right: 20px;
-      background: rgba(0,0,0,0.55); color: #fff;
-      font-size: 12px; padding: 6px 12px; border-radius: 20px;
-      z-index: 99999; pointer-events: none;
-      opacity: 1; transition: opacity 1s;
-    `;
-    document.body.appendChild(hint);
-    // Fade out after first click
-    document.addEventListener('click', () => {
-      hint.style.opacity = '0';
-      setTimeout(() => hint.remove(), 1000);
-    }, { once: true });
-    // Also auto-fade after 5s
-    setTimeout(() => { hint.style.opacity = '0'; setTimeout(() => hint.remove(), 1000); }, 5000);
-  });
 
   function playFairyChime() {
     if (!soundReady || !audioCtx || audioCtx.state !== 'running') return;
