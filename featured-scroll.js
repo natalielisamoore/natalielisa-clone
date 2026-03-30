@@ -255,10 +255,15 @@
     arrowsWrap.appendChild(makeArrow('Previous', -1));
     arrowsWrap.appendChild(makeArrow('Next', 1));
 
-    // Bar — dots left, arrows right, sits directly below the cards
+    // Bar — dots left, arrows right
+    // Insert after .sectionheight1 inside featured-work-new (outside Webflow's
+    // positioned camera/sticky stack so it renders in normal flow below the cards)
     bar.appendChild(dotsWrap);
     bar.appendChild(arrowsWrap);
-    camera.parentNode.insertBefore(bar, camera.nextSibling);
+    var sectionHeight = document.querySelector('.featured-work-new .sectionheight1');
+    var insertParent = sectionHeight ? sectionHeight.parentNode : camera.parentNode;
+    var insertBefore = sectionHeight ? sectionHeight.nextSibling : camera.nextSibling;
+    insertParent.insertBefore(bar, insertBefore);
 
     // Build dots after layout settles
     setTimeout(function () {
