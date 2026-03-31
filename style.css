@@ -4853,6 +4853,7 @@ p {
 }
 
 .about-wrapper {
+  margin-top: 0 !important;
   margin-bottom: 5em;
 }
 
@@ -8275,7 +8276,7 @@ p {
 
   .about-wrapper {
     width: 90%;
-    margin-top: 20em;
+    margin-top: 0;
     margin-left: auto;
     margin-right: auto;
   }
@@ -9438,7 +9439,7 @@ p {
   .about-wrapper {
     color: var(--black);
     width: auto;
-    margin-top: 12em;
+    margin-top: 0;
     margin-left: auto;
     margin-right: auto;
     line-height: 15px;

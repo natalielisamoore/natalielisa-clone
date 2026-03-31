@@ -85,8 +85,8 @@ overflow-x: hidden;
 .splide__track {
   overflow: visible;
 }
-</style><script type="text/javascript">window.__WEBFLOW_CURRENCY_SETTINGS = {"currencyCode":"CAD","symbol":"$","decimal":".","fractionDigits":2,"group":",","template":"{{wf {\"path\":\"symbol\",\"type\":\"PlainText\"} }} {{wf {\"path\":\"amount\",\"type\":\"CommercePrice\"} }} {{wf {\"path\":\"currencyCode\",\"type\":\"PlainText\"} }}","hideDecimalForWholeNumbers":false};</script></head><body><div data-animation="default" class="navbar1_component w-nav" data-easing2="ease" fs-scrolldisable-element="smart-nav" data-easing="ease" data-collapse="medium" data-w-id="7a5712d2-428a-76c4-82bd-60e573de2251" role="banner" data-duration="400"><div class="navbar1_container"><a href="../" class="navbar1_logo-link w-nav-brand"><img width="210" loading="lazy" alt="" src="../images/nav-logo.svg" class="navbar1_logo"/></a><div class="ham-cart-wrapper"><div data-w-id="7a5712d2-428a-76c4-82bd-60e573de2262" class="hamburber"><div class="burgerline top"></div><div class="burgerline middle"></div><div class="burgerline bottom"></div></div></div></div><div class="blacklinenavigator"></div></div><div class="lines-section" style="height:150vh;overflow:hidden;">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" style="position:sticky;top:0;width:100%;height:100vh;display:block;pointer-events:none;">
+</style><script type="text/javascript">window.__WEBFLOW_CURRENCY_SETTINGS = {"currencyCode":"CAD","symbol":"$","decimal":".","fractionDigits":2,"group":",","template":"{{wf {\"path\":\"symbol\",\"type\":\"PlainText\"} }} {{wf {\"path\":\"amount\",\"type\":\"CommercePrice\"} }} {{wf {\"path\":\"currencyCode\",\"type\":\"PlainText\"} }}","hideDecimalForWholeNumbers":false};</script></head><body><div data-animation="default" class="navbar1_component w-nav" data-easing2="ease" fs-scrolldisable-element="smart-nav" data-easing="ease" data-collapse="medium" data-w-id="7a5712d2-428a-76c4-82bd-60e573de2251" role="banner" data-duration="400"><div class="navbar1_container"><a href="../" class="navbar1_logo-link w-nav-brand"><img width="210" loading="lazy" alt="" src="../images/nav-logo.svg" class="navbar1_logo"/></a><div class="ham-cart-wrapper"><div data-w-id="7a5712d2-428a-76c4-82bd-60e573de2262" class="hamburber"><div class="burgerline top"></div><div class="burgerline middle"></div><div class="burgerline bottom"></div></div></div></div><div class="blacklinenavigator"></div></div><div class="lines-section" style="height:calc(100vh - 70px);overflow:hidden;">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" style="position:sticky;top:0;width:100%;height:calc(100vh - 70px);display:block;pointer-events:none;">
   <defs>
     <clipPath id="heart-clip" clipPathUnits="userSpaceOnUse">
       <path transform="translate(626.805, 252.479) scale(0.85)" d="M427.71,132.7l-35.72,35.72-35.72-35.72c-57.82-57.82-151.56-57.82-209.38,0h0c-57.82,57.82-57.82,151.56,0,209.38l35.72,35.72,209.38,209.38,209.38-209.38,35.72-35.72c57.82-57.82,57.82-151.56,0-209.38h0c-57.82-57.82-151.56-57.82-209.38,0Z"/>
@@ -113,7 +113,7 @@ overflow-x: hidden;
   var bot = document.getElementById('about-bottom-layer');
   var maxTravel = (4220.58 - 1920) / 4;
   var center = -(4220.58 - 1920) / 2;
-  var animEnd = window.innerHeight * 1.5;
+  var animEnd = window.innerHeight * 1.0;
   function onScroll(){
     var progress = Math.min(window.scrollY / animEnd, 1);
     var offset = progress * maxTravel;
