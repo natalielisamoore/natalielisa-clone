@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Innovative Earthworks — Logo Presentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:     #0d0d0d;
+      --yellow:    #e8d636;
+      --yellow-dim: rgba(232, 214, 54, 0.15);
+      --gray:      #aaabae;
+      --white:     #f5f4f0;
+      --muted:     rgba(245, 244, 240, 0.38);
+      --stroke:    rgba(245, 244, 240, 0.12);
+      --font-mono: 'Geist Mono', 'Courier New', monospace;
+    }
+
+    html { font-size: 16px; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--font-mono);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--muted); text-decoration: none; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; }
+    a:hover { color: var(--yellow); }
+
+    /* ── SHELL ── */
+    .presentation {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 3.5rem 2.5rem 8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 6rem;
+    }
+
+    /* ── HEADER ── */
+    .pres-header {
+      border-bottom: 1px solid var(--stroke);
+      padding-bottom: 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .pres-header__left h1 {
+      font-size: 0.65rem;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--yellow);
+    }
+
+    .pres-header__left h2 {
+      margin-top: 0.6rem;
+      font-size: 2.4rem;
+      font-weight: 300;
+      letter-spacing: -0.01em;
+      line-height: 1.1;
+      color: var(--white);
+    }
+
+    .pres-header__meta {
+      text-align: right;
+    }
+
+    .pres-header__meta p {
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      line-height: 1.9;
+    }
+
+    /* ── SECTION LABEL ── */
+    .section-label {
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--stroke);
+    }
+
+    /* ── HERO — MAIN LOGO ── */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .hero-stage {
+      background: #111;
+      border: 1px solid var(--stroke);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 5rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-stage::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 50% at 50% 55%, rgba(232, 214, 54, 0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-stage img {
+      width: 100%;
+      max-width: 680px;
+      height: auto;
+      display: block;
+    }
+
+    .hero-caption {
+      margin-top: 1.2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+    }
+
+    .hero-caption__title {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--white);
+    }
+
+    .hero-caption__note {
+      font-size: 0.58rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .badge {
+      display: inline-block;
+      background: var(--yellow-dim);
+      border: 1px solid rgba(232, 214, 54, 0.35);
+      color: var(--yellow);
+      font-size: 0.5rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.6rem;
+      border-radius: 2px;
+      vertical-align: middle;
+      margin-left: 0.6rem;
+    }
+
+    /* ── GRID — SECONDARY LOGOS ── */
+    .logo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 860px) {
+      .logo-grid { grid-template-columns: 1fr; }
+      .pres-header__meta { text-align: left; }
+    }
+
+    .logo-card {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-card__stage {
+      border-radius: 4px;
+      border: 1px solid var(--stroke);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 2rem;
+      aspect-ratio: 1 / 1;
+    }
+
+    .logo-card__stage--light  { background: #f5f4f0; }
+    .logo-card__stage--dark   { background: #111; }
+    .logo-card__stage--black  { background: #0d0d0d; }
+
+    .logo-card__stage img {
+      width: 100%;
+      max-width: 280px;
+      height: auto;
+      display: block;
+    }
+
+    .logo-card__caption {
+      margin-top: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .logo-card__caption span {
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .logo-card__caption .title { color: var(--white); }
+    .logo-card__caption .sub   { color: var(--muted); }
+
+    /* ── COLOUR PALETTE ── */
+    .palette {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .swatches {
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    .swatch {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .swatch__chip {
+      width: 72px;
+      height: 72px;
+      border-radius: 3px;
+      border: 1px solid var(--stroke);
+    }
+
+    .swatch__label {
+      font-size: 0.55rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .swatch__label strong {
+      display: block;
+      color: var(--white);
+      font-weight: 400;
+    }
+
+    /* ── USE NOTES ── */
+    .notes {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 640px) {
+      .notes { grid-template-columns: 1fr; }
+    }
+
+    .note-card {
+      border: 1px solid var(--stroke);
+      border-radius: 4px;
+      padding: 1.8rem 1.8rem 2rem;
+    }
+
+    .note-card h3 {
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 1rem;
+    }
+
+    .note-card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+
+    .note-card li {
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      line-height: 1.65;
+      padding-left: 1.2rem;
+      position: relative;
+    }
+
+    .note-card li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--stroke);
+    }
+
+    /* ── FOOTER ── */
+    .pres-footer {
+      border-top: 1px solid var(--stroke);
+      padding-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .pres-footer p {
+      font-size: 0.58rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+<div class="presentation">
+
+  <!-- HEADER -->
+  <header class="pres-header">
+    <div class="pres-header__left">
+      <h1>Logo Presentation</h1>
+      <h2>Innovative Earthworks</h2>
+    </div>
+    <div class="pres-header__meta">
+      <p>Designed by Natalie Lisa Moore</p>
+      <p>natalie lisa — Brand & Web Design</p>
+      <p>natalielisa.com</p>
+    </div>
+  </header>
+
+  <!-- MAIN LOGO -->
+  <section class="hero">
+    <div class="section-label">Primary Logo — Colour on Black</div>
+    <div class="hero-stage">
+      <img src="assets/innovative-earthworks-02.svg" alt="Innovative Earthworks — Colour on Black">
+    </div>
+    <div class="hero-caption">
+      <div>
+        <span class="hero-caption__title">Colour on Black<span class="badge">Primary</span></span>
+      </div>
+      <span class="hero-caption__note">Excavator door · Main application</span>
+    </div>
+  </section>
+
+  <!-- SECONDARY LOGOS -->
+  <section>
+    <div class="section-label">Additional Versions</div>
+    <div class="logo-grid">
+
+      <!-- Colour on White -->
+      <div class="logo-card">
+        <div class="logo-card__stage logo-card__stage--light">
+          <img src="assets/innovative-earthworks-01.svg" alt="Innovative Earthworks — Colour on White">
+        </div>
+        <div class="logo-card__caption">
+          <span class="title">Colour on White</span>
+          <span class="sub">Light backgrounds</span>
+        </div>
+      </div>
+
+      <!-- Black on White -->
+      <div class="logo-card">
+        <div class="logo-card__stage logo-card__stage--light">
+          <img src="assets/innovative-earthworks-03.svg" alt="Innovative Earthworks — Black on White">
+        </div>
+        <div class="logo-card__caption">
+          <span class="title">Black on White</span>
+          <span class="sub">Single colour · Print</span>
+        </div>
+      </div>
+
+      <!-- White on Black -->
+      <div class="logo-card">
+        <div class="logo-card__stage logo-card__stage--black">
+          <img src="assets/innovative-earthworks-04.svg" alt="Innovative Earthworks — White on Black">
+        </div>
+        <div class="logo-card__caption">
+          <span class="title">White on Black</span>
+          <span class="sub">Single colour · Dark backgrounds</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- COLOUR PALETTE -->
+  <section class="palette">
+    <div class="section-label">Brand Colours</div>
+    <div class="swatches">
+      <div class="swatch">
+        <div class="swatch__chip" style="background:#e8d636;"></div>
+        <div class="swatch__label">
+          <strong>Yellow</strong>
+          #E8D636
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch__chip" style="background:#aaabae;"></div>
+        <div class="swatch__label">
+          <strong>Silver</strong>
+          #AAABAE
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch__chip" style="background:#0d0d0d; border-color: rgba(245,244,240,0.2);"></div>
+        <div class="swatch__label">
+          <strong>Black</strong>
+          #0D0D0D
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch__chip" style="background:#ffffff; border-color: rgba(245,244,240,0.2);"></div>
+        <div class="swatch__label">
+          <strong>White</strong>
+          #FFFFFF
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- USE NOTES -->
+  <section>
+    <div class="section-label">Usage Notes</div>
+    <div class="notes">
+      <div class="note-card">
+        <h3>Excavator Door</h3>
+        <ul>
+          <li>Use the Colour on Black version (file 02)</li>
+          <li>Vinyl cut or printed decal on black door panel</li>
+          <li>Minimum recommended width: 300mm</li>
+          <li>Keep clear space equal to the height of the wordmark on all sides</li>
+        </ul>
+      </div>
+      <div class="note-card">
+        <h3>Shirts</h3>
+        <ul>
+          <li>Dark shirts — use Colour on Black or White on Black version</li>
+          <li>Light shirts — use Colour on White or Black on White version</li>
+          <li>Embroidery or screen print both work at this scale</li>
+          <li>Avoid placing on busy or patterned fabric</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="pres-footer">
+    <p>Innovative Earthworks — Logo Presentation · 2026</p>
+    <a href="../../index.html">← Back to natalielisa.com</a>
+  </footer>
+
+</div>
+</body>
+</html>
