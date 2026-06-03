@@ -67,18 +67,18 @@ overflow-x: hidden;
   }
   .willow-wrapper > div {
     width: 100%;
-    background-position: 50%;
+    aspect-ratio: 1 / 1;        /* all stack images square */
+    background-position: 50%;   /* centered crop */
     background-size: cover;
     background-repeat: no-repeat;
   }
-  /* each image keeps its own ratio so nothing crops */
-  .willow1 { background-image: url("../willowloft-portfolio/willow-01.jpg"); aspect-ratio: 4 / 5; }
-  .willow2 { background-image: url("../willowloft-portfolio/willow-02.jpg"); aspect-ratio: 4 / 5; }
-  .willow3 { background-image: url("../willowloft-portfolio/willow-03.jpg"); aspect-ratio: 4 / 5; }
-  .willow4 { background-image: url("../willowloft-portfolio/willow-04.jpg"); aspect-ratio: 2 / 3; }
-  .willow5 { background-image: url("../willowloft-portfolio/willow-05.jpg"); aspect-ratio: 3 / 2; }
-  .willow6 { background-image: url("../willowloft-portfolio/willow-06.jpg"); aspect-ratio: 4 / 5; }
-  .willow7 { background-image: url("../willowloft-portfolio/willow-07.jpg"); aspect-ratio: 4 / 5; }
+  .willow1 { background-image: url("../willowloft-portfolio/willow-01.jpg"); }
+  .willow2 { background-image: url("../willowloft-portfolio/willow-02.jpg"); }
+  .willow3 { background-image: url("../willowloft-portfolio/willow-03.jpg"); }
+  .willow4 { background-image: url("../willowloft-portfolio/willow-04.jpg"); }
+  .willow5 { background-image: url("../willowloft-portfolio/willow-05.jpg"); }
+  .willow6 { background-image: url("../willowloft-portfolio/willow-06.jpg"); }
+  .willow7 { background-image: url("../willowloft-portfolio/willow-07.jpg"); }
   @media screen and (max-width: 767px) {
     .willow-wrapper { width: 90%; padding-top: 5em; }
   }
