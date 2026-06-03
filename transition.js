@@ -101,7 +101,9 @@
     e.preventDefault();
     navigating = true;
 
-    const dest = a.href;
+    let dest = a.href;
+    // Local file:// URLs point to directories — append index.html so the browser renders the page
+    if (dest.startsWith('file://') && dest.endsWith('/')) dest += 'index.html';
     const cx   = e.clientX || window.innerWidth  / 2;
     const cy   = e.clientY || window.innerHeight / 2;
 
