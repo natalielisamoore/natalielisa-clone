@@ -2,6 +2,8 @@
   'use strict';
 
   function init() {
+    // Mobile: skip the horizontal drag-scroll; CSS lays the cards out in a vertical column.
+    if (window.innerWidth <= 767) return;
     var height1 = document.querySelector('.featured-work-new .sectionheight1');
     var sticky  = document.querySelector('.featured-work-new .sticky-element1');
     var camera  = document.querySelector('.featured-work-new .camera');
