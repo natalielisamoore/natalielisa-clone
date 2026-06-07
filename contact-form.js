@@ -49,15 +49,19 @@
         return res.json().then(function (body) { return { ok: res.ok, body: body }; });
       })
       .then(function (r) {
+        console.log('[contact-form] Web3Forms response:', r);
         if (r.ok && r.body && r.body.success) {
           form.style.display = 'none';
           if (done) done.style.display = 'block';
           form.reset();
         } else {
-          showFail(r.body && r.body.message ? r.body.message : null);
+          showFail(r.body && r.body.message ? r.body.message : 'Submission rejected (no message).');
         }
       })
-      .catch(function () { showFail(); });
+      .catch(function (err) {
+        console.error('[contact-form] request failed:', err);
+        showFail('Could not reach the form service: ' + (err && err.message ? err.message : err));
+      });
     });
   }
 
