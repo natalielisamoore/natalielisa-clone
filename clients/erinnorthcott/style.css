@@ -1,0 +1,386 @@
+/* ==========================================================================
+   Erin Northcott — Sunrise to Stars
+   Placeholder type: Georgia (headings) / Arial (body) — swap later via fonts.css
+   ========================================================================== */
+
+:root {
+  --white:    #ffffff;
+  --gold:     #c9a84c;
+  --gold-lite:#e9c766;
+  --rose:     #f5c6c6;
+  --clay:     #8b5e3c;
+  --midnight: #0a0a1a;
+
+  --ink:      #3a2e22;   /* warm near-black for body text on light sky */
+  --ink-soft: #6b5a48;
+
+  --measure:  62ch;
+  --ease:     cubic-bezier(.22,.61,.36,1);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--ink);
+  background: var(--midnight); /* fallback beneath the sky */
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+/* --------------------------------------------------------------------------
+   Fixed atmosphere layers
+   -------------------------------------------------------------------------- */
+.sky {
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  /* JS overwrites this; static sunrise as no-JS fallback */
+  background: linear-gradient(180deg, #fdf7ef 0%, #f8d9c6 50%, #f4c57a 100%);
+  will-change: background;
+}
+
+.stars {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  opacity: 0;              /* JS raises this near the night section */
+  pointer-events: none;
+  will-change: opacity;
+}
+
+.petals {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* a single falling petal (spawned by petals.js) */
+.petal {
+  position: absolute;
+  top: -8vh;
+  width: 16px;
+  height: 16px;
+  background: radial-gradient(circle at 30% 30%, #fbe0e0, var(--rose) 60%, #e7a9a9);
+  border-radius: 100% 0 100% 100%;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+/* --------------------------------------------------------------------------
+   Navigation
+   -------------------------------------------------------------------------- */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.15rem clamp(1.1rem, 4vw, 3rem);
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(9px);
+  -webkit-backdrop-filter: blur(9px);
+  border-bottom: 1px solid rgba(255,255,255,0.14);
+  transition: background .5s var(--ease), border-color .5s var(--ease);
+}
+.nav__name {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+  letter-spacing: .06em;
+  color: var(--ink);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.nav__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(.9rem, 2vw, 2rem);
+  justify-content: flex-end;
+}
+.nav__link {
+  font-size: .82rem;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  cursor: default;                 /* stubbed for now */
+  transition: color .3s var(--ease);
+}
+.nav__link:hover { color: var(--gold); }
+
+/* --------------------------------------------------------------------------
+   Sections & shared type
+   -------------------------------------------------------------------------- */
+.page { position: relative; z-index: 1; }
+
+.section {
+  position: relative;
+  padding: clamp(6rem, 16vh, 12rem) clamp(1.25rem, 6vw, 5rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.measure { max-width: var(--measure); margin: 0 auto; }
+
+.eyebrow {
+  font-size: .78rem;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--clay);
+  margin: 0 0 1.4rem;
+}
+.eyebrow--light { color: var(--gold-lite); }
+
+.section__title {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-weight: 400;
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  line-height: 1.05;
+  margin: 0 0 1.6rem;
+  color: var(--ink);
+}
+.section__title--light { color: #fff7ea; }
+
+.lede {
+  font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+  line-height: 1.85;
+  color: var(--ink);
+  margin: 0;
+}
+.lede--light { color: rgba(255,248,238,.9); }
+
+/* --------------------------------------------------------------------------
+   SUNRISE — hero
+   -------------------------------------------------------------------------- */
+.section--hero {
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+}
+.hero { max-width: 40ch; }
+.hero .eyebrow { color: var(--clay); }
+.hero__name {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-weight: 400;
+  font-size: clamp(3.2rem, 12vw, 8rem);
+  line-height: .95;
+  letter-spacing: .01em;
+  margin: 0;
+  color: var(--ink);
+}
+.hero__tagline {
+  font-size: clamp(1.05rem, 2vw, 1.4rem);
+  font-style: italic;
+  color: var(--clay);
+  margin: 1.6rem 0 0;
+}
+
+.scroll-cue {
+  position: absolute;
+  bottom: 2.4rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .6rem;
+  font-size: .72rem;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--clay);
+}
+.scroll-cue__line {
+  width: 1px;
+  height: 46px;
+  background: linear-gradient(var(--clay), transparent);
+  animation: cue 2.4s var(--ease) infinite;
+  transform-origin: top;
+}
+@keyframes cue {
+  0%   { transform: scaleY(0); opacity: 0; }
+  40%  { transform: scaleY(1); opacity: 1; }
+  100% { transform: scaleY(1) translateY(46px); opacity: 0; }
+}
+
+/* --------------------------------------------------------------------------
+   GOLDEN HOUR — pullquote + ripple
+   -------------------------------------------------------------------------- */
+.pullquote {
+  position: relative;
+  margin: clamp(4rem, 10vh, 8rem) auto 0;
+  max-width: 30ch;
+  text-align: center;
+}
+.pullquote blockquote {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-style: italic;
+  font-size: clamp(1.8rem, 5vw, 3.2rem);
+  line-height: 1.2;
+  color: var(--clay);
+}
+
+/* concentric water-ripple behind the pullquote */
+.ripple {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 0; height: 0;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+}
+.ripple i {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 42vmin; height: 42vmin;
+  margin: -21vmin 0 0 -21vmin;
+  border: 1px solid rgba(201,168,76,.45);
+  border-radius: 50%;
+  opacity: 0;
+}
+.reveal.in .ripple i { animation: ripple 5.5s var(--ease) infinite; }
+.reveal.in .ripple i:nth-child(2) { animation-delay: 1.8s; }
+.reveal.in .ripple i:nth-child(3) { animation-delay: 3.6s; }
+@keyframes ripple {
+  0%   { transform: scale(.2); opacity: .55; }
+  80%  { opacity: 0; }
+  100% { transform: scale(1.1); opacity: 0; }
+}
+
+/* --------------------------------------------------------------------------
+   NIGHT SKY — audio player + starline
+   -------------------------------------------------------------------------- */
+.section--night { min-height: 120vh; justify-content: center; }
+.night__inner { text-align: center; }
+.night__intro {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-style: italic;
+  font-size: clamp(1.15rem, 2.4vw, 1.6rem);
+  color: rgba(255,248,238,.85);
+  margin: 0 0 2.5rem;
+}
+
+.player {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  max-width: 30rem;
+  margin: 0 auto;
+  padding: 1.1rem 1.3rem;
+  text-align: left;
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(233,199,102,.28);
+  border-radius: 999px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+.player__btn {
+  flex: 0 0 auto;
+  width: 52px; height: 52px;
+  display: grid; place-items: center;
+  border: 1px solid rgba(233,199,102,.5);
+  border-radius: 50%;
+  background: rgba(201,168,76,.14);
+  color: var(--gold-lite);
+  cursor: pointer;
+  transition: background .3s var(--ease), transform .2s var(--ease);
+}
+.player__btn:hover { background: rgba(201,168,76,.26); transform: scale(1.05); }
+.player__icon { width: 22px; height: 22px; fill: currentColor; }
+.player__icon--pause { display: none; }
+.player.is-playing .player__icon--play { display: none; }
+.player.is-playing .player__icon--pause { display: block; }
+
+.player__body { flex: 1 1 auto; min-width: 0; }
+.player__label {
+  margin: 0 0 .55rem;
+  font-size: .82rem;
+  letter-spacing: .04em;
+  color: rgba(255,248,238,.82);
+}
+.player__track {
+  height: 4px;
+  border-radius: 4px;
+  background: rgba(255,255,255,.16);
+  cursor: pointer;
+  overflow: hidden;
+}
+.player__progress {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--gold), var(--gold-lite));
+}
+.player__time {
+  display: flex;
+  justify-content: space-between;
+  margin-top: .5rem;
+  font-size: .7rem;
+  color: rgba(255,248,238,.55);
+}
+
+/* the gold line that fades in slowly as the audio plays */
+.starline {
+  margin: clamp(4rem, 12vh, 9rem) auto 0;
+  max-width: 24ch;
+  text-align: center;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-style: italic;
+  font-size: clamp(1.5rem, 4.5vw, 2.8rem);
+  line-height: 1.35;
+  color: var(--gold-lite);
+  text-shadow: 0 0 26px rgba(201,168,76,.35);
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 6s var(--ease), transform 6s var(--ease);
+}
+.starline.in { opacity: 1; transform: none; }
+.starline__by {
+  display: block;
+  margin-top: 1rem;
+  font-style: normal;
+  font-size: .5em;
+  letter-spacing: .1em;
+  color: rgba(233,199,102,.7);
+}
+
+/* --------------------------------------------------------------------------
+   Scroll reveal
+   -------------------------------------------------------------------------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 1.1s var(--ease), transform 1.1s var(--ease);
+}
+.reveal.in { opacity: 1; transform: none; }
+
+/* --------------------------------------------------------------------------
+   Responsive
+   -------------------------------------------------------------------------- */
+@media (max-width: 640px) {
+  .nav { flex-direction: column; align-items: flex-start; gap: .55rem; padding: .8rem 1.1rem; }
+  .nav__links { gap: .55rem 1.1rem; }
+  .nav__link { font-size: .68rem; letter-spacing: .1em; }
+  .player { border-radius: 22px; }
+}
+
+/* --------------------------------------------------------------------------
+   Reduced motion — keep the scroll-driven sky, calm everything else
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .scroll-cue__line { animation: none; }
+  .reveal.in .ripple i { animation: none; opacity: .25; }
+  .starline { transition: opacity 1s linear; transform: none; }
+  .petal { display: none; }
+}
