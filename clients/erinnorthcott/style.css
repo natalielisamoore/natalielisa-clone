@@ -345,7 +345,7 @@ body {
   min-height: 100vh;
   overflow: hidden;
 }
-.hero { max-width: 42ch; position: relative; z-index: 2; margin: 0 auto; }
+.hero { max-width: min(92vw, 1040px); position: relative; z-index: 2; margin: 0 auto; }
 
 /* soft cloud banks on either side of the sunrise hero — you enter between them */
 .hero__clouds { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
@@ -1103,12 +1103,12 @@ body {
 /* Erin, a plain rectangular frame held in the middle of the sunrise */
 .hero__portrait {
   display: block;
-  width: clamp(230px, 30vw, 400px);
+  width: min(92vw, 1040px);
   height: auto;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 1700 / 729;
   margin: 0 auto;
   object-fit: cover;
-  object-position: 50% 42%;
+  object-position: 50% 50%;
   /* sun-faded, so she sits inside the golden hour rather than against it */
   filter: sepia(.3) saturate(1.1) hue-rotate(-8deg) brightness(1.05) contrast(.98);
   box-shadow: 0 22px 54px rgba(74,42,20,.22);
