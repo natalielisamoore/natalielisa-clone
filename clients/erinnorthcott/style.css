@@ -1080,15 +1080,7 @@ body {
 }
 
 /* --------------------------------------------------------------------------
-   Reel 02 — The Promise. Held wide and quiet; no archive props here, so the
-   Daniel section keeps them to itself.
-   -------------------------------------------------------------------------- */
-.section--promise { min-height: 88vh; }
-.promise__inner { text-align: center; max-width: 60ch; }
-.promise__inner .lede { margin-left: auto; margin-right: auto; }
-
-/* --------------------------------------------------------------------------
-   Reel 04 — Tea & Story. Softer and more spacious than the archive sections.
+   Tea & Story. Softer and more spacious than the archive sections.
    -------------------------------------------------------------------------- */
 .section--tea { min-height: 88vh; }
 .tea__inner { text-align: center; max-width: 58ch; }
