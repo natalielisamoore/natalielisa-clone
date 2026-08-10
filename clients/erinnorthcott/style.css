@@ -1118,13 +1118,13 @@ body {
    Footer: bio and socials on the left, pages on the right, credits beneath
    -------------------------------------------------------------------------- */
 .footer__bio {
-  max-width: 46ch;
-  font-size: .92rem;
-  line-height: 1.65;
-  color: rgba(255,248,238,.74);
-  margin: 0;
+  font-family: var(--mono);
+  font-size: .66rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: rgba(255,248,238,.62);
+  margin: .75rem 0 0;
 }
-.footer__bio em { font-style: italic; color: rgba(255,248,238,.9); }
 
 .footer__follow {
   display: flex;
