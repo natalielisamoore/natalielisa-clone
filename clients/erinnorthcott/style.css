@@ -1118,3 +1118,19 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .hero__line { animation: none; opacity: .88; }
 }
+
+/* Erin, small and sun-faded, so the sunset keeps coming through around her */
+.hero__portrait {
+  display: block;
+  width: clamp(108px, 13vw, 168px);
+  height: auto;
+  aspect-ratio: 1;
+  margin: 0 auto clamp(1.3rem, 2.8vw, 2rem);
+  object-fit: cover;
+  /* feathered edge — no hard disc sitting on the sky */
+  -webkit-mask: radial-gradient(circle closest-side at 50% 46%, #000 58%, rgba(0,0,0,.34) 82%, transparent 99%);
+          mask: radial-gradient(circle closest-side at 50% 46%, #000 58%, rgba(0,0,0,.34) 82%, transparent 99%);
+  /* graded warm so she sits inside the golden hour, not against it */
+  filter: sepia(.46) saturate(1.18) hue-rotate(-12deg) brightness(1.08) contrast(.96);
+  opacity: .94;
+}
