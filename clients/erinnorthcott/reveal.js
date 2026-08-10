@@ -25,7 +25,6 @@
   const progress = root.querySelector('[data-progress]');
   const curEl    = root.querySelector('[data-current]');
   const durEl    = root.querySelector('[data-duration]');
-  const starline = document.getElementById('starline');
 
   const fmt = (s) => {
     if (!isFinite(s)) return '0:00';
@@ -43,7 +42,6 @@
   audio.addEventListener('play', () => {
     root.classList.add('is-playing');
     btn.setAttribute('aria-label', 'Pause');
-    if (starline) starline.classList.add('in');   // the gold line begins its slow rise
   });
   audio.addEventListener('pause', () => {
     root.classList.remove('is-playing');
