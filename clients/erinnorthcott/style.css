@@ -1098,39 +1098,18 @@ body {
   .flicker { animation: none; opacity: .03; }
 }
 
-/* Daniel's line, the first thing said on arrival — handwritten, quiet, and
-   arriving a beat after the name */
-.hero__line {
-  font-family: var(--hand);
-  font-size: clamp(1.35rem, 2.7vw, 2.1rem);
-  line-height: 1.2;
-  color: var(--clay);
-  text-align: center;
-  margin: clamp(1.1rem, 2.4vw, 1.8rem) 0 0;
-  transform: rotate(-1.5deg);
-  opacity: 0;
-  animation: hero-line 2.6s var(--ease) 1.5s forwards;
-}
-@keyframes hero-line {
-  from { opacity: 0; transform: rotate(-1.5deg) translateY(8px); }
-  to   { opacity: .88; transform: rotate(-1.5deg) translateY(0); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .hero__line { animation: none; opacity: .88; }
-}
 
-/* Erin, small and sun-faded, so the sunset keeps coming through around her */
+
+/* Erin, a plain rectangular frame held in the middle of the sunrise */
 .hero__portrait {
   display: block;
-  width: clamp(170px, 22vw, 280px);
+  width: clamp(230px, 30vw, 400px);
   height: auto;
-  aspect-ratio: 1;
-  margin: 0 auto clamp(1.8rem, 3.6vw, 2.6rem);
+  aspect-ratio: 4 / 5;
+  margin: 0 auto;
   object-fit: cover;
-  /* feathered edge — no hard disc sitting on the sky */
-  -webkit-mask: radial-gradient(circle closest-side at 50% 46%, #000 58%, rgba(0,0,0,.34) 82%, transparent 99%);
-          mask: radial-gradient(circle closest-side at 50% 46%, #000 58%, rgba(0,0,0,.34) 82%, transparent 99%);
-  /* graded warm so she sits inside the golden hour, not against it */
-  filter: sepia(.46) saturate(1.18) hue-rotate(-12deg) brightness(1.08) contrast(.96);
-  opacity: .94;
+  object-position: 50% 42%;
+  /* sun-faded, so she sits inside the golden hour rather than against it */
+  filter: sepia(.3) saturate(1.1) hue-rotate(-8deg) brightness(1.05) contrast(.98);
+  box-shadow: 0 22px 54px rgba(74,42,20,.22);
 }
