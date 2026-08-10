@@ -456,19 +456,6 @@ body {
 }
 .golden__text .lede { max-width: 62ch; margin: 0 auto; }   /* readable, centered */
 
-/* the "Daniel" title, in the Super-8 title-card manner: heavy rounded oblique,
-   drawn as an outline rather than filled */
-.section--golden .section__title {
-  font-family: 'Nunito', 'Trebuchet MS', sans-serif;
-  font-style: italic;
-  font-weight: 900;
-  font-size: clamp(2.6rem, 7vw, 5.2rem);
-  letter-spacing: -.01em;
-  color: transparent;
-  -webkit-text-stroke: 3px var(--ink);    /* dark warm stroke reads on the golden sky */
-          text-stroke: 3px var(--ink);
-  paint-order: stroke fill;
-}
 
 /* film still as a warm duotone inside a 16mm-style frame — clickable to the film */
 .filmframe { margin: 0; position: relative; }
