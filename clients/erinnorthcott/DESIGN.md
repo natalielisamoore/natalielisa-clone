@@ -35,7 +35,7 @@ _History: a fixed sunset photograph was tried (2026-08-09) then reverted — the
 1. **SUNRISE (hero)** — "Erin Northcott" large, short tagline + handwritten note.
 2. **HOOK — archival threshold** (`.section--hook`) — the cinematic hook line between hero & story. Warm sun-faded; thin slide-mount frame, two faintly-spinning cassette reels, a handwritten "no. 01" corner label, mono "FROM THE ARCHIVE" eyebrow. Line 1 handwritten (Caveat): *"Boxes of cassettes & a request…"*; line 2 serif: *"a dying wish that became an HBO film."* (HBO upright = quietly important). Emotional doorway into Golden Hour.
 3. **GOLDEN HOUR** — Daniel & the story; asymmetric film-frame grid (real Daniel/HBO image) + bio.
-4. **SUNSET — The Becoming** — how Inner Ceremonies came to be; the eleven-year transformation.
+4. **SUNSET — The Becoming** — Inner Ceremonies intro (Erin's personal/somatic work). Asymmetric grid: text left, an **autoplay/loop/muted rose-unfurling video** right (`videos/rose-unfurling.mp4`, 640×640) as a soft-edged ethereal orb (radial mask) with a petal-pink glow behind it.
 5. **NIGHT SKY** — stars arrive; minimal audio player (placeholder silent track). On play, gold line fades in: *"Mommy, the stars are kissing me." — Daniel Northcott*
 6. **CLOSING benediction** (`.section--close`) — *"Our story never ends."* (glowing cream, "ends." muted rust) on the deep night with horizon glow + "— in Daniel's words" handwritten. The final frame.
 
