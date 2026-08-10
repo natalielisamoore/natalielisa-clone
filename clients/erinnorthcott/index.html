@@ -23,6 +23,8 @@
   <canvas class="motes" aria-hidden="true"></canvas>
   <!-- Portal edge vignette -->
   <div class="vignette" aria-hidden="true"></div>
+  <!-- Film grain over everything -->
+  <div class="grain" aria-hidden="true"></div>
 
   <!-- Navigation -->
   <header class="nav">
@@ -56,14 +58,27 @@
 
     <!-- GOLDEN HOUR — Daniel & the story -->
     <section class="section section--golden" id="golden">
-      <div class="measure reveal">
-        <p class="eyebrow">01 &mdash; Golden Hour</p>
-        <h2 class="section__title">Daniel &amp; the story</h2>
-        <p class="lede">For eleven years, Erin lived inside her brother Daniel&rsquo;s story &mdash; the footage he filmed across the world, the life he lived without hesitation, and the loss that reshaped her own. That long labor of love became a film, and that film carried Daniel &mdash; his life and his death &mdash; to HBO, and to millions.</p>
+      <div class="golden__grid">
+        <figure class="filmframe reveal" aria-hidden="true">
+          <div class="filmframe__img">
+            <img src="images/daniel-still-PLACEHOLDER.jpg" alt="" loading="lazy" />
+          </div>
+          <figcaption class="filmframe__cap">
+            <span>Daniel Northcott</span>
+            <span>16MM &middot; 00:11:04</span>
+          </figcaption>
+        </figure>
+
+        <div class="golden__text reveal">
+          <p class="eyebrow">01 &mdash; Golden Hour</p>
+          <h2 class="section__title">Daniel &amp; the story</h2>
+          <p class="lede">For eleven years, Erin lived inside her brother Daniel&rsquo;s story &mdash; the footage he filmed across the world, the life he lived without hesitation, and the loss that reshaped her own. That long labor of love became a film, and that film carried Daniel &mdash; his life and his death &mdash; to HBO, and to millions.</p>
+        </div>
       </div>
-      <figure class="pullquote reveal">
+
+      <figure class="pullquote pullquote--bleed reveal">
         <span class="ripple" aria-hidden="true"><i></i><i></i><i></i></span>
-        <blockquote>Our story never ends.</blockquote>
+        <blockquote>Our story<br />never ends.</blockquote>
       </figure>
     </section>
 

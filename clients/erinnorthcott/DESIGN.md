@@ -43,6 +43,9 @@ _History: a fixed sunset photograph was tried (2026-08-09) then reverted — the
 - Gold text fade-in at bottom of night sky
 - Fade-up on all content entering viewport (`reveal.js`)
 
+## Creative pass — asymmetry + film (2026-08-09)
+Fixing "flat/boring" (every section was centered + no imagery). **Golden Hour redesigned as the template:** asymmetric grid — a **film still** (left) treated as a warm duotone inside a 16mm-style frame with a mono caption (`DANIEL NORTHCOTT · 16MM · 00:11:04`), body text anchored off-center (right), and an **oversized pull-quote** (`Our story never ends.`) that bleeds off the edge. Plus a **film-grain** overlay site-wide (`.grain`, inline SVG feTurbulence, soft-light). Image is a **placeholder** (`images/daniel-still-PLACEHOLDER.jpg`, grayscale bokeh) — swap in a real still of Daniel's footage. NEXT: apply the same asymmetric/scale-contrast treatment to Sunset & bring imagery throughout; other creative options on the table: cinematic audio climax (audio-reactive stars), concentric-circles motif (Daniel's orbicularity), scroll parallax/pinning, cursor aura.
+
 ## Navigation
 Fixed top, semi-transparent (sky shows through). "Erin Northcott" left; links right — Inner Ceremonies · Daniel & The Film · Podcast · Collaborate. **Links are non-clickable stubs for now** (homepage built first; inner pages later).
 
