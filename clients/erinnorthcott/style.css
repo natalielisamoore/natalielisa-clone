@@ -563,15 +563,16 @@ body {
   text-align: center;
 }
 .pullquote--close {
-  max-width: 24ch;
+  max-width: none;
   margin: 0 auto;
   text-align: center;
 }
 .pullquote--close blockquote {
   color: #fdf3e2;
-  font-size: clamp(2.8rem, 9vw, 6rem);
-  line-height: .98;
+  font-size: clamp(1.5rem, 7.4vw, 4.6rem);
+  line-height: 1.05;
   letter-spacing: -.01em;
+  white-space: nowrap;                 /* one sentence, one line */
   text-shadow: 0 0 46px rgba(201,168,76,.32);
 }
 .pullquote--close .ink-accent { color: #e0715c; }      /* brighter rust reads on the dark */
