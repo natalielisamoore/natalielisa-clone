@@ -33,7 +33,7 @@
     const p = max > 0 ? Math.min(Math.max(window.scrollY / max, 0), 1) : 0;
     sky.style.background = skyAt(p);
     // let other layers know how deep into the night we are (0..1)
-    document.documentElement.style.setProperty('--night', String(Math.max(0, (p - 0.6) / 0.4)));
+    document.documentElement.style.setProperty('--night', String(Math.max(0, (p - 0.5) / 0.5)));
     window.__skyProgress = p;
     ticking = false;
   }
