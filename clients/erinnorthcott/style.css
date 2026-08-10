@@ -236,7 +236,7 @@ body {
   padding: 1.15rem clamp(1.1rem, 4vw, 3rem);
   /* translucent bar — light over the bright mid sections, dark over hero/night */
   background: rgba(255,255,255,0.06);
-  background: color-mix(in srgb, rgba(255,255,255,.05), rgba(12,10,26,.5) calc(var(--navlight, 0) * 100%));
+  background: color-mix(in srgb, rgba(255,255,255,.05), rgba(12,10,26,.5) calc(var(--dusk, 0) * 100%));
   backdrop-filter: blur(9px);
   -webkit-backdrop-filter: blur(9px);
   border-bottom: 1px solid rgba(255,255,255,0.12);
@@ -247,7 +247,7 @@ body {
   font-size: clamp(1.15rem, 1.7vw, 1.4rem);
   letter-spacing: .01em;
   color: var(--ink);                                                               /* fallback */
-  color: color-mix(in oklab, var(--ink), #fdf6e8 calc(var(--navlight, 0) * 100%)); /* ink ↔ ivory */
+  color: color-mix(in oklab, var(--ink), #fdf6e8 calc(var(--dusk, 0) * 100%)); /* ink ↔ ivory */
   text-decoration: none;
   white-space: nowrap;
 }
@@ -264,7 +264,7 @@ body {
   letter-spacing: .1em;
   text-transform: uppercase;
   color: var(--ink-soft);                                                                       /* fallback */
-  color: color-mix(in oklab, var(--ink-soft), rgba(253,246,232,.92) calc(var(--navlight, 0) * 100%));
+  color: color-mix(in oklab, var(--ink-soft), rgba(253,246,232,.92) calc(var(--dusk, 0) * 100%));
   cursor: default;                 /* stubbed for now */
   transition: color .3s var(--ease);
 }
@@ -322,38 +322,12 @@ body {
    SUNRISE — hero
    -------------------------------------------------------------------------- */
 .section--hero {
-  align-items: flex-start;
-  justify-content: flex-end;
-  text-align: left;
+  align-items: center;
+  text-align: center;
   min-height: 100vh;
   overflow: hidden;
-  padding-bottom: clamp(3.5rem, 9vh, 7rem);
 }
-/* full-bleed sun-bleached 8mm portrait of Erin (placeholder for filmed footage) */
-.hero-photo { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
-.hero-photo img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  object-position: 66% 34%;                    /* keep her face as it crops */
-  filter: sepia(.26) saturate(.82) contrast(.88) brightness(1.13) hue-rotate(-6deg);
-}
-/* sun-bleached wash + top & bottom scrims (nav + name legibility) + vignette */
-.hero-photo::after {
-  content: ""; position: absolute; inset: 0; pointer-events: none;
-  background:
-    linear-gradient(180deg, rgba(28,15,9,.5), transparent 14%),
-    linear-gradient(0deg, rgba(38,20,12,.66), rgba(38,20,12,.14) 30%, transparent 52%),
-    linear-gradient(90deg, rgba(58,30,18,.32), transparent 46%),
-    radial-gradient(135% 120% at 62% 36%, transparent 50%, rgba(48,24,12,.5) 100%);
-}
-.hero-photo__grain {
-  position: absolute; inset: -12%; pointer-events: none;
-  opacity: .4; mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: 150px 150px;
-  animation: film8-grain .5s steps(4) infinite, film8-flicker 2.6s ease-in-out infinite;
-}
-.hero { max-width: 42ch; position: relative; z-index: 2; margin: 0; }
+.hero { max-width: 42ch; position: relative; z-index: 2; margin: 0 auto; }
 
 /* soft cloud banks on either side of the sunrise hero — you enter between them */
 .hero__clouds { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
@@ -387,28 +361,25 @@ body {
 .hero__name {
   font-family: var(--serif);
   font-weight: 400;
-  font-size: clamp(3rem, 10vw, 7rem);
-  line-height: .9;
+  font-size: clamp(3.2rem, 11vw, 7.5rem);
+  line-height: .92;
   letter-spacing: -.015em;
   margin: 0;
-  color: #fff7ea;
-  text-shadow: 0 2px 36px rgba(18,9,5,.55);
+  color: var(--ink);
 }
 .hero__tagline {
   font-family: var(--serif);
-  font-size: clamp(1.15rem, 2.2vw, 1.6rem);
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
   font-style: italic;
-  color: rgba(255,244,232,.94);
-  text-shadow: 0 1px 20px rgba(18,9,5,.5);
+  color: var(--clay);
   margin: 1.4rem 0 0;
 }
 
 .scroll-cue {
   position: absolute;
   bottom: 2.4rem;
-  right: clamp(1.5rem, 4vw, 3rem);
-  left: auto;
-  transform: none;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -417,12 +388,12 @@ body {
   font-size: .72rem;
   letter-spacing: .2em;
   text-transform: uppercase;
-  color: rgba(255,244,232,.85);
+  color: var(--clay);
 }
 .scroll-cue__line {
   width: 1px;
   height: 46px;
-  background: linear-gradient(rgba(255,244,232,.8), transparent);
+  background: linear-gradient(var(--clay), transparent);
   animation: cue 2.4s var(--ease) infinite;
   transform-origin: top;
 }
@@ -453,17 +424,18 @@ body {
 }
 
 /* ---- Golden Hour: asymmetric film layout ---------------------------------- */
-.golden__grid {
+.golden__stack {
   width: 100%;
-  max-width: 1300px;
+  max-width: 920px;                 /* big, centered — not full width */
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 0.8fr 1.2fr;
-  gap: clamp(2rem, 6vw, 5.5rem);
-  align-items: center;
+  text-align: center;
 }
-.golden__text { max-width: none; text-align: left; }
-.golden__text .lede { max-width: 54ch; }   /* keep body readable; title uses full width */
+.golden__stack .filmframe { margin: 0 auto; }
+.golden__text {
+  margin-top: clamp(1.8rem, 4vw, 3rem);
+  text-align: center;
+}
+.golden__text .lede { max-width: 62ch; margin: 0 auto; }   /* readable, centered */
 
 /* film still as a warm duotone inside a 16mm-style frame — clickable to the film */
 .filmframe { margin: 0; position: relative; }
@@ -536,9 +508,6 @@ body {
   color: var(--ink-soft);
 }
 
-@media (max-width: 820px) {
-  .golden__grid { grid-template-columns: 1fr; gap: 2.2rem; max-width: 34rem; }
-}
 
 /* ---- The Becoming: text beside the unfurling-rose video ------------------- */
 .becoming__grid {
