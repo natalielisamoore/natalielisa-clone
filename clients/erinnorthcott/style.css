@@ -1132,3 +1132,19 @@ body {
   .footer__bio { max-width: none; }
   .footer__base { flex-direction: column; align-items: flex-start; gap: .5rem; }
 }
+
+/* site credit in the base bar — the one live link down here */
+.footer__credit {
+  color: rgba(255,248,238,.45);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color .3s var(--ease);
+}
+.footer__credit:hover,
+.footer__credit:focus-visible { color: #f3b0c4; }
+
+/* the podcast title holds one line */
+.section--tea .section__title {
+  white-space: nowrap;
+  font-size: clamp(1.5rem, 5.2vw, 3.2rem);
+}
