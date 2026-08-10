@@ -547,19 +547,19 @@ body {
   font-size: .72rem;
   letter-spacing: .28em;
   text-transform: uppercase;
-  color: #9a6f14;                    /* deep gold — reads on the light sky */
+  color: var(--gold-lite);
   text-decoration: none;
   padding: .9rem 2.3rem;
-  border: 1px solid #c29a2f;
+  border: 1px solid var(--gold);
   border-radius: 999px;
   background: transparent;
   transition: background .4s var(--ease), color .4s var(--ease), border-color .4s var(--ease);
 }
 .btn-enter:hover,
 .btn-enter:focus-visible {
-  background: rgba(201,168,76,.18);
-  border-color: #9a6f14;
-  color: var(--ink);
+  background: rgba(201,168,76,.16);
+  border-color: var(--gold-lite);
+  color: #fff7ea;
 }
 
 .becoming__media { margin: 0; position: relative; }

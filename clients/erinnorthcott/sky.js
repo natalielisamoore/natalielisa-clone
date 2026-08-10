@@ -3,15 +3,12 @@
   const sky = document.querySelector('.sky');
   if (!sky) return;
 
-  // Positioned stops across the scroll (0..1). Stays LIGHT through the whole
-  // middle, then drops to a near-black navy for the night at the very bottom.
-  const STOPS = [
-    { p: 0.00, c: ['#fdeef1', '#f8cdc9', '#f9c896'] }, // sunrise — pink → peach
-    { p: 0.30, c: ['#fbdcc2', '#f7cfa2', '#f4cb90'] }, // golden — peach-gold (light)
-    { p: 0.62, c: ['#f9dcc8', '#f6cfa4', '#f2c992'] }, // light gold — the middle stays light
-    { p: 0.75, c: ['#f7d9c4', '#f3cc9f', '#eec78d'] }, // hold light through the Becoming
-    { p: 0.80, c: ['#131c3c', '#0d1530', '#0a1026'] }, // quick dusk → dark by the night section
-    { p: 1.00, c: ['#080b18', '#06080f', '#05060c'] }  // dark dark navy, almost black
+  // Four "moments" of the sky. Each is a 3-stop vertical gradient (top/mid/bottom).
+  const MOMENTS = [
+    { top: '#fdeef1', mid: '#f7c8c7', bot: '#f8c290' }, // sunrise  — whisper pink → baby pink → peach
+    { top: '#f8cbbb', mid: '#efb877', bot: '#cf9f4a' }, // golden   — rosy peach → warm gold
+    { top: '#dd9c8b', mid: '#9e5f44', bot: '#4e3550' }, // sunset   — rose-clay → dusk plum
+    { top: '#101a33', mid: '#0c1022', bot: '#0a0a1a' }  // midnight — deep night
   ];
 
   const hexToRgb = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
@@ -22,11 +19,12 @@
   };
 
   function skyAt(p) {
-    let i = 0;
-    while (i < STOPS.length - 2 && p > STOPS[i + 1].p) i++;
-    const A = STOPS[i], B = STOPS[i + 1];
-    const t = Math.min(1, Math.max(0, (p - A.p) / (B.p - A.p)));
-    return `linear-gradient(180deg, ${mix(A.c[0], B.c[0], t)} 0%, ${mix(A.c[1], B.c[1], t)} 50%, ${mix(A.c[2], B.c[2], t)} 100%)`;
+    // p in [0,1] across the whole scroll → segment between two moments
+    const seg = p * (MOMENTS.length - 1);
+    const i = Math.min(Math.floor(seg), MOMENTS.length - 2);
+    const t = seg - i;
+    const A = MOMENTS[i], B = MOMENTS[i + 1];
+    return `linear-gradient(180deg, ${mix(A.top, B.top, t)} 0%, ${mix(A.mid, B.mid, t)} 50%, ${mix(A.bot, B.bot, t)} 100%)`;
   }
 
   let ticking = false;
@@ -35,10 +33,9 @@
     const p = max > 0 ? Math.min(Math.max(window.scrollY / max, 0), 1) : 0;
     sky.style.background = skyAt(p);
     // let other layers know how deep into the night we are (0..1)
-    // stars & horizon only in the dark bottom
-    document.documentElement.style.setProperty('--night', String(Math.min(1, Math.max(0, (p - 0.79) / 0.13))));
-    // nav flips ink → ivory as the sky darkens at the bottom
-    document.documentElement.style.setProperty('--dusk', String(Math.min(1, Math.max(0, (p - 0.78) / 0.04))));
+    document.documentElement.style.setProperty('--night', String(Math.max(0, (p - 0.5) / 0.5)));
+    // earlier ramp so the nav stays readable as the sky darkens (dark → light)
+    document.documentElement.style.setProperty('--dusk', String(Math.min(1, Math.max(0, (p - 0.32) / 0.32))));
     window.__skyProgress = p;
     ticking = false;
   }
