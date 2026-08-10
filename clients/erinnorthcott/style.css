@@ -805,7 +805,7 @@ body {
   font-size: .62rem;
   letter-spacing: .24em;
   text-transform: uppercase;
-  color: var(--gold-lite);
+  color: #f3b0c4;                 /* pink column titles */
   margin: 0 0 1rem;
 }
 .footer__link {
