@@ -32,9 +32,9 @@ _History: a fixed sunset photograph was tried (2026-08-09) then reverted — the
 4. **Midnight** — deep `#0a0a1a`, stars visible
 
 ## Sections (top → bottom)
-1. **SUNRISE (hero)** — "Erin Northcott" large, short tagline + handwritten note.
+1. **SUNRISE (hero)** — full-bleed **sun-bleached 8mm portrait of Erin** (`images/erinnorthcott.jpg`, placeholder for future filmed footage — structured as `.hero-photo img`, swap for `<video>` later). Name "Erin Northcott" bottom-left in cream serif, tagline w/ red "first light" underline, BEGIN cue bottom-right. Nav uses `--navlight` (light over dark hero/night, dark over light mid sections).
 2. **HOOK — archival threshold** (`.section--hook`) — the cinematic hook line between hero & story. Warm sun-faded; thin slide-mount frame, two faintly-spinning cassette reels, a handwritten "no. 01" corner label, mono "FROM THE ARCHIVE" eyebrow. Line 1 handwritten (Caveat): *"Boxes of cassettes & a request…"*; line 2 serif: *"a dying wish that became an HBO film."* (HBO upright = quietly important). Emotional doorway into Golden Hour.
-3. **GOLDEN HOUR** — Daniel & the story; asymmetric film-frame grid (real Daniel/HBO image) + bio.
+3. **GOLDEN HOUR** — Daniel & the story; asymmetric film-frame grid. Frame is now a **looping muted video of the HBO Daniel documentary** (`videos/daniel.mp4`, 3.4MB, transcoded from a 54MB .mov via bundled ffmpeg at /Applications/meetily.app/Contents/MacOS/ffmpeg; poster = `images/daniel.jpg`). Clickable → trailer (youtube 04iHR-eZIXY).
 4. **SUNSET — The Becoming** — Inner Ceremonies intro (Erin's personal/somatic work). Asymmetric grid: text left, an **autoplay/loop/muted rose-unfurling video** right (`videos/rose-unfurling.mp4`, 640×640) as a soft-edged ethereal orb (radial mask) with a petal-pink glow behind it.
 5. **NIGHT SKY** — stars arrive; minimal audio player (placeholder silent track). On play, gold line fades in: *"Mommy, the stars are kissing me." — Daniel Northcott*
 6. **CLOSING benediction** (`.section--close`) — *"Our story never ends."* (glowing cream, "ends." muted rust) on the deep night with horizon glow + "— in Daniel's words" handwritten. The final frame.

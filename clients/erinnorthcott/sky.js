@@ -36,6 +36,12 @@
     document.documentElement.style.setProperty('--night', String(Math.max(0, (p - 0.5) / 0.5)));
     // earlier ramp for UI that needs to stay readable as the sky darkens (nav)
     document.documentElement.style.setProperty('--dusk', String(Math.min(1, Math.max(0, (p - 0.32) / 0.32))));
+    // nav wants LIGHT text over the dark photo hero (top) and the night (bottom),
+    // but DARK text over the light golden/becoming sections in between.
+    const vh = window.innerHeight;
+    const heroLight = Math.min(1, Math.max(0, (vh * 0.72 - window.scrollY) / (vh * 0.28)));
+    const nightLight = Math.min(1, Math.max(0, (p - 0.56) / 0.14));
+    document.documentElement.style.setProperty('--navlight', String(Math.max(heroLight, nightLight)));
     window.__skyProgress = p;
     ticking = false;
   }

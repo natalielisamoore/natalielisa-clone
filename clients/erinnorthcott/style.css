@@ -234,9 +234,9 @@ body {
   justify-content: space-between;
   gap: 1rem;
   padding: 1.15rem clamp(1.1rem, 4vw, 3rem);
-  /* translucent light bar that deepens into a dusk overlay as the sky darkens */
+  /* translucent bar — light over the bright mid sections, dark over hero/night */
   background: rgba(255,255,255,0.06);
-  background: color-mix(in srgb, rgba(255,255,255,.05), rgba(12,10,26,.52) calc(var(--dusk, 0) * 100%));
+  background: color-mix(in srgb, rgba(255,255,255,.05), rgba(12,10,26,.5) calc(var(--navlight, 0) * 100%));
   backdrop-filter: blur(9px);
   -webkit-backdrop-filter: blur(9px);
   border-bottom: 1px solid rgba(255,255,255,0.12);
@@ -246,8 +246,8 @@ body {
   font-style: italic;
   font-size: clamp(1.15rem, 1.7vw, 1.4rem);
   letter-spacing: .01em;
-  color: var(--ink);                                                            /* fallback */
-  color: color-mix(in oklab, var(--ink), #fdf6e8 calc(var(--dusk, 0) * 100%));  /* ink → ivory on dusk */
+  color: var(--ink);                                                               /* fallback */
+  color: color-mix(in oklab, var(--ink), #fdf6e8 calc(var(--navlight, 0) * 100%)); /* ink ↔ ivory */
   text-decoration: none;
   white-space: nowrap;
 }
@@ -263,8 +263,8 @@ body {
   font-weight: 400;
   letter-spacing: .1em;
   text-transform: uppercase;
-  color: var(--ink-soft);                                                                    /* fallback */
-  color: color-mix(in oklab, var(--ink-soft), rgba(253,246,232,.9) calc(var(--dusk, 0) * 100%));
+  color: var(--ink-soft);                                                                       /* fallback */
+  color: color-mix(in oklab, var(--ink-soft), rgba(253,246,232,.92) calc(var(--navlight, 0) * 100%));
   cursor: default;                 /* stubbed for now */
   transition: color .3s var(--ease);
 }
@@ -322,12 +322,38 @@ body {
    SUNRISE — hero
    -------------------------------------------------------------------------- */
 .section--hero {
-  align-items: center;
-  text-align: center;
+  align-items: flex-start;
+  justify-content: flex-end;
+  text-align: left;
   min-height: 100vh;
-  overflow: hidden;            /* contain the drifting clouds */
+  overflow: hidden;
+  padding-bottom: clamp(3.5rem, 9vh, 7rem);
 }
-.hero { max-width: 40ch; position: relative; z-index: 1; }
+/* full-bleed sun-bleached 8mm portrait of Erin (placeholder for filmed footage) */
+.hero-photo { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
+.hero-photo img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: 66% 34%;                    /* keep her face as it crops */
+  filter: sepia(.26) saturate(.82) contrast(.88) brightness(1.13) hue-rotate(-6deg);
+}
+/* sun-bleached wash + top & bottom scrims (nav + name legibility) + vignette */
+.hero-photo::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(28,15,9,.5), transparent 14%),
+    linear-gradient(0deg, rgba(38,20,12,.66), rgba(38,20,12,.14) 30%, transparent 52%),
+    linear-gradient(90deg, rgba(58,30,18,.32), transparent 46%),
+    radial-gradient(135% 120% at 62% 36%, transparent 50%, rgba(48,24,12,.5) 100%);
+}
+.hero-photo__grain {
+  position: absolute; inset: -12%; pointer-events: none;
+  opacity: .4; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 150px 150px;
+  animation: film8-grain .5s steps(4) infinite, film8-flicker 2.6s ease-in-out infinite;
+}
+.hero { max-width: 42ch; position: relative; z-index: 2; margin: 0; }
 
 /* soft cloud banks on either side of the sunrise hero — you enter between them */
 .hero__clouds { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
@@ -361,25 +387,28 @@ body {
 .hero__name {
   font-family: var(--serif);
   font-weight: 400;
-  font-size: clamp(3.4rem, 12.5vw, 8.5rem);
-  line-height: .92;
+  font-size: clamp(3rem, 10vw, 7rem);
+  line-height: .9;
   letter-spacing: -.015em;
   margin: 0;
-  color: var(--ink);
+  color: #fff7ea;
+  text-shadow: 0 2px 36px rgba(18,9,5,.55);
 }
 .hero__tagline {
   font-family: var(--serif);
   font-size: clamp(1.15rem, 2.2vw, 1.6rem);
   font-style: italic;
-  color: var(--clay);
-  margin: 1.6rem 0 0;
+  color: rgba(255,244,232,.94);
+  text-shadow: 0 1px 20px rgba(18,9,5,.5);
+  margin: 1.4rem 0 0;
 }
 
 .scroll-cue {
   position: absolute;
   bottom: 2.4rem;
-  left: 50%;
-  transform: translateX(-50%);
+  right: clamp(1.5rem, 4vw, 3rem);
+  left: auto;
+  transform: none;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -388,12 +417,12 @@ body {
   font-size: .72rem;
   letter-spacing: .2em;
   text-transform: uppercase;
-  color: var(--clay);
+  color: rgba(255,244,232,.85);
 }
 .scroll-cue__line {
   width: 1px;
   height: 46px;
-  background: linear-gradient(var(--clay), transparent);
+  background: linear-gradient(rgba(255,244,232,.8), transparent);
   animation: cue 2.4s var(--ease) infinite;
   transform-origin: top;
 }
@@ -441,7 +470,7 @@ body {
 .filmframe__link { display: block; text-decoration: none; color: inherit; cursor: pointer; }
 .filmframe__img {
   position: relative;
-  aspect-ratio: 1014 / 542;            /* the key art's native ratio — no crop */
+  aspect-ratio: 16 / 9;                /* matches the documentary clip */
   overflow: hidden;
   border-radius: 2px;
   box-shadow: 0 30px 80px rgba(30,16,40,.38);
@@ -454,7 +483,8 @@ body {
   box-shadow: 0 34px 92px rgba(30,16,40,.5);
   outline-color: rgba(233,199,102,.6);
 }
-.filmframe__img img {
+.filmframe__img img,
+.filmframe__img video {
   width: 100%; height: 100%;
   object-fit: cover;
   display: block;
@@ -462,7 +492,9 @@ body {
   transition: transform .7s var(--ease);
 }
 .filmframe__link:hover .filmframe__img img,
-.filmframe__link:focus-visible .filmframe__img img { transform: scale(1.04); }
+.filmframe__link:hover .filmframe__img video,
+.filmframe__link:focus-visible .filmframe__img img,
+.filmframe__link:focus-visible .filmframe__img video { transform: scale(1.04); }
 /* "Watch the trailer →" cue, revealed on hover */
 .filmframe__watch {
   position: absolute;
