@@ -1,5 +1,4 @@
-/* reveal.js — fade-up on scroll, the night-sky audio player, and the gold
-   starline that fades in slowly as the audio plays. */
+/* reveal.js — fade-up on scroll. */
 (function () {
 
   /* ---- fade-up on scroll ------------------------------------------------ */
@@ -15,50 +14,4 @@
     revealables.forEach((el) => el.classList.add('in'));
   }
 
-  /* ---- audio player ----------------------------------------------------- */
-  const root = document.querySelector('[data-player]');
-  if (!root) return;
-
-  const audio    = root.querySelector('[data-audio]');
-  const btn      = root.querySelector('[data-play]');
-  const track    = root.querySelector('[data-track]');
-  const progress = root.querySelector('[data-progress]');
-  const curEl    = root.querySelector('[data-current]');
-  const durEl    = root.querySelector('[data-duration]');
-
-  const fmt = (s) => {
-    if (!isFinite(s)) return '0:00';
-    const m = Math.floor(s / 60);
-    const sec = Math.floor(s % 60).toString().padStart(2, '0');
-    return `${m}:${sec}`;
-  };
-
-  audio.addEventListener('loadedmetadata', () => { durEl.textContent = fmt(audio.duration); });
-
-  btn.addEventListener('click', () => {
-    if (audio.paused) audio.play(); else audio.pause();
-  });
-
-  audio.addEventListener('play', () => {
-    root.classList.add('is-playing');
-    btn.setAttribute('aria-label', 'Pause');
-  });
-  audio.addEventListener('pause', () => {
-    root.classList.remove('is-playing');
-    btn.setAttribute('aria-label', 'Play');
-  });
-
-  audio.addEventListener('timeupdate', () => {
-    const pct = audio.duration ? (audio.currentTime / audio.duration) * 100 : 0;
-    progress.style.width = pct + '%';
-    curEl.textContent = fmt(audio.currentTime);
-  });
-  audio.addEventListener('ended', () => { root.classList.remove('is-playing'); progress.style.width = '0%'; });
-
-  const seek = (clientX) => {
-    const r = track.getBoundingClientRect();
-    const ratio = Math.min(Math.max((clientX - r.left) / r.width, 0), 1);
-    if (audio.duration) audio.currentTime = ratio * audio.duration;
-  };
-  track.addEventListener('click', (e) => seek(e.clientX));
 })();
