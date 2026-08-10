@@ -1097,3 +1097,24 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .flicker { animation: none; opacity: .03; }
 }
+
+/* Daniel's line, the first thing said on arrival — handwritten, quiet, and
+   arriving a beat after the name */
+.hero__line {
+  font-family: var(--hand);
+  font-size: clamp(1.35rem, 2.7vw, 2.1rem);
+  line-height: 1.2;
+  color: var(--clay);
+  text-align: center;
+  margin: clamp(1.1rem, 2.4vw, 1.8rem) 0 0;
+  transform: rotate(-1.5deg);
+  opacity: 0;
+  animation: hero-line 2.6s var(--ease) 1.5s forwards;
+}
+@keyframes hero-line {
+  from { opacity: 0; transform: rotate(-1.5deg) translateY(8px); }
+  to   { opacity: .88; transform: rotate(-1.5deg) translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero__line { animation: none; opacity: .88; }
+}
