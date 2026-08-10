@@ -7,8 +7,8 @@
   <meta name="description" content="Erin Northcott — somatic guide and storyteller. A new chapter, beginning at first light." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=JetBrains+Mono:wght@300;400;500&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css?v=15" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=JetBrains+Mono:wght@300;400;500&family=Caveat:wght@500;600;700&family=Permanent+Marker&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css?v=17" />
 </head>
 <body>
   <!-- Arrival: a luminous veil that dissolves on load — you cross a threshold -->
@@ -29,6 +29,18 @@
   <div class="dust" aria-hidden="true"></div>
   <!-- Film grain over everything -->
   <div class="grain" aria-hidden="true"></div>
+
+  <!-- Torn-paper filters: turbulence chews the straight edges into fibres -->
+  <svg class="svg-defs" width="0" height="0" aria-hidden="true" focusable="false">
+    <filter id="torn-edge" x="-8%" y="-30%" width="116%" height="160%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.014 0.09" numOctaves="4" seed="11" result="n" />
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="11" xChannelSelector="R" yChannelSelector="G" />
+    </filter>
+    <filter id="torn-rule" x="-4%" y="-220%" width="108%" height="540%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.03 0.4" numOctaves="3" seed="4" result="n" />
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="7" xChannelSelector="R" yChannelSelector="G" />
+    </filter>
+  </svg>
   <!-- Film-edge markings, like a strip of exposed negative down each side -->
   <div class="filmedge filmedge--l" aria-hidden="true"><span>16A</span><span>&#8594;</span><span>KODAK 400</span><span>&#8226;&#8226;</span><span>5</span></div>
   <div class="filmedge filmedge--r" aria-hidden="true"><span>56</span><span>&#8226;&#8226;</span><span>400</span><span>&#8594;</span><span>16A</span></div>
@@ -75,8 +87,15 @@
               <video class="filmframe__vid" src="videos/daniel.mp4" poster="images/daniel.jpg" autoplay loop muted playsinline preload="metadata" aria-hidden="true"></video>
               <span class="filmframe__watch">Watch the trailer &rarr;</span>
             </div>
+            <!-- Key-art label: the film's own line, brushed onto torn tape -->
+            <span class="keyart">
+              <span class="keyart__paper" aria-hidden="true"></span>
+              <span class="keyart__line">When <em>life</em> is your subject</span>
+              <span class="keyart__rule" aria-hidden="true"></span>
+            </span>
           </a>
-          <figcaption class="filmframe__cap">
+
+          <figcaption class="filmframe__cap filmframe__cap--under">
             <span>Daniel &amp; The Film</span>
             <span>HBO Original</span>
           </figcaption>
@@ -153,9 +172,9 @@
     </div>
   </footer>
 
-  <script src="sky.js?v=15" defer></script>
+  <script src="sky.js?v=17" defer></script>
   <script src="stars.js" defer></script>
   <script src="motes.js" defer></script>
-  <script src="reveal.js?v=15" defer></script>
+  <script src="reveal.js?v=17" defer></script>
 </body>
 </html>
