@@ -1,15 +1,20 @@
-/* sky.js — continuous sunrise→golden→sunset→midnight, tied to scroll position */
+/* sky.js — one continuous sunset, tied to scroll: first light → honey gold →
+   amber → dusty rose → mauve dusk → deep starry navy. */
 (function () {
   const sky = document.querySelector('.sky');
   if (!sky) return;
 
-  // Four "moments" of the sky. Each is a 3-stop vertical gradient (top/mid/bottom).
+  // Six "moments" of the sky, in the order the reel runs through them.
+  // Each is a 3-stop vertical gradient (top/mid/bottom).
   const MOMENTS = [
-    { top: '#fdeef1', mid: '#f7c8c7', bot: '#f8c290' }, // sunrise  — whisper pink → baby pink → peach
-    { top: '#f8cbbb', mid: '#efb877', bot: '#cf9f4a' }, // golden   — rosy peach → warm gold
-    { top: '#dd9c8b', mid: '#9e5f44', bot: '#4e3550' }, // sunset   — rose-clay → dusk plum
-    { top: '#101a33', mid: '#0c1022', bot: '#0a0a1a' }  // midnight — deep night
+    { top: '#fdf6ec', mid: '#fde3e9', bot: '#f9cfc4' }, // first light — cream → baby pink
+    { top: '#fbdcc6', mid: '#f5c98c', bot: '#e8ab55' }, // honey gold
+    { top: '#f3c39a', mid: '#e39a5c', bot: '#c97b3e' }, // amber
+    { top: '#dfa093', mid: '#c07a72', bot: '#8e5560' }, // dusty rose
+    { top: '#8f6a80', mid: '#5b4463', bot: '#33284a' }, // mauve dusk
+    { top: '#121b36', mid: '#0c1024', bot: '#08080f' }  // deep starry navy
   ];
+
 
   const hexToRgb = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
   const lerp = (a, b, t) => Math.round(a + (b - a) * t);
@@ -33,9 +38,9 @@
     const p = max > 0 ? Math.min(Math.max(window.scrollY / max, 0), 1) : 0;
     sky.style.background = skyAt(p);
     // let other layers know how deep into the night we are (0..1)
-    document.documentElement.style.setProperty('--night', String(Math.max(0, (p - 0.5) / 0.5)));
+    document.documentElement.style.setProperty('--night', String(Math.max(0, (p - 0.66) / 0.34)));
     // earlier ramp so the nav stays readable as the sky darkens (dark → light)
-    document.documentElement.style.setProperty('--dusk', String(Math.min(1, Math.max(0, (p - 0.32) / 0.32))));
+    document.documentElement.style.setProperty('--dusk', String(Math.min(1, Math.max(0, (p - 0.46) / 0.3))));
     window.__skyProgress = p;
     ticking = false;
   }

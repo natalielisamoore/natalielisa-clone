@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=JetBrains+Mono:wght@300;400;500&family=Caveat:wght@500;600;700&family=Permanent+Marker&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css?v=17" />
+  <link rel="stylesheet" href="style.css?v=18" />
 </head>
 <body>
   <!-- Arrival: a luminous veil that dissolves on load — you cross a threshold -->
@@ -27,8 +27,12 @@
   <div class="leaks" aria-hidden="true"></div>
   <!-- Dust specks & hairline scratches on the negative -->
   <div class="dust" aria-hidden="true"></div>
+  <!-- Faint vertical frame lines, as if the frame were projected onto the page -->
+  <div class="framelines" aria-hidden="true"></div>
   <!-- Film grain over everything -->
   <div class="grain" aria-hidden="true"></div>
+  <!-- The projector's own unsteady lamp -->
+  <div class="flicker" aria-hidden="true"></div>
 
   <!-- Torn-paper filters: turbulence chews the straight edges into fibres -->
   <svg class="svg-defs" width="0" height="0" aria-hidden="true" focusable="false">
@@ -102,7 +106,7 @@
         </figure>
 
         <div class="golden__text reveal">
-          <p class="eyebrow">01 &mdash; Golden Hour</p>
+          <p class="eyebrow">Reel 01 &mdash; The Archive</p>
           <h2 class="section__title">Daniel</h2>
           <p class="lede">For eleven years, Erin lived inside her brother Daniel&rsquo;s story &mdash; the footage he filmed across the world, the life he lived without hesitation, and the loss that reshaped her own. That long labor of love became a film, and that film carried Daniel &mdash; his life and his death &mdash; to HBO, and to millions.</p>
           <a class="btn-enter" href="https://www.youtube.com/watch?v=04iHR-eZIXY" target="_blank" rel="noopener">Daniel</a>
@@ -110,11 +114,20 @@
       </div>
     </section>
 
+    <!-- THE PROMISE — the sacred mission the footage became -->
+    <section class="section section--promise" id="promise">
+      <div class="measure reveal promise__inner">
+        <p class="eyebrow">Reel 02 &mdash; The Promise</p>
+        <h2 class="section__title">A sacred mission</h2>
+        <p class="lede">The request was simple, and impossible: finish it. What followed was eleven years of tape and transcription, of grief that refused to stay in one place, of a life handled with both hands. Somewhere in those years it stopped being a project. It became a devotion &mdash; a promise kept at the pace a promise actually takes.</p>
+      </div>
+    </section>
+
     <!-- SUNSET — The Becoming -->
     <section class="section section--sunset" id="sunset">
       <div class="becoming__grid">
         <div class="becoming__text reveal">
-          <p class="eyebrow eyebrow--light">02 &mdash; The Becoming</p>
+          <p class="eyebrow eyebrow--light">Reel 03 &mdash; The Becoming</p>
           <h2 class="section__title section__title--light">Inner Ceremonies</h2>
           <p class="lede lede--light">Somewhere across those eleven years, the work stopped being only about Daniel. Grief became a teacher. The body became a doorway. Out of that long passage a practice was born &mdash; Erin&rsquo;s somatic work for people moving through thresholds of their own.</p>
           <!-- TODO: point href at the Inner Ceremonies page once it's built -->
@@ -130,10 +143,20 @@
       </div>
     </section>
 
+    <!-- TEA & STORY — the podcast -->
+    <section class="section section--tea" id="tea">
+      <div class="measure reveal tea__inner">
+        <p class="eyebrow eyebrow--light">Reel 04 &mdash; Tea &amp; Story</p>
+        <h2 class="section__title section__title--light">The Podcast</h2>
+        <p class="lede lede--light">Long conversations, the kind that need a second pot of tea. Stories told by people still living inside them, that don&rsquo;t resolve on cue. A room where grief and delight are allowed at the same table.</p>
+        <p class="tea__soon">Coming soon</p>
+      </div>
+    </section>
+
     <!-- NIGHT SKY — the stars arrive -->
     <section class="section section--night" id="night">
       <div class="measure reveal night__inner">
-        <p class="eyebrow eyebrow--light">03 &mdash; Night Sky</p>
+        <p class="eyebrow eyebrow--light">Reel 05 &mdash; Night Sky</p>
       </div>
 
       <!-- CLOSING — Daniel's own words, the last thing you read -->
@@ -172,9 +195,9 @@
     </div>
   </footer>
 
-  <script src="sky.js?v=17" defer></script>
+  <script src="sky.js?v=18" defer></script>
   <script src="stars.js" defer></script>
   <script src="motes.js" defer></script>
-  <script src="reveal.js?v=17" defer></script>
+  <script src="reveal.js?v=18" defer></script>
 </body>
 </html>
