@@ -267,7 +267,7 @@ body {
   cursor: default;                 /* stubbed for now */
   transition: color .3s var(--ease);
 }
-.nav__link:hover { color: var(--gold-lite); }
+.nav__link:hover { color: #e2809b; }   /* pink hover */
 
 /* --------------------------------------------------------------------------
    Sections & shared type
@@ -655,9 +655,14 @@ body {
   background: rgba(201,168,76,.14);
   color: var(--gold-lite);
   cursor: pointer;
-  transition: background .3s var(--ease), transform .2s var(--ease);
+  transition: background .3s var(--ease), border-color .3s var(--ease), color .3s var(--ease), transform .2s var(--ease);
 }
-.player__btn:hover { background: rgba(201,168,76,.26); transform: scale(1.05); }
+.player__btn:hover {
+  background: rgba(242,183,204,.22);          /* pink hover */
+  border-color: rgba(243,176,196,.7);
+  color: #f3b0c4;
+  transform: scale(1.05);
+}
 .player__icon { width: 22px; height: 22px; fill: currentColor; }
 .player__icon--pause { display: none; }
 .player.is-playing .player__icon--play { display: none; }
@@ -810,7 +815,7 @@ body {
   cursor: default;                 /* stubbed until inner pages exist */
   transition: color .3s var(--ease);
 }
-.footer__link:hover { color: var(--gold-lite); }
+.footer__link:hover { color: #f3b0c4; }   /* pink hover (lighter for the dark footer) */
 .footer__badge {
   font-family: var(--mono);
   font-size: .58rem;
