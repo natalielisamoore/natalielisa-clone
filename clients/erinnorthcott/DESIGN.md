@@ -4,8 +4,10 @@ _2026-08-09 · client site under natalielisa.com/clients/erinnorthcott (portable
 ## The feeling
 Arriving somewhere trustworthy, original, and alive. Every decision serves that first. A single scroll-driven journey through a sky: **sunrise → golden hour → sunset → midnight stars.**
 
-## Core mechanic — continuous sky
-One `position: fixed` full-viewport sky layer. `sky.js` reads scroll progress (0→1) and interpolates the gradient between four "moments," so the sky is seamless and continuous, tied to scroll position. Sections sit transparent on top.
+## Core mechanic — the sky
+**Updated 2026-08-09:** the animated scroll-interpolated gradient was replaced with a **fixed full-screen sunset photograph** (`images/sunset.jpg`), `cover`/centered/no-repeat, with a soft warm-dark overlay (darker top & bottom, lightest middle) for legibility. `sky.js` no longer paints a gradient — it only tracks scroll depth so the stars still fade in over the night section. Top-section text was recolored to light/cream to read over the photo.
+
+_Original concept (kept for reference):_ one `position: fixed` sky layer whose gradient `sky.js` interpolated between four "moments" (sunrise→golden→sunset→midnight), tied to scroll.
 
 ## Layer stack (back → front)
 1. **Sky** — fixed, scroll-interpolated gradient
