@@ -1054,7 +1054,11 @@ body {
 /* --------------------------------------------------------------------------
    Tea & Story. Softer and more spacious than the archive sections.
    -------------------------------------------------------------------------- */
-.section--tea { min-height: 88vh; }
+.section--tea {
+  min-height: 0;
+  padding-top: clamp(3rem, 8vh, 5.5rem);
+  padding-bottom: clamp(3rem, 8vh, 5.5rem);
+}
 .tea__inner { text-align: center; max-width: 58ch; }
 .tea__inner .lede { margin-left: auto; margin-right: auto; }
 .tea__soon {
@@ -1153,6 +1157,26 @@ body {
 .becoming__text .btn-enter { color: #fff; }
 .becoming__text .btn-enter:hover,
 .becoming__text .btn-enter:focus-visible {
+  background: var(--rose);
+  border-color: var(--rose);
+  color: var(--ink);
+}
+
+/* --------------------------------------------------------------------------
+   Collaborate — the invitation, held wide on the dusk
+   -------------------------------------------------------------------------- */
+.section--collab {
+  min-height: 0;
+  padding-top: clamp(4rem, 11vh, 7.5rem);
+  padding-bottom: clamp(4rem, 11vh, 7.5rem);
+}
+.collab__inner { text-align: center; max-width: 54ch; }
+.collab__inner .lede { margin-left: auto; margin-right: auto; }
+
+/* on the dusk, this button reads white too */
+.collab__inner .btn-enter { color: #fff; }
+.collab__inner .btn-enter:hover,
+.collab__inner .btn-enter:focus-visible {
   background: var(--rose);
   border-color: var(--rose);
   color: var(--ink);
