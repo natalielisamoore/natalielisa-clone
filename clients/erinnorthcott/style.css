@@ -445,7 +445,7 @@ body {
 /* ---- Golden Hour: asymmetric film layout ---------------------------------- */
 .golden__stack {
   width: 100%;
-  max-width: 920px;                 /* big, centered — not full width */
+  max-width: 1240px;                /* big, centered — not full width */
   margin: 0 auto;
   text-align: center;
 }
