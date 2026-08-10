@@ -727,47 +727,6 @@ body {
    -------------------------------------------------------------------------- */
 .section--night { min-height: 100vh; justify-content: center; padding-top: clamp(7rem, 14vh, 11rem); padding-bottom: clamp(5rem, 12vh, 9rem); }
 .night__inner { text-align: center; }
-
-/* ---- Milky Way underlay: the photograph blooms in through circles ---------
-   --sf (0 → 1) is driven by scroll in reveal.js. Seven soft discs open at
-   scattered points, then merge into the whole night sky.                    */
-.starfield {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background: url("images/stars2-web.jpg") center/cover no-repeat;
-  opacity: calc(var(--sf, 0) * .55);
-  transform: scale(calc(1.08 - var(--sf, 0) * .08));   /* settles as it arrives */
-  mix-blend-mode: screen;                              /* stars add light, never a flat plate */
-  will-change: opacity, transform;
-  --sf-in:  calc(var(--sfr, 0) * 34vmax);  /* opaque core of each disc */
-  --sf-out: calc(var(--sfr, 0) * 44vmax);  /* soft rim — tight enough to read as a circle */
-  -webkit-mask-image:
-    radial-gradient(circle at 20% 26%, #000 var(--sf-in), transparent var(--sf-out)),
-    radial-gradient(circle at 74% 18%, #000 var(--sf-in), transparent var(--sf-out)),
-    radial-gradient(circle at 50% 54%, #000 var(--sf-in), transparent var(--sf-out)),
-    radial-gradient(circle at 12% 72%, #000 var(--sf-in), transparent var(--sf-out)),
-    radial-gradient(circle at 86% 66%, #000 var(--sf-in), transparent var(--sf-out)),
-    radial-gradient(circle at 38% 88%, #000 var(--sf-in), transparent var(--sf-out)),
-    radial-gradient(circle at 66% 92%, #000 var(--sf-in), transparent var(--sf-out));
-          mask-image:
-    radial-gradient(circle at 20% 26%, #000 var(--sf-in), transparent var(--sf-out)),
-    radial-gradient(circle at 74% 18%, #000 var(--sf-in), transparent var(--sf-out)),
-    radial-gradient(circle at 50% 54%, #000 var(--sf-in), transparent var(--sf-out)),
-    radial-gradient(circle at 12% 72%, #000 var(--sf-in), transparent var(--sf-out)),
-    radial-gradient(circle at 86% 66%, #000 var(--sf-in), transparent var(--sf-out)),
-    radial-gradient(circle at 38% 88%, #000 var(--sf-in), transparent var(--sf-out)),
-    radial-gradient(circle at 66% 92%, #000 var(--sf-in), transparent var(--sf-out));
-}
-/* keep the words above the photograph */
-.section--night > .measure,
-.section--night > .starline,
-.section--night > .pullquote { position: relative; z-index: 1; }
-
-@media (prefers-reduced-motion: reduce) {
-  .starfield { transform: none; }
-}
 .night__intro {
   font-family: var(--serif);
   font-style: italic;

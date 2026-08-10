@@ -15,29 +15,6 @@
     revealables.forEach((el) => el.classList.add('in'));
   }
 
-  /* ---- Milky Way underlay: circles open as the night section arrives ----- */
-  const night = document.getElementById('night');
-  const field = night && night.querySelector('.starfield');
-  if (field) {
-    let queued = false;
-    const drawField = () => {
-      queued = false;
-      const r = night.getBoundingClientRect();
-      /* 0 when the section's top reaches the bottom of the screen,
-         1 by the time it has risen most of the way up */
-      const p = Math.min(1, Math.max(0, (innerHeight - r.top) / (innerHeight + r.height * 0.45)));
-      night.style.setProperty('--sf', p.toFixed(3));
-      /* the discs grow on a curve, so they stay separate circles for most of
-         the journey and only merge into the whole sky at the very end */
-      night.style.setProperty('--sfr', Math.pow(p, 2.4).toFixed(3));
-    };
-    addEventListener('scroll', () => {
-      if (!queued) { queued = true; requestAnimationFrame(drawField); }
-    }, { passive: true });
-    addEventListener('resize', drawField, { passive: true });
-    drawField();
-  }
-
   /* ---- audio player ----------------------------------------------------- */
   const root = document.querySelector('[data-player]');
   if (!root) return;
