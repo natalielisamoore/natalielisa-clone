@@ -1148,3 +1148,12 @@ body {
   white-space: nowrap;
   font-size: clamp(1.5rem, 5.2vw, 3.2rem);
 }
+
+/* the Inner Ceremonies button sits on the dusk — white so it reads */
+.becoming__text .btn-enter { color: #fff; }
+.becoming__text .btn-enter:hover,
+.becoming__text .btn-enter:focus-visible {
+  background: var(--rose);
+  border-color: var(--rose);
+  color: var(--ink);
+}
