@@ -880,7 +880,7 @@ body {
   max-width: none;               /* full-bleed — spans the whole width */
   margin: 0;
   display: grid;
-  grid-template-columns: 2.7fr 1fr 1fr;   /* brand column wide — pushes Explore/Connect right */
+  grid-template-columns: 2.4fr 1fr 1fr;   /* bio holds the left, links sit right */
   gap: clamp(1.5rem, 3.5vw, 3rem);
   align-items: start;
 }
@@ -1112,4 +1112,51 @@ body {
   /* sun-faded, so she sits inside the golden hour rather than against it */
   filter: sepia(.3) saturate(1.1) hue-rotate(-8deg) brightness(1.05) contrast(.98);
   box-shadow: 0 22px 54px rgba(74,42,20,.22);
+}
+
+/* --------------------------------------------------------------------------
+   Footer: bio and socials on the left, pages on the right, credits beneath
+   -------------------------------------------------------------------------- */
+.footer__bio {
+  max-width: 46ch;
+  font-size: .92rem;
+  line-height: 1.65;
+  color: rgba(255,248,238,.74);
+  margin: 0;
+}
+.footer__bio em { font-style: italic; color: rgba(255,248,238,.9); }
+
+.footer__follow {
+  display: flex;
+  align-items: center;
+  gap: clamp(.9rem, 2vw, 1.5rem);
+  margin: clamp(1.3rem, 2.6vw, 1.9rem) 0 0;
+}
+.footer__follow-label {
+  font-family: var(--mono);
+  font-size: .62rem;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: #f3b0c4;                 /* same pink as the column titles */
+  white-space: nowrap;
+}
+.footer__socials { display: flex; gap: clamp(.9rem, 1.8vw, 1.3rem); }
+.footer__social {
+  display: inline-flex;
+  width: 1.15rem;
+  height: 1.15rem;
+  color: rgba(255,248,238,.78);
+  cursor: default;                 /* stubbed until the real handles land */
+  transition: color .3s var(--ease), transform .3s var(--ease);
+}
+.footer__social svg { width: 100%; height: 100%; fill: currentColor; }
+.footer__social:hover { color: #f3b0c4; transform: translateY(-2px); }
+
+/* three items across the base bar now */
+.footer__base { align-items: center; }
+.footer__base .footer__badge { margin-top: 0; }
+
+@media (max-width: 720px) {
+  .footer__bio { max-width: none; }
+  .footer__base { flex-direction: column; align-items: flex-start; gap: .5rem; }
 }
