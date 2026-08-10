@@ -500,7 +500,7 @@ body {
   color: #fff7ea;
   padding: .55rem 1rem;
   border: 1px solid rgba(255,247,234,.55);
-  border-radius: 999px;
+  border-radius: 0;
   background: rgba(20,12,20,.4);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
@@ -554,7 +554,7 @@ body {
   text-decoration: none;
   padding: 1.15rem 3rem;
   border: 1px solid currentColor;   /* deep rose on the light sky → pale rose as it darkens */
-  border-radius: 999px;
+  border-radius: 0;
   background: transparent;
   transition: background .4s var(--ease), color .4s var(--ease), border-color .4s var(--ease);
 }
@@ -1122,10 +1122,10 @@ body {
 /* Erin, small and sun-faded, so the sunset keeps coming through around her */
 .hero__portrait {
   display: block;
-  width: clamp(108px, 13vw, 168px);
+  width: clamp(170px, 22vw, 280px);
   height: auto;
   aspect-ratio: 1;
-  margin: 0 auto clamp(1.3rem, 2.8vw, 2rem);
+  margin: 0 auto clamp(1.8rem, 3.6vw, 2.6rem);
   object-fit: cover;
   /* feathered edge — no hard disc sitting on the sky */
   -webkit-mask: radial-gradient(circle closest-side at 50% 46%, #000 58%, rgba(0,0,0,.34) 82%, transparent 99%);
