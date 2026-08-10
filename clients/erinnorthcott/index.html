@@ -7,7 +7,7 @@
   <meta name="description" content="Erin Northcott — somatic guide and storyteller. A new chapter, beginning at first light." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=JetBrains+Mono:wght@300;400;500&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -23,8 +23,15 @@
   <canvas class="motes" aria-hidden="true"></canvas>
   <!-- Portal edge vignette -->
   <div class="vignette" aria-hidden="true"></div>
+  <!-- Warm light leaks drifting at the edges -->
+  <div class="leaks" aria-hidden="true"></div>
+  <!-- Dust specks & hairline scratches on the negative -->
+  <div class="dust" aria-hidden="true"></div>
   <!-- Film grain over everything -->
   <div class="grain" aria-hidden="true"></div>
+  <!-- Film-edge markings, like a strip of exposed negative down each side -->
+  <div class="filmedge filmedge--l" aria-hidden="true"><span>16A</span><span>&#8594;</span><span>KODAK 400</span><span>&#8226;&#8226;</span><span>5</span></div>
+  <div class="filmedge filmedge--r" aria-hidden="true"><span>56</span><span>&#8226;&#8226;</span><span>400</span><span>&#8594;</span><span>16A</span></div>
 
   <!-- Navigation -->
   <header class="nav">
@@ -48,7 +55,8 @@
       <div class="hero reveal">
         <p class="eyebrow">Somatic guide · Storyteller</p>
         <h1 class="hero__name">Erin Northcott</h1>
-        <p class="hero__tagline">A new chapter, beginning at first light.</p>
+        <p class="hero__tagline">A new chapter, beginning at <span class="hand-underline">first light</span>.</p>
+        <p class="hero__note">est. from a box of old reels &mdash; at sunset</p>
       </div>
       <div class="scroll-cue" aria-hidden="true">
         <span>Begin</span>
@@ -78,7 +86,8 @@
 
       <figure class="pullquote pullquote--bleed reveal">
         <span class="ripple" aria-hidden="true"><i></i><i></i><i></i></span>
-        <blockquote>Our story<br />never ends.</blockquote>
+        <blockquote>Our story<br />never <span class="ink-accent">ends.</span></blockquote>
+        <figcaption class="pullquote__hand">&mdash; in Daniel&rsquo;s words</figcaption>
       </figure>
     </section>
 
