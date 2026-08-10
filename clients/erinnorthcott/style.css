@@ -1051,25 +1051,6 @@ body {
   background-image: repeating-linear-gradient(90deg, currentColor 0 .34em, transparent .34em .84em);
 }
 
-/* --------------------------------------------------------------------------
-   Tea & Story. Softer and more spacious than the archive sections.
-   -------------------------------------------------------------------------- */
-.section--tea {
-  min-height: 0;
-  padding-top: clamp(3rem, 8vh, 5.5rem);
-  padding-bottom: clamp(3rem, 8vh, 5.5rem);
-}
-.tea__inner { text-align: center; max-width: 58ch; }
-.tea__inner .lede { margin-left: auto; margin-right: auto; }
-.tea__soon {
-  font-family: var(--mono);
-  font-size: .66rem;
-  letter-spacing: .28em;
-  text-transform: uppercase;
-  color: rgba(255,246,232,.62);
-  margin: clamp(1.8rem, 3.4vw, 2.6rem) 0 0;
-}
-
 @media (prefers-reduced-motion: reduce) {
   .flicker { animation: none; opacity: .03; }
 }
@@ -1146,12 +1127,6 @@ body {
 }
 .footer__credit:hover,
 .footer__credit:focus-visible { color: #f3b0c4; }
-
-/* the podcast title holds one line */
-.section--tea .section__title {
-  white-space: nowrap;
-  font-size: clamp(1.5rem, 5.2vw, 3.2rem);
-}
 
 /* the Inner Ceremonies button sits on the dusk — white so it reads */
 .becoming__text .btn-enter { color: #fff; }
