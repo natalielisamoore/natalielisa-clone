@@ -7,7 +7,8 @@
   --white:    #ffffff;
   --gold:     #c9a84c;
   --gold-lite:#e9c766;
-  --rose:     #f5c6c6;
+  --rose:      #f5c6c6;
+  --rose-deep: #bf5468;   /* rose with enough weight to read on the light sky */
   --clay:     #8b5e3c;
   --midnight: #0a0a1a;
 
@@ -539,39 +540,28 @@ body {
 }
 .becoming__text { max-width: 52ch; text-align: left; }
 
-/* ENTER button — outlined in gold, into Erin's work */
+/* Pill buttons (DANIEL, ENTER) — outlined in rose, filling pink on hover */
 .btn-enter {
   display: inline-block;
   margin-top: clamp(1.8rem, 3.2vw, 2.6rem);
   font-family: var(--mono);
-  font-size: .72rem;
-  letter-spacing: .28em;
+  font-size: .84rem;
+  letter-spacing: .3em;
   text-transform: uppercase;
-  color: var(--gold-lite);
+  color: var(--rose-deep);                                                    /* fallback */
+  color: color-mix(in oklab, var(--rose-deep), var(--rose) calc(var(--dusk, 0) * 100%));
   text-decoration: none;
-  padding: .9rem 2.3rem;
-  border: 1px solid var(--gold);
+  padding: 1.15rem 3rem;
+  border: 1px solid currentColor;   /* deep rose on the light sky → pale rose as it darkens */
   border-radius: 999px;
   background: transparent;
   transition: background .4s var(--ease), color .4s var(--ease), border-color .4s var(--ease);
 }
 .btn-enter:hover,
 .btn-enter:focus-visible {
-  background: rgba(201,168,76,.16);
-  border-color: var(--gold-lite);
-  color: #fff7ea;
-}
-
-/* same pill, tuned for the light golden sky (the Daniel section) */
-.btn-enter--ink {
+  background: var(--rose);
+  border-color: var(--rose);
   color: var(--ink);
-  border-color: var(--clay);
-}
-.btn-enter--ink:hover,
-.btn-enter--ink:focus-visible {
-  background: var(--clay);
-  border-color: var(--clay);
-  color: #fdf3e2;
 }
 
 .becoming__media { margin: 0; position: relative; }
@@ -882,7 +872,7 @@ body {
   position: relative;
   z-index: 1;
   color: rgba(255,248,238,.8);
-  padding: clamp(3rem, 7vw, 5rem) clamp(1.5rem, 3vw, 2.5rem) 2.2rem;
+  padding: clamp(2rem, 3.6vw, 2.9rem) clamp(1.5rem, 3vw, 2.5rem) 1.5rem;
   border-top: 1px solid rgba(233,199,102,.16);
   background: linear-gradient(180deg, rgba(10,10,26,0) 0%, rgba(6,5,14,.6) 100%);
 }
@@ -890,13 +880,14 @@ body {
   max-width: none;               /* full-bleed — spans the whole width */
   margin: 0;
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr;
-  gap: clamp(2rem, 5vw, 4rem);
+  grid-template-columns: 2.7fr 1fr 1fr;   /* brand column wide — pushes Explore/Connect right */
+  gap: clamp(1.5rem, 3.5vw, 3rem);
+  align-items: start;
 }
 .footer__name {
   font-family: var(--serif);
   font-style: italic;
-  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-size: clamp(1.25rem, 2.1vw, 1.6rem);
   color: #fff7ea;
   margin: 0;
 }
@@ -915,18 +906,18 @@ body {
   margin: 1.2rem 0 0;
   transform: rotate(-1.6deg);
 }
-.footer__col { display: flex; flex-direction: column; gap: .7rem; }
+.footer__col { display: flex; flex-direction: column; gap: .45rem; }
 .footer__h {
   font-family: var(--mono);
   font-size: .62rem;
   letter-spacing: .24em;
   text-transform: uppercase;
   color: #f3b0c4;                 /* pink column titles */
-  margin: 0 0 1rem;
+  margin: 0 0 .7rem;
 }
 .footer__link {
   font-family: var(--serif);
-  font-size: 1.05rem;
+  font-size: .92rem;
   color: rgba(255,248,238,.82);
   cursor: default;                 /* stubbed until inner pages exist */
   transition: color .3s var(--ease);
@@ -942,8 +933,8 @@ body {
 }
 .footer__base {
   max-width: none;
-  margin: clamp(2.5rem, 5vw, 4rem) 0 0;
-  padding-top: 1.4rem;
+  margin: clamp(1.5rem, 3vw, 2.2rem) 0 0;
+  padding-top: 1rem;
   border-top: 1px solid rgba(255,255,255,.08);
   display: flex;
   justify-content: space-between;
