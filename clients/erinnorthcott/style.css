@@ -676,23 +676,22 @@ body {
   text-align: center;
 }
 .pullquote--close blockquote {
-  color: #fdf3e2;
-  font-size: clamp(1.5rem, 7.4vw, 4.6rem);
-  line-height: 1.05;
+  color: #ffffff;
+  font-size: clamp(1.2rem, 5.4vw, 3.3rem);
+  line-height: 1.1;
   letter-spacing: -.01em;
   white-space: nowrap;                 /* one sentence, one line */
-  text-shadow: 0 0 46px rgba(201,168,76,.32);
+  text-shadow: 0 0 46px rgba(255,255,255,.28);
   animation: glow-breathe 6.5s ease-in-out infinite;
 }
 /* a slow, gentle shimmer — magic felt even without a cursor */
 @keyframes glow-breathe {
-  0%, 100% { text-shadow: 0 0 30px rgba(201,168,76,.26); }
-  50%      { text-shadow: 0 0 56px rgba(233,199,102,.5); }
+  0%, 100% { text-shadow: 0 0 30px rgba(255,255,255,.22); }
+  50%      { text-shadow: 0 0 56px rgba(255,255,255,.45); }
 }
-.pullquote--close .ink-accent { color: #e0715c; }      /* brighter rust reads on the dark */
 .pullquote--close .pullquote__hand {
-  color: var(--gold-lite);
-  opacity: .8;
+  color: #ffffff;
+  opacity: .75;
   margin-top: 1rem;
 }
 
