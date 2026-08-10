@@ -562,6 +562,18 @@ body {
   color: #fff7ea;
 }
 
+/* same pill, tuned for the light golden sky (the Daniel section) */
+.btn-enter--ink {
+  color: var(--ink);
+  border-color: var(--clay);
+}
+.btn-enter--ink:hover,
+.btn-enter--ink:focus-visible {
+  background: var(--clay);
+  border-color: var(--clay);
+  color: #fdf3e2;
+}
+
 .becoming__media { margin: 0; position: relative; }
 
 /* soft-edged orb that clips the video + its 8mm film overlays together */
