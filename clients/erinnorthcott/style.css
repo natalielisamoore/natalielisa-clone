@@ -378,9 +378,10 @@ body {
 .hero__name {
   font-family: var(--serif);
   font-weight: 400;
-  font-size: clamp(3.2rem, 11vw, 7.5rem);
-  line-height: .92;
+  font-size: clamp(2.1rem, 9.4vw, 6.2rem);
+  line-height: 1;
   letter-spacing: -.015em;
+  white-space: nowrap;                 /* one line */
   margin: 0;
   color: var(--ink);
 }
