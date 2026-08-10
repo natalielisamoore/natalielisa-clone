@@ -25,7 +25,7 @@ html { scroll-behavior: smooth; }
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
-  color: #f7f1e8; /* light default — the page now sits over a dark-overlaid photo */
+  color: var(--ink);
   background: var(--midnight); /* fallback beneath the sky */
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -39,22 +39,9 @@ body {
   position: fixed;
   inset: 0;
   z-index: -3;
-  /* Full-screen sunset photograph. The layer is fixed, so the image stays put
-     while the content scrolls over it. A soft warm-dark overlay sits on top —
-     darker at the top and bottom, lightest through the middle — to keep text
-     legible while preserving the warmth and colour of the photo underneath. */
-  background-color: var(--midnight); /* fallback until images/sunset2.jpg loads */
-  background-image:
-    linear-gradient(180deg,
-      rgba(12, 7, 4, 0.55) 0%,
-      rgba(12, 7, 4, 0.20) 28%,
-      rgba(12, 7, 4, 0.10) 50%,
-      rgba(12, 7, 4, 0.20) 72%,
-      rgba(12, 7, 4, 0.60) 100%),
-    url("images/sunset2.jpg");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
+  /* JS overwrites this; static sunrise as no-JS fallback */
+  background: linear-gradient(180deg, #fdf7ef 0%, #f8d9c6 50%, #f4c57a 100%);
+  will-change: background;
 }
 
 .stars {
@@ -64,26 +51,6 @@ body {
   opacity: 0;              /* JS raises this near the night section */
   pointer-events: none;
   will-change: opacity;
-}
-
-.petals {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  overflow: hidden;
-}
-
-/* a single falling petal (spawned by petals.js) */
-.petal {
-  position: absolute;
-  top: -8vh;
-  width: 16px;
-  height: 16px;
-  background: radial-gradient(circle at 30% 30%, #fbe0e0, var(--rose) 60%, #e7a9a9);
-  border-radius: 100% 0 100% 100%;
-  opacity: 0;
-  will-change: transform, opacity;
 }
 
 /* --------------------------------------------------------------------------
@@ -103,13 +70,12 @@ body {
   -webkit-backdrop-filter: blur(9px);
   border-bottom: 1px solid rgba(255,255,255,0.14);
   transition: background .5s var(--ease), border-color .5s var(--ease);
-  text-shadow: 0 1px 12px rgba(0,0,0,.35);
 }
 .nav__name {
   font-family: Georgia, 'Times New Roman', serif;
   font-size: clamp(1.05rem, 1.6vw, 1.3rem);
   letter-spacing: .06em;
-  color: #fff7ea;
+  color: var(--ink);
   text-decoration: none;
   white-space: nowrap;
 }
@@ -123,7 +89,7 @@ body {
   font-size: .82rem;
   letter-spacing: .13em;
   text-transform: uppercase;
-  color: rgba(255,248,238,.85);
+  color: var(--ink-soft);
   cursor: default;                 /* stubbed for now */
   transition: color .3s var(--ease);
 }
@@ -141,7 +107,6 @@ body {
   flex-direction: column;
   justify-content: center;
   min-height: 100vh;
-  text-shadow: 0 1px 16px rgba(0,0,0,.30); /* keep text legible over the photo */
 }
 
 .measure { max-width: var(--measure); margin: 0 auto; }
@@ -150,7 +115,7 @@ body {
   font-size: .78rem;
   letter-spacing: .28em;
   text-transform: uppercase;
-  color: var(--gold-lite);
+  color: var(--clay);
   margin: 0 0 1.4rem;
 }
 .eyebrow--light { color: var(--gold-lite); }
@@ -161,14 +126,14 @@ body {
   font-size: clamp(2rem, 5vw, 3.4rem);
   line-height: 1.05;
   margin: 0 0 1.6rem;
-  color: #fff7ea;
+  color: var(--ink);
 }
 .section__title--light { color: #fff7ea; }
 
 .lede {
   font-size: clamp(1.05rem, 1.6vw, 1.35rem);
   line-height: 1.85;
-  color: rgba(255,248,238,.92);
+  color: var(--ink);
   margin: 0;
 }
 .lede--light { color: rgba(255,248,238,.9); }
@@ -182,7 +147,7 @@ body {
   min-height: 100vh;
 }
 .hero { max-width: 40ch; }
-.hero .eyebrow { color: var(--gold-lite); }
+.hero .eyebrow { color: var(--clay); }
 .hero__name {
   font-family: Georgia, 'Times New Roman', serif;
   font-weight: 400;
@@ -190,12 +155,12 @@ body {
   line-height: .95;
   letter-spacing: .01em;
   margin: 0;
-  color: #fff7ea;
+  color: var(--ink);
 }
 .hero__tagline {
   font-size: clamp(1.05rem, 2vw, 1.4rem);
   font-style: italic;
-  color: rgba(255,240,225,.92);
+  color: var(--clay);
   margin: 1.6rem 0 0;
 }
 
@@ -211,12 +176,12 @@ body {
   font-size: .72rem;
   letter-spacing: .28em;
   text-transform: uppercase;
-  color: rgba(255,248,238,.82);
+  color: var(--clay);
 }
 .scroll-cue__line {
   width: 1px;
   height: 46px;
-  background: linear-gradient(rgba(255,248,238,.8), transparent);
+  background: linear-gradient(var(--clay), transparent);
   animation: cue 2.4s var(--ease) infinite;
   transform-origin: top;
 }
@@ -243,7 +208,7 @@ body {
   font-style: italic;
   font-size: clamp(1.8rem, 5vw, 3.2rem);
   line-height: 1.2;
-  color: #fdf3e2;
+  color: var(--clay);
 }
 
 /* concentric water-ripple behind the pullquote */
@@ -397,5 +362,4 @@ body {
   .scroll-cue__line { animation: none; }
   .reveal.in .ripple i { animation: none; opacity: .25; }
   .starline { transition: opacity 1s linear; transform: none; }
-  .petal { display: none; }
 }
