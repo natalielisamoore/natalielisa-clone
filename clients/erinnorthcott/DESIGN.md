@@ -10,10 +10,13 @@ One `position: fixed` sky layer whose gradient `sky.js` interpolates between fou
 _History: a fixed sunset photograph was tried (2026-08-09) then reverted — the static image lost the temporal "journey" the story needs. Rose petals were also removed at Natalie's request._
 
 ## Layer stack (back → front)
-1. **Sky** — fixed, scroll-interpolated gradient (light → dark)
+1. **Sky** — fixed, scroll-interpolated gradient (light → dark). Sunrise/golden now carry **baby pink** (whisper rose) → peach → gold, not just peach.
 2. **Horizon** — fixed glowing light-band; intensifies into the night (`--night`)
-3. **Stars** — fixed canvas; fades in near the night section; white + gold, larger ones glow and breathe
-4. **Content** — four sections, fade-up on scroll (IntersectionObserver)
+3. **Motes** (`motes.js`) — ambient celestial dust drifting site-wide; the "you're inside a space" unifier
+4. **Stars** — fixed canvas; denser now; fades in for the night; white + gold, larger ones glow
+5. **Hero clouds** — soft cloud banks on BOTH sides of the sunrise hero, gently parting (enter between them)
+6. **Content** — four sections, fade-up on scroll (IntersectionObserver)
+7. **Vignette** — soft portal edge-frame; **Arrival veil** (`.enter-veil`) dissolves on load = crossing a threshold
 
 ## Palette
 - White `#FFFFFF` — primary canvas

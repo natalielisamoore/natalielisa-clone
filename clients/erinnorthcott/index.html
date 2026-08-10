@@ -11,12 +11,18 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- Arrival: a luminous veil that dissolves on load — you cross a threshold -->
+  <div class="enter-veil" aria-hidden="true"></div>
   <!-- Layer 1: the sky (fixed, scroll-interpolated gradient) -->
   <div class="sky" aria-hidden="true"></div>
   <!-- Layer 2: the stars (fixed canvas, fades in near the night section) -->
   <canvas class="stars" aria-hidden="true"></canvas>
   <!-- Layer 2b: glowing horizon light-band (intensifies into the night) -->
   <div class="horizon" aria-hidden="true"></div>
+  <!-- Ambient celestial dust across the whole site -->
+  <canvas class="motes" aria-hidden="true"></canvas>
+  <!-- Portal edge vignette -->
+  <div class="vignette" aria-hidden="true"></div>
 
   <!-- Navigation -->
   <header class="nav">
@@ -35,7 +41,7 @@
     <!-- SUNRISE — hero -->
     <section class="section section--hero" id="sunrise">
       <div class="hero__clouds" aria-hidden="true">
-        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span><span></span>
       </div>
       <div class="hero reveal">
         <p class="eyebrow">Somatic guide · Storyteller</p>
@@ -103,6 +109,7 @@
 
   <script src="sky.js" defer></script>
   <script src="stars.js" defer></script>
+  <script src="motes.js" defer></script>
   <script src="reveal.js" defer></script>
 </body>
 </html>

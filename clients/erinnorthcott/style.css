@@ -43,8 +43,8 @@ body {
   position: fixed;
   inset: 0;
   z-index: -3;
-  /* JS overwrites this; static sunrise as no-JS fallback */
-  background: linear-gradient(180deg, #fdf7ef 0%, #f8d9c6 50%, #f4c57a 100%);
+  /* JS overwrites this; static pink-peach sunrise as no-JS fallback */
+  background: linear-gradient(180deg, #fdeef1 0%, #f7c8c7 50%, #f8c290 100%);
   will-change: background;
 }
 
@@ -77,6 +77,33 @@ body {
   mix-blend-mode: screen;
   opacity: calc(.16 + var(--night, 0) * .62);
   will-change: opacity;
+}
+
+/* ambient celestial dust — drifts across the whole site (motes.js) */
+.motes { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
+
+/* portal edge vignette — a soft threshold frame that deepens the space */
+.vignette {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  background: radial-gradient(128% 108% at 50% 42%, transparent 54%, rgba(8,5,16,.30) 100%);
+}
+
+/* arrival veil — a luminous wash that dissolves on load, like entering */
+.enter-veil {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 44%, #ffffff 0%, #fbe0e0 40%, #f6c290 100%);
+  animation: enter 2s var(--ease) forwards;
+}
+@keyframes enter {
+  0%   { opacity: 1; transform: scale(1.05); }
+  55%  { opacity: .55; }
+  100% { opacity: 0; visibility: hidden; transform: scale(1); }
 }
 
 /* --------------------------------------------------------------------------
@@ -182,23 +209,32 @@ body {
 }
 .hero { max-width: 40ch; position: relative; z-index: 1; }
 
-/* soft clouds drifting across the sunrise hero */
-.hero__clouds { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+/* soft cloud banks on either side of the sunrise hero — you enter between them */
+.hero__clouds { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
 .hero__clouds span {
   position: absolute;
   display: block;
-  border-radius: 50%;
-  background: radial-gradient(ellipse at 50% 45%, rgba(255,255,255,.95), rgba(255,253,250,.5) 42%, rgba(255,255,255,0) 70%);
-  filter: blur(20px);
+  /* several overlapping puffs → a lumpy, cloud-like mass */
+  background:
+    radial-gradient(closest-side at 26% 62%, rgba(255,255,255,.92), rgba(255,255,255,0)),
+    radial-gradient(closest-side at 48% 42%, rgba(255,255,255,.98), rgba(255,255,255,0)),
+    radial-gradient(closest-side at 70% 60%, rgba(255,255,255,.90), rgba(255,255,255,0)),
+    radial-gradient(closest-side at 40% 74%, rgba(255,255,255,.84), rgba(255,255,255,0)),
+    radial-gradient(closest-side at 84% 46%, rgba(255,255,255,.80), rgba(255,255,255,0));
+  background-repeat: no-repeat;
+  filter: blur(16px);
   will-change: transform;
 }
-.hero__clouds span:nth-child(1) { width: 46vw; height: 19vw; top: 16%; left: -25%; opacity: .85; animation: drift-a 52s linear infinite; }
-.hero__clouds span:nth-child(2) { width: 34vw; height: 14vw; top: 34%; left: -35%; opacity: .70; animation: drift-b 70s linear infinite; }
-.hero__clouds span:nth-child(3) { width: 54vw; height: 21vw; top: 56%; left: -45%; opacity: .80; animation: drift-a 84s linear infinite; }
-.hero__clouds span:nth-child(4) { width: 26vw; height: 11vw; top: 10%; left:  22%; opacity: .60; animation: drift-b 60s linear infinite; }
-.hero__clouds span:nth-child(5) { width: 40vw; height: 16vw; top: 72%; left: -20%; opacity: .68; animation: drift-a 96s linear infinite; }
-@keyframes drift-a { from { transform: translateX(0); } to { transform: translateX(160vw); } }
-@keyframes drift-b { from { transform: translateX(0); } to { transform: translateX(170vw); } }
+/* left bank — drifts gently inward and back, like parting clouds */
+.hero__clouds span:nth-child(1) { width: 44vw; height: 24vw; top:  4%; left: -22%; opacity: .92; animation: cloud-l 27s ease-in-out infinite; }
+.hero__clouds span:nth-child(2) { width: 36vw; height: 20vw; top: 42%; left: -18%; opacity: .78; animation: cloud-l 35s ease-in-out infinite; }
+.hero__clouds span:nth-child(3) { width: 32vw; height: 18vw; top: 72%; left: -24%; opacity: .72; animation: cloud-l 31s ease-in-out infinite; }
+/* right bank */
+.hero__clouds span:nth-child(4) { width: 44vw; height: 24vw; top:  2%; right: -22%; opacity: .92; animation: cloud-r 29s ease-in-out infinite; }
+.hero__clouds span:nth-child(5) { width: 36vw; height: 20vw; top: 40%; right: -18%; opacity: .78; animation: cloud-r 37s ease-in-out infinite; }
+.hero__clouds span:nth-child(6) { width: 32vw; height: 18vw; top: 70%; right: -24%; opacity: .72; animation: cloud-r 33s ease-in-out infinite; }
+@keyframes cloud-l { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(6vw); } }
+@keyframes cloud-r { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(-6vw); } }
 .hero .eyebrow { color: var(--clay); }
 .section--hero .eyebrow::before { content: "\2014\00a0"; }
 .section--hero .eyebrow::after  { content: "\00a0\2014"; }
@@ -423,4 +459,5 @@ body {
   .reveal.in .ripple i { animation: none; opacity: .25; }
   .starline { transition: opacity 1s linear; transform: none; }
   .hero__clouds span { animation: none; }
+  .enter-veil { animation: none; opacity: 0; visibility: hidden; }
 }

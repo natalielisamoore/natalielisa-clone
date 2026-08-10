@@ -5,9 +5,9 @@
 
   // Four "moments" of the sky. Each is a 3-stop vertical gradient (top/mid/bottom).
   const MOMENTS = [
-    { top: '#fdf7ef', mid: '#f8d9c6', bot: '#f4c57a' }, // sunrise  — warm white → peach → gold
-    { top: '#f8da9e', mid: '#e9b85c', bot: '#c9a84c' }, // golden   — luminous gold
-    { top: '#d99b72', mid: '#9e5f44', bot: '#4e3550' }, // sunset   — clay → dusk plum
+    { top: '#fdeef1', mid: '#f7c8c7', bot: '#f8c290' }, // sunrise  — whisper pink → baby pink → peach
+    { top: '#f8cbbb', mid: '#efb877', bot: '#cf9f4a' }, // golden   — rosy peach → warm gold
+    { top: '#dd9c8b', mid: '#9e5f44', bot: '#4e3550' }, // sunset   — rose-clay → dusk plum
     { top: '#101a33', mid: '#0c1022', bot: '#0a0a1a' }  // midnight — deep night
   ];
 

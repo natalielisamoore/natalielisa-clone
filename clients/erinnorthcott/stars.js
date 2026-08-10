@@ -15,9 +15,9 @@
     canvas.height = window.innerHeight * dpr;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-    const count = Math.round((window.innerWidth * window.innerHeight) / 7000);
+    const count = Math.round((window.innerWidth * window.innerHeight) / 3400);
     stars = Array.from({ length: count }, () => {
-      const large = Math.random() < 0.14;
+      const large = Math.random() < 0.20;
       return {
         x: Math.random() * window.innerWidth,
         y: Math.random() * window.innerHeight,
