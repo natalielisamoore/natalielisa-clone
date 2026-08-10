@@ -67,8 +67,6 @@
     <!-- HOOK — archival threshold into the story -->
     <section class="section section--hook" id="hook">
       <div class="hook reveal">
-        <span class="hook__reels" aria-hidden="true"><i></i><i></i></span>
-        <span class="hook__tag" aria-hidden="true">no.&nbsp;01</span>
         <p class="hook__label">From the archive</p>
         <p class="hook__hand">Boxes of cassettes &amp; a request&hellip;</p>
         <p class="hook__line">a dying wish that became an <span class="hook__hbo">HBO&nbsp;film</span>.</p>
@@ -79,9 +77,13 @@
     <section class="section section--golden" id="golden">
       <div class="golden__grid">
         <figure class="filmframe reveal">
-          <div class="filmframe__img">
-            <img src="images/daniel.jpg" alt="Daniel Northcott, from the HBO Original documentary Daniel" loading="lazy" />
-          </div>
+          <!-- TODO: point href at the real trailer / "Daniel & The Film" page -->
+          <a class="filmframe__link" href="#" aria-label="Watch Daniel — an HBO Original documentary">
+            <div class="filmframe__img">
+              <img src="images/daniel.jpg" alt="Daniel Northcott, from the HBO Original documentary Daniel" loading="lazy" />
+              <span class="filmframe__watch">Watch the trailer &rarr;</span>
+            </div>
+          </a>
           <figcaption class="filmframe__cap">
             <span>Daniel &amp; The Film</span>
             <span>HBO Original</span>
@@ -132,10 +134,8 @@
         &ldquo;Mommy, the stars are kissing me.&rdquo;
         <span class="starline__by">&mdash; Daniel Northcott</span>
       </p>
-    </section>
 
-    <!-- CLOSING — the final benediction -->
-    <section class="section section--close" id="close">
+      <!-- CLOSING — the final benediction, held in the same night -->
       <figure class="pullquote pullquote--close reveal">
         <span class="ripple" aria-hidden="true"><i></i><i></i><i></i></span>
         <blockquote>Our story never <span class="ink-accent">ends.</span></blockquote>
@@ -144,6 +144,34 @@
     </section>
 
   </main>
+
+  <footer class="footer" id="footer">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <p class="footer__name">Erin Northcott</p>
+        <p class="footer__tag">Somatic guide &middot; Storyteller</p>
+        <p class="footer__note">Made in devotion.</p>
+      </div>
+      <nav class="footer__col" aria-label="Explore">
+        <p class="footer__h">Explore</p>
+        <span class="footer__link" aria-disabled="true">Inner Ceremonies</span>
+        <span class="footer__link" aria-disabled="true">Daniel &amp; The Film</span>
+        <span class="footer__link" aria-disabled="true">The Podcast</span>
+        <span class="footer__link" aria-disabled="true">Collaborate</span>
+      </nav>
+      <div class="footer__col">
+        <p class="footer__h">Connect</p>
+        <!-- TODO: replace with Erin's real handles/email -->
+        <span class="footer__link" aria-disabled="true">Instagram</span>
+        <span class="footer__link" aria-disabled="true">Email</span>
+        <span class="footer__badge">Daniel &mdash; an HBO Original</span>
+      </div>
+    </div>
+    <div class="footer__base">
+      <span>&copy; 2026 Erin Northcott</span>
+      <span class="footer__code">Reel end &middot; 16A</span>
+    </div>
+  </footer>
 
   <script src="sky.js" defer></script>
   <script src="stars.js" defer></script>

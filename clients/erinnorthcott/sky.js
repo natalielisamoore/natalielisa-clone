@@ -34,6 +34,8 @@
     sky.style.background = skyAt(p);
     // let other layers know how deep into the night we are (0..1)
     document.documentElement.style.setProperty('--night', String(Math.max(0, (p - 0.5) / 0.5)));
+    // earlier ramp for UI that needs to stay readable as the sky darkens (nav)
+    document.documentElement.style.setProperty('--dusk', String(Math.min(1, Math.max(0, (p - 0.32) / 0.32))));
     window.__skyProgress = p;
     ticking = false;
   }

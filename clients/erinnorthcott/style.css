@@ -233,18 +233,20 @@ body {
   justify-content: space-between;
   gap: 1rem;
   padding: 1.15rem clamp(1.1rem, 4vw, 3rem);
+  /* translucent light bar that deepens into a dusk overlay as the sky darkens */
   background: rgba(255,255,255,0.06);
+  background: color-mix(in srgb, rgba(255,255,255,.05), rgba(12,10,26,.52) calc(var(--dusk, 0) * 100%));
   backdrop-filter: blur(9px);
   -webkit-backdrop-filter: blur(9px);
-  border-bottom: 1px solid rgba(255,255,255,0.14);
-  transition: background .5s var(--ease), border-color .5s var(--ease);
+  border-bottom: 1px solid rgba(255,255,255,0.12);
 }
 .nav__name {
   font-family: var(--serif);
   font-style: italic;
   font-size: clamp(1.15rem, 1.7vw, 1.4rem);
   letter-spacing: .01em;
-  color: var(--ink);
+  color: var(--ink);                                                            /* fallback */
+  color: color-mix(in oklab, var(--ink), #fdf6e8 calc(var(--dusk, 0) * 100%));  /* ink → ivory on dusk */
   text-decoration: none;
   white-space: nowrap;
 }
@@ -260,11 +262,12 @@ body {
   font-weight: 400;
   letter-spacing: .1em;
   text-transform: uppercase;
-  color: var(--ink-soft);
+  color: var(--ink-soft);                                                                    /* fallback */
+  color: color-mix(in oklab, var(--ink-soft), rgba(253,246,232,.9) calc(var(--dusk, 0) * 100%));
   cursor: default;                 /* stubbed for now */
   transition: color .3s var(--ease);
 }
-.nav__link:hover { color: var(--gold); }
+.nav__link:hover { color: var(--gold-lite); }
 
 /* --------------------------------------------------------------------------
    Sections & shared type
@@ -432,8 +435,9 @@ body {
 .golden__text { max-width: none; text-align: left; }
 .golden__text .lede { max-width: 54ch; }   /* keep body readable; title uses full width */
 
-/* film still as a warm duotone inside a 16mm-style frame */
+/* film still as a warm duotone inside a 16mm-style frame — clickable to the film */
 .filmframe { margin: 0; position: relative; }
+.filmframe__link { display: block; text-decoration: none; color: inherit; cursor: pointer; }
 .filmframe__img {
   position: relative;
   aspect-ratio: 1014 / 542;            /* the key art's native ratio — no crop */
@@ -442,13 +446,45 @@ body {
   box-shadow: 0 30px 80px rgba(30,16,40,.38);
   outline: 1px solid rgba(255,246,230,.18);
   outline-offset: 8px;                 /* thin film-frame border */
+  transition: box-shadow .5s var(--ease), outline-color .5s var(--ease);
+}
+.filmframe__link:hover .filmframe__img,
+.filmframe__link:focus-visible .filmframe__img {
+  box-shadow: 0 34px 92px rgba(30,16,40,.5);
+  outline-color: rgba(233,199,102,.6);
 }
 .filmframe__img img {
   width: 100%; height: 100%;
   object-fit: cover;
   display: block;
   filter: contrast(1.03) saturate(.85); /* gently muted to sit in the palette */
+  transition: transform .7s var(--ease);
 }
+.filmframe__link:hover .filmframe__img img,
+.filmframe__link:focus-visible .filmframe__img img { transform: scale(1.04); }
+/* "Watch the trailer →" cue, revealed on hover */
+.filmframe__watch {
+  position: absolute;
+  left: 50%; bottom: 16px;
+  transform: translate(-50%, 8px);
+  z-index: 3;
+  font-family: var(--mono);
+  font-size: .64rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: #fff7ea;
+  padding: .55rem 1rem;
+  border: 1px solid rgba(255,247,234,.55);
+  border-radius: 999px;
+  background: rgba(20,12,20,.4);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  opacity: 0;
+  transition: opacity .4s var(--ease), transform .4s var(--ease);
+  pointer-events: none;
+}
+.filmframe__link:hover .filmframe__watch,
+.filmframe__link:focus-visible .filmframe__watch { opacity: 1; transform: translate(-50%, 0); }
 .filmframe__img::after {               /* subtle warm grade for cohesion */
   content: "";
   position: absolute; inset: 0;
@@ -475,7 +511,8 @@ body {
 .section--hook {
   text-align: center;
   align-items: center;
-  min-height: 80vh;
+  justify-content: center;
+  min-height: 100vh;               /* full, centered threshold — text never clipped */
 }
 .hook {
   position: relative;
@@ -492,27 +529,6 @@ body {
   -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='6' height='6'%3E%3Crect width='6' height='6' fill='%23fff'/%3E%3C/svg%3E");
   pointer-events: none;
 }
-/* faint cassette reels flanking the text, turning slowly */
-.hook__reels {
-  position: absolute; inset: 0;
-  display: flex; align-items: center; justify-content: center;
-  gap: 15vw;
-  z-index: 0; pointer-events: none; opacity: .55;
-}
-.hook__reels i {
-  width: 15vw; height: 15vw; max-width: 148px; max-height: 148px;
-  border-radius: 50%;
-  border: 1px solid rgba(139,94,60,.30);
-  background:
-    radial-gradient(circle, transparent 24%, rgba(139,94,60,.14) 25%, transparent 28%),
-    repeating-conic-gradient(rgba(139,94,60,.13) 0deg 6deg, transparent 6deg 18deg);
-  -webkit-mask: radial-gradient(circle, transparent 17%, #000 18%);
-          mask: radial-gradient(circle, transparent 17%, #000 18%);
-  animation: reelspin 44s linear infinite;
-}
-.hook__reels i:nth-child(2) { animation-duration: 58s; }
-@keyframes reelspin { to { transform: rotate(360deg); } }
-
 /* tiny handwritten cassette-label tag, tucked into a corner */
 .hook__tag {
   position: absolute;
@@ -556,15 +572,10 @@ body {
 .hook__hbo { font-style: normal; letter-spacing: .01em; }  /* quietly important */
 @media (prefers-reduced-motion: reduce) { .hook__reels i { animation: none; } }
 
-/* ---- Closing benediction: the final note on the deep night ---------------- */
-.section--close {
-  min-height: 100vh;
-  align-items: center;
-  text-align: center;
-}
+/* ---- Closing benediction: held right under the audio, on the deep night ---- */
 .pullquote--close {
   max-width: none;
-  margin: 0 auto;
+  margin: clamp(2.5rem, 7vh, 5.5rem) auto 0;   /* close under the starline — one moment */
   text-align: center;
 }
 .pullquote--close blockquote {
@@ -611,7 +622,7 @@ body {
 /* --------------------------------------------------------------------------
    NIGHT SKY — audio player + starline
    -------------------------------------------------------------------------- */
-.section--night { min-height: 120vh; justify-content: center; }
+.section--night { min-height: 100vh; justify-content: center; padding-top: clamp(7rem, 14vh, 11rem); padding-bottom: clamp(5rem, 12vh, 9rem); }
 .night__inner { text-align: center; }
 .night__intro {
   font-family: var(--serif);
@@ -683,7 +694,7 @@ body {
 
 /* the gold line that fades in slowly as the audio plays */
 .starline {
-  margin: clamp(4rem, 12vh, 9rem) auto 0;
+  margin: clamp(2.5rem, 6vh, 4.5rem) auto 0;
   max-width: 24ch;
   text-align: center;
   font-family: var(--serif);
@@ -740,4 +751,89 @@ body {
   .hero__clouds span { animation: none; }
   .enter-veil { animation: none; opacity: 0; visibility: hidden; }
   .grain, .dust, .leaks { animation: none; }
+  .filmframe__img img { transition: none; }
+}
+
+/* --------------------------------------------------------------------------
+   Footer — quiet archival close, held in the deep night
+   -------------------------------------------------------------------------- */
+.footer {
+  position: relative;
+  z-index: 1;
+  color: rgba(255,248,238,.8);
+  padding: clamp(3rem, 7vw, 5rem) clamp(1.25rem, 6vw, 5rem) 2.2rem;
+  border-top: 1px solid rgba(233,199,102,.16);
+  background: linear-gradient(180deg, rgba(10,10,26,0) 0%, rgba(6,5,14,.6) 100%);
+}
+.footer__inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+}
+.footer__name {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  color: #fff7ea;
+  margin: 0;
+}
+.footer__tag {
+  font-family: var(--mono);
+  font-size: .64rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--gold-lite);
+  margin: .7rem 0 0;
+}
+.footer__note {
+  font-family: var(--hand);
+  font-size: 1.3rem;
+  color: rgba(255,248,238,.6);
+  margin: 1.2rem 0 0;
+  transform: rotate(-1.6deg);
+}
+.footer__col { display: flex; flex-direction: column; gap: .7rem; }
+.footer__h {
+  font-family: var(--mono);
+  font-size: .62rem;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: var(--gold-lite);
+  margin: 0 0 1rem;
+}
+.footer__link {
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  color: rgba(255,248,238,.82);
+  cursor: default;                 /* stubbed until inner pages exist */
+  transition: color .3s var(--ease);
+}
+.footer__link:hover { color: var(--gold-lite); }
+.footer__badge {
+  font-family: var(--mono);
+  font-size: .58rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgba(255,248,238,.45);
+  margin-top: .6rem;
+}
+.footer__base {
+  max-width: 1180px;
+  margin: clamp(2.5rem, 5vw, 4rem) auto 0;
+  padding-top: 1.4rem;
+  border-top: 1px solid rgba(255,255,255,.08);
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-family: var(--mono);
+  font-size: .6rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: rgba(255,248,238,.4);
+}
+@media (max-width: 720px) {
+  .footer__inner { grid-template-columns: 1fr; gap: 2.2rem; }
+  .footer__base { flex-direction: column; }
 }

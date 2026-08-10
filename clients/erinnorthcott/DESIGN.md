@@ -54,7 +54,16 @@ Erin wants the site to feel like the **Daniel HBO documentary** / an **ethereal 
 Implemented: **Caveat** handwriting font (archival hand) + **oxidized brick-red** accent `--accent-red:#b23a2e` (the film's red, kept on-palette, not neon). Fixed texture layers: heavier flickering **grain**, **light leaks** (warm, breathing), **dust specks + hairline scratches**, **film-edge markings** down both sides (`.filmedge`, hidden <720px). Handwritten accents: `.hand-underline` (SVG red scrawl) under "first light"; `.hero__note` ("est. from a box of old reels — at sunset"); pullquote "ends." in red + `.pullquote__hand` caption "— in Daniel's words". **Still TODO from Jay Shetty list: centered wordmark nav, HBO credibility band, cinematic Erin portrait (needs photo).**
 
 ## Navigation
-Fixed top, semi-transparent (sky shows through). "Erin Northcott" left; links right — Inner Ceremonies · Daniel & The Film · Podcast · Collaborate. **Links are non-clickable stubs for now** (homepage built first; inner pages later).
+Fixed top, semi-transparent. "Erin Northcott" left; links right — Inner Ceremonies · Daniel & The Film · Podcast · Collaborate. **Links are non-clickable stubs for now.** **Dusk-adaptive:** sky.js sets `--dusk` (ramps 0→1 from ~32% scroll); nav text mixes ink→ivory and the bar deepens to a dusk overlay via `color-mix()` so it stays readable on dark sections.
+
+## Footer
+Quiet archival close on the deep night (below the closing benediction, flows continuously — no gap). Wordmark + "Somatic guide · Storyteller" + handwritten "Made in devotion."; Explore column (4 page stubs); Connect column (Instagram/Email — **placeholder stubs, need Erin's real handles**) + "Daniel — an HBO Original" badge; base bar "© 2026 Erin Northcott / Reel end · 16A".
+
+## Clickable film
+Golden Hour's Daniel/HBO image is now a link (`.filmframe__link`) with hover zoom + "Watch the trailer →" cue. **href is a placeholder `#` — needs the real trailer/inner-page URL.**
+
+## Scroll choreography (polish pass 2026-08-09)
+Removed blank dark bands: night section min-height 120vh→100vh with padding; "Our story never ends." merged INTO the night section right under the audio/starline (was a separate 100vh section) so it reads as one held moment. Hook = full-height centered threshold, text never clipped, cassette reels removed (Natalie: "tacky").
 
 ## Typography (updated 2026-08-09)
 Editorial type system inspired by **sinceyouarrived.world/sky**:
