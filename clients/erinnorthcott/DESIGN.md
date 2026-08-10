@@ -11,8 +11,9 @@ _History: a fixed sunset photograph was tried (2026-08-09) then reverted — the
 
 ## Layer stack (back → front)
 1. **Sky** — fixed, scroll-interpolated gradient (light → dark)
-2. **Stars** — fixed canvas; fades in near the night section; white + gold, larger ones glow and breathe
-3. **Content** — four sections, fade-up on scroll (IntersectionObserver)
+2. **Horizon** — fixed glowing light-band; intensifies into the night (`--night`)
+3. **Stars** — fixed canvas; fades in near the night section; white + gold, larger ones glow and breathe
+4. **Content** — four sections, fade-up on scroll (IntersectionObserver)
 
 ## Palette
 - White `#FFFFFF` — primary canvas
@@ -42,8 +43,16 @@ _History: a fixed sunset photograph was tried (2026-08-09) then reverted — the
 ## Navigation
 Fixed top, semi-transparent (sky shows through). "Erin Northcott" left; links right — Inner Ceremonies · Daniel & The Film · Podcast · Collaborate. **Links are non-clickable stubs for now** (homepage built first; inner pages later).
 
-## Typography
-Placeholder: Georgia headings, Arial body. Swappable later via `fonts.css`.
+## Typography (updated 2026-08-09)
+Editorial type system inspired by **sinceyouarrived.world/sky**:
+- **Fraunces** (Google Fonts) — display serif for masthead, hero name, section titles, pullquote, night intro, starline. Masthead + taglines + section titles set **italic**.
+- **JetBrains Mono** (Google Fonts) — all labels: eyebrows, nav links, scroll cue, player captions/time, attribution. Uppercase, letterspaced.
+- **Arial** — body/lede.
+Loaded via `<link>` to Google Fonts in `index.html`.
+
+## Bold accents (from risingtemps.com)
+- **Glowing horizon light-band** — fixed `.horizon` layer, a warm radial glow across the mid-line that intensifies into the night via `opacity: calc(.16 + var(--night) * .62)`.
+- **Mono chapter numerals** — section eyebrows numbered `01 — Golden Hour`, `02 — The Becoming`, `03 — Night Sky` (the narrative's three movements). Hero eyebrow flanked with em-dashes: `— SOMATIC GUIDE · STORYTELLER —`.
 
 ## File structure
 ```

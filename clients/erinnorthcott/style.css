@@ -1,6 +1,6 @@
 /* ==========================================================================
    Erin Northcott — Sunrise to Stars
-   Placeholder type: Georgia (headings) / Arial (body) — swap later via fonts.css
+   Type: Fraunces (editorial display serif) / JetBrains Mono (labels) / Arial (body)
    ========================================================================== */
 
 :root {
@@ -14,6 +14,9 @@
   --ink:      #3a2e22;   /* warm near-black for body text on light sky */
   --ink-soft: #6b5a48;
 
+  --serif: 'Fraunces', Georgia, Cambria, 'Times New Roman', serif; /* display */
+  --mono:  'JetBrains Mono', ui-monospace, SFMono-Regular, monospace; /* labels */
+
   --measure:  62ch;
   --ease:     cubic-bezier(.22,.61,.36,1);
 }
@@ -25,6 +28,7 @@ html { scroll-behavior: smooth; }
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
+  font-optical-sizing: auto;
   color: var(--ink);
   background: var(--midnight); /* fallback beneath the sky */
   -webkit-font-smoothing: antialiased;
@@ -47,9 +51,31 @@ body {
 .stars {
   position: fixed;
   inset: 0;
-  z-index: -2;
+  z-index: -1;
   opacity: 0;              /* JS raises this near the night section */
   pointer-events: none;
+  will-change: opacity;
+}
+
+/* glowing horizon light-band (a nod to Rising Temps) — a warm horizon that
+   intensifies into the night via the --night signal set by sky.js */
+.horizon {
+  position: fixed;
+  left: 0; right: 0;
+  top: 60%;
+  height: 46vh;
+  transform: translateY(-50%);
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(130% 58% at 50% 50%,
+      rgba(255,244,222,.55) 0%,
+      rgba(233,199,102,.30) 34%,
+      rgba(201,168,76,.12) 55%,
+      transparent 72%);
+  filter: blur(34px);
+  mix-blend-mode: screen;
+  opacity: calc(.16 + var(--night, 0) * .62);
   will-change: opacity;
 }
 
@@ -72,9 +98,10 @@ body {
   transition: background .5s var(--ease), border-color .5s var(--ease);
 }
 .nav__name {
-  font-family: Georgia, 'Times New Roman', serif;
-  font-size: clamp(1.05rem, 1.6vw, 1.3rem);
-  letter-spacing: .06em;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1.15rem, 1.7vw, 1.4rem);
+  letter-spacing: .01em;
   color: var(--ink);
   text-decoration: none;
   white-space: nowrap;
@@ -86,8 +113,10 @@ body {
   justify-content: flex-end;
 }
 .nav__link {
-  font-size: .82rem;
-  letter-spacing: .13em;
+  font-family: var(--mono);
+  font-size: .72rem;
+  font-weight: 400;
+  letter-spacing: .1em;
   text-transform: uppercase;
   color: var(--ink-soft);
   cursor: default;                 /* stubbed for now */
@@ -112,8 +141,10 @@ body {
 .measure { max-width: var(--measure); margin: 0 auto; }
 
 .eyebrow {
-  font-size: .78rem;
-  letter-spacing: .28em;
+  font-family: var(--mono);
+  font-size: .72rem;
+  font-weight: 400;
+  letter-spacing: .22em;
   text-transform: uppercase;
   color: var(--clay);
   margin: 0 0 1.4rem;
@@ -121,10 +152,12 @@ body {
 .eyebrow--light { color: var(--gold-lite); }
 
 .section__title {
-  font-family: Georgia, 'Times New Roman', serif;
+  font-family: var(--serif);
+  font-style: italic;
   font-weight: 400;
-  font-size: clamp(2rem, 5vw, 3.4rem);
-  line-height: 1.05;
+  font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+  line-height: 1.02;
+  letter-spacing: -.01em;
   margin: 0 0 1.6rem;
   color: var(--ink);
 }
@@ -148,17 +181,20 @@ body {
 }
 .hero { max-width: 40ch; }
 .hero .eyebrow { color: var(--clay); }
+.section--hero .eyebrow::before { content: "\2014\00a0"; }
+.section--hero .eyebrow::after  { content: "\00a0\2014"; }
 .hero__name {
-  font-family: Georgia, 'Times New Roman', serif;
+  font-family: var(--serif);
   font-weight: 400;
-  font-size: clamp(3.2rem, 12vw, 8rem);
-  line-height: .95;
-  letter-spacing: .01em;
+  font-size: clamp(3.4rem, 12.5vw, 8.5rem);
+  line-height: .92;
+  letter-spacing: -.015em;
   margin: 0;
   color: var(--ink);
 }
 .hero__tagline {
-  font-size: clamp(1.05rem, 2vw, 1.4rem);
+  font-family: var(--serif);
+  font-size: clamp(1.15rem, 2.2vw, 1.6rem);
   font-style: italic;
   color: var(--clay);
   margin: 1.6rem 0 0;
@@ -173,8 +209,9 @@ body {
   flex-direction: column;
   align-items: center;
   gap: .6rem;
+  font-family: var(--mono);
   font-size: .72rem;
-  letter-spacing: .28em;
+  letter-spacing: .2em;
   text-transform: uppercase;
   color: var(--clay);
 }
@@ -204,7 +241,7 @@ body {
   position: relative;
   z-index: 1;
   margin: 0;
-  font-family: Georgia, 'Times New Roman', serif;
+  font-family: var(--serif);
   font-style: italic;
   font-size: clamp(1.8rem, 5vw, 3.2rem);
   line-height: 1.2;
@@ -243,7 +280,7 @@ body {
 .section--night { min-height: 120vh; justify-content: center; }
 .night__inner { text-align: center; }
 .night__intro {
-  font-family: Georgia, 'Times New Roman', serif;
+  font-family: var(--serif);
   font-style: italic;
   font-size: clamp(1.15rem, 2.4vw, 1.6rem);
   color: rgba(255,248,238,.85);
@@ -283,9 +320,10 @@ body {
 
 .player__body { flex: 1 1 auto; min-width: 0; }
 .player__label {
+  font-family: var(--mono);
   margin: 0 0 .55rem;
-  font-size: .82rem;
-  letter-spacing: .04em;
+  font-size: .7rem;
+  letter-spacing: .05em;
   color: rgba(255,248,238,.82);
 }
 .player__track {
@@ -304,7 +342,8 @@ body {
   display: flex;
   justify-content: space-between;
   margin-top: .5rem;
-  font-size: .7rem;
+  font-family: var(--mono);
+  font-size: .68rem;
   color: rgba(255,248,238,.55);
 }
 
@@ -313,7 +352,7 @@ body {
   margin: clamp(4rem, 12vh, 9rem) auto 0;
   max-width: 24ch;
   text-align: center;
-  font-family: Georgia, 'Times New Roman', serif;
+  font-family: var(--serif);
   font-style: italic;
   font-size: clamp(1.5rem, 4.5vw, 2.8rem);
   line-height: 1.35;
@@ -326,10 +365,12 @@ body {
 .starline.in { opacity: 1; transform: none; }
 .starline__by {
   display: block;
-  margin-top: 1rem;
+  margin-top: 1.2rem;
+  font-family: var(--mono);
   font-style: normal;
-  font-size: .5em;
-  letter-spacing: .1em;
+  font-size: .42em;
+  letter-spacing: .14em;
+  text-transform: uppercase;
   color: rgba(233,199,102,.7);
 }
 

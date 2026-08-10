@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Erin Northcott</title>
   <meta name="description" content="Erin Northcott — somatic guide and storyteller. A new chapter, beginning at first light." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -12,6 +15,8 @@
   <div class="sky" aria-hidden="true"></div>
   <!-- Layer 2: the stars (fixed canvas, fades in near the night section) -->
   <canvas class="stars" aria-hidden="true"></canvas>
+  <!-- Layer 2b: glowing horizon light-band (intensifies into the night) -->
+  <div class="horizon" aria-hidden="true"></div>
 
   <!-- Navigation -->
   <header class="nav">
@@ -43,7 +48,7 @@
     <!-- GOLDEN HOUR — Daniel & the story -->
     <section class="section section--golden" id="golden">
       <div class="measure reveal">
-        <p class="eyebrow">Golden Hour</p>
+        <p class="eyebrow">01 &mdash; Golden Hour</p>
         <h2 class="section__title">Daniel &amp; the story</h2>
         <p class="lede">For eleven years, Erin lived inside her brother Daniel&rsquo;s story &mdash; the footage he filmed across the world, the life he lived without hesitation, and the loss that reshaped her own. That long labor of love became a film, and that film carried Daniel &mdash; his life and his death &mdash; to HBO, and to millions.</p>
       </div>
@@ -56,7 +61,7 @@
     <!-- SUNSET — The Becoming -->
     <section class="section section--sunset" id="sunset">
       <div class="measure reveal">
-        <p class="eyebrow eyebrow--light">Sunset &mdash; The Becoming</p>
+        <p class="eyebrow eyebrow--light">02 &mdash; The Becoming</p>
         <h2 class="section__title section__title--light">Inner Ceremonies</h2>
         <p class="lede lede--light">Somewhere across those eleven years, the work stopped being only about Daniel. Grief became a teacher. The body became a doorway. Out of that long passage a practice was born &mdash; Erin&rsquo;s somatic work for people moving through thresholds of their own.</p>
       </div>
@@ -65,7 +70,7 @@
     <!-- NIGHT SKY — the stars arrive -->
     <section class="section section--night" id="night">
       <div class="measure reveal night__inner">
-        <p class="eyebrow eyebrow--light">Night Sky</p>
+        <p class="eyebrow eyebrow--light">03 &mdash; Night Sky</p>
         <p class="night__intro">His mother remembers Daniel as a little boy.</p>
 
         <!-- Custom minimal audio player -->
