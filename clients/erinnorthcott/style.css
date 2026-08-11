@@ -698,7 +698,7 @@ body {
 /* --------------------------------------------------------------------------
    NIGHT SKY — audio player + starline
    -------------------------------------------------------------------------- */
-.section--night { min-height: 100vh; justify-content: center; padding-top: clamp(7rem, 14vh, 11rem); padding-bottom: clamp(5rem, 12vh, 9rem); }
+.section--night { min-height: 100vh; justify-content: flex-end; padding-top: clamp(7rem, 14vh, 11rem); padding-bottom: clamp(2.5rem, 6vh, 4.5rem); }
 .night__inner { text-align: center; }
 .night__intro {
   font-family: var(--serif);
