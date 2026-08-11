@@ -1305,29 +1305,21 @@ body {
 }
 .erin__photo { margin: 0; }
 
-/* a gold border with the light moving slowly along it */
+/* a plain gilt frame — the light falls across it once and stays put */
 .erin__plate {
   width: 100%;
   max-width: 440px;
   margin-left: auto;
   padding: clamp(.5rem, 1.1vw, .8rem);
-  /* the two ends match so the tile loops with no seam, and the highlight is a
-     wash rather than a streak — the light moves, it doesn't flash */
-  background: linear-gradient(115deg,
-    #b8933c 0%,
-    #cba954 25%,
-    #e4c67c 45%,
-    #f0d79c 50%,   /* the highlight that travels */
-    #e4c67c 55%,
-    #cba954 75%,
-    #b8933c 100%);
-  background-size: 200% 200%;
-  animation: erin-gold 22s linear infinite;
-  box-shadow: 0 20px 46px rgba(74,42,20,.26);
-}
-@keyframes erin-gold {
-  from { background-position:   0% 50%; }
-  to   { background-position: 200% 50%; }
+  background: linear-gradient(135deg,
+    #e8c87c 0%,
+    #d0ae58 34%,
+    #b8933c 58%,
+    #c9a84c 78%,
+    #ddba6b 100%);
+  box-shadow:
+    0 20px 46px rgba(74,42,20,.26),
+    inset 0 0 0 1px rgba(255,242,206,.5);   /* a crisp lit edge on the outside */
 }
 .erin__plate img {
   display: block;
@@ -1395,10 +1387,6 @@ body {
 @media (pointer: coarse) { .lamp { display: none; } }
 @media (prefers-reduced-motion: reduce) { .lamp { display: none; } }
 
-
-@media (prefers-reduced-motion: reduce) {
-  .erin__plate { animation: none; background-position: 38% 50%; }
-}
 
 /* --------------------------------------------------------------------------
    CONNECT — the enquiry page. The sky doesn't run its arc here; it holds on
