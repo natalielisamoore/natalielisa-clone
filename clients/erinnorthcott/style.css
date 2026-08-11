@@ -1,6 +1,6 @@
 /* ==========================================================================
    Erin Northcott — Sunrise to Stars
-   Type: Fraunces (editorial display serif) / JetBrains Mono (labels) / Arial (body)
+   Type: Fraunces (editorial display serif) / Karla (body) / JetBrains Mono (labels)
    ========================================================================== */
 
 :root {
@@ -18,6 +18,7 @@
   --serif: 'Fraunces', Georgia, Cambria, 'Times New Roman', serif; /* display */
   --mono:  'JetBrains Mono', ui-monospace, SFMono-Regular, monospace; /* labels */
   --hand:  'Caveat', 'Segoe Script', cursive;                        /* archival hand */
+  --body:  'Karla', 'Helvetica Neue', Arial, sans-serif;             /* warm grotesque, not a system default */
 
   --accent-red: #b23a2e;   /* oxidized brick — the documentary's red, on palette */
 
@@ -31,7 +32,7 @@ html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--body);
   font-optical-sizing: auto;
   color: var(--ink);
   background: var(--midnight); /* fallback beneath the sky */
@@ -329,8 +330,8 @@ body {
 .section__title--light { color: #fff7ea; }
 
 .lede {
-  font-size: clamp(0.92rem, 1.15vw, 1.08rem);
-  line-height: 1.75;
+  font-size: clamp(0.98rem, 1.2vw, 1.14rem);   /* Karla sets a touch smaller than Arial */
+  line-height: 1.72;
   color: #000;              /* body paragraphs read black, not warm brown */
   margin: 0;
 }
@@ -434,6 +435,22 @@ body {
 }
 .golden__text .lede { max-width: 62ch; margin: 0 auto; }   /* readable, centered */
 
+/* Reel 01 faces Reel 02: the frame sits left here, the text right, so the two
+   story reels mirror each other across the turn of the sky. */
+@media (min-width: 821px) {
+  .golden__stack {
+    max-width: 1320px;
+    display: grid;
+    grid-template-columns: 1.24fr 0.76fr;
+    gap: clamp(2rem, 4.5vw, 4rem);
+    align-items: center;
+    text-align: left;
+  }
+  .golden__text { margin-top: 0; text-align: left; }
+  .golden__text .lede { max-width: 42ch; margin: 0; }
+  .filmframe__cap--under { margin-top: clamp(2.2rem, 3vw, 2.9rem); }
+}
+
 /* the DANIEL button reads white like the other two, and fills pink on hover */
 .golden__text .btn-enter { color: #fff; }
 .golden__text .btn-enter:hover,
@@ -443,6 +460,53 @@ body {
   color: var(--ink);
 }
 
+
+/* --------------------------------------------------------------------------
+   THE HINGE — Reel 01 stalls in the gate, burns through to white, and Reel 02
+   opens out of that same light. Driven entirely by scroll (burn.js sets
+   --burn and --bloom on :root); at rest both are 0 and nothing renders.
+   -------------------------------------------------------------------------- */
+.filmframe__burn {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  opacity: min(1, calc(var(--burn, 0) * 4));   /* it catches all at once, the way film does */
+  background: radial-gradient(circle at 50% 70%,
+    rgba(255,253,247,1)   0                            calc(var(--burn, 0) * 62%),
+    rgba(255,228,166,.98) calc(var(--burn, 0) * 72%),
+    rgba(206,96,38,.96)   calc(var(--burn, 0) * 84%),
+    rgba(58,24,13,.94)    calc(var(--burn, 0) * 94%),
+    rgba(58,24,13,0)      calc(var(--burn, 0) * 116%));
+}
+/* the lamp finally floods the whole gate */
+.filmframe__burn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #fffdf7;
+  opacity: clamp(0, calc((var(--burn, 0) - 0.66) * 3), 1);
+}
+/* and the picture blows out as it goes */
+.filmframe__img { filter: brightness(calc(1 + var(--burn, 0) * .3)); }
+
+.becoming__bloom {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  opacity: var(--bloom, 0);
+  background: radial-gradient(circle at 50% 50%,
+    #fffdf7 0 44%, rgba(255,253,247,.9) 64%, rgba(255,253,247,0) 84%);
+}
+/* the rose opens out of the white rather than simply appearing in front of it */
+.becoming__film { transform: scale(calc(1 + var(--bloom, 0) * .09)); }
+
+@media (prefers-reduced-motion: reduce) {
+  .filmframe__burn, .becoming__bloom { display: none; }
+  .filmframe__img { filter: none; }
+  .becoming__film { transform: none; }
+}
 
 /* film still as a warm duotone inside a 16mm-style frame — clickable to the film */
 .filmframe { margin: 0; position: relative; }

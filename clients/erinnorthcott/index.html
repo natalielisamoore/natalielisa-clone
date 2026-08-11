@@ -7,8 +7,8 @@
   <meta name="description" content="Erin Northcott — somatic guide and storyteller. A new chapter, beginning at first light." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=JetBrains+Mono:wght@300;400;500&family=Caveat:wght@500;600;700&family=Permanent+Marker&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css?v=46" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=JetBrains+Mono:wght@300;400;500&family=Caveat:wght@500;600;700&family=Karla:wght@300..600&family=Permanent+Marker&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css?v=50" />
 </head>
 <body>
   <!-- Arrival: a luminous veil that dissolves on load — you cross a threshold -->
@@ -86,6 +86,8 @@
             <div class="filmframe__img">
               <video class="filmframe__vid" data-src="videos/daniel.mp4" poster="images/daniel.jpg" loop muted playsinline preload="none" aria-hidden="true"></video>
               <span class="filmframe__watch">Watch the trailer &rarr;</span>
+              <!-- the frame stalls in the gate and burns through, scroll-driven -->
+              <span class="filmframe__burn" aria-hidden="true"></span>
             </div>
             <!-- Key-art label: the film's own line, brushed onto torn tape -->
             <span class="keyart">
@@ -127,6 +129,8 @@
             <video data-src="videos/rose-unfurling.mp4" poster="images/rose-poster.jpg" loop muted playsinline preload="none" aria-hidden="true"></video>
             <span class="becoming__grain8" aria-hidden="true"></span>
             <span class="becoming__vignette" aria-hidden="true"></span>
+            <!-- the rose opens out of the same white the film burned to -->
+            <span class="becoming__bloom" aria-hidden="true"></span>
           </div>
         </figure>
       </div>
@@ -201,10 +205,11 @@
     </div>
   </footer>
 
-  <script src="sky.js?v=46" defer></script>
+  <script src="sky.js?v=50" defer></script>
   <script src="stars.js" defer></script>
   <script src="motes.js" defer></script>
-  <script src="petals.js?v=46" defer></script>
-  <script src="reveal.js?v=46" defer></script>
+  <script src="petals.js?v=50" defer></script>
+  <script src="burn.js?v=50" defer></script>
+  <script src="reveal.js?v=50" defer></script>
 </body>
 </html>
