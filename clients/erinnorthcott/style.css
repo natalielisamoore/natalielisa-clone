@@ -264,6 +264,7 @@ body {
 .nav__link {
   position: relative;
   font-family: var(--mono);
+  text-decoration: none;
   font-size: .82rem;
   font-weight: 400;
   letter-spacing: .1em;
@@ -941,6 +942,7 @@ body {
 }
 .footer__link {
   font-family: var(--serif);
+  text-decoration: none;
   font-size: 1.02rem;
   color: rgba(255,248,238,.82);
   cursor: default;                 /* stubbed until inner pages exist */
@@ -1499,3 +1501,7 @@ body.is-connect .footer {
 @media (max-width: 640px) {
   .connect__inner { max-width: none; }
 }
+
+/* the links that actually go somewhere behave like links; the stubs don't */
+.nav__link[href],
+.footer__link[href] { cursor: pointer; }
