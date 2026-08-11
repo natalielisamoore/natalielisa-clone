@@ -1374,29 +1374,3 @@ body {
   .filmframe__sound { top: 10px; right: 10px; padding: .42rem .6rem; font-size: .55rem; }
   .filmframe__sound-label { display: none; }   /* icon only on a phone */
 }
-
-
-/* --------------------------------------------------------------------------
-   The reel ends on the same torn sticker it opened on — static and centred
-   this time, and the marker is red the whole way across.
-   -------------------------------------------------------------------------- */
-.keyart--end {
-  position: relative;
-  left: auto;
-  bottom: auto;
-  z-index: 2;
-  display: block;
-  width: min(86%, 540px);
-  margin: clamp(3rem, 8vh, 5.5rem) auto 0;
-  transform: rotate(-1.4deg);
-  pointer-events: auto;
-}
-.keyart--end .keyart__line {
-  color: var(--accent-red);
-  opacity: 1;
-  text-shadow: 0 0 1px rgba(150,40,30,.4);
-}
-
-@media (max-width: 720px) {
-  .keyart--end { width: 92%; margin-top: clamp(2.2rem, 6vh, 3.5rem); }
-}
