@@ -425,20 +425,6 @@ body {
   color: var(--clay);
 }
 
-/* ---- Golden Hour: asymmetric film layout ---------------------------------- */
-.golden__stack {
-  width: 100%;
-  max-width: 1240px;                /* big, centered — not full width */
-  margin: 0 auto;
-  text-align: center;
-}
-.golden__stack .filmframe { margin: 0 auto; }
-.golden__text {
-  margin-top: clamp(1.8rem, 4vw, 3rem);
-  text-align: center;
-}
-.golden__text .lede { max-width: 62ch; margin: 0 auto; }   /* readable, centered */
-
 /* the DANIEL button reads white like the other two, and fills pink on hover */
 .hook .btn-enter { color: #fff; }
 .hook .btn-enter:hover,
@@ -662,20 +648,18 @@ body {
   align-items: center;
   justify-content: center;
   min-height: auto;                          /* compact band — tight top & bottom */
-  padding-top: clamp(2rem, 5vh, 3.75rem);
-  padding-bottom: clamp(2rem, 5vh, 3.75rem);
+  padding-top: clamp(2.5rem, 6vh, 4.5rem);
+  padding-bottom: clamp(4rem, 10vh, 7rem);
 }
 
-/* Reel 01 reads on from the hook — one thought, not a screen apart. Without
-   this it inherits the full-height section and floats in the middle of it. */
-.section--golden {
-  min-height: 0;
-  padding-top: clamp(1.25rem, 3vh, 2.5rem);
-  padding-bottom: clamp(5rem, 13vh, 9rem);
-}
 .hook {
   max-width: 46rem;
   margin: 0 auto;
+}
+/* the hook now carries the whole reel: two lines, the paragraph, the film */
+.hook .lede {
+  max-width: 54ch;
+  margin: clamp(1.6rem, 3.4vw, 2.6rem) auto 0;
 }
 .hook__label {
   font-family: var(--mono);
@@ -1240,4 +1224,35 @@ body {
   position: absolute;
   inset: 0;
   background: linear-gradient(180deg, rgba(6,7,18,.22) 0%, rgba(6,7,18,.34) 55%, rgba(6,7,18,.60) 100%);
+}
+
+
+/* --------------------------------------------------------------------------
+   The closing line arrives a letter at a time, left to right — his words
+   surfacing rather than being printed. letters.js splits the text and adds
+   .lit when it comes into view; the caption follows once the line has landed.
+   -------------------------------------------------------------------------- */
+.pullquote--close .ltr {
+  display: inline-block;
+  opacity: 0;
+  white-space: pre;
+}
+.pullquote--close.lit .ltr {
+  animation: letter-in .78s var(--ease) both;
+  animation-delay: calc(var(--i, 0) * 42ms);
+}
+@keyframes letter-in {
+  from { opacity: 0; transform: translateY(.22em) scale(.96); filter: blur(7px); }
+  to   { opacity: 1; transform: none;                         filter: blur(0); }
+}
+/* the attribution waits for the line to finish */
+.pullquote--close.lit .pullquote__hand {
+  animation: hand-in .9s var(--ease) both;
+  animation-delay: calc(var(--n, 0) * 42ms + .3s);
+}
+@keyframes hand-in { from { opacity: 0; } to { opacity: .75; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .pullquote--close .ltr { opacity: 1; animation: none; }
+  .pullquote--close.lit .pullquote__hand { animation: none; opacity: .75; }
 }
