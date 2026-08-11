@@ -344,8 +344,13 @@ body {
   text-align: center;
   min-height: 100vh;
   overflow: hidden;
+  /* the hero holds nothing but the photo, so it doesn't need full section padding */
+  padding-top: clamp(4rem, 9vh, 7rem);
+  padding-bottom: clamp(4rem, 9vh, 7rem);
 }
-.hero { max-width: min(92vw, 1040px); position: relative; z-index: 2; margin: 0 auto; }
+/* she fills most of the sunrise, but never edge to edge and never taller than the fold */
+:root { --hero-w: min(90vw, 74vh * 2.332, 1500px); }
+.hero { max-width: var(--hero-w); position: relative; z-index: 2; margin: 0 auto; }
 
 /* soft cloud banks on either side of the sunrise hero — you enter between them */
 .hero__clouds { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
@@ -1060,7 +1065,7 @@ body {
 /* Erin, a plain rectangular frame held in the middle of the sunrise */
 .hero__portrait {
   display: block;
-  width: min(92vw, 1040px);
+  width: var(--hero-w);
   height: auto;
   aspect-ratio: 1700 / 729;
   margin: 0 auto;
