@@ -276,21 +276,24 @@ body {
 }
 .nav__link:hover { color: #e2809b; }   /* pink hover */
 /* a pink handwritten underline that scrawls in on hover */
+/* One shallow hand-drawn curve, wiped in from the left. It used to animate
+   with scaleX, which squashed the curve flat and sprang it out — the shape has
+   to hold still while it's revealed, so the reveal is a clip, not a stretch. */
 .nav__link::after {
   content: "";
   position: absolute;
   left: -3%; right: -3%;
-  bottom: -.55em;
-  height: .5em;
+  bottom: -.5em;
+  height: .42em;
   background: no-repeat center/100% 100%
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='16' viewBox='0 0 240 16'%3E%3Cpath d='M3 9 C 60 3, 120 13, 180 6 S 232 5, 237 8' fill='none' stroke='%23e57fa0' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E");
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='14' viewBox='0 0 240 14'%3E%3Cpath d='M4 5.5 C 62 12, 178 12, 236 6' fill='none' stroke='%23e57fa0' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E");
   opacity: 0;
-  transform: scaleX(.55);
-  transform-origin: left center;
-  transition: opacity .3s var(--ease), transform .35s var(--ease);
+  clip-path: inset(0 100% 0 0);
+  transition: opacity .22s var(--ease), clip-path .42s var(--ease);
   pointer-events: none;
 }
-.nav__link:hover::after { opacity: 1; transform: scaleX(1); }
+.nav__link:hover::after,
+.nav__link:focus-visible::after { opacity: 1; clip-path: inset(0 0 0 0); }
 
 /* --------------------------------------------------------------------------
    Sections & shared type
