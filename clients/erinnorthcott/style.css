@@ -1238,8 +1238,8 @@ body {
   white-space: pre;
 }
 .pullquote--close.lit .ltr {
-  animation: letter-in .78s var(--ease) both;
-  animation-delay: calc(var(--i, 0) * 42ms);
+  animation: letter-in .5s var(--ease) both;
+  animation-delay: calc(var(--i, 0) * 20ms);
 }
 @keyframes letter-in {
   from { opacity: 0; transform: translateY(.22em) scale(.96); filter: blur(7px); }
@@ -1247,8 +1247,8 @@ body {
 }
 /* the attribution waits for the line to finish */
 .pullquote--close.lit .pullquote__hand {
-  animation: hand-in .9s var(--ease) both;
-  animation-delay: calc(var(--n, 0) * 42ms + .3s);
+  animation: hand-in .6s var(--ease) both;
+  animation-delay: calc(var(--n, 0) * 20ms + .18s);
 }
 @keyframes hand-in { from { opacity: 0; } to { opacity: .75; } }
 
