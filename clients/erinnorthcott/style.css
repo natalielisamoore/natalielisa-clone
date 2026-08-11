@@ -31,6 +31,7 @@
 html { scroll-behavior: smooth; }
 
 body {
+  position: relative;      /* anchors .endsky to the bottom of the document */
   margin: 0;
   font-family: var(--body);
   font-optical-sizing: auto;
@@ -73,11 +74,11 @@ body {
   z-index: -2;
   pointer-events: none;
   background:
-    radial-gradient(130% 58% at 50% 50%,
+    radial-gradient(220% 58% at 50% 50%,
       rgba(255,244,222,.55) 0%,
-      rgba(233,199,102,.30) 34%,
-      rgba(201,168,76,.12) 55%,
-      transparent 72%);
+      rgba(233,199,102,.30) 40%,
+      rgba(201,168,76,.12) 66%,
+      transparent 92%);
   filter: blur(34px);
   mix-blend-mode: screen;
   opacity: calc(.16 + var(--night, 0) * .62);
@@ -439,9 +440,9 @@ body {
 .golden__text .lede { max-width: 62ch; margin: 0 auto; }   /* readable, centered */
 
 /* the DANIEL button reads white like the other two, and fills pink on hover */
-.golden__text .btn-enter { color: #fff; }
-.golden__text .btn-enter:hover,
-.golden__text .btn-enter:focus-visible {
+.hook .btn-enter { color: #fff; }
+.hook .btn-enter:hover,
+.hook .btn-enter:focus-visible {
   background: var(--rose);
   border-color: var(--rose);
   color: var(--ink);
@@ -449,34 +450,9 @@ body {
 
 
 /* --------------------------------------------------------------------------
-   THE HINGE — Reel 01 stalls in the gate, burns through to white, and Reel 02
-   opens out of that same light. Driven entirely by scroll (burn.js sets
-   --burn and --bloom on :root); at rest both are 0 and nothing renders.
+   Reel 02 arrives blown out and resolves — bloom.js sets --bloom on :root as
+   the rose comes up the screen. At rest it is 0 and nothing renders.
    -------------------------------------------------------------------------- */
-.filmframe__burn {
-  position: absolute;
-  inset: 0;
-  z-index: 4;
-  pointer-events: none;
-  opacity: min(1, calc(var(--burn, 0) * 4));   /* it catches all at once, the way film does */
-  background: radial-gradient(circle at 50% 70%,
-    rgba(255,253,247,1)   0                            calc(var(--burn, 0) * 62%),
-    rgba(255,228,166,.98) calc(var(--burn, 0) * 72%),
-    rgba(206,96,38,.96)   calc(var(--burn, 0) * 84%),
-    rgba(58,24,13,.94)    calc(var(--burn, 0) * 94%),
-    rgba(58,24,13,0)      calc(var(--burn, 0) * 116%));
-}
-/* the lamp finally floods the whole gate */
-.filmframe__burn::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: #fffdf7;
-  opacity: clamp(0, calc((var(--burn, 0) - 0.66) * 3), 1);
-}
-/* and the picture blows out as it goes */
-.filmframe__img { filter: brightness(calc(1 + var(--burn, 0) * .3)); }
-
 .becoming__bloom {
   position: absolute;
   inset: 0;
@@ -490,8 +466,7 @@ body {
 .becoming__film { transform: scale(calc(1 + var(--bloom, 0) * .09)); }
 
 @media (prefers-reduced-motion: reduce) {
-  .filmframe__burn, .becoming__bloom { display: none; }
-  .filmframe__img { filter: none; }
+  .becoming__bloom { display: none; }
   .becoming__film { transform: none; }
 }
 
@@ -928,37 +903,11 @@ body {
 /* --------------------------------------------------------------------------
    Footer — quiet archival close, held in the deep night
    -------------------------------------------------------------------------- */
-/* "Mommy, the stars are kissing me." — his face in the starfield, held behind
-   the footer so the last thing on the page is him. */
-.footer__sky {
-  position: absolute;
-  inset: 0;
-  z-index: -1;                 /* behind the footer's own content, above its background */
-  overflow: hidden;
-  pointer-events: none;
-  /* rises out of the night sky instead of starting on a seam */
-  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 30%);
-          mask-image: linear-gradient(180deg, transparent 0%, #000 30%);
-}
-.footer__sky img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 50% 20%;    /* keep his eyes in the crop */
-}
-.footer__sky::after {          /* scrim, so the type still reads over the stars */
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(6,7,18,.34) 0%, rgba(6,7,18,.52) 45%, rgba(6,7,18,.76) 100%);
-}
-
 .footer {
   position: relative;
   z-index: 1;
   color: rgba(255,248,238,.8);
-  padding: clamp(5.5rem, 13vh, 9rem) clamp(1.5rem, 3vw, 2.5rem) 1.5rem;
+  padding: clamp(3rem, 6vh, 4.5rem) clamp(1.5rem, 3vw, 2.5rem) 1.5rem;
   border-top: 1px solid rgba(233,199,102,.16);
   background: linear-gradient(180deg, rgba(10,10,26,0) 0%, rgba(6,5,14,.6) 100%);
 }
@@ -1255,4 +1204,39 @@ body {
   background: var(--rose);
   border-color: var(--rose);
   color: var(--ink);
+}
+
+
+/* --------------------------------------------------------------------------
+   THE END OF THE PAGE — "Mommy, the stars are kissing me."
+   Daniel's face in the starfield, anchored to the bottom of the document and
+   tall enough to run behind the closing quote AND the footer, so the two read
+   as one continuous night instead of a picture pasted under a seam. It sits at
+   z-index 0: above the fixed sky layers, below .page and .footer content.
+   -------------------------------------------------------------------------- */
+.endsky {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 88vh;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  /* no seam at the top — it surfaces out of the night sky */
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, rgba(0,0,0,.6) 12%, #000 26%);
+          mask-image: linear-gradient(180deg, transparent 0%, rgba(0,0,0,.6) 12%, #000 26%);
+}
+.endsky img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 34%;
+}
+.endsky::after {               /* keeps the quote and the footer type readable */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(6,7,18,.22) 0%, rgba(6,7,18,.34) 55%, rgba(6,7,18,.60) 100%);
 }
