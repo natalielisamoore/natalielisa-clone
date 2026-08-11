@@ -349,9 +349,12 @@ body {
   padding-top: clamp(4rem, 9vh, 7rem);
   padding-bottom: clamp(4rem, 9vh, 7rem);
 }
-/* she fills most of the sunrise, but never edge to edge and never taller than the fold */
-:root { --hero-w: min(90vw, 74vh * 2.332, 1500px); }
-.hero { max-width: var(--hero-w); position: relative; z-index: 2; margin: 0 auto; }
+/* the film frame is the landing — same format and size it had in the reel */
+.hero { max-width: min(92vw, 1240px); position: relative; z-index: 2; margin: 0 auto; }
+/* on a phone a 16:9 frame is short, so don't strand it in a full-height section */
+@media (max-width: 720px) {
+  .section--hero { min-height: 0; }
+}
 
 /* soft cloud banks on either side of the sunrise hero — you enter between them */
 .hero__clouds { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
@@ -434,22 +437,6 @@ body {
   text-align: center;
 }
 .golden__text .lede { max-width: 62ch; margin: 0 auto; }   /* readable, centered */
-
-/* Reel 01 faces Reel 02: the frame sits left here, the text right, so the two
-   story reels mirror each other across the turn of the sky. */
-@media (min-width: 821px) {
-  .golden__stack {
-    max-width: 1320px;
-    display: grid;
-    grid-template-columns: 1.24fr 0.76fr;
-    gap: clamp(2rem, 4.5vw, 4rem);
-    align-items: center;
-    text-align: left;
-  }
-  .golden__text { margin-top: 0; text-align: left; }
-  .golden__text .lede { max-width: 42ch; margin: 0; }
-  .filmframe__cap--under { margin-top: clamp(2.2rem, 3vw, 2.9rem); }
-}
 
 /* the DANIEL button reads white like the other two, and fills pink on hover */
 .golden__text .btn-enter { color: #fff; }
@@ -1149,20 +1136,6 @@ body {
 }
 
 
-
-/* Erin, a plain rectangular frame held in the middle of the sunrise */
-.hero__portrait {
-  display: block;
-  width: var(--hero-w);
-  height: auto;
-  aspect-ratio: 1700 / 729;
-  margin: 0 auto;
-  object-fit: cover;
-  object-position: 50% 50%;
-  /* sun-faded, so she sits inside the golden hour rather than against it */
-  filter: sepia(.3) saturate(1.1) hue-rotate(-8deg) brightness(1.05) contrast(.98);
-  box-shadow: 0 22px 54px rgba(74,42,20,.22);
-}
 
 /* --------------------------------------------------------------------------
    Footer: bio and socials on the left, pages on the right, credits beneath
