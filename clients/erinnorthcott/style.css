@@ -691,6 +691,14 @@ body {
   padding-top: clamp(2rem, 5vh, 3.75rem);
   padding-bottom: clamp(2rem, 5vh, 3.75rem);
 }
+
+/* Reel 01 reads on from the hook — one thought, not a screen apart. Without
+   this it inherits the full-height section and floats in the middle of it. */
+.section--golden {
+  min-height: 0;
+  padding-top: clamp(1.25rem, 3vh, 2.5rem);
+  padding-bottom: clamp(5rem, 13vh, 9rem);
+}
 .hook {
   max-width: 46rem;
   margin: 0 auto;
