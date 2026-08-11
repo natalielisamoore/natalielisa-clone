@@ -1270,8 +1270,23 @@ body {
   min-height: 0;
   padding-top: clamp(3rem, 8vh, 6rem);
   padding-bottom: clamp(3.5rem, 9vh, 7rem);
+  overflow: hidden;                  /* the ink runs off the edge, not off the page */
+}
+/* rose-gold ink spilling in from the edge of the screen, behind everything */
+.erin__ink {
+  position: absolute;
+  right: -11%;
+  top: 56%;
+  transform: translateY(-50%) rotate(6deg);
+  width: min(31vw, 390px);
+  height: auto;
+  z-index: 0;
+  pointer-events: none;
+  opacity: .88;
 }
 .erin__grid {
+  position: relative;
+  z-index: 1;                        /* the words sit above the ink */
   width: 100%;
   max-width: 1240px;
   margin: 0 auto;
@@ -1283,14 +1298,29 @@ body {
 }
 .erin__photo { margin: 0; }
 
-/* a print with its paper border left on */
+/* a gold border with the light moving slowly along it */
 .erin__plate {
   width: 100%;
   max-width: 440px;
   margin-left: auto;
   padding: clamp(.5rem, 1.1vw, .8rem);
-  background: linear-gradient(168deg, #fdfaf3 0%, #f8f2e5 60%, #efe6d3 100%);
-  box-shadow: 0 20px 46px rgba(74,42,20,.22);
+  background: linear-gradient(115deg,
+    #8f6f26 0%,
+    #c9a84c 16%,
+    #e9c766 28%,
+    #fdf4d4 38%,   /* the highlight that travels */
+    #e9c766 48%,
+    #c9a84c 62%,
+    #94742a 78%,
+    #c9a84c 92%,
+    #e9c766 100%);
+  background-size: 260% 260%;
+  animation: erin-gold 11s linear infinite;
+  box-shadow: 0 20px 46px rgba(74,42,20,.26);
+}
+@keyframes erin-gold {
+  0%   { background-position:   0% 50%; }
+  100% { background-position: 200% 50%; }
 }
 .erin__plate img {
   display: block;
@@ -1300,6 +1330,7 @@ body {
   object-fit: cover;
   object-position: 50% 34%;
   filter: saturate(1.02) brightness(1.02);
+  box-shadow: 0 0 0 1px rgba(66,46,12,.4);   /* the print seated inside the metal */
 }
 
 .erin__text { max-width: 60ch; }
@@ -1318,6 +1349,7 @@ body {
   }
   .erin__plate { margin: 0 auto; max-width: 300px; }
   .erin__text { max-width: none; }
+  .erin__ink { width: 52vw; right: -18%; top: 78%; opacity: .38; }
 }
 
 /* --------------------------------------------------------------------------
@@ -1355,3 +1387,8 @@ body {
 
 @media (pointer: coarse) { .lamp { display: none; } }
 @media (prefers-reduced-motion: reduce) { .lamp { display: none; } }
+
+
+@media (prefers-reduced-motion: reduce) {
+  .erin__plate { animation: none; background-position: 38% 50%; }
+}
