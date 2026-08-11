@@ -4,12 +4,18 @@
   /* ---- fade-up on scroll ------------------------------------------------ */
   const revealables = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window) {
-    const io = new IntersectionObserver((entries) => {
+    const watch = (margin) => new IntersectionObserver((entries, obs) => {
       for (const e of entries) {
-        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); }
       }
-    }, { threshold: 0.18, rootMargin: '0px 0px -8% 0px' });
-    revealables.forEach((el) => io.observe(el));
+    }, { threshold: 0.18, rootMargin: margin });
+
+    // The page holds its reveals back until they're properly on screen. The
+    // footer can't: that -8% inset excludes the last strip of the document, so
+    // the base bar would sit at the very bottom and never intersect.
+    const page = watch('0px 0px -8% 0px');
+    const foot = watch('0px');
+    revealables.forEach((el) => (el.closest('.footer') ? foot : page).observe(el));
   } else {
     revealables.forEach((el) => el.classList.add('in'));
   }
