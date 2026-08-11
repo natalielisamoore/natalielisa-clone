@@ -1304,23 +1304,23 @@ body {
   max-width: 440px;
   margin-left: auto;
   padding: clamp(.5rem, 1.1vw, .8rem);
+  /* the two ends match so the tile loops with no seam, and the highlight is a
+     wash rather than a streak — the light moves, it doesn't flash */
   background: linear-gradient(115deg,
-    #8f6f26 0%,
-    #c9a84c 16%,
-    #e9c766 28%,
-    #fdf4d4 38%,   /* the highlight that travels */
-    #e9c766 48%,
-    #c9a84c 62%,
-    #94742a 78%,
-    #c9a84c 92%,
-    #e9c766 100%);
-  background-size: 260% 260%;
-  animation: erin-gold 11s linear infinite;
+    #b8933c 0%,
+    #cba954 25%,
+    #e4c67c 45%,
+    #f0d79c 50%,   /* the highlight that travels */
+    #e4c67c 55%,
+    #cba954 75%,
+    #b8933c 100%);
+  background-size: 200% 200%;
+  animation: erin-gold 22s linear infinite;
   box-shadow: 0 20px 46px rgba(74,42,20,.26);
 }
 @keyframes erin-gold {
-  0%   { background-position:   0% 50%; }
-  100% { background-position: 200% 50%; }
+  from { background-position:   0% 50%; }
+  to   { background-position: 200% 50%; }
 }
 .erin__plate img {
   display: block;
