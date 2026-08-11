@@ -549,8 +549,8 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
-  gap: clamp(2rem, 6vw, 5.5rem);
+  grid-template-columns: 0.88fr 1.12fr;   /* the text column ends where the text does */
+  gap: clamp(1.75rem, 4.6vw, 4.25rem);
   align-items: center;
 }
 .becoming__text { max-width: 52ch; text-align: left; }
@@ -579,7 +579,7 @@ body {
   color: var(--ink);
 }
 
-.becoming__media { margin: 0; position: relative; }
+.becoming__media { margin: 0; position: relative; max-width: 580px; }
 
 /* soft-edged orb that clips the video + its 8mm film overlays together */
 .becoming__film {
