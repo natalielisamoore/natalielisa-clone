@@ -1291,15 +1291,17 @@ body {
   pointer-events: none;
   opacity: .88;
 }
+/* the same container and column split as Inner Ceremonies, so the two
+   sections share one pair of vertical edges down the page */
 .erin__grid {
   position: relative;
   z-index: 1;                        /* the words sit above the ink */
   width: 100%;
-  max-width: 1240px;
+  max-width: 1200px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 0.86fr 1.14fr;
-  gap: clamp(2.2rem, 5.5vw, 5rem);
+  grid-template-columns: 0.88fr 1.12fr;
+  gap: clamp(1.75rem, 4.6vw, 4.25rem);
   align-items: center;
   text-align: left;
 }
@@ -1309,7 +1311,6 @@ body {
 .erin__plate {
   width: 100%;
   max-width: 440px;
-  margin-left: auto;
   padding: clamp(.5rem, 1.1vw, .8rem);
   background: linear-gradient(135deg,
     #e8c87c 0%,
