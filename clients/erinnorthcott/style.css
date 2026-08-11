@@ -1394,16 +1394,23 @@ body {
 }
 
 /* --------------------------------------------------------------------------
-   CONNECT — the enquiry page. The sky doesn't run its whole arc here; it
-   holds at dusk, so the page reads as one held moment rather than a second
-   journey. --dusk and --night are set by hand since sky.js isn't loaded.
+   CONNECT — the enquiry page. The sky doesn't run its arc here; it holds on
+   one photographed sunset, so the page is a single held moment rather than a
+   second journey. That sunset is pale, so this page runs light: --dusk and
+   --night sit at 0 and the form is dark ink on warm paper.
    -------------------------------------------------------------------------- */
 body.is-connect {
-  --dusk: 1;
-  --night: .42;
+  --dusk: 0;
+  --night: 0;
 }
+/* the labels have a bright band of sky to hold their own against */
+body.is-connect .eyebrow { color: #9a6a3c; }
 body.is-connect .sky {
-  background: linear-gradient(180deg, #a8788c 0%, #6d5273 48%, #3a2c52 100%);
+  background: #f6d9e0 url("images/connect-sky.jpg") center / cover no-repeat;
+}
+/* the footer keeps its dark band so it still reads over a bright sky */
+body.is-connect .footer {
+  background: linear-gradient(180deg, rgba(22,14,32,.62) 0%, rgba(9,6,16,.88) 100%);
 }
 
 .section--connect {
@@ -1431,7 +1438,7 @@ body.is-connect .sky {
   font-size: .68rem;
   letter-spacing: .18em;
   text-transform: uppercase;
-  color: rgba(255,248,238,.72);
+  color: var(--ink-soft);
 }
 .connect__input {
   display: block;
@@ -1440,31 +1447,39 @@ body.is-connect .sky {
   font-family: var(--body);
   font-size: 1.02rem;
   line-height: 1.5;
-  color: #fff8ee;
-  background: rgba(20,12,26,.24);
-  border: 1px solid rgba(255,248,238,.34);
+  color: var(--ink);
+  background: rgba(255,252,246,.6);
+  border: 1px solid rgba(96,66,44,.34);
   border-radius: 0;
   -webkit-backdrop-filter: blur(3px);
           backdrop-filter: blur(3px);
   transition: border-color .3s var(--ease), background .3s var(--ease);
 }
 .connect__input--area { resize: vertical; min-height: 9rem; }
-.connect__input:hover { border-color: rgba(255,248,238,.55); }
+.connect__input:hover { border-color: rgba(96,66,44,.55); }
 .connect__input:focus {
   outline: none;
-  border-color: var(--rose);
-  background: rgba(20,12,26,.34);
+  border-color: var(--rose-deep);
+  background: rgba(255,253,249,.82);
 }
-.connect__input:focus-visible { outline: 2px solid var(--rose); outline-offset: 2px; }
+.connect__input:focus-visible { outline: 2px solid var(--rose-deep); outline-offset: 2px; }
 
 .connect__botcheck { display: none !important; }
 
-.connect__send { margin-top: .4rem; color: #fff; cursor: pointer; }
+/* the one solid button on the site — an outline would vanish into the sand */
+.connect__send {
+  margin-top: .4rem;
+  cursor: pointer;
+  color: #fff8ee;
+  background: var(--rose-deep);
+  border-color: var(--rose-deep);
+  box-shadow: 0 12px 28px rgba(120,40,60,.24);
+}
 .connect__send:hover,
 .connect__send:focus-visible {
-  background: var(--rose);
-  border-color: var(--rose);
-  color: var(--ink);
+  background: #8f3348;
+  border-color: #8f3348;
+  color: #fff8ee;
 }
 .connect__send[disabled] { opacity: .6; cursor: default; }
 
@@ -1474,11 +1489,12 @@ body.is-connect .sky {
   font-family: var(--body);
   font-size: .95rem;
   line-height: 1.5;
+  color: var(--ink);
 }
-.connect__note.is-sent   { color: #ffe9ec; }
-.connect__note.is-failed { color: #ffc9c0; }
+.connect__note.is-sent   { color: #8f3348; }
+.connect__note.is-failed { color: var(--accent-red); }
 
-.nav__link--here { cursor: pointer; color: #fff8ee; }
+.nav__link--here { cursor: pointer; }
 
 @media (max-width: 640px) {
   .connect__inner { max-width: none; }
