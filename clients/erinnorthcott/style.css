@@ -1318,3 +1318,39 @@ body {
   .erin__plate { margin: 0 auto; max-width: 300px; }
   .erin__text { max-width: none; }
 }
+
+/* --------------------------------------------------------------------------
+   The lamp — a pool of light following the pointer, sitting between the sky
+   and the page so it lights the air without ever washing the type.
+   Light can't brighten a bright sky, so there are two of them: a warm bloom
+   that works by overlay while the sun is up, and real light by screen once
+   it's dark. They cross over on --night.
+   -------------------------------------------------------------------------- */
+.lamp {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 0;                    /* above the sky and the dust, below .page */
+  width: 440px;
+  height: 440px;
+  pointer-events: none;
+  opacity: 0;
+  filter: blur(16px);
+  transition: opacity .7s var(--ease);
+  will-change: transform;
+}
+.lamp--warm {
+  mix-blend-mode: overlay;
+  background: radial-gradient(circle,
+    rgba(255,206,132,.95) 0%, rgba(255,188,104,.42) 36%, transparent 68%);
+}
+.lamp--cool {
+  mix-blend-mode: screen;
+  background: radial-gradient(circle,
+    rgba(208,226,255,.66) 0%, rgba(172,198,255,.28) 36%, transparent 68%);
+}
+.lamp--warm.is-lit { opacity: calc(.85 - var(--night, 0) * .8); }
+.lamp--cool.is-lit { opacity: calc(.2 + var(--night, 0) * .8); }
+
+@media (pointer: coarse) { .lamp { display: none; } }
+@media (prefers-reduced-motion: reduce) { .lamp { display: none; } }
