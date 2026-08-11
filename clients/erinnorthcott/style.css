@@ -530,7 +530,8 @@ body {
 
 /* ---- The Becoming: text beside the unfurling-rose video ------------------- */
 
-/* rose petals fall through this reel and nowhere else */
+/* rose petals fall through this reel and nowhere else, and they part as the
+   pointer moves through them */
 .section--sunset { overflow: hidden; }
 .petals {
   position: absolute;

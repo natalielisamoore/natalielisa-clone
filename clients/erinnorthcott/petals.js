@@ -1,6 +1,8 @@
 /* petals.js — rose petals falling softly through Inner Ceremonies.
    Two layers, so the reel has real depth: most petals drift behind the text,
    and a few large, out-of-focus ones pass in front of the lens.
+   They also part: move the pointer through them and they're carried aside on
+   the air, tumbling as they go, then settle back into the fall.
    Only runs while the section is on screen. */
 (function () {
   const section = document.getElementById('sunset');
@@ -98,6 +100,15 @@
   const rand = (a, b) => a + Math.random() * (b - a);
   let w = 0, h = 0, dpr = 1, petals = [], raf = 0, last = 0, visible = false;
 
+  /* ---- the hand moving through them ------------------------------------- */
+  const PART = window.matchMedia('(pointer: fine)').matches && !reduce;
+  const REACH = 175;
+  let cx = -9999, cy = -9999;          // pointer, in page coords
+  if (PART) {
+    window.addEventListener('mousemove', (e) => { cx = e.clientX; cy = e.clientY; }, { passive: true });
+    document.addEventListener('mouseleave', () => { cx = cy = -9999; });
+  }
+
   function makePetal(front, seeded) {
     const size = front ? rand(110, 190) : rand(20, 52);
     return {
@@ -114,7 +125,9 @@
       spin: rand(-0.5, 0.5),
       flip: rand(0, Math.PI * 2),
       flipHz: rand(0.25, 0.75),
-      alpha: front ? rand(0.15, 0.26) : rand(0.60, 0.95)
+      kx: 0, ky: 0,                                     // carried on the air
+      drawX: 0,
+      alpha: front ? rand(0.13, 0.22) : rand(0.5, 0.86)
     };
   }
 
@@ -131,7 +144,7 @@
     bctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     fctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-    const backCount  = Math.max(12, Math.min(24, Math.round(w / 68)));
+    const backCount  = Math.max(9, Math.min(17, Math.round(w / 95)));
     const frontCount = w > 900 ? 4 : 2;
     petals = [];
     for (let i = 0; i < backCount; i++)  petals.push(makePetal(false, true));
@@ -148,7 +161,7 @@
       // edge-on, a petal shows almost no face — it thins out and dims
       const face = Math.abs(turn);
       const squeeze = (turn < 0 ? -1 : 1) * Math.max(0.10, face);
-      const x = p.x + p.sway * Math.sin(time * p.swayHz * Math.PI * 2 + p.phase);
+      const x = p.drawX;
 
       ctx.save();
       ctx.globalAlpha = p.alpha * (0.55 + 0.45 * face);
@@ -167,13 +180,42 @@
     last = now;
     const time = now / 1000;
 
+    // the canvases sit inside the section, so the pointer needs section coords
+    let px = -9999, py = -9999;
+    if (PART && cx > -9000) {
+      const r = section.getBoundingClientRect();
+      px = cx - r.left;
+      py = cy - r.top;
+    }
+
     for (const p of petals) {
       p.y += p.vy * dt;
       p.rot += p.spin * dt;
       p.flip += p.flipHz * dt * Math.PI * 2;
+      p.drawX = p.x + p.sway * Math.sin(time * p.swayHz * Math.PI * 2 + p.phase);
+
+      // the foreground petals are past the lens — the hand can't reach them
+      if (PART && !p.front) {
+        const dx = p.drawX - px, dy = p.y - py;
+        const d2 = dx * dx + dy * dy;
+        if (d2 < REACH * REACH && d2 > 1) {
+          const d = Math.sqrt(d2);
+          const carry = (1 - d / REACH) * (1 - d / REACH) * 1.5;
+          p.kx += (dx / d) * carry;
+          p.ky += (dy / d) * carry;
+          p.spin += (dx < 0 ? -1 : 1) * carry * 0.06;   // shoved sideways, it tumbles
+        }
+        p.x += p.kx;
+        p.y += p.ky;
+        p.kx *= 0.96;                                    // carried a while, then it settles
+        p.ky *= 0.96;
+        p.drawX = p.x + p.sway * Math.sin(time * p.swayHz * Math.PI * 2 + p.phase);
+      }
+
       if (p.y - p.size > h + 20) {                    // gone past the reel — send it back up
         p.y = -p.size - rand(0, h * 0.35);
         p.x = rand(-0.05, 1.05) * w;
+        p.kx = p.ky = 0;
       }
     }
     draw(time);
@@ -192,6 +234,7 @@
   }
 
   build();
+  for (const p of petals) p.drawX = p.x;
   if (reduce) {
     draw(0);                                          // a still scattering, no motion
   } else if ('IntersectionObserver' in window) {
