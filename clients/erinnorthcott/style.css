@@ -1301,6 +1301,11 @@ body {
 }
 
 .erin__text { max-width: 60ch; }
+/* a shade smaller than a reel headline — this is a bridge, not a chapter */
+.erin__title {
+  font-size: clamp(1.6rem, 3vw, 2.3rem);
+  margin: .35rem 0 0;
+}
 .erin__text .lede { margin-top: clamp(.9rem, 2vw, 1.35rem); }
 
 @media (max-width: 820px) {
