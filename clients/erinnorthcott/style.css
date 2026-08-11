@@ -264,7 +264,7 @@ body {
 .nav__link {
   position: relative;
   font-family: var(--mono);
-  font-size: .72rem;
+  font-size: .82rem;
   font-weight: 400;
   letter-spacing: .1em;
   text-transform: uppercase;
@@ -866,7 +866,7 @@ body {
 @media (max-width: 640px) {
   .nav { flex-direction: column; align-items: flex-start; gap: .55rem; padding: .8rem 1.1rem; }
   .nav__links { gap: .55rem 1.1rem; }
-  .nav__link { font-size: .68rem; letter-spacing: .1em; }
+  .nav__link { font-size: .76rem; letter-spacing: .1em; }
   .player { border-radius: 22px; }
 }
 
@@ -933,7 +933,7 @@ body {
 .footer__col { display: flex; flex-direction: column; gap: .45rem; }
 .footer__h {
   font-family: var(--mono);
-  font-size: .62rem;
+  font-size: .72rem;
   letter-spacing: .24em;
   text-transform: uppercase;
   color: #f3b0c4;                 /* pink column titles */
@@ -941,7 +941,7 @@ body {
 }
 .footer__link {
   font-family: var(--serif);
-  font-size: .92rem;
+  font-size: 1.02rem;
   color: rgba(255,248,238,.82);
   cursor: default;                 /* stubbed until inner pages exist */
   transition: color .3s var(--ease);
@@ -949,7 +949,7 @@ body {
 .footer__link:hover { color: #f3b0c4; }   /* pink hover (lighter for the dark footer) */
 .footer__badge {
   font-family: var(--mono);
-  font-size: .58rem;
+  font-size: .67rem;
   letter-spacing: .18em;
   text-transform: uppercase;
   color: rgba(255,248,238,.45);
@@ -964,7 +964,7 @@ body {
   justify-content: space-between;
   gap: 1rem;
   font-family: var(--mono);
-  font-size: .6rem;
+  font-size: .69rem;
   letter-spacing: .16em;
   text-transform: uppercase;
   color: rgba(255,248,238,.4);
@@ -1114,7 +1114,7 @@ body {
    -------------------------------------------------------------------------- */
 .footer__bio {
   font-family: var(--mono);
-  font-size: .66rem;
+  font-size: .75rem;
   letter-spacing: .2em;
   text-transform: uppercase;
   color: rgba(255,248,238,.62);
@@ -1129,7 +1129,7 @@ body {
 }
 .footer__follow-label {
   font-family: var(--mono);
-  font-size: .62rem;
+  font-size: .72rem;
   letter-spacing: .24em;
   text-transform: uppercase;
   color: #f3b0c4;                 /* same pink as the column titles */
@@ -1391,4 +1391,95 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   .erin__plate { animation: none; background-position: 38% 50%; }
+}
+
+/* --------------------------------------------------------------------------
+   CONNECT — the enquiry page. The sky doesn't run its whole arc here; it
+   holds at dusk, so the page reads as one held moment rather than a second
+   journey. --dusk and --night are set by hand since sky.js isn't loaded.
+   -------------------------------------------------------------------------- */
+body.is-connect {
+  --dusk: 1;
+  --night: .42;
+}
+body.is-connect .sky {
+  background: linear-gradient(180deg, #a8788c 0%, #6d5273 48%, #3a2c52 100%);
+}
+
+.section--connect {
+  min-height: 100vh;
+  justify-content: center;
+  padding-top: clamp(6rem, 15vh, 10rem);
+  padding-bottom: clamp(4rem, 10vh, 7rem);
+}
+.connect__inner {
+  width: 100%;
+  max-width: 620px;
+  margin: 0 auto;
+  text-align: left;
+}
+.connect__intro { margin-bottom: clamp(2rem, 5vh, 3.25rem); }
+
+.connect__field {
+  display: block;
+  margin: 0 0 clamp(1.1rem, 2.6vh, 1.7rem);
+}
+.connect__label {
+  display: block;
+  margin-bottom: .55rem;
+  font-family: var(--mono);
+  font-size: .68rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgba(255,248,238,.72);
+}
+.connect__input {
+  display: block;
+  width: 100%;
+  padding: .95rem 1.1rem;
+  font-family: var(--body);
+  font-size: 1.02rem;
+  line-height: 1.5;
+  color: #fff8ee;
+  background: rgba(20,12,26,.24);
+  border: 1px solid rgba(255,248,238,.34);
+  border-radius: 0;
+  -webkit-backdrop-filter: blur(3px);
+          backdrop-filter: blur(3px);
+  transition: border-color .3s var(--ease), background .3s var(--ease);
+}
+.connect__input--area { resize: vertical; min-height: 9rem; }
+.connect__input:hover { border-color: rgba(255,248,238,.55); }
+.connect__input:focus {
+  outline: none;
+  border-color: var(--rose);
+  background: rgba(20,12,26,.34);
+}
+.connect__input:focus-visible { outline: 2px solid var(--rose); outline-offset: 2px; }
+
+.connect__botcheck { display: none !important; }
+
+.connect__send { margin-top: .4rem; color: #fff; cursor: pointer; }
+.connect__send:hover,
+.connect__send:focus-visible {
+  background: var(--rose);
+  border-color: var(--rose);
+  color: var(--ink);
+}
+.connect__send[disabled] { opacity: .6; cursor: default; }
+
+.connect__note {
+  margin: 1.1rem 0 0;
+  min-height: 1.2em;
+  font-family: var(--body);
+  font-size: .95rem;
+  line-height: 1.5;
+}
+.connect__note.is-sent   { color: #ffe9ec; }
+.connect__note.is-failed { color: #ffc9c0; }
+
+.nav__link--here { cursor: pointer; color: #fff8ee; }
+
+@media (max-width: 640px) {
+  .connect__inner { max-width: none; }
 }
