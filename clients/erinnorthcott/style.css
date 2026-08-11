@@ -453,21 +453,20 @@ body {
    Reel 02 arrives blown out and resolves — bloom.js sets --bloom on :root as
    the rose comes up the screen. At rest it is 0 and nothing renders.
    -------------------------------------------------------------------------- */
-.becoming__bloom {
-  position: absolute;
-  inset: 0;
-  z-index: 4;
-  pointer-events: none;
-  opacity: var(--bloom, 0);
-  background: radial-gradient(circle at 50% 50%,
-    #fffdf7 0 44%, rgba(255,253,247,.9) 64%, rgba(255,253,247,0) 84%);
+/* No white disc landing on top of it — the rose itself arrives as diffuse
+   light and gathers into a flower: blurred, bright, colourless and barely
+   there, resolving into focus as it comes up the screen. */
+.becoming__film {
+  transform: scale(calc(1 + var(--bloom, 0) * .05));
+  filter:
+    blur(calc(var(--bloom, 0) * 14px))
+    brightness(calc(1 + var(--bloom, 0) * .5))
+    saturate(calc(1 - var(--bloom, 0) * .6));
+  opacity: calc(1 - var(--bloom, 0) * .55);
 }
-/* the rose opens out of the white rather than simply appearing in front of it */
-.becoming__film { transform: scale(calc(1 + var(--bloom, 0) * .09)); }
 
 @media (prefers-reduced-motion: reduce) {
-  .becoming__bloom { display: none; }
-  .becoming__film { transform: none; }
+  .becoming__film { transform: none; filter: none; opacity: 1; }
 }
 
 /* film still as a warm duotone inside a 16mm-style frame — clickable to the film */
