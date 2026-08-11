@@ -906,9 +906,10 @@ body {
   align-items: start;
 }
 .footer__name {
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: clamp(1.25rem, 2.1vw, 1.6rem);
+  font-family: var(--body);
+  font-weight: 700;
+  font-size: clamp(1.15rem, 1.9vw, 1.45rem);
+  letter-spacing: .01em;
   color: #fff7ea;
   margin: 0;
 }
