@@ -331,7 +331,7 @@ body {
 .lede {
   font-size: clamp(0.92rem, 1.15vw, 1.08rem);
   line-height: 1.75;
-  color: var(--ink);
+  color: #000;              /* body paragraphs read black, not warm brown */
   margin: 0;
 }
 .lede--light { color: rgba(255,248,238,.9); }
@@ -433,6 +433,15 @@ body {
   text-align: center;
 }
 .golden__text .lede { max-width: 62ch; margin: 0 auto; }   /* readable, centered */
+
+/* the DANIEL button reads white like the other two, and fills pink on hover */
+.golden__text .btn-enter { color: #fff; }
+.golden__text .btn-enter:hover,
+.golden__text .btn-enter:focus-visible {
+  background: var(--rose);
+  border-color: var(--rose);
+  color: var(--ink);
+}
 
 
 /* film still as a warm duotone inside a 16mm-style frame — clickable to the film */
@@ -703,7 +712,7 @@ body {
 /* --------------------------------------------------------------------------
    NIGHT SKY — audio player + starline
    -------------------------------------------------------------------------- */
-.section--night { min-height: 100vh; justify-content: flex-end; padding-top: clamp(7rem, 14vh, 11rem); padding-bottom: clamp(2.5rem, 6vh, 4.5rem); }
+.section--night { min-height: 100vh; justify-content: flex-end; padding-top: clamp(7rem, 14vh, 11rem); padding-bottom: clamp(4.5rem, 10vh, 7rem); }
 .night__inner { text-align: center; }
 .night__intro {
   font-family: var(--serif);
