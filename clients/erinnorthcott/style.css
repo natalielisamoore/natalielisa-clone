@@ -866,7 +866,9 @@ body {
    -------------------------------------------------------------------------- */
 @media (max-width: 640px) {
   .nav { flex-direction: column; align-items: flex-start; gap: .55rem; padding: .8rem 1.1rem; }
-  .nav__links { gap: .55rem 1.1rem; }
+  /* four links won't sit on one row here — let them wrap left-aligned under
+     the wordmark rather than stranding the last one on the right */
+  .nav__links { gap: .5rem 1.05rem; justify-content: flex-start; }
   .nav__link { font-size: .76rem; letter-spacing: .1em; }
   .player { border-radius: 22px; }
 }
