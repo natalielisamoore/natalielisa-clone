@@ -928,11 +928,37 @@ body {
 /* --------------------------------------------------------------------------
    Footer — quiet archival close, held in the deep night
    -------------------------------------------------------------------------- */
+/* "Mommy, the stars are kissing me." — his face in the starfield, held behind
+   the footer so the last thing on the page is him. */
+.footer__sky {
+  position: absolute;
+  inset: 0;
+  z-index: -1;                 /* behind the footer's own content, above its background */
+  overflow: hidden;
+  pointer-events: none;
+  /* rises out of the night sky instead of starting on a seam */
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 30%);
+          mask-image: linear-gradient(180deg, transparent 0%, #000 30%);
+}
+.footer__sky img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 20%;    /* keep his eyes in the crop */
+}
+.footer__sky::after {          /* scrim, so the type still reads over the stars */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(6,7,18,.34) 0%, rgba(6,7,18,.52) 45%, rgba(6,7,18,.76) 100%);
+}
+
 .footer {
   position: relative;
   z-index: 1;
   color: rgba(255,248,238,.8);
-  padding: clamp(2rem, 3.6vw, 2.9rem) clamp(1.5rem, 3vw, 2.5rem) 1.5rem;
+  padding: clamp(5.5rem, 13vh, 9rem) clamp(1.5rem, 3vw, 2.5rem) 1.5rem;
   border-top: 1px solid rgba(233,199,102,.16);
   background: linear-gradient(180deg, rgba(10,10,26,0) 0%, rgba(6,5,14,.6) 100%);
 }
