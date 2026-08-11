@@ -448,12 +448,12 @@ body {
    light and gathers into a flower: blurred, bright, colourless and barely
    there, resolving into focus as it comes up the screen. */
 .becoming__film {
-  transform: scale(calc(1 + var(--bloom, 0) * .05));
+  transform: scale(calc(1 + var(--bloom, 0) * .035));
   filter:
-    blur(calc(var(--bloom, 0) * 14px))
-    brightness(calc(1 + var(--bloom, 0) * .5))
-    saturate(calc(1 - var(--bloom, 0) * .6));
-  opacity: calc(1 - var(--bloom, 0) * .55);
+    blur(calc(var(--bloom, 0) * 7px))
+    brightness(calc(1 + var(--bloom, 0) * .32))
+    saturate(calc(1 - var(--bloom, 0) * .4));
+  opacity: calc(1 - var(--bloom, 0) * .4);
 }
 
 @media (prefers-reduced-motion: reduce) {

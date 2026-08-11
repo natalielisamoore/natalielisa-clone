@@ -18,9 +18,10 @@
   function update() {
     const vh = window.innerHeight;
     const r = anchor.getBoundingClientRect();
-    // cubic ease-out so it settles into focus instead of snapping the last bit
-    const t = clamp01((vh * 0.55 - r.top) / (vh * 0.72));
-    root.style.setProperty('--bloom', String(Math.pow(1 - t, 2.6)));
+    // it starts resolving the moment it enters and is sharp well before it's
+    // centred — the ease-out only softens the last of it, it doesn't stall
+    const t = clamp01((vh * 0.80 - r.top) / (vh * 0.45));
+    root.style.setProperty('--bloom', String(Math.pow(1 - t, 3.2)));
     ticking = false;
   }
 
