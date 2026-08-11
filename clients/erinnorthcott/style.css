@@ -689,8 +689,9 @@ body {
 }
 .hook__hand {
   font-family: var(--hand);
-  font-size: clamp(2rem, 5vw, 3.4rem);
+  font-size: clamp(1.4rem, 7.5vw, 3.4rem);
   line-height: 1.08;
+  white-space: nowrap;                 /* one thought, one line */
   color: #e07a9c;                      /* pink, not brown */
   transform: rotate(-1.4deg);
   margin: 0 0 .9rem;
@@ -698,8 +699,9 @@ body {
 .hook__line {
   font-family: var(--serif);
   font-style: italic;
-  font-size: clamp(1.55rem, 3.7vw, 2.7rem);
+  font-size: clamp(1rem, 4.9vw, 2.7rem);
   line-height: 1.26;
+  white-space: nowrap;                 /* one thought, one line */
   color: #fffaf2;                            /* white */
   text-shadow: 0 1px 22px rgba(96,52,30,.3); /* keep it legible on the warm sky */
   margin: 0;
