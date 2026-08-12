@@ -355,9 +355,25 @@ body {
   padding-top: clamp(4rem, 9vh, 7rem);
   padding-bottom: clamp(4rem, 9vh, 7rem);
 }
-/* the film frame is the landing — same format and size it had in the reel */
-.hero { max-width: min(92vw, 1240px); position: relative; z-index: 2; margin: 0 auto; }
-/* on a phone a 16:9 frame is short, so don't strand it in a full-height section */
+/* Erin is the landing again — the rose collage, wide, held in the sunrise */
+:root { --hero-w: min(92vw, 76vh * 2.048, 1500px); }
+.hero { max-width: var(--hero-w); position: relative; z-index: 2; margin: 0 auto; }
+.hero__portrait {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 2400 / 1172;
+  object-fit: cover;
+  box-shadow: 0 22px 54px rgba(74,42,20,.24);
+}
+
+/* the film keeps its own stage, one scroll in */
+.section--film {
+  min-height: 0;
+  padding-top: clamp(2.5rem, 6vh, 4.5rem);
+  padding-bottom: clamp(3.5rem, 9vh, 6.5rem);
+}
+.section--film .filmframe { width: 100%; max-width: min(92vw, 1100px); margin: 0 auto; }
 @media (max-width: 720px) {
   .section--hero { min-height: 0; }
 }
