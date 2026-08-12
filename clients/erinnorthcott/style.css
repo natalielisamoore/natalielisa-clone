@@ -375,7 +375,7 @@ body {
   width: 100%;
   height: calc(100vh - var(--nav-h, 4.2rem));
   object-fit: cover;
-  object-position: 58% 50%;        /* keep her face in frame as it crops */
+  object-position: 55% 42%;        /* 16:9 in a wider window — the crop is vertical */
 }
 /* A 2:1 collage can't fill a phone screen without cropping to a sliver, so on
    narrow viewports the hero gives back some height and centres on her face. */
@@ -383,7 +383,7 @@ body {
   .section--hero { min-height: 0; }
   .hero__portrait {
     height: 68vh;
-    object-position: 70% 44%;
+    object-position: 62% 44%;
   }
 }
 
@@ -465,9 +465,10 @@ body {
 }
 
 /* the DANIEL button reads white like the other two, and fills pink on hover */
-.hook .btn-enter { color: #fff; }
-.hook .btn-enter:hover,
-.hook .btn-enter:focus-visible {
+.film__cta { text-align: center; margin: 0; }
+.film__cta .btn-enter { color: #fff; }
+.film__cta .btn-enter:hover,
+.film__cta .btn-enter:focus-visible {
   background: var(--rose);
   border-color: var(--rose);
   color: var(--ink);
