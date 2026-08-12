@@ -211,7 +211,7 @@ body {
 .hero__note {
   font-family: var(--hand);
   font-size: clamp(1.1rem, 1.7vw, 1.45rem);
-  color: var(--clay);
+  color: #000;
   opacity: .82;
   margin: .9rem 0 0;
   transform: rotate(-2.2deg);
@@ -317,7 +317,7 @@ body {
   font-weight: 400;
   letter-spacing: .22em;
   text-transform: uppercase;
-  color: var(--clay);
+  color: #000;                 /* stated, not warm-brown */
   margin: 0 0 1.4rem;
 }
 .eyebrow--light { color: var(--gold-lite); }
@@ -331,7 +331,7 @@ body {
   letter-spacing: -.01em;
   text-wrap: balance;
   margin: 0 0 1.5rem;
-  color: var(--ink);
+  color: #000;                 /* stated, not warm-brown */
 }
 .section__title--light { color: #fff7ea; }
 
@@ -688,9 +688,9 @@ body {
   text-align: center;
   align-items: center;
   justify-content: center;
-  min-height: auto;                          /* compact band — tight top & bottom */
-  padding-top: clamp(2.5rem, 6vh, 4.5rem);
-  padding-bottom: clamp(4rem, 10vh, 7rem);
+  min-height: auto;
+  padding-top: clamp(5rem, 13vh, 9rem);
+  padding-bottom: clamp(6rem, 15vh, 10.5rem);
 }
 
 .hook {
@@ -726,8 +726,7 @@ body {
   font-size: clamp(1rem, 4.9vw, 2.7rem);
   line-height: 1.26;
   white-space: nowrap;                 /* one thought, one line */
-  color: #fffaf2;                            /* white */
-  text-shadow: 0 1px 22px rgba(96,52,30,.3); /* keep it legible on the warm sky */
+  color: #e07a9c;                            /* pink, matching the hand above it */
   margin: 0;
 }
 .hook__hbo { font-style: normal; letter-spacing: .01em; }  /* quietly important */
