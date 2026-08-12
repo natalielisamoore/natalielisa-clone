@@ -726,7 +726,7 @@ body {
   font-size: clamp(1rem, 4.9vw, 2.7rem);
   line-height: 1.26;
   white-space: nowrap;                 /* one thought, one line */
-  color: #e07a9c;                            /* pink, matching the hand above it */
+  color: #000;                               /* black — the pink is the hand above it */
   margin: 0;
 }
 .hook__hbo { font-style: normal; letter-spacing: .01em; }  /* quietly important */
@@ -1564,3 +1564,14 @@ body.is-connect .footer {
 .nav.is-over .nav__name,
 .nav.is-over .nav__link { color: #fff8ee; }
 .nav.is-over .nav__link:hover { color: #f3b0c4; }
+
+
+/* Inner Ceremonies still sits on a light-enough sky (luminance .47), so its
+   type goes black with the rest. Collaborate (.29) and the night (.13) keep
+   their cream — black would be unreadable on them. */
+#sunset .eyebrow--light,
+#sunset .section__title--light,
+#sunset .lede--light { color: #000; }
+#sunset .btn-enter { color: #000; }
+#sunset .btn-enter:hover,
+#sunset .btn-enter:focus-visible { background: var(--rose); border-color: var(--rose); color: #000; }
