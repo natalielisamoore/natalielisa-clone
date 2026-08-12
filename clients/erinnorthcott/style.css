@@ -622,12 +622,15 @@ body {
 .becoming__media { margin: 0; position: relative; max-width: 580px; }
 
 /* soft-edged orb that clips the video + its 8mm film overlays together */
+/* a square, like the film frame — nothing else on this site is round */
 .becoming__film {
   position: relative;
   aspect-ratio: 1 / 1;
   overflow: hidden;
-  -webkit-mask: radial-gradient(circle at 50% 50%, #000 58%, transparent 76%);
-          mask: radial-gradient(circle at 50% 50%, #000 58%, transparent 76%);
+  border-radius: 0;
+  box-shadow: 0 30px 80px rgba(30,16,40,.30);
+  outline: 1px solid rgba(255,246,230,.20);
+  outline-offset: 8px;
 }
 .becoming__film video {
   width: 100%;
@@ -669,13 +672,13 @@ body {
 }
 
 /* a soft petal-pink glow behind the rose */
+/* the glow behind it stays soft and shapeless — it's light, not an object */
 .becoming__media::before {
   content: "";
   position: absolute;
-  inset: 6%;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(245,198,198,.32), transparent 68%);
-  filter: blur(24px);
+  inset: 2%;
+  background: radial-gradient(closest-side, rgba(245,198,198,.34), transparent 76%);
+  filter: blur(26px);
   z-index: -1;
 }
 @media (max-width: 820px) {
