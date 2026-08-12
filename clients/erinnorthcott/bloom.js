@@ -6,9 +6,9 @@
 (function () {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  const rose = document.querySelector('.becoming__film');
+  const rose = document.querySelector('.becoming__room');
   // measure the untransformed figure — .becoming__film is itself being scaled
-  const anchor = document.querySelector('.becoming__media') || rose;
+  const anchor = document.querySelector('.becoming__text') || rose;
   if (!rose) return;
 
   const root = document.documentElement;
