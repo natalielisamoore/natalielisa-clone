@@ -355,16 +355,36 @@ body {
   padding-top: clamp(4rem, 9vh, 7rem);
   padding-bottom: clamp(4rem, 9vh, 7rem);
 }
-/* Erin is the landing again — the rose collage, wide, held in the sunrise */
-:root { --hero-w: min(92vw, 76vh * 2.048, 1500px); }
-.hero { max-width: var(--hero-w); position: relative; z-index: 2; margin: 0 auto; }
+/* Erin is the landing: full bleed, edge to edge, filling the screen under
+   the nav. The bar is fixed, so the hero reserves its height as padding. */
+.section--hero {
+  min-height: 100vh;
+  padding: 0;
+  justify-content: flex-start;
+}
+.hero {
+  max-width: none;
+  width: 100%;
+  margin: 0;
+  position: relative;
+  z-index: 2;
+  padding-top: var(--nav-h, 4.2rem);
+}
 .hero__portrait {
   display: block;
   width: 100%;
-  height: auto;
-  aspect-ratio: 2400 / 1172;
+  height: calc(100vh - var(--nav-h, 4.2rem));
   object-fit: cover;
-  box-shadow: 0 22px 54px rgba(74,42,20,.24);
+  object-position: 58% 50%;        /* keep her face in frame as it crops */
+}
+/* A 2:1 collage can't fill a phone screen without cropping to a sliver, so on
+   narrow viewports the hero gives back some height and centres on her face. */
+@media (max-width: 720px) {
+  .section--hero { min-height: 0; }
+  .hero__portrait {
+    height: 68vh;
+    object-position: 70% 44%;
+  }
 }
 
 /* the film keeps its own stage, one scroll in */
@@ -374,9 +394,7 @@ body {
   padding-bottom: clamp(3.5rem, 9vh, 6.5rem);
 }
 .section--film .filmframe { width: 100%; max-width: min(92vw, 1100px); margin: 0 auto; }
-@media (max-width: 720px) {
-  .section--hero { min-height: 0; }
-}
+
 
 /* soft cloud banks on either side of the sunrise hero — you enter between them */
 .hero__clouds { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }

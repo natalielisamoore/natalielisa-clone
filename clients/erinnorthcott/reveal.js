@@ -1,5 +1,20 @@
-/* reveal.js — fade-up on scroll. */
+/* reveal.js — fade-up on scroll, plus the one measurement the layout needs. */
 (function () {
+
+  /* ---- --nav-h: the fixed bar's real height ------------------------------
+     The hero sits under the bar and needs to reserve exactly its height. That
+     changes with the breakpoint (the links wrap to two rows on a phone), so it
+     is measured rather than guessed. */
+  const bar = document.querySelector('.nav');
+  if (bar) {
+    const measure = () => {
+      document.documentElement.style.setProperty('--nav-h', bar.offsetHeight + 'px');
+    };
+    measure();
+    if ('ResizeObserver' in window) new ResizeObserver(measure).observe(bar);
+    else window.addEventListener('resize', measure, { passive: true });
+    window.addEventListener('load', measure);
+  }
 
   /* ---- fade-up on scroll ------------------------------------------------ */
   const revealables = document.querySelectorAll('.reveal');
