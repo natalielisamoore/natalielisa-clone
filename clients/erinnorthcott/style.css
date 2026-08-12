@@ -379,15 +379,12 @@ body {
   object-fit: contain;             /* nothing of the frame gets cut */
   object-position: 50% 50%;
 }
-/* Letterboxing a 16:9 frame into a phone screen would leave it mostly black, so
-   narrow viewports crop to her face instead and give the height back. */
-@media (max-width: 720px) {
-  .section--hero { min-height: 0; background: none; }
-  .hero__portrait {
-    height: 68vh;
-    object-fit: cover;
-    object-position: 62% 44%;
-  }
+/* Narrower than the frame's own 16:9, filling the height would letterbox it into
+   a sea of black — so the hero stops trying to fill the screen and simply shows
+   the whole frame at its natural size. Nothing is ever cropped, at any width. */
+@media (max-width: 1000px) {
+  .section--hero { min-height: 0; }
+  .hero__portrait { height: auto; aspect-ratio: 1920 / 1080; }
 }
 
 /* the film keeps its own stage, one scroll in */
@@ -1558,7 +1555,9 @@ body.is-connect .footer {
 /* The bar floats over the hero with nothing behind it, then takes back its
    translucent ground once the page scrolls past. */
 .nav.is-over {
-  background: transparent;
+  /* no bar — but a breath of shade so the links hold up wherever the photo is
+     light behind them */
+  background: linear-gradient(180deg, rgba(8,8,10,.42) 0%, rgba(8,8,10,0) 100%);
   -webkit-backdrop-filter: none;
           backdrop-filter: none;
   border-bottom-color: transparent;
