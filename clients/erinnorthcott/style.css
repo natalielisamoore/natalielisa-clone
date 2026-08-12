@@ -1602,7 +1602,7 @@ body.is-connect .footer {
   color: #000;
 }
 
-.ceremony__cta { margin: clamp(2rem, 5vh, 3rem) 0 0; text-align: center; }
+.ceremony__cta { margin: clamp(1.4rem, 3vw, 2.1rem) 0 0; }
 /* the one solid button on the homepage — this is the thing she sells */
 .btn-enter--solid {
   background: var(--rose-deep);
@@ -1622,4 +1622,6 @@ body.is-connect .footer {
 }
 
 /* the rose's right edge lines up with the panels below it */
-.becoming__media { max-width: 560px; margin-left: auto; margin-right: 0; }
+/* a smaller rose, still right-aligned with the panels below */
+.becoming__media { max-width: 440px; margin-left: auto; margin-right: 0; }
+.becoming__grid { grid-template-columns: 1.14fr 0.86fr; }
