@@ -14,6 +14,22 @@
     if ('ResizeObserver' in window) new ResizeObserver(measure).observe(bar);
     else window.addEventListener('resize', measure, { passive: true });
     window.addEventListener('load', measure);
+
+    /* ---- the bar goes transparent while it's floating over the hero ------- */
+    const hero = document.querySelector('.section--hero');
+    if (hero) {
+      let ticking = false;
+      const mode = () => {
+        const over = hero.getBoundingClientRect().bottom > bar.offsetHeight;
+        bar.classList.toggle('is-over', over);
+        ticking = false;
+      };
+      mode();
+      window.addEventListener('scroll', () => {
+        if (!ticking) { ticking = true; requestAnimationFrame(mode); }
+      }, { passive: true });
+      window.addEventListener('resize', mode, { passive: true });
+    }
   }
 
   /* ---- fade-up on scroll ------------------------------------------------ */
