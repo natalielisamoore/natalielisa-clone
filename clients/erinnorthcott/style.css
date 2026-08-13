@@ -489,15 +489,8 @@ body {
 /* film still as a warm duotone inside a 16mm-style frame — clickable to the film */
 .filmframe { margin: 0; position: relative; }
 .filmframe__link { display: block; position: relative; text-decoration: none; color: inherit; cursor: pointer; }
-/* the projector gate — the footage takes the shape of a real 8mm frame,
-   rough edges and rounded corners, with the sky showing around it */
+/* the gate border is baked into Erin's own edit — no CSS mask needed */
 .filmframe__img {
-  -webkit-mask-image: url("images/gate-mask.png");
-  -webkit-mask-size: 100% 100%;
-  -webkit-mask-repeat: no-repeat;
-  mask-image: url("images/gate-mask.png");
-  mask-size: 100% 100%;
-  mask-repeat: no-repeat;
   position: relative;
   aspect-ratio: 16 / 9;                /* matches the documentary clip */
   overflow: hidden;
@@ -1602,3 +1595,59 @@ body.is-connect .footer {
   }
   .becoming__media { max-width: 100%; }
 }
+
+/* --------------------------------------------------------------------------
+   Sound: the film runs silent until the viewer asks for it. Sits in the
+   frame's top corner, out of the key-art label's way, and stays legible over
+   whatever the footage is doing underneath.
+   -------------------------------------------------------------------------- */
+.filmframe__sound {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 5;
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .5rem .8rem;
+  font-family: var(--mono);
+  font-size: .6rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: #fff7ea;
+  background: rgba(20,12,20,.44);
+  border: 1px solid rgba(255,247,234,.4);
+  border-radius: 0;
+  cursor: pointer;
+  -webkit-backdrop-filter: blur(4px);
+          backdrop-filter: blur(4px);
+  transition: background .3s var(--ease), border-color .3s var(--ease), color .3s var(--ease);
+}
+.filmframe__sound:hover,
+.filmframe__sound:focus-visible {
+  background: rgba(20,12,20,.66);
+  border-color: rgba(233,199,102,.75);
+}
+.filmframe__sound[hidden] { display: none; }
+
+.filmframe__sound-icon {
+  width: 15px;
+  height: 15px;
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.filmframe__sound-icon .spk { fill: currentColor; stroke: none; }
+/* muted shows the cross; on shows the waves */
+.filmframe__sound-icon .wave { opacity: 0; }
+.filmframe__sound.is-on .filmframe__sound-icon .wave { opacity: 1; }
+.filmframe__sound.is-on .filmframe__sound-icon .cross { opacity: 0; }
+
+@media (max-width: 720px) {
+  .filmframe__sound { top: 10px; right: 10px; padding: .42rem .6rem; font-size: .55rem; }
+  .filmframe__sound-label { display: none; }   /* icon only on a phone */
+}
+

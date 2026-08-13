@@ -44,6 +44,8 @@
     e.preventDefault();
     e.stopPropagation();
     vid.muted = !vid.muted;
+    // silent, it loops as ambience; with sound it plays through once and stops
+    vid.loop = vid.muted;
     if (!vid.muted) {
       vid.volume = 1;
       vid.play().catch(() => {});
