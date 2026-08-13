@@ -1561,46 +1561,6 @@ body.is-connect .footer {
 #sunset .btn-enter:focus-visible { background: var(--rose); border-color: var(--rose); color: #000; }
 
 
-/* --------------------------------------------------------------------------
-   INNER CEREMONIES — the intro sits beside the rose, then three frosted panels
-   answer the question a stranger is actually asking, then one solid action.
-   -------------------------------------------------------------------------- */
-.ceremony__cells {
-  list-style: none;
-  width: 100%;
-  max-width: 1200px;
-  margin: clamp(2.5rem, 6vh, 4rem) auto 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: clamp(.9rem, 2vw, 1.4rem);
-}
-/* frosted glass — the sky reads through it, softened */
-.ceremony__cell {
-  padding: clamp(1.2rem, 2.4vw, 1.75rem);
-  background: rgba(255,250,246,.26);
-  border: 1px solid rgba(255,250,246,.5);
-  border-radius: 0;
-  box-shadow: 0 14px 38px rgba(96,52,60,.16);
-  -webkit-backdrop-filter: blur(16px) saturate(1.2);
-          backdrop-filter: blur(16px) saturate(1.2);
-  text-align: left;
-}
-.ceremony__label {
-  margin: 0 0 .6rem;
-  font-family: var(--mono);
-  font-size: .64rem;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  color: #000;
-  opacity: .62;
-}
-.ceremony__body {
-  margin: 0;
-  font-size: clamp(.94rem, 1.1vw, 1.02rem);
-  line-height: 1.62;
-  color: #000;
-}
 
 .ceremony__cta { margin: clamp(1.4rem, 3vw, 2.1rem) 0 0; }
 /* the one solid button on the homepage — this is the thing she sells */
@@ -1617,9 +1577,6 @@ body.is-connect .footer {
   color: #fff8ee;
 }
 
-@media (max-width: 820px) {
-  .ceremony__cells { grid-template-columns: 1fr; max-width: 30rem; }
-}
 
 /* the rose's right edge lines up with the panels below it */
 /* a smaller rose, still right-aligned with the panels below */
