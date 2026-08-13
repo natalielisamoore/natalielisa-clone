@@ -609,9 +609,15 @@ body {
   aspect-ratio: 1 / 1;
   overflow: hidden;
   border-radius: 0;
-  box-shadow: 0 30px 80px rgba(30,16,40,.30);
-  outline: 1px solid rgba(255,246,230,.20);
-  outline-offset: 8px;
+  /* the edges give out instead of stopping — smudged, but still a square */
+  -webkit-mask-image:
+    linear-gradient(to right,  transparent 0, #000 9%, #000 91%, transparent 100%),
+    linear-gradient(to bottom, transparent 0, #000 9%, #000 91%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(to right,  transparent 0, #000 9%, #000 91%, transparent 100%),
+    linear-gradient(to bottom, transparent 0, #000 9%, #000 91%, transparent 100%);
+  mask-composite: intersect;
 }
 .becoming__film video {
   width: 100%;
@@ -1580,5 +1586,10 @@ body.is-connect .footer {
 
 /* the rose's right edge lines up with the panels below it */
 /* a smaller rose, still right-aligned with the panels below */
-.becoming__media { max-width: 440px; margin-left: auto; margin-right: 0; }
-.becoming__grid { grid-template-columns: 1.14fr 0.86fr; }
+.becoming__media { max-width: 440px; margin: 0; }
+.becoming__grid {
+  max-width: 1040px;
+  grid-template-columns: minmax(0, 52ch) 440px;
+  justify-content: center;
+  gap: clamp(1.5rem, 3.4vw, 3rem);
+}
