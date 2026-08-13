@@ -127,7 +127,7 @@
       flipHz: rand(0.25, 0.75),
       kx: 0, ky: 0,                                     // carried on the air
       drawX: 0,
-      alpha: front ? rand(0.13, 0.22) : rand(0.5, 0.86)
+      alpha: front ? rand(0.08, 0.14) : rand(0.30, 0.58)
     };
   }
 
@@ -144,8 +144,8 @@
     bctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     fctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-    const backCount  = Math.max(9, Math.min(17, Math.round(w / 95)));
-    const frontCount = w > 900 ? 4 : 2;
+    const backCount  = Math.max(5, Math.min(10, Math.round(w / 150)));
+    const frontCount = w > 900 ? 2 : 1;
     petals = [];
     for (let i = 0; i < backCount; i++)  petals.push(makePetal(false, true));
     for (let i = 0; i < frontCount; i++) petals.push(makePetal(true, true));
