@@ -1561,19 +1561,6 @@ body.is-connect .footer {
 
 
 .ceremony__cta { margin: clamp(1.4rem, 3vw, 2.1rem) 0 0; }
-/* the one solid button on the homepage — this is the thing she sells */
-.btn-enter--solid {
-  background: var(--rose-deep);
-  border-color: var(--rose-deep);
-  color: #fff8ee;
-  box-shadow: 0 14px 32px rgba(120,40,60,.22);
-}
-.btn-enter--solid:hover,
-.btn-enter--solid:focus-visible {
-  background: #8f3348;
-  border-color: #8f3348;
-  color: #fff8ee;
-}
 
 
 /* the rose's right edge lines up with the panels below it */
