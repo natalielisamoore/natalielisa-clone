@@ -489,21 +489,21 @@ body {
 /* film still as a warm duotone inside a 16mm-style frame — clickable to the film */
 .filmframe { margin: 0; position: relative; }
 .filmframe__link { display: block; position: relative; text-decoration: none; color: inherit; cursor: pointer; }
+/* the projector gate — the footage takes the shape of a real 8mm frame,
+   rough edges and rounded corners, with the sky showing around it */
 .filmframe__img {
+  -webkit-mask-image: url("images/gate-mask.png");
+  -webkit-mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-image: url("images/gate-mask.png");
+  mask-size: 100% 100%;
+  mask-repeat: no-repeat;
   position: relative;
   aspect-ratio: 16 / 9;                /* matches the documentary clip */
   overflow: hidden;
   border-radius: 2px;
-  box-shadow: 0 30px 80px rgba(30,16,40,.38);
-  outline: 1px solid rgba(255,246,230,.18);
-  outline-offset: 8px;                 /* thin film-frame border */
-  transition: box-shadow .5s var(--ease), outline-color .5s var(--ease);
 }
-.filmframe__link:hover .filmframe__img,
-.filmframe__link:focus-visible .filmframe__img {
-  box-shadow: 0 34px 92px rgba(30,16,40,.5);
-  outline-color: rgba(233,199,102,.6);
-}
+
 .filmframe__img img,
 .filmframe__img video {
   width: 100%; height: 100%;
