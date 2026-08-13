@@ -372,19 +372,19 @@ body {
   position: relative;
   z-index: 2;
 }
-.hero__portrait {
-  display: block;
-  width: 100%;
-  height: 100vh;
-  object-fit: contain;             /* nothing of the frame gets cut */
-  object-position: 50% 50%;
-}
+/* the film is the landing — its border is part of the edit, so it's shown
+   whole on black exactly as the collage was */
+.section--hero .filmframe { width: 100%; max-width: none; margin: 0; }
+.section--hero .filmframe__img { aspect-ratio: auto; height: 100vh; }
+.section--hero .filmframe__img video { object-fit: contain; }
+.section--hero .filmframe__cap { display: none; }
+.section--hero .film__cta { margin-top: clamp(1.2rem, 3vh, 2rem); }
 /* Narrower than the frame's own 16:9, filling the height would letterbox it into
    a sea of black — so the hero stops trying to fill the screen and simply shows
    the whole frame at its natural size. Nothing is ever cropped, at any width. */
 @media (max-width: 1000px) {
   .section--hero { min-height: 0; }
-  .hero__portrait { height: auto; aspect-ratio: 1920 / 1080; }
+  .section--hero .filmframe__img { height: auto; aspect-ratio: 1920 / 1080; }
 }
 
 /* the film keeps its own stage, one scroll in */
@@ -1651,3 +1651,12 @@ body.is-connect .footer {
   .filmframe__sound-label { display: none; }   /* icon only on a phone */
 }
 
+
+/* in the hero the bar sits over the frame's top corner, so the sound control
+   moves down out of its way (and clear of the key-art label at bottom centre) */
+.section--hero .filmframe__sound {
+  top: auto;
+  right: auto;
+  bottom: clamp(1rem, 3vh, 2rem);
+  left: clamp(1rem, 3vw, 2.2rem);
+}
