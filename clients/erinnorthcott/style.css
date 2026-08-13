@@ -609,15 +609,7 @@ body {
   aspect-ratio: 1 / 1;
   overflow: hidden;
   border-radius: 0;
-  /* the edges give out instead of stopping — smudged, but still a square */
-  -webkit-mask-image:
-    linear-gradient(to right,  transparent 0, #000 9%, #000 91%, transparent 100%),
-    linear-gradient(to bottom, transparent 0, #000 9%, #000 91%, transparent 100%);
-  -webkit-mask-composite: source-in;
-  mask-image:
-    linear-gradient(to right,  transparent 0, #000 9%, #000 91%, transparent 100%),
-    linear-gradient(to bottom, transparent 0, #000 9%, #000 91%, transparent 100%);
-  mask-composite: intersect;
+  box-shadow: 0 0 0 1px rgba(66,46,12,.4);   /* seated inside the metal */
 }
 .becoming__film video {
   width: 100%;
@@ -1586,10 +1578,20 @@ body.is-connect .footer {
 
 /* the rose's right edge lines up with the panels below it */
 /* a smaller rose, still right-aligned with the panels below */
-.becoming__media { max-width: 440px; margin: 0; }
+/* the same gilt frame as Erin's portrait */
+.becoming__media {
+  max-width: 500px;
+  margin: 0;
+  padding: clamp(.5rem, 1.1vw, .8rem);
+  background: linear-gradient(135deg,
+    #e8c87c 0%, #d0ae58 34%, #b8933c 58%, #c9a84c 78%, #ddba6b 100%);
+  box-shadow:
+    0 20px 46px rgba(74,42,20,.26),
+    inset 0 0 0 1px rgba(255,242,206,.5);
+}
 .becoming__grid {
   max-width: 1040px;
-  grid-template-columns: minmax(0, 52ch) 440px;
+  grid-template-columns: minmax(0, 52ch) 500px;
   justify-content: center;
   gap: clamp(1.5rem, 3.4vw, 3rem);
 }
