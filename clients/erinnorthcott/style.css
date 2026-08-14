@@ -508,12 +508,8 @@ body {
   object-fit: cover;
   display: block;
   filter: contrast(1.03) saturate(.85); /* gently muted to sit in the palette */
-  transition: transform .7s var(--ease);
 }
-.filmframe__link:hover .filmframe__img img,
-.filmframe__link:hover .filmframe__img video,
-.filmframe__link:focus-visible .filmframe__img img,
-.filmframe__link:focus-visible .filmframe__img video { transform: scale(1.04); }
+
 /* "Watch the trailer →" cue, revealed on hover */
 .filmframe__watch {
   position: absolute;
