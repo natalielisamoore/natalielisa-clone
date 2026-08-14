@@ -363,7 +363,6 @@ body {
   min-height: 100vh;
   padding: 0;
   justify-content: center;
-  background: #080808;
 }
 .hero {
   max-width: none;
@@ -375,7 +374,11 @@ body {
 /* the film is the landing — its border is part of the edit, so it's shown
    whole on black exactly as the collage was */
 .section--hero .filmframe { width: 100%; max-width: none; margin: 0; }
-.section--hero .filmframe__img { aspect-ratio: auto; height: 100vh; }
+.section--hero .filmframe__img {
+  aspect-ratio: auto;
+  height: calc(100vh - var(--nav-h, 3.6rem) - 7.5rem);   /* leaves room for the button */
+  background: #080808;                                    /* only behind the frame */
+}
 .section--hero .filmframe__img video { object-fit: contain; }
 .section--hero .filmframe__cap { display: none; }
 .section--hero .film__cta { margin-top: clamp(1.2rem, 3vh, 2rem); }
