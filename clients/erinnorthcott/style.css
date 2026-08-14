@@ -373,13 +373,9 @@ body {
 }
 /* the film is the landing — its border is part of the edit, so it's shown
    whole on black exactly as the collage was */
-/* sized by the film's own 16:9, capped so the whole thing plus the button
-   lands inside the fold — no letterboxing, so no black ground needed */
-.section--hero .filmframe {
-  width: min(100%, calc((100vh - var(--nav-h, 3.6rem) - 8rem) * 1.7778));
-  max-width: none;
-  margin: 0 auto;
-}
+/* full bleed, edge to edge, under the nav — the whole frame at its own 16:9,
+   so nothing is cropped and there is no black ground anywhere */
+.section--hero .filmframe { width: 100%; max-width: none; margin: 0; }
 .section--hero .filmframe__img {
   aspect-ratio: 16 / 9;
   height: auto;
