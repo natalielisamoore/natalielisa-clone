@@ -373,11 +373,17 @@ body {
 }
 /* the film is the landing — its border is part of the edit, so it's shown
    whole on black exactly as the collage was */
-.section--hero .filmframe { width: 100%; max-width: none; margin: 0; }
+/* sized by the film's own 16:9, capped so the whole thing plus the button
+   lands inside the fold — no letterboxing, so no black ground needed */
+.section--hero .filmframe {
+  width: min(100%, calc((100vh - var(--nav-h, 3.6rem) - 8rem) * 1.7778));
+  max-width: none;
+  margin: 0 auto;
+}
 .section--hero .filmframe__img {
-  aspect-ratio: auto;
-  height: calc(100vh - var(--nav-h, 3.6rem) - 7.5rem);   /* leaves room for the button */
-  background: #080808;                                    /* only behind the frame */
+  aspect-ratio: 16 / 9;
+  height: auto;
+  background: none;
 }
 .section--hero .filmframe__img video { object-fit: contain; }
 .section--hero .filmframe__cap { display: none; }
@@ -469,12 +475,12 @@ body {
 
 /* the DANIEL button reads white like the other two, and fills pink on hover */
 .film__cta { text-align: center; margin: 0; }
-.film__cta .btn-enter { color: #fff; }
+.film__cta .btn-enter { color: #000; }
 .film__cta .btn-enter:hover,
 .film__cta .btn-enter:focus-visible {
   background: var(--rose);
   border-color: var(--rose);
-  color: var(--ink);
+  color: #000;
 }
 
 
