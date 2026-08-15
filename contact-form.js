@@ -40,10 +40,12 @@
         btn.disabled = true;
       }
 
+      var payload = JSON.stringify(Object.fromEntries(new FormData(form).entries()));
+
       fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        headers: { 'Accept': 'application/json' },
-        body: new FormData(form)
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: payload
       })
       .then(function (res) {
         return res.json().then(function (body) { return { ok: res.ok, body: body }; });
