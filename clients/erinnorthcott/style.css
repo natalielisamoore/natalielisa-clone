@@ -191,17 +191,10 @@ body {
    The strip carries its own ground (a warm film base) rather than a blend
    mode, so the sprockets read over the dawn sky and the night alike —
    multiply would have erased them from #night down. */
-/* Film does not glide through a gate, it is yanked: the claw pulls it down,
-   then it HOLDS while the shutter opens. Everything below is built on one
-   shared beat so the strip moves as a single piece of film --
-
-     pitch      58px   one perforation
-     step     14.5px   what one pull advances (a quarter pitch)
-     rate        8/s   pulls per second
-     speed     116px/s = step x rate
-
-   The perforations and the edge printing must both land on that beat, or the
-   printing looks like it is sliding along film that is standing still. */
+/* The strip is deliberately still. Both the slow crawl and the stepped
+   pull-down were tried and cut -- the edge should read as film without
+   asking for any attention. (git 810bcf1..v140 has the gate mechanics if
+   the motion is ever wanted back.) */
 .filmedge {
   position: fixed;
   top: 0; bottom: 0;
@@ -215,9 +208,6 @@ body {
   letter-spacing: .12em;
   color: rgba(255,238,212,.74);
   text-shadow: 0 0 3px rgba(18,10,4,.7), 0 1px 1px rgba(18,10,4,.55);
-  /* the strip chatters in the gate and the shutter beats across it */
-  animation: film-chatter .5s steps(4) infinite,
-             film-shutter .24s steps(4) infinite;
 }
 .filmedge--l {
   left: 0;
@@ -230,7 +220,7 @@ body {
     rgba(24,14,6,.30) 0%, rgba(24,14,6,.27) 64%, rgba(24,14,6,0) 100%);
 }
 
-/* the perforations — one pitch per cycle in four discrete pulls */
+/* the perforations */
 .filmedge::before {
   content: "";
   position: absolute;
@@ -239,18 +229,14 @@ body {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='58'%3E%3Crect x='4' y='17' width='12' height='24' rx='3.5' fill='%23fff4de' fill-opacity='.66'/%3E%3C/svg%3E");
   background-repeat: repeat-y;
   background-size: 20px 58px;
-  animation: film-run .5s steps(4) infinite;
 }
 .filmedge--l::before { left: 0; }
 .filmedge--r::before { right: 0; }
 
-/* the edge printing, riding the same beat. The column runs one block above
-   the viewport and travels exactly one block per cycle, so it loops without
-   a seam -- which is also why every block has to read the same. */
+/* the edge printing, repeating evenly down the strip */
 .filmedge__print {
   position: absolute;
   top: -290px;
-  animation: film-print 2.5s steps(20) infinite;
 }
 .filmedge--l .filmedge__print { left: 20px; right: 0; }
 .filmedge--r .filmedge__print { left: 0; right: 20px; }
@@ -264,28 +250,6 @@ body {
   white-space: nowrap;
 }
 
-@keyframes film-run   { from { background-position: 0 0; } to { background-position: 0 58px; } }
-@keyframes film-print { from { transform: translateY(0); }  to { transform: translateY(290px); } }
-/* the film never sits quite still between pulls */
-@keyframes film-chatter {
-  0%   { transform: translate(0, 0); }
-  25%  { transform: translate(.6px, -.4px); }
-  50%  { transform: translate(-.5px, .3px); }
-  75%  { transform: translate(.3px, .5px); }
-  100% { transform: translate(0, 0); }
-}
-/* the shutter blade crossing the lamp — shallow on purpose, a deep strobe at
-   this rate would be both ugly and a genuine photosensitivity risk */
-@keyframes film-shutter {
-  0%   { opacity: 1; }
-  25%  { opacity: .88; }
-  50%  { opacity: .97; }
-  75%  { opacity: .91; }
-  100% { opacity: 1; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .filmedge, .filmedge::before, .filmedge__print { animation: none; }
-}
 @media (max-width: 720px) { .filmedge { display: none; } }
 
 /* --------------------------------------------------------------------------
