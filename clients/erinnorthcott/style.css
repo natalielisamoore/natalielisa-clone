@@ -164,11 +164,14 @@ body {
 }
 @keyframes dustflick { 0%,100% { opacity: .42; } 33% { opacity: .55; } 66% { opacity: .34; } }
 
-/* film-edge markings — a strip of exposed negative running down each side */
+/* film-edge markings — a strip of exposed negative running down each side.
+   The strip carries its own ground (a warm film base) rather than a blend
+   mode, so the sprockets read over the dawn sky and the night alike —
+   multiply would have erased them from #night down. */
 .filmedge {
   position: fixed;
   top: 0; bottom: 0;
-  width: 34px;
+  width: 46px;
   z-index: 5;
   pointer-events: none;
   display: flex;
@@ -176,14 +179,50 @@ body {
   justify-content: space-around;
   align-items: center;
   font-family: var(--mono);
-  font-size: .52rem;
-  letter-spacing: .1em;
-  color: rgba(60,40,24,.42);
-  mix-blend-mode: multiply;
+  font-size: .58rem;
+  font-weight: 500;
+  letter-spacing: .12em;
+  color: rgba(255,238,212,.74);
+  text-shadow: 0 0 3px rgba(18,10,4,.7), 0 1px 1px rgba(18,10,4,.55);
+  animation: film-gate 11s ease-in-out infinite;   /* the rare shift in the gate */
 }
-.filmedge--l { left: 0; }
-.filmedge--r { right: 0; }
+.filmedge--l {
+  left: 0;
+  padding-left: 20px;
+  background: linear-gradient(to right,
+    rgba(24,14,6,.30) 0%, rgba(24,14,6,.27) 64%, rgba(24,14,6,0) 100%);
+}
+.filmedge--r {
+  right: 0;
+  padding-right: 20px;
+  background: linear-gradient(to left,
+    rgba(24,14,6,.30) 0%, rgba(24,14,6,.27) 64%, rgba(24,14,6,0) 100%);
+}
+/* the perforations themselves, drifting as if pulled through a projector */
+.filmedge::before {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 20px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='58'%3E%3Crect x='4' y='17' width='12' height='24' rx='3.5' fill='%23fff4de' fill-opacity='.66'/%3E%3C/svg%3E");
+  background-repeat: repeat-y;
+  background-size: 20px 58px;
+  animation: film-run 16s linear infinite;
+}
+.filmedge--l::before { left: 0; }
+.filmedge--r::before { right: 0; }
 .filmedge span { writing-mode: vertical-rl; text-orientation: mixed; white-space: nowrap; }
+/* one hole-pitch per cycle, so the loop is seamless */
+@keyframes film-run { from { background-position: 0 0; } to { background-position: 0 58px; } }
+/* almost always still; every so often the frame jumps in the gate */
+@keyframes film-gate {
+  0%, 96%, 98%, 100% { transform: translateY(0);      opacity: 1; }
+  96.6%              { transform: translateY(-1.6px); opacity: .82; }
+  97.4%              { transform: translateY(1.1px);  opacity: .93; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .filmedge, .filmedge::before { animation: none; }
+}
 @media (max-width: 720px) { .filmedge { display: none; } }
 
 /* --------------------------------------------------------------------------
