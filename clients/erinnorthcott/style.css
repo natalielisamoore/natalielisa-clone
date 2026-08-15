@@ -1073,7 +1073,9 @@ body {
 .keyart {
   position: absolute;
   left: 50%;
-  bottom: -1.7rem;
+  /* rests on the frame's bottom edge rather than straddling it — the .75rem
+     clears the dip the -1.1deg rotation puts on the lower corners */
+  bottom: .75rem;
   z-index: 3;
   width: min(84%, 660px);
   margin: 0;
@@ -1137,7 +1139,7 @@ body {
 .filmframe__cap--under { margin-top: clamp(2.6rem, 4.6vw, 3.6rem); }
 
 @media (max-width: 720px) {
-  .keyart { width: 92%; bottom: -1.4rem; }
+  .keyart { width: 92%; bottom: .5rem; }
   .keyart__rule { height: 4px; }
 }
 
@@ -1592,13 +1594,6 @@ body.is-connect .footer {
 .footer__inner > .reveal:nth-child(2) { transition-delay: .1s; }
 .footer__inner > .reveal:nth-child(3) { transition-delay: .2s; }
 .footer__base.reveal { transition-delay: .3s; }
-
-/* the closing line — the one lifted word, as on the key art */
-.footer__code em {
-  font-style: normal;
-  color: var(--gold);
-  opacity: .85;
-}
 
 /* a quiet tag beside a link that isn't a link yet */
 .footer__soon {
