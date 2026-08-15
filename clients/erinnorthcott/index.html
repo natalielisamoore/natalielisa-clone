@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=JetBrains+Mono:wght@300;400;500&family=Caveat:wght@500;600;700&family=Karla:wght@300..700&family=Permanent+Marker&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css?v=139" />
+  <link rel="stylesheet" href="style.css?v=140" />
 </head>
 <body>
   <!-- Arrival: a luminous veil that dissolves on load — you cross a threshold -->
@@ -51,9 +51,37 @@
       <feDisplacementMap in="SourceGraphic" in2="n" scale="7" xChannelSelector="R" yChannelSelector="G" />
     </filter>
   </svg>
-  <!-- Film-edge markings, like a strip of exposed negative down each side -->
-  <div class="filmedge filmedge--l" aria-hidden="true"><span>16A</span><span>&#8594;</span><span>KODAK 400</span><span>&#8226;&#8226;</span><span>5</span></div>
-  <div class="filmedge filmedge--r" aria-hidden="true"><span>56</span><span>&#8226;&#8226;</span><span>400</span><span>&#8594;</span><span>16A</span></div>
+  <!-- Film-edge markings. The printing is ON the film, so it travels with
+       the perforations: ten identical blocks, shifted by exactly one block
+       per cycle, which makes the loop seamless. -->
+  <div class="filmedge filmedge--l" aria-hidden="true">
+    <div class="filmedge__print">
+      <span class="filmedge__mark">16A &#8594; KODAK 400 &#8226;&#8226; 5</span>
+      <span class="filmedge__mark">16A &#8594; KODAK 400 &#8226;&#8226; 5</span>
+      <span class="filmedge__mark">16A &#8594; KODAK 400 &#8226;&#8226; 5</span>
+      <span class="filmedge__mark">16A &#8594; KODAK 400 &#8226;&#8226; 5</span>
+      <span class="filmedge__mark">16A &#8594; KODAK 400 &#8226;&#8226; 5</span>
+      <span class="filmedge__mark">16A &#8594; KODAK 400 &#8226;&#8226; 5</span>
+      <span class="filmedge__mark">16A &#8594; KODAK 400 &#8226;&#8226; 5</span>
+      <span class="filmedge__mark">16A &#8594; KODAK 400 &#8226;&#8226; 5</span>
+      <span class="filmedge__mark">16A &#8594; KODAK 400 &#8226;&#8226; 5</span>
+      <span class="filmedge__mark">16A &#8594; KODAK 400 &#8226;&#8226; 5</span>
+    </div>
+  </div>
+  <div class="filmedge filmedge--r" aria-hidden="true">
+    <div class="filmedge__print">
+      <span class="filmedge__mark">56 &#8226;&#8226; KODAK 400 &#8594; 16A</span>
+      <span class="filmedge__mark">56 &#8226;&#8226; KODAK 400 &#8594; 16A</span>
+      <span class="filmedge__mark">56 &#8226;&#8226; KODAK 400 &#8594; 16A</span>
+      <span class="filmedge__mark">56 &#8226;&#8226; KODAK 400 &#8594; 16A</span>
+      <span class="filmedge__mark">56 &#8226;&#8226; KODAK 400 &#8594; 16A</span>
+      <span class="filmedge__mark">56 &#8226;&#8226; KODAK 400 &#8594; 16A</span>
+      <span class="filmedge__mark">56 &#8226;&#8226; KODAK 400 &#8594; 16A</span>
+      <span class="filmedge__mark">56 &#8226;&#8226; KODAK 400 &#8594; 16A</span>
+      <span class="filmedge__mark">56 &#8226;&#8226; KODAK 400 &#8594; 16A</span>
+      <span class="filmedge__mark">56 &#8226;&#8226; KODAK 400 &#8594; 16A</span>
+    </div>
+  </div>
 
   <!-- Navigation -->
   <header class="nav">
@@ -76,7 +104,7 @@
           <a class="filmframe__link" href="https://www.youtube.com/watch?v=04iHR-eZIXY" target="_blank" rel="noopener" aria-label="Watch the trailer for Daniel — an HBO Original documentary">
             <div class="filmframe__img">
               <!-- data-has-audio flips to "true" the moment the clip carries sound -->
-              <video class="filmframe__vid" data-src="videos/daniel.mp4?v=139" data-has-audio="true" poster="images/daniel.jpg?v=139" loop muted playsinline preload="none" aria-hidden="true"></video>
+              <video class="filmframe__vid" data-src="videos/daniel.mp4?v=140" data-has-audio="true" poster="images/daniel.jpg?v=140" loop muted playsinline preload="none" aria-hidden="true"></video>
               <span class="filmframe__watch">Watch the trailer &rarr;</span>
             </div>
             <!-- Key-art label: the film's own line, brushed onto torn tape -->
@@ -242,13 +270,13 @@
     <img src="images/starskissingme2.jpg" alt="" loading="lazy" decoding="async" />
   </div>
 
-  <script src="sky.js?v=139" defer></script>
+  <script src="sky.js?v=140" defer></script>
   <script src="stars.js" defer></script>
-  <script src="motes.js?v=139" defer></script>
-  <script src="cursor.js?v=139" defer></script>
-  <script src="letters.js?v=139" defer></script>
-  <script src="sound.js?v=139" defer></script>
-  <script src="petals.js?v=139" defer></script>
-  <script src="reveal.js?v=139" defer></script>
+  <script src="motes.js?v=140" defer></script>
+  <script src="cursor.js?v=140" defer></script>
+  <script src="letters.js?v=140" defer></script>
+  <script src="sound.js?v=140" defer></script>
+  <script src="petals.js?v=140" defer></script>
+  <script src="reveal.js?v=140" defer></script>
 </body>
 </html>
