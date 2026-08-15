@@ -29,7 +29,16 @@ body {
   --svc-radius: 20px;
 }
 
-.svc-main { background-color: var(--ivory); padding: 0 2.5vw 6em; }
+/* Transparent, not ivory — body already paints ivory, and an opaque background
+   here would hide the cloud image the content now sits over. The negative top
+   margin lifts the hero up into the faded lower third of the photo. */
+.svc-main {
+  background-color: transparent;
+  padding: 0 2.5vw 6em;
+  position: relative;
+  z-index: 1;
+  margin-top: -20vh;
+}
 
 /* The sitewide `p` rule carries padding-left/right:100px and font-size:1.3vw.
    That is right for the wide single-column pages but crushes text inside these
@@ -380,7 +389,8 @@ body {
 
 /* ---------- tablet ---------- */
 @media screen and (max-width: 991px) {
-  .svc-hero-media { height: 44vh; }
+  .svc-hero-media { height: 46vh; }
+  .svc-main { margin-top: -15vh; }
   .svc-hero { padding: 2.5em 0 3em; }
   .svc-hero-title { font-size: 6.4em; }
   .svc-hero-lead { font-size: 2.3em; }
@@ -412,7 +422,8 @@ body {
   /* the shared stylesheet sizes .menu-text.one–.five here but has no .six */
   .menu-text.six { font-size: 40px; }
   .svc-main { padding: 0 1.5vw 5em; }
-  .svc-hero-media { height: 34vh; min-height: 220px; }
+  .svc-hero-media { height: 38vh; min-height: 240px; }
+  .svc-main { margin-top: -11vh; }
   .svc-hero { padding: 2em 0 2.5em; }
   .svc-hero-title { font-size: 9.2em; }
   .svc-hero-lead { font-size: 4.4em; }
