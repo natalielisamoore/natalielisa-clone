@@ -1,0 +1,682 @@
+<!DOCTYPE html><html data-wf-domain="natalielisa.com" data-wf-site="65c5586c812f9f3723ee3036" lang="en"><head><meta charset="utf-8"/><title>Services | Natalie Lisa Moore</title><meta content="Brand identity, brand photography, and web design for conscious founders. Creative Strategy Sessions, Logo Love, Brand Foundation, Brand Atmosphere, and the full Brand World." name="description"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<link href="../fonts.css" rel="stylesheet" type="text/css"/>
+<link href="../style.css" rel="stylesheet" type="text/css"/>
+<link href="../images/66569c76c0de5ae7fa67127a_n-favicon.png" rel="shortcut icon" type="image/x-icon"/>
+<link href="../images/6654bec1c59579bef8ee9cde_favicon.png" rel="apple-touch-icon"/>
+<style>
+/* ── carried over from the homepage shell ── */
+.no-scroll { overflow: hidden; }
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+::-webkit-scrollbar { width: 0px; }
+::-webkit-scrollbar-thumb { background: #FF0000; }
+.nav-parent, .burger-menu-parent, .flex-cc-h.menu {
+  -webkit-backface-visibility: none !important;
+  -webkit-transform: translate3d(0, 0, 0);
+}
+
+/* ── Services page ──
+   Type is sized in em because body is font-size:1vw sitewide.
+   Font stacks name the Webflow families first (matching every other page),
+   then the local fonts.css families as a fallback if the CDN ever goes away. */
+
+:root {
+  --svc-line: #000;
+  --svc-radius: 20px;
+}
+
+.svc-main { background-color: var(--ivory); padding: 0 2.5vw 6em; }
+
+/* The sitewide `p` rule carries padding-left/right:100px and font-size:1.3vw.
+   That is right for the wide single-column pages but crushes text inside these
+   cards, so neutralise it here and let the .svc- classes do the sizing. */
+.svc-main p { padding-left: 0; padding-right: 0; }
+
+.svc-wrap { width: 95%; max-width: 1500px; margin: 0 auto; }
+
+/* ---------- hero ---------- */
+.svc-hero { padding: 8em 0 4em; }
+
+.svc-hero-title {
+  color: #000;
+  font-family: 'Ppneuemontreal Book', 'PP Neue Montreal', sans-serif;
+  font-size: 4.6em;
+  font-weight: 400;
+  line-height: 1.05em;
+  letter-spacing: -0.01em;
+  max-width: 20em;
+  margin: 0 0 .6em;
+}
+.svc-swash {
+  font-family: 'Ppplayground', 'PP Playground', sans-serif;
+  font-size: 1.35em;
+  font-weight: 500;
+  line-height: 0.8em;
+}
+.svc-hero-lead {
+  color: #000;
+  font-family: 'Ppneuemontreal Book', 'PP Neue Montreal', sans-serif;
+  font-size: 1.5em;
+  font-weight: 400;
+  line-height: 1.45em;
+  max-width: 34em;
+  margin: 0;
+}
+
+/* ---------- section heading ---------- */
+.svc-sec-head {
+  color: #000;
+  font-family: 'Ppneuemontreal Book', 'PP Neue Montreal', sans-serif;
+  font-size: 3.7em;
+  font-weight: 400;
+  line-height: 1.1em;
+  margin: 0 0 .5em;
+}
+.svc-sec-sub {
+  font-family: 'Ppneuemontreal Book', 'PP Neue Montreal', sans-serif;
+  font-size: 1.4em;
+  line-height: 1.45em;
+  max-width: 32em;
+  margin: 0 0 2em;
+}
+
+/* ---------- tier card ---------- */
+.svc-tiers { display: flex; flex-direction: column; gap: 2.2em; padding-top: 2em; }
+
+.svc-tier {
+  background-color: var(--ivory);
+  border: 1px solid var(--svc-line);
+  border-radius: var(--svc-radius);
+  padding: 3em 3.2em 3.2em;
+  position: relative;
+  overflow: hidden;
+}
+/* thin accent rule across the top of each card */
+.svc-tier::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: .55em;
+  background-color: var(--svc-accent, transparent);
+  border-bottom: 1px solid var(--svc-line);
+}
+.svc-tier--flagship { background-color: var(--light-pink); }
+
+.svc-tier-head {
+  display: flex;
+  align-items: baseline;
+  gap: 1em;
+  border-bottom: 1px solid var(--svc-line);
+  padding-bottom: 1.1em;
+  margin-bottom: 1.6em;
+}
+.svc-tier-num {
+  font-family: 'Ppneuemontreal Book', 'PP Neue Montreal', sans-serif;
+  font-size: 1.3em;
+  line-height: 1em;
+  flex: none;
+  padding: .35em .9em;
+  border: 1px solid var(--svc-line);
+  border-radius: 50px;
+  background-color: var(--svc-accent, transparent);
+}
+.svc-tier-name {
+  color: #000;
+  font-family: 'Ppneuemontreal Book', 'PP Neue Montreal', sans-serif;
+  font-size: 2.7em;
+  font-weight: 400;
+  line-height: 1em;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+.svc-tier-sub {
+  font-family: 'Ppplayground', 'PP Playground', sans-serif;
+  font-size: 3.1em;
+  font-weight: 500;
+  line-height: .9em;
+  margin-left: auto;
+  padding-left: 1em;
+  white-space: nowrap;
+}
+
+.svc-tier-body {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 3em;
+  align-items: start;
+}
+
+.svc-tier-desc {
+  color: #000;
+  font-family: 'Ppneuemontreal Book', 'PP Neue Montreal', sans-serif;
+  font-size: 1.45em;
+  line-height: 1.45em;
+  margin: 0 0 1.2em;
+}
+.svc-tier-for {
+  font-family: 'Ppneuemontreal Book', 'PP Neue Montreal', sans-serif;
+  font-size: 1.25em;
+  line-height: 1.5em;
+  margin: 0;
+}
+.svc-label {
+  display: block;
+  font-size: .72em;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  margin-bottom: .5em;
+}
+
+/* includes list */
+.svc-includes { list-style: none; margin: 0 0 1.6em; padding: 0; }
+.svc-includes li {
+  font-family: 'Ppneuemontreal Book', 'PP Neue Montreal', sans-serif;
+  font-size: 1.25em;
+  line-height: 1.5em;
+  padding-left: 1.6em;
+  margin-bottom: .45em;
+  position: relative;
+}
+.svc-includes li::before {
+  content: "\2726";
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+/* investment block */
+.svc-invest {
+  border-top: 1px solid var(--svc-line);
+  padding-top: 1.1em;
+  margin-bottom: .4em;
+}
+.svc-price {
+  font-family: 'Ppneuemontreal Book', 'PP Neue Montreal', sans-serif;
+  font-size: 1.9em;
+  line-height: 1.15em;
+  margin: 0;
+}
+.svc-meta {
+  font-family: 'Ppneuemontreal Book', 'PP Neue Montreal', sans-serif;
+  font-size: 1.1em;
+  line-height: 1.5em;
+  margin: .35em 0 0;
+}
+.svc-credit {
+  font-family: 'Otminiature Webfont Italic', 'Ppneuemontreal Book', 'PP Neue Montreal', serif;
+  font-style: italic;
+  font-size: 1.1em;
+  line-height: 1.45em;
+  margin: .5em 0 0;
+}
+
+/* button — mirrors .workwithme-button, with a per-tier hover fill */
+.svc-btn {
+  background-color: var(--black);
+  color: var(--white);
+  border: 1px solid var(--svc-line);
+  border-radius: 30px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 15em;
+  height: 3em;
+  padding: 0 2em;
+  margin-top: 1.4em;
+  font-family: 'Ppneuemontreal Book', 'PP Neue Montreal', sans-serif;
+  font-size: 1.15em;
+  letter-spacing: .06em;
+  text-decoration: none;
+  transition: background-color .3s ease, color .3s ease;
+}
+.svc-btn:hover { background-color: var(--svc-accent, var(--lavender)); color: var(--black); }
+
+/* ---------- expansion ---------- */
+.svc-expansion {
+  border: 1px solid var(--svc-line);
+  border-radius: var(--svc-radius);
+  background-color: var(--butter);
+  padding: 3em 3.2em 3.2em;
+  margin-top: 2.2em;
+}
+.svc-expansion .svc-includes { columns: 2; column-gap: 3em; margin-bottom: 1.4em; }
+.svc-expansion .svc-includes li { break-inside: avoid; }
+
+/* ---------- FAQ ---------- */
+.svc-faq { padding-top: 6em; }
+.svc-faq-list {
+  border-top: 1px solid var(--svc-line);
+  max-width: 60em;
+}
+.svc-faq-item { border-bottom: 1px solid var(--svc-line); }
+.svc-faq-trigger {
+  width: 100%;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5em;
+  padding: 1.5em 0;
+  font-family: 'Ppneuemontreal Book', 'PP Neue Montreal', sans-serif;
+  font-size: 1.5em;
+  line-height: 1.3em;
+  color: #000;
+  transition: padding-left .3s ease;
+}
+.svc-faq-trigger:hover { padding-left: .6em; }
+.svc-faq-icon { flex: none; position: relative; width: 1em; height: 1em; }
+.svc-faq-icon::before, .svc-faq-icon::after {
+  content: "";
+  position: absolute;
+  top: 50%; left: 0;
+  width: 100%; height: 1px;
+  background-color: #000;
+  transition: transform .3s ease;
+}
+.svc-faq-icon::after { transform: rotate(90deg); }
+.svc-faq-item.is-open .svc-faq-icon::after { transform: rotate(0deg); }
+.svc-faq-answer {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height .4s ease;
+}
+.svc-faq-answer p {
+  font-family: 'Ppneuemontreal Book', 'PP Neue Montreal', sans-serif;
+  font-size: 1.3em;
+  line-height: 1.5em;
+  margin: 0 0 1.6em;
+  max-width: 42em;
+}
+
+/* ---------- how to book ---------- */
+.svc-book { padding-top: 6em; }
+.svc-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.6em; }
+.svc-step {
+  border: 1px solid var(--svc-line);
+  border-radius: var(--svc-radius);
+  padding: 2.2em 2em 2.4em;
+  background-color: var(--ivory);
+}
+.svc-step-num {
+  font-family: 'Ppplayground', 'PP Playground', sans-serif;
+  font-size: 3.4em;
+  font-weight: 500;
+  line-height: .9em;
+  display: block;
+  margin-bottom: .5em;
+}
+.svc-step h3 {
+  font-family: 'Ppneuemontreal Book', 'PP Neue Montreal', sans-serif;
+  font-size: 1.8em;
+  font-weight: 400;
+  line-height: 1.1em;
+  margin: 0 0 .5em;
+}
+.svc-step p {
+  font-family: 'Ppneuemontreal Book', 'PP Neue Montreal', sans-serif;
+  font-size: 1.2em;
+  line-height: 1.5em;
+  margin: 0;
+}
+
+.svc-closing {
+  border: 1px solid var(--svc-line);
+  border-radius: var(--svc-radius);
+  background-color: var(--lavender);
+  text-align: center;
+  padding: 3.5em 2em 3em;
+  margin-top: 2.2em;
+}
+.svc-closing p {
+  font-family: 'Ppneuemontreal Book', 'PP Neue Montreal', sans-serif;
+  font-size: 1.6em;
+  line-height: 1.45em;
+  max-width: 30em;
+  margin: 0 auto;
+}
+.svc-closing .svc-btn:hover { background-color: var(--chartuese); }
+
+/* Footer nav: the link row is sized for four links (they total ~407px in a
+   541px track). SERVICES is a fifth, which overflows to zero gaps, so step the
+   footer link size down to keep them on one row with breathing space.
+   NOTE: when SERVICES is rolled out to the other pages this rule has to travel
+   with it — inline per-page for the CDN pages, or into style.css for the rest. */
+.footer .link-list .link { font-size: 1.6em; }
+
+/* ---------- tablet ---------- */
+@media screen and (max-width: 991px) {
+  .svc-hero { padding: 6em 0 3em; }
+  .svc-hero-title { font-size: 6.4em; }
+  .svc-hero-lead { font-size: 2.3em; }
+  .svc-sec-head { font-size: 5.4em; }
+  .svc-sec-sub { font-size: 2.2em; }
+  .svc-tier { padding: 2.6em 2.4em 2.8em; }
+  .svc-tier-head { flex-wrap: wrap; }
+  .svc-tier-name { font-size: 4em; }
+  .svc-tier-sub { font-size: 4.3em; margin-left: 0; padding-left: 0; width: 100%; white-space: normal; }
+  .svc-tier-num { font-size: 2em; }
+  .svc-tier-body { grid-template-columns: 1fr; gap: 2em; }
+  .svc-tier-desc { font-size: 2.2em; }
+  .svc-tier-for, .svc-includes li { font-size: 2em; }
+  .svc-price { font-size: 2.9em; }
+  .svc-meta, .svc-credit { font-size: 1.8em; }
+  .svc-btn { font-size: 1.9em; }
+  .svc-expansion .svc-includes { columns: 1; }
+  .svc-faq-trigger { font-size: 2.4em; }
+  .svc-faq-answer p { font-size: 2em; }
+  .svc-steps { grid-template-columns: 1fr; }
+  .svc-step-num { font-size: 5.2em; }
+  .svc-step h3 { font-size: 2.8em; }
+  .svc-step p { font-size: 2em; }
+  .svc-closing p { font-size: 2.4em; }
+}
+
+/* ---------- phone ---------- */
+@media screen and (max-width: 479px) {
+  /* the shared stylesheet sizes .menu-text.one–.five here but has no .six */
+  .menu-text.six { font-size: 40px; }
+  .svc-main { padding: 0 1.5vw 5em; }
+  .svc-hero { padding: 5em 0 2.5em; }
+  .svc-hero-title { font-size: 9.2em; }
+  .svc-hero-lead { font-size: 4.4em; }
+  .svc-sec-head { font-size: 8.5em; }
+  .svc-sec-sub { font-size: 4.2em; }
+  .svc-tier { padding: 2.2em 1.8em 2.4em; }
+  .svc-tier-name { font-size: 7em; }
+  .svc-tier-sub { font-size: 7.4em; }
+  .svc-tier-num { font-size: 3.8em; }
+  .svc-tier-desc { font-size: 4.3em; }
+  .svc-tier-for, .svc-includes li { font-size: 3.9em; }
+  .svc-price { font-size: 5.6em; }
+  .svc-meta, .svc-credit { font-size: 3.5em; }
+  .svc-btn { font-size: 3.7em; min-width: 0; width: 100%; }
+  .svc-faq-trigger { font-size: 4.6em; }
+  .svc-faq-answer p { font-size: 3.9em; }
+  .svc-step-num { font-size: 9em; }
+  .svc-step h3 { font-size: 5.4em; }
+  .svc-step p { font-size: 3.9em; }
+  .svc-closing p { font-size: 4.6em; }
+}
+</style>
+</head><body class="body-2">
+
+<div class="menu-parent"><div class="menu-panel-left"><a href="../" class="menu-link-parent link1 w-inline-block"><div class="menu-text one">Home</div><img loading="lazy" src="../images/664aa81165e01ed75b2d58c7_Asset17.svg" alt="" class="arrow-menu"/><div class="card-whipe pinkshade-bg"></div><div class="menu-img-parent img1"><div class="img-child img-1"></div></div></a><a href="../work/" class="menu-link-parent w-inline-block"><div class="menu-text two">Work</div><img loading="lazy" src="../images/664aa81165e01ed75b2d58c7_Asset17.svg" alt="" class="arrow-menu"/><div class="card-whipe pinkshade-bg"></div><div class="menu-img-parent img2"><div class="img-child img-2"></div></div></a><a href="./" aria-current="page" class="menu-link-parent w-inline-block w--current"><div class="menu-text six">Services</div><img loading="lazy" src="../images/664aa81165e01ed75b2d58c7_Asset17.svg" alt="" class="arrow-menu"/><div class="card-whipe pinkshade-bg"></div><div class="menu-img-parent img6"><div class="img-child img-6"></div></div></a><a href="../about/" class="menu-link-parent w-inline-block"><div class="menu-text four">About</div><img loading="lazy" src="../images/664aa81165e01ed75b2d58c7_Asset17.svg" alt="" class="arrow-menu"/><div class="card-whipe pinkshade-bg"></div><div class="menu-img-parent img4"><div class="img-child img-5"></div></div></a><a href="../contact/" class="menu-link-parent w-inline-block"><div class="menu-text five">Contact</div><img loading="lazy" src="../images/664aa81165e01ed75b2d58c7_Asset17.svg" alt="" class="arrow-menu"/><div class="card-whipe pinkshade-bg"></div><div class="menu-img-parent img5"><div class="img-child img-4"></div></div></a><a href="../playground/" class="menu-link-parent w-inline-block"><div class="menu-text three">Paintings</div><img loading="lazy" src="../images/664aa81165e01ed75b2d58c7_Asset17.svg" alt="" class="arrow-menu"/><div class="card-whipe pinkshade-bg"></div><div class="menu-img-parent img3"><div class="img-child img-3"></div></div></a></div><div class="rightpanel"><div class="imgbg"><img loading="lazy" src="../images/65f381b584def4d6ffa4f815_natalie-in-space.jpg" alt="" class="image-12"/></div></div></div>
+
+<div data-animation="default" class="navbar1_component w-nav" data-easing2="ease" fs-scrolldisable-element="smart-nav" data-easing="ease" data-collapse="medium" role="banner" data-duration="400"><div class="navbar1_container"><a href="../" class="navbar1_logo-link w-nav-brand"><img width="210" loading="lazy" alt="" src="../images/nav-logo.svg" class="navbar1_logo"/></a><div class="ham-cart-wrapper"><div class="hamburber"><div class="burgerline top"></div><div class="burgerline middle"></div><div class="burgerline bottom"></div></div></div></div><div class="blacklinenavigator"></div></div>
+
+<main class="svc-main">
+<div class="svc-wrap">
+
+  <!-- ══════════ HERO ══════════ -->
+  <section class="svc-hero">
+    <h1 class="svc-hero-title">Enter a world where your brand becomes <span class="svc-swash">fully, unmistakably you.</span></h1>
+    <p class="svc-hero-lead">Every brand is experienced in layers — the identity that grounds it, the atmosphere that surrounds it, and the world it inhabits. My offerings are designed to meet you exactly where you are, whether you&#x27;re just beginning or ready for the full vision.</p>
+  </section>
+
+  <!-- ══════════ TIERS ══════════ -->
+  <section class="svc-tiers">
+
+    <!-- 01 — Creative Strategy Session -->
+    <article class="svc-tier" style="--svc-accent: var(--butter);">
+      <div class="svc-tier-head">
+        <div class="svc-tier-num">01</div>
+        <h2 class="svc-tier-name">Creative Strategy Session</h2>
+        <div class="svc-tier-sub">Clarity Before Creation</div>
+      </div>
+      <div class="svc-tier-body">
+        <div>
+          <p class="svc-tier-desc">A focused 90-minute deep dive into your brand, digital presence, or creative direction. Structured, intentional thinking time with someone who knows how to ask the right questions and see what others miss.</p>
+          <p class="svc-tier-for"><span class="svc-label">Who it&#x27;s for</span>Founders who need clarity before committing to a full project — or anyone feeling stuck and ready for direction.</p>
+        </div>
+        <div>
+          <ul class="svc-includes">
+            <li>90-minute recorded session</li>
+            <li>Written summary of insights and recommendations</li>
+            <li>A clear creative roadmap — whether that&#x27;s with me or on your own</li>
+          </ul>
+          <div class="svc-invest">
+            <p class="svc-price">$300</p>
+            <p class="svc-credit">Applied as credit toward any package within 30 days.</p>
+          </div>
+          <a href="../contact/?service=strategy-session" class="svc-btn">BOOK A SESSION</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 02 — Logo Love -->
+    <article class="svc-tier" style="--svc-accent: var(--lavender);">
+      <div class="svc-tier-head">
+        <div class="svc-tier-num">02</div>
+        <h2 class="svc-tier-name">Logo Love</h2>
+        <div class="svc-tier-sub">A Single, Considered Mark</div>
+      </div>
+      <div class="svc-tier-body">
+        <div>
+          <p class="svc-tier-desc">Sometimes you just need a beautiful logo. One crafted mark that captures your essence — made with the same intentionality and care as a full identity.</p>
+          <p class="svc-tier-for"><span class="svc-label">Who it&#x27;s for</span>Founders with clear brand direction who need a stunning logo to anchor it.</p>
+        </div>
+        <div>
+          <ul class="svc-includes">
+            <li>Primary logo design</li>
+            <li>Submark version</li>
+            <li>Colour palette (up to 3 colours)</li>
+            <li>Font pairing recommendation</li>
+            <li>Final files in all formats</li>
+            <li>2 rounds of revisions</li>
+          </ul>
+          <div class="svc-invest">
+            <p class="svc-price">Starting at $800</p>
+            <p class="svc-meta">Timeline: 1–2 weeks</p>
+            <p class="svc-credit">Applied as credit toward Brand Foundation when you&#x27;re ready for more.</p>
+          </div>
+          <a href="../contact/?service=logo-love" class="svc-btn">BEGIN INQUIRY</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 03 — Brand Foundation -->
+    <article class="svc-tier" style="--svc-accent: var(--chartuese);">
+      <div class="svc-tier-head">
+        <div class="svc-tier-num">03</div>
+        <h2 class="svc-tier-name">Brand Foundation</h2>
+        <div class="svc-tier-sub">Refined Identity</div>
+      </div>
+      <div class="svc-tier-body">
+        <div>
+          <p class="svc-tier-desc">The visual bedrock of your brand. A cohesive identity that captures your essence, communicates your values, and grows with you.</p>
+          <p class="svc-tier-for"><span class="svc-label">Who it&#x27;s for</span>Emerging businesses and conscious founders ready to show up with intention from the very beginning.</p>
+        </div>
+        <div>
+          <ul class="svc-includes">
+            <li>Custom logo suite</li>
+            <li>Typography &amp; colour palette</li>
+            <li>Core brand guidelines</li>
+            <li>Essential marketing materials</li>
+            <li>Social media graphics</li>
+          </ul>
+          <div class="svc-invest">
+            <p class="svc-price">Starting at $2,500</p>
+            <p class="svc-meta">Payment plans available · Timeline: 2–4 weeks</p>
+          </div>
+          <a href="../contact/?service=brand-foundation" class="svc-btn">BEGIN INQUIRY</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 04 — Brand Atmosphere -->
+    <article class="svc-tier" style="--svc-accent: var(--coral);">
+      <div class="svc-tier-head">
+        <div class="svc-tier-num">04</div>
+        <h2 class="svc-tier-name">Brand Atmosphere</h2>
+        <div class="svc-tier-sub">Embodied Expression</div>
+      </div>
+      <div class="svc-tier-body">
+        <div>
+          <p class="svc-tier-desc">Brand photography that brings the feeling of your brand to life — the mood, the texture, the world behind the work.</p>
+          <p class="svc-tier-for"><span class="svc-label">Who it&#x27;s for</span>Founders who want imagery that conveys depth, soul, and the felt essence of what they do.</p>
+        </div>
+        <div>
+          <ul class="svc-includes">
+            <li>Creative direction</li>
+            <li>Styling guidance</li>
+            <li>Professional photography session</li>
+            <li>Post-production editing</li>
+            <li>Imagery for website, social, and marketing</li>
+          </ul>
+          <div class="svc-invest">
+            <p class="svc-price">Starting at $950</p>
+            <p class="svc-meta">Payment plans available · Timeline: 1–2 weeks</p>
+          </div>
+          <a href="../contact/?service=brand-atmosphere" class="svc-btn">BEGIN INQUIRY</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 05 — Brand World -->
+    <article class="svc-tier svc-tier--flagship" style="--svc-accent: var(--pink);">
+      <div class="svc-tier-head">
+        <div class="svc-tier-num">05</div>
+        <h2 class="svc-tier-name">Brand World</h2>
+        <div class="svc-tier-sub">Integrated Presence</div>
+      </div>
+      <div class="svc-tier-body">
+        <div>
+          <p class="svc-tier-desc">The full vision. A complete journey weaving identity, atmosphere, and digital presence into one cohesive, luminous whole. This is the deepest way to work with me.</p>
+          <p class="svc-tier-for"><span class="svc-label">Who it&#x27;s for</span>Founders and creatives ready for complete coherence across every touchpoint of their brand.</p>
+        </div>
+        <div>
+          <ul class="svc-includes">
+            <li>Brand Foundation — full identity</li>
+            <li>Brand Atmosphere — photography</li>
+            <li>Custom website design &amp; development</li>
+            <li>Strategy &amp; creative direction across all layers</li>
+          </ul>
+          <div class="svc-invest">
+            <p class="svc-price">Starting at $7,500</p>
+            <p class="svc-meta">Payment plans available · Timeline: 3–5 months</p>
+          </div>
+          <a href="../contact/?service=brand-world" class="svc-btn">BEGIN INQUIRY</a>
+        </div>
+      </div>
+    </article>
+
+  </section>
+
+  <!-- ══════════ BRAND EXPANSION ══════════ -->
+  <section class="svc-expansion">
+    <div class="svc-tier-head">
+      <h2 class="svc-tier-name">Brand Expansion</h2>
+      <div class="svc-tier-sub">Optional Enhancements</div>
+    </div>
+    <p class="svc-tier-desc">Thoughtful additions for brands ready to go deeper — the details that make a visual world complete.</p>
+    <ul class="svc-includes">
+      <li>Packaging &amp; print design</li>
+      <li>Illustration systems</li>
+      <li>Campaign direction</li>
+      <li>Merchandise design</li>
+      <li>Custom paintings</li>
+    </ul>
+    <div class="svc-invest">
+      <p class="svc-price">Custom quote per project</p>
+    </div>
+    <a href="../contact/?service=brand-expansion" class="svc-btn">BEGIN INQUIRY</a>
+  </section>
+
+  <!-- ══════════ FAQ ══════════
+       DRAFT copy, written only from facts already stated on this page.
+       Two answers carry a [NATALIE:] note where I don't know the real answer —
+       search the file for "NATALIE:" before publishing. -->
+  <section class="svc-faq">
+    <h2 class="svc-sec-head">FAQ</h2>
+    <div class="svc-faq-list">
+
+      <div class="svc-faq-item">
+        <button class="svc-faq-trigger" type="button">How does your design process work?<span class="svc-faq-icon"></span></button>
+        <div class="svc-faq-answer"><p>Every project follows the same shape. We begin with a conversation about where you are and where you&#x27;re going. That feeds research and direction, where the visual world starts to take form. From there into design, where you see real concepts and we refine them together. And finally delivery — every file you need, plus guidance on using them well. You will never be guessing what happens next: you&#x27;ll know what&#x27;s coming, and when.</p></div>
+      </div>
+
+      <div class="svc-faq-item">
+        <button class="svc-faq-trigger" type="button">Do you offer payment plans?<span class="svc-faq-icon"></span></button>
+        <div class="svc-faq-answer"><p>Yes — on Brand Foundation, Brand Atmosphere, and Brand World. A deposit secures your place in my calendar, and the balance is spread across the life of the project. We agree the full schedule together before any work begins, so you know exactly what is due and when.</p></div>
+      </div>
+
+      <div class="svc-faq-item">
+        <button class="svc-faq-trigger" type="button">I&#x27;m not sure which offering is right for me.<span class="svc-faq-icon"></span></button>
+        <div class="svc-faq-answer"><p>Then start with a Creative Strategy Session. Ninety minutes, recorded, with a written summary and a clear roadmap afterward — whether that roadmap involves me or not. It&#x27;s $300, and it&#x27;s credited toward any package you book within thirty days. It is the lowest-risk way to find out whether we should work together.</p></div>
+      </div>
+
+      <div class="svc-faq-item">
+        <button class="svc-faq-trigger" type="button">How long does a project take, and when could we start?<span class="svc-faq-icon"></span></button>
+        <div class="svc-faq-answer"><p>Timelines are listed with each offering and run from the day we begin, not the day you enquire. Because I take on a limited number of projects at a time, start dates are usually a few weeks out — so if you have a launch or a season you&#x27;re working toward, tell me early and we&#x27;ll build backward from it.</p></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════ HOW TO BOOK ══════════ -->
+  <section class="svc-book">
+    <h2 class="svc-sec-head">How to <span class="svc-swash">book</span></h2>
+    <div class="svc-steps">
+      <div class="svc-step">
+        <span class="svc-step-num">01</span>
+        <h3>Inquire</h3>
+        <p>Fill out my inquiry form and tell me about your project.</p>
+      </div>
+      <div class="svc-step">
+        <span class="svc-step-num">02</span>
+        <h3>Discovery Call</h3>
+        <p>We connect for 30 minutes to explore your vision and confirm the fit.</p>
+      </div>
+      <div class="svc-step">
+        <span class="svc-step-num">03</span>
+        <h3>Proposal &amp; Deposit</h3>
+        <p>You receive a custom proposal, contract, and invoice. Deposit secures your project — and then we begin.</p>
+      </div>
+    </div>
+    <div class="svc-closing">
+      <p>I take on a limited number of projects at a time so every client receives my full creative attention. If you feel the pull — reach out.</p>
+      <a href="../contact/?service=general" class="svc-btn">BEGIN INQUIRY</a>
+    </div>
+  </section>
+
+</div>
+</main>
+
+<section class="footer"><div class="footer-warpper"><div class="footer-parent"><div class="logo-sqrl"><img src="../images/66df7d06a89c23cac069cab9_Asset5.svg" loading="lazy" width="1042" alt="" class="squirrel-logo-footer"/></div><div class="work-together-parent"><div class="text-block-15">LET&#x27;S WORK<span class="script-txt"> Together</span></div></div><div class="getintouch-blck"><a href="../contact/" class="getintouch-blck-child w-inline-block"><div class="arrow-parent"><img src="../images/65fba8473c871871705623cd_Asset15.png" loading="lazy" width="22" alt=""/></div><div class="div-block-13"><div class="text-block-16">GET IN TOUCH</div></div></a></div><div class="rightside-footer-parent"><div class="nat-plus-img"><img src="../images/663029bb22cd0cc88b11fa91_nm-plus2.png" loading="lazy" width="510" sizes="(max-width: 767px) 100vw, 510px" alt="" srcset="../images/663029bb22cd0cc88b11fa91_nm-plus2-p-500.png 500w, ../images/663029bb22cd0cc88b11fa91_nm-plus2-p-800.png 800w, ../images/663029bb22cd0cc88b11fa91_nm-plus2.png 1042w" class="image-6"/></div><div class="rightside-footer-child"><div class="link-list"><div hoverstagger="link" class="link-text-wrapper"><a href="../" hoverstagger="text" class="link one">HOME</a><a href="../" hoverstagger="text" class="link one is-2">HOME</a></div><div hoverstagger="link" class="link-text-wrapper"><a hoverstagger="text" href="../work/" class="link link2foot">WORK</a><a hoverstagger="text" href="../work/" class="link link2foot is-2">WORK</a></div><div hoverstagger="link" class="link-text-wrapper"><a hoverstagger="text" href="./" aria-current="page" class="link link3foot w--current">SERVICES</a><a hoverstagger="text" href="./" aria-current="page" class="link link3foot is-2 w--current">SERVICES</a></div><div hoverstagger="link" class="link-text-wrapper"><a hoverstagger="text" href="../about/" class="link link3foot">ABOUT</a><a hoverstagger="text" href="../about/" class="link link3foot is-2">ABOUT</a></div><div hoverstagger="link" class="link-text-wrapper"><a hoverstagger="text" href="../contact/" class="link">CONTACT</a><a hoverstagger="text" href="../contact/" class="link is-2">CONTACT</a></div></div></div></div></div></div><div class="credits"><div class="text-block-25"><strong class="bold-text">© 2026 MOORE DESIGN ALL RIGHTS RESERVED.</strong></div><div class="text-block-26"><strong class="bold-text-2">SITE DESIGN BY ME :)</strong></div></div></section>
+
+<script>
+/* Self-contained FAQ accordion — no Webflow runtime needed */
+(function () {
+  document.querySelectorAll('.svc-faq-item').forEach(function (item) {
+    var trigger = item.querySelector('.svc-faq-trigger');
+    var answer  = item.querySelector('.svc-faq-answer');
+    if (!trigger || !answer) return;
+    trigger.addEventListener('click', function () {
+      var open = item.classList.toggle('is-open');
+      answer.style.maxHeight = open ? answer.scrollHeight + 'px' : '0px';
+    });
+  });
+  /* keep an open answer correctly sized when the viewport changes */
+  window.addEventListener('resize', function () {
+    document.querySelectorAll('.svc-faq-item.is-open .svc-faq-answer').forEach(function (a) {
+      a.style.maxHeight = a.scrollHeight + 'px';
+    });
+  });
+})();
+</script>
+<script src="../menu.js" type="text/javascript"></script>
+<script src="../cursor.js" type="text/javascript"></script>
+<script src="../ambient.js" type="text/javascript"></script>
+<script src="../magnetic.js" type="text/javascript"></script>
+<script src="../menu-hover.js" type="text/javascript"></script>
+<script src="../transition.js" type="text/javascript"></script>
+<script src="../squirrel.js" type="text/javascript"></script>
+<script src="../butterfly.js" type="text/javascript"></script>
+</body></html>

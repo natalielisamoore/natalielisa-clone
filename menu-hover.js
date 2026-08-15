@@ -36,6 +36,7 @@
     'img-3': 'https://cdn.prod.website-files.com/65c5586c812f9f3723ee3036/66399d9e7a6de75c583538d1_RAVEN-NEON.png',
     'img-4': 'https://cdn.prod.website-files.com/65c5586c812f9f3723ee3036/664d1ad8a2aa4200ff4cd710_DTS_Please_Do_Not_Disturb_by_Fanette_Guilloud_25.jpg',
     'img-5': 'https://cdn.prod.website-files.com/65c5586c812f9f3723ee3036/66e39d861f894464c563d2db_natalie-edit-twil7.web.jpg',
+    'img-6': 'https://cdn.prod.website-files.com/65c5586c812f9f3723ee3036/664a82f3c2fbb0bd6e94b267_DTS_EDEN_Danny_Owens_10128.jpg.jpg',
   };
 
   /* ── Right-side panel lives on body, outside the transformed menu-parent ── */
