@@ -341,18 +341,16 @@ body {
   transition: color .3s var(--ease);
 }
 .nav__link:hover { color: #e2809b; }   /* pink hover */
-/* a pink handwritten underline that scrawls in on hover */
-/* One shallow hand-drawn curve, wiped in from the left. It used to animate
-   with scaleX, which squashed the curve flat and sprang it out — the shape has
-   to hold still while it's revealed, so the reveal is a clip, not a stretch. */
+/* a straight pink rule, the width of the word, wiped in from the left */
 .nav__link::after {
   content: "";
   position: absolute;
-  left: -3%; right: -3%;
-  bottom: -.5em;
-  height: .42em;
-  background: no-repeat center/100% 100%
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='14' viewBox='0 0 240 14'%3E%3Cpath d='M4 5.5 C 62 12, 178 12, 236 6' fill='none' stroke='%23e57fa0' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E");
+  left: 0;
+  right: .1em;                     /* trims the trailing letter-space, so the
+                                      rule ends on the last glyph, not past it */
+  bottom: -.35em;
+  height: 2px;
+  background: #e57fa0;
   opacity: 0;
   clip-path: inset(0 100% 0 0);
   transition: opacity .22s var(--ease), clip-path .42s var(--ease);
