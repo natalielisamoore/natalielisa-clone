@@ -163,6 +163,30 @@ section { padding-block: var(--stack); }
   font-size: clamp(1rem, .95rem + .45vw, 1.25rem);
 }
 
+/* ── centred page rhythm ──
+   Text blocks centre themselves inside the wrap so whitespace is balanced on
+   both sides. The About section keeps its deliberate left-bleed asymmetry. */
+.hero, .mirror, .love, .offer, .next, .pull, .book { text-align: center; }
+.hero .kicker, .hero h1, .hero-sub,
+.mirror p, .next-intro, .pull p, .book-lead,
+.sec-head { margin-left: auto; margin-right: auto; }
+.hero h1 { max-width: 20ch; }
+.mirror p { max-width: 52ch; }
+.pull p { max-width: 28ch; }
+.book-lead { max-width: 46ch; }
+.sec-head { max-width: 34ch; }
+/* the About block keeps its left-bleed asymmetry, so its heading stays
+   flush with its own copy rather than centring inside the column */
+.about .sec-head { margin-left: 0; margin-right: 0; max-width: none; }
+
+/* cards centre their own contents, but lists stay left-aligned to stay legible */
+.what .card, .love .card, .offer .card, .next .card { text-align: center; }
+.what .card-head, .love .card-head, .offer .card-head, .next .card-head { justify-content: center; }
+.what .card-sub, .offer .card-sub { margin-left: 0; padding-left: .5em; }
+.beats { text-align: left; max-width: 46ch; margin-inline: auto; }
+.slide p, .offer-price, .offer-sub { margin-inline: auto; }
+.next-grid .card-head { flex-direction: column; align-items: center; gap: .5em; }
+
 /* ── section headings ── */
 .sec-head {
   font-size: clamp(1.75rem, 1.15rem + 2.7vw, 3.4rem);
@@ -278,6 +302,17 @@ section { padding-block: var(--stack); }
   object-position: center 22%;
 }
 .about-copy { padding-inline: var(--gut); }
+/* second portrait, framed — floats top-right on wide screens the way the
+   reference does, and simply sits above the heading on narrow ones */
+.about-photo-2 {
+  border: var(--line);
+  width: clamp(96px, 26vw, 150px);
+  height: auto;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  object-position: center 20%;
+  margin-bottom: clamp(1rem, 3vw, 1.5rem);
+}
 .about-kicker {
   font-size: clamp(.78rem, .76rem + .2vw, .95rem);
   letter-spacing: .2em;
@@ -326,6 +361,16 @@ section { padding-block: var(--stack); }
   }
   .about-photo { aspect-ratio: 3 / 4; }
   .about-copy { padding-inline: 0 var(--gut); max-width: 640px; }
+  .about-bleed { position: relative; }
+  /* flush to the page edge at the top of the section, clear of the copy,
+     which is vertically centred and starts well below it */
+  .about-photo-2 {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: clamp(120px, 12vw, 185px);
+    margin: 0;
+  }
   .offer-grid { grid-template-columns: 1.05fr 1fr; }
   .offer-grid--single { grid-template-columns: minmax(0, 640px); }
   .next-grid  { grid-template-columns: 1fr 1fr; }
@@ -381,7 +426,7 @@ section { padding-block: var(--stack); }
 <!-- 4 ── TESTIMONIAL SLIDER ─────────────────────────────── -->
 <section class="love">
   <div class="wrap">
-    <h2 class="sec-head">What people say <span class="swash">afterwards.</span></h2>
+    <h2 class="sec-head sec-head--bold">What people are saying</h2>
 
     <div class="slider" data-interval="7000">
       <div class="slider-track" role="region" aria-label="Client testimonials" aria-live="polite">
@@ -412,6 +457,7 @@ section { padding-block: var(--stack); }
   <div class="about-bleed">
     <img class="about-photo" src="../activate-media/natalie.jpg" alt="Natalie Moore" width="825" height="1100" loading="lazy"/>
     <div class="about-copy">
+      <img class="about-photo-2" src="../activate-media/natalie-2.jpg" alt="" width="525" height="700" loading="lazy"/>
       <h2 class="sec-head sec-head--bold">Hey, what&rsquo;s up</h2>
       <p class="about-kicker">Creative director &amp; brand designer</p>
       <p>I&rsquo;m Natalie. I help founders uncover who they&rsquo;re becoming and direct the full expression of it: story, identity, aesthetic, presence. I hold the vision and guide every creative decision, so what the world sees is unmistakably you. Clients leave feeling seen, clear, and lit up. This offer comes through my partnership with Karen Fassio for the Microsoft Alumni Network.</p>
