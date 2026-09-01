@@ -375,17 +375,6 @@ section { padding-block: var(--stack); }
   object-position: center 22%;
 }
 .about-copy { padding-inline: var(--gut); }
-/* second portrait, framed — floats top-right on wide screens the way the
-   reference does, and simply sits above the heading on narrow ones */
-.about-photo-2 {
-  border: var(--line);
-  width: clamp(140px, 34vw, 210px);
-  height: auto;
-  aspect-ratio: 2 / 3;
-  object-fit: cover;
-  object-position: center center;
-  margin-bottom: clamp(1rem, 3vw, 1.5rem);
-}
 .about-kicker {
   font-size: clamp(.78rem, .76rem + .2vw, .95rem);
   letter-spacing: .2em;
@@ -829,21 +818,9 @@ section { padding-block: var(--stack); }
     gap: clamp(2.5rem, 5vw, 4.5rem);
   }
   .about-photo { aspect-ratio: 3 / 4; }
-  /* copy stops short of the framed photo's left edge, so the two never
-     overlap however tall the frame gets */
-  .about-copy { padding-inline: 0 var(--gut); max-width: 520px; }
-  .about-bleed { position: relative; }
-  /* flush to the page edge at the top of the section, clear of the copy,
-     which is vertically centred and starts well below it */
-  .about-photo-2 {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: clamp(170px, 17vw, 270px);
-    margin: 0;
-  }
+  .about-copy { padding-inline: 0 var(--gut); max-width: 620px; }
   .offer-grid { grid-template-columns: 1.05fr 1fr; }
-  .offer-grid--single { grid-template-columns: minmax(0, 640px); }
+  .offer-grid--single { grid-template-columns: minmax(0, 640px); justify-content: center; }
   .next-grid  { grid-template-columns: 1fr 1fr; }
   .shift-grid { grid-template-columns: 1fr 1fr; gap: clamp(3rem, 6vw, 5.5rem); }
 }
@@ -912,7 +889,6 @@ section { padding-block: var(--stack); }
       <div class="card-head">
         <span class="chip">90 MIN</span>
         <h2 class="card-title">90 minutes. Laser-focused.</h2>
-        <span class="card-sub">Yours.</span>
       </div>
       <ul class="beats">
         <li>We workshop who you are now, and who you&rsquo;re becoming.</li>
@@ -967,7 +943,6 @@ section { padding-block: var(--stack); }
   <div class="about-bleed">
     <img class="about-photo" src="../activate-media/natalie.jpg" alt="Natalie Moore" width="825" height="1100" loading="lazy"/>
     <div class="about-copy">
-      <img class="about-photo-2" src="../activate-media/squiggles-rose.jpg" alt="" width="467" height="700" loading="lazy"/>
       <h2 class="sec-head sec-head--bold">Hey, what&rsquo;s up</h2>
       <p class="about-kicker">Creative director &amp; brand designer</p>
       <p>I&rsquo;m Natalie. I help founders uncover who they&rsquo;re becoming and direct the full expression of it: story, identity, aesthetic, presence. I hold the vision and guide every creative decision, so what the world sees is unmistakably you. Clients leave feeling seen, clear, and lit up. This offer comes through my partnership with Karen Fassio for the Microsoft Alumni Network.</p>
@@ -978,7 +953,7 @@ section { padding-block: var(--stack); }
 <!-- 7 ── THE OFFER ───────────────────────────────────────── -->
 <section class="offer">
   <div class="wrap">
-    <h2 class="sec-head">Your investment in the <span class="swash">next iteration.</span></h2>
+    <h2 class="sec-head">Your investment in the <span class="swash">next you.</span></h2>
     <div class="offer-grid offer-grid--single">
       <div class="card card--pink" style="--accent: var(--pink);">
         <div class="card-head">
@@ -1008,7 +983,7 @@ section { padding-block: var(--stack); }
       <div class="card card--butter" style="--accent: var(--coral);">
         <div class="card-head">
           <span class="chip">02</span>
-          <h3 class="card-title">The Full Iteration &middot; $7,500</h3>
+          <h3 class="card-title">Brand World &middot; $7,500</h3>
         </div>
         <p>Brand and website, with creative direction and photos.</p>
       </div>
