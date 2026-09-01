@@ -111,6 +111,20 @@ section { padding-block: var(--stack); }
     rgba(253,244,242,.68) 76%, #fdf4f2 100%);
   pointer-events: none;
 }
+/* same photo closing the page, faded from the top so it grows out of the
+   content rather than starting on a hard edge */
+.hero-media--foot {
+  height: clamp(220px, 38vh, 420px);
+  background-position: center 42%;
+}
+.hero-media--foot::after {
+  inset: 0 0 auto 0;
+  height: 62%;
+  background: linear-gradient(to bottom,
+    #fdf4f2 0%, rgba(253,244,242,.91) 18%, rgba(253,244,242,.72) 36%,
+    rgba(253,244,242,.48) 56%, rgba(253,244,242,.22) 78%, rgba(253,244,242,0) 100%);
+}
+
 .masthead { position: absolute; top: clamp(1rem, 2.4vw, 1.7rem); left: 0; right: 0; z-index: 2; }
 /* the wordmark sits against the page edge, not the centred text column */
 .masthead .wrap { max-width: none; padding-inline: clamp(1rem, 2.2vw, 1.9rem); }
@@ -278,9 +292,8 @@ section { padding-block: var(--stack); }
 }
 
 .card-lede {
-  font-size: clamp(1.05rem, .98rem + .6vw, 1.4rem);
+  font-size: clamp(.95rem, .92rem + .42vw, 1.18rem);
   line-height: 1.35;
-  margin-bottom: clamp(1.2rem, 2.6vw, 1.8rem);
 }
 
 /* ✦ list */
@@ -346,8 +359,33 @@ section { padding-block: var(--stack); }
 }
 
 /* ── testimonial slider ── */
-.slider { position: relative; }
-.slider-track { display: grid; }
+/* arrows flank the track in their own grid columns, so they can never
+   overlap the card or push past the viewport */
+.slider {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: clamp(.4rem, 1.6vw, 1.4rem);
+}
+.slider-track { grid-column: 2; grid-row: 1; display: grid; }
+.slider-arrow {
+  grid-row: 1;
+  display: grid;
+  place-items: center;
+  width: clamp(38px, 4vw, 48px);
+  height: clamp(38px, 4vw, 48px);
+  padding: 0;
+  border: var(--line);
+  border-radius: 50%;
+  background: var(--chartreuse);
+  color: var(--ink);
+  cursor: pointer;
+  transition: background-color .3s ease;
+}
+.slider-arrow:hover, .slider-arrow:focus-visible { background: var(--lavender); }
+.slider-arrow.is-prev { grid-column: 1; }
+.slider-arrow.is-next { grid-column: 3; }
+.slider-dots { grid-column: 1 / -1; grid-row: 2; }
 .slide {
   grid-area: 1 / 1;
   opacity: 0;
@@ -901,8 +939,8 @@ section { padding-block: var(--stack); }
       <div class="card-head">
         <span class="chip">90 MIN</span>
         <h2 class="card-title">Activation Session</h2>
+        <span class="card-lede">90 minutes. Laser-focused.</span>
       </div>
-      <p class="card-lede">90 minutes. Laser-focused.</p>
       <ul class="beats">
         <li>We workshop who you are now, and who you&rsquo;re becoming.</li>
         <li>We find your brand voice and the story only you can tell.</li>
@@ -946,6 +984,12 @@ section { padding-block: var(--stack); }
         </blockquote>
 
       </div>
+      <button class="slider-arrow is-prev" type="button" aria-label="Previous testimonial">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="10,3 5,8 10,13"/></svg>
+      </button>
+      <button class="slider-arrow is-next" type="button" aria-label="Next testimonial">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="6,3 11,8 6,13"/></svg>
+      </button>
       <div class="slider-dots" role="tablist" aria-label="Choose a testimonial"></div>
     </div>
   </div>
@@ -1019,6 +1063,8 @@ section { padding-block: var(--stack); }
   </div>
 </section>
 
+<div class="hero-media hero-media--foot"></div>
+
 <div class="wf-footer">
 <section class="footer"><div class="footer-warpper"><div class="footer-parent"><div class="logo-sqrl"><img src="../images/66df7d06a89c23cac069cab9_Asset5.svg" loading="lazy" width="1042" alt="" class="squirrel-logo-footer"/></div><div class="work-together-parent"><div class="text-block-15">LET&#x27;S WORK<span class="script-txt"> Together</span></div></div><div class="getintouch-blck"><a href="../contact/" class="getintouch-blck-child w-inline-block"><div class="arrow-parent"><img src="../images/65fba8473c871871705623cd_Asset15.png" loading="lazy" width="22" alt=""/></div><div class="div-block-13"><div class="text-block-16">GET IN TOUCH</div></div></a></div><div class="rightside-footer-parent"><div class="nat-plus-img"><img src="../images/663029bb22cd0cc88b11fa91_nm-plus2.png" loading="lazy" width="510" sizes="(max-width: 767px) 100vw, 510px" alt="" srcset="../images/663029bb22cd0cc88b11fa91_nm-plus2-p-500.png 500w, ../images/663029bb22cd0cc88b11fa91_nm-plus2-p-800.png 800w, ../images/663029bb22cd0cc88b11fa91_nm-plus2.png 1042w" class="image-6"/></div><div class="rightside-footer-child"><div class="link-list"><div hoverstagger="link" class="link-text-wrapper"><a href="../" hoverstagger="text" class="link one">HOME</a><a href="../" hoverstagger="text" class="link one is-2">HOME</a></div><div hoverstagger="link" class="link-text-wrapper"><a hoverstagger="text" href="../work/" aria-current="page" class="link link2foot w--current">WORK</a><a hoverstagger="text" href="../work/" aria-current="page" class="link link2foot is-2 w--current">WORK</a></div><div hoverstagger="link" class="link-text-wrapper"><a hoverstagger="text" href="../about/" class="link link3foot">ABOUT</a><a hoverstagger="text" href="../about/" class="link link3foot is-2">ABOUT</a></div><div hoverstagger="link" class="link-text-wrapper"><a hoverstagger="text" href="../contact/" class="link">CONTACT</a><a hoverstagger="text" href="../contact/" class="link is-2">CONTACT</a></div></div></div></div></div></div><div class="credits"><div class="text-block-25"><strong class="bold-text">© 2026 MOORE DESIGN ALL RIGHTS RESERVED.</strong></div><div class="text-block-26"><strong class="bold-text-2">SITE DESIGN BY ME :)</strong></div></div></section>
 </div>
@@ -1053,6 +1099,10 @@ section { padding-block: var(--stack); }
   function start()   { if (!still) timer = setInterval(function () { show(i + 1); }, delay); }
   function stop()    { clearInterval(timer); }
   function restart() { stop(); start(); }
+
+  var prev = root.querySelector('.is-prev'), next = root.querySelector('.is-next');
+  if (prev) prev.addEventListener('click', function () { show(i - 1); restart(); });
+  if (next) next.addEventListener('click', function () { show(i + 1); restart(); });
 
   show(0);
   start();
