@@ -4,11 +4,11 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Activation Session · Natalie Moore</title>
-<meta name="description" content="A 90-minute Activation Session for Microsoft alumni ready for their next iteration — your story, your brand voice, your first real steps."/>
+<meta name="description" content="A 90-minute Activation Session for Microsoft alumni ready for their next iteration: your story, your brand voice, your first real steps."/>
 
 <meta property="og:type" content="website"/>
 <meta property="og:title" content="Activation Session · Natalie Moore"/>
-<meta property="og:description" content="A 90-minute Activation Session for Microsoft alumni ready for their next iteration — your story, your brand voice, your first real steps."/>
+<meta property="og:description" content="A 90-minute Activation Session for Microsoft alumni ready for their next iteration: your story, your brand voice, your first real steps."/>
 <meta property="og:image" content="https://natalielisa.com/activate-media/og-activate.jpg"/>
 <meta property="og:image:width" content="1200"/>
 <meta property="og:image:height" content="630"/>
@@ -23,17 +23,12 @@
 <link rel="preload" as="font" type="font/woff2" href="../fonts/ppneuemontreal-book-webfont.woff2" crossorigin/>
 <link rel="preload" as="font" type="font/woff2" href="../fonts/PPPlayground-Medium.woff2" crossorigin/>
 <link rel="stylesheet" href="../fonts.css"/>
-<noscript><style>
-  /* The embed needs JS to receive its URL. Without it, hide the empty
-     panel so the section falls back to the plain booking link. */
-  .book-frame { display: none !important; }
-</style></noscript>
 
 <style>
 /* ═══ Activation Session ═══
-   Carries the /services design language — cloud hero with a gradient fade,
+   Carries the /services design language , cloud hero with a gradient fade,
    bordered cards with a coloured accent bar and a number chip, Playground
-   swash subtitles, ✦ lists — rebuilt mobile-first with clamp() instead of
+   swash subtitles, ✦ lists , rebuilt mobile-first with clamp() instead of
    the sitewide 1vw em scale. Does not load style.css (197KB, and its global
    p-padding fights this layout); brand tokens are copied from it exactly. */
 
@@ -78,7 +73,7 @@ img { max-width: 100%; display: block; }
 h1, h2, h3 { font-weight: 400; margin: 0; letter-spacing: -.015em; }
 p { margin: 0; }
 
-.wrap { width: 100%; max-width: 1180px; margin: 0 auto; padding-inline: var(--gut); }
+.wrap { width: 100%; max-width: 1240px; margin: 0 auto; padding-inline: var(--gut); }
 section { padding-block: var(--stack); }
 .swash { font-family: var(--swash); font-weight: 500; }
 
@@ -109,16 +104,16 @@ section { padding-block: var(--stack); }
   padding-bottom: var(--stack);
 }
 .hero h1 {
-  font-size: clamp(2.1rem, 1.05rem + 4.7vw, 4.4rem);
-  line-height: 1.04;
-  margin-bottom: .48em;
-  max-width: 15ch;
+  font-size: clamp(2.25rem, 1.1rem + 5vw, 4.8rem);
+  line-height: 1.03;
+  margin-bottom: .45em;
+  max-width: 18ch;
 }
 .hero h1 .swash { font-size: 1.16em; line-height: .8; }
 .hero-sub {
   font-size: clamp(1.05rem, .95rem + .72vw, 1.45rem);
   line-height: 1.5;
-  max-width: 40ch;
+  max-width: 50ch;
   margin-bottom: clamp(1.8rem, 4vw, 2.6rem);
 }
 
@@ -133,6 +128,19 @@ section { padding-block: var(--stack); }
   transition: background-color .3s ease, color .3s ease;
 }
 .cta:hover, .cta:focus-visible { background: var(--chartreuse); color: var(--ink); }
+.cta--big {
+  padding: 1.2em 2.6em;
+  font-size: clamp(1rem, .95rem + .45vw, 1.25rem);
+}
+
+/* ── section headings ── */
+.sec-head {
+  font-size: clamp(1.75rem, 1.15rem + 2.7vw, 3.4rem);
+  line-height: 1.08;
+  max-width: 30ch;
+  margin-bottom: clamp(1.1rem, 2.6vw, 1.8rem);
+}
+.sec-head .swash { font-size: 1.14em; line-height: .8; }
 
 /* ── card anatomy, lifted from the tier cards on /services ── */
 .card {
@@ -181,19 +189,46 @@ section { padding-block: var(--stack); }
 .beats li {
   position: relative; padding-left: 1.9em;
   font-size: clamp(1rem, .95rem + .42vw, 1.22rem);
-  line-height: 1.5; max-width: 58ch;
+  line-height: 1.55; max-width: 68ch;
 }
 .beats li::before { content: "\2726"; position: absolute; left: 0; top: 0; }
 
 /* ── the mirror ── */
 .mirror p {
-  font-size: clamp(1.2rem, 1rem + 1.25vw, 2rem);
-  line-height: 1.44;
-  max-width: 26ch;
+  font-size: clamp(1.15rem, 1rem + 1.05vw, 1.75rem);
+  line-height: 1.5;
+  max-width: 46ch;
 }
 
+/* ── testimonial slider ── */
+.slider { position: relative; }
+.slider-track { display: grid; }
+.slide {
+  grid-area: 1 / 1;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity .6s ease, transform .6s ease, visibility .6s;
+}
+.slide.is-active { opacity: 1; visibility: visible; transform: none; }
+.slide p {
+  font-size: clamp(1.05rem, .98rem + .6vw, 1.42rem);
+  line-height: 1.55;
+  max-width: 62ch;
+  margin-bottom: 1.2em;
+}
+.slide footer { font-size: clamp(.78rem, .76rem + .16vw, .9rem); letter-spacing: .13em; text-transform: uppercase; }
+.slider-dots { display: flex; gap: .6rem; justify-content: center; margin-top: clamp(1.1rem, 2.5vw, 1.6rem); }
+.slider-dots button {
+  width: 11px; height: 11px; padding: 0;
+  border: var(--line); border-radius: 50%;
+  background: transparent; cursor: pointer;
+  transition: background-color .3s ease;
+}
+.slider-dots button[aria-selected="true"] { background: var(--ink); }
+
 /* ── testimonials ── */
-.quote p { font-size: clamp(1.02rem, .96rem + .5vw, 1.28rem); line-height: 1.55; max-width: 48ch; margin-bottom: 1.1em; }
+.quote p { font-size: clamp(1.02rem, .96rem + .5vw, 1.28rem); line-height: 1.6; max-width: 62ch; margin-bottom: 1.1em; }
 .quote footer { font-size: clamp(.78rem, .76rem + .16vw, .9rem); letter-spacing: .13em; text-transform: uppercase; }
 
 /* ── about ── */
@@ -203,14 +238,14 @@ section { padding-block: var(--stack); }
   width: 100%; max-width: 420px; height: auto;
   aspect-ratio: 3 / 4; object-fit: cover;
 }
-.about-grid p { font-size: clamp(1rem, .95rem + .45vw, 1.2rem); line-height: 1.6; max-width: 52ch; }
+.about-grid p { font-size: clamp(1rem, .95rem + .45vw, 1.2rem); line-height: 1.62; max-width: 60ch; }
 
 /* ── pull quotes ── */
 .pull { padding-block: clamp(2.5rem, 7vw, 5.5rem); }
 .pull p {
   font-family: var(--swash); font-weight: 500;
   font-size: clamp(1.85rem, .95rem + 5.2vw, 4rem);
-  line-height: 1.02; max-width: 20ch;
+  line-height: 1.04; max-width: 26ch;
 }
 
 /* ── offer ── */
@@ -225,11 +260,7 @@ section { padding-block: var(--stack); }
 .next-grid p { font-size: clamp(.96rem, .93rem + .3vw, 1.1rem); line-height: 1.5; }
 
 /* ── booking ── */
-.book-lead { font-size: clamp(1.15rem, 1rem + 1.05vw, 1.75rem); line-height: 1.42; max-width: 28ch; margin-bottom: clamp(1.6rem, 4vw, 2.4rem); }
-.book-frame { border: var(--line); border-radius: var(--r-card); background: var(--white); overflow: hidden; }
-.book-frame iframe { width: 100%; height: 780px; border: 0; display: block; }
-.book-fallback { margin-top: 1.3rem; font-size: clamp(.94rem, .92rem + .22vw, 1.04rem); }
-.book-fallback a { color: var(--ink); text-underline-offset: .25em; }
+.book-lead { font-size: clamp(1.15rem, 1rem + 1.05vw, 1.75rem); line-height: 1.45; max-width: 44ch; margin-bottom: clamp(1.6rem, 4vw, 2.4rem); }
 
 /* ── footer: brand mark only, no links competing with the CTA ── */
 .site-footer { padding-bottom: clamp(2.5rem, 6vw, 4rem); }
@@ -244,6 +275,7 @@ section { padding-block: var(--stack); }
 @media (min-width: 820px) {
   .about-grid { grid-template-columns: minmax(0, 400px) 1fr; gap: clamp(2.5rem, 5vw, 4rem); }
   .offer-grid { grid-template-columns: 1.05fr 1fr; }
+  .offer-grid--single { grid-template-columns: minmax(0, 640px); }
   .next-grid  { grid-template-columns: 1fr 1fr; }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -262,15 +294,16 @@ section { padding-block: var(--stack); }
 <section class="hero">
   <div class="wrap">
     <h1>You learned Microsoft&rsquo;s way. Now let&rsquo;s find <span class="swash">yours.</span></h1>
-    <p class="hero-sub">A 90-minute Activation Session for Microsoft alumni ready for their next iteration &mdash; your story, your brand voice, your first real steps.</p>
-    <a class="cta" href="#book">Book your Activation Session &mdash; $300</a>
+    <p class="hero-sub">A 90-minute Activation Session for Microsoft alumni ready for their next iteration: your story, your brand voice, your first real steps.</p>
+    <a class="cta" href="#book">Book your Activation Session &middot; $300</a>
   </div>
 </section>
 
 <!-- 2 ── THE MIRROR ──────────────────────────────────────── -->
 <section class="mirror">
   <div class="wrap">
-    <p>You&rsquo;ve spent years building someone else&rsquo;s story &mdash; brilliantly. Now there&rsquo;s something stirring that&rsquo;s entirely yours: an idea, a venture, a version of you that doesn&rsquo;t fit the old title. You can feel the potential. What you need is someone to see it with you, and help you give it a shape the world can recognize.</p>
+    <h2 class="sec-head">Something in you has <span class="swash">already turned.</span></h2>
+    <p>You&rsquo;ve spent years building someone else&rsquo;s story, brilliantly. Now there&rsquo;s something stirring that&rsquo;s entirely yours: an idea, a venture, a version of you that doesn&rsquo;t fit the old title. You can feel the potential. What you need is someone to see it with you, and help you give it a shape the world can recognize.</p>
   </div>
 </section>
 
@@ -284,30 +317,60 @@ section { padding-block: var(--stack); }
         <span class="card-sub">Yours.</span>
       </div>
       <ul class="beats">
-        <li>We workshop who you are now &mdash; and who you&rsquo;re becoming.</li>
+        <li>We workshop who you are now, and who you&rsquo;re becoming.</li>
         <li>We find your brand voice and the story only you can tell.</li>
-        <li>You leave with a vivid picture of your next iteration &mdash; your positioning, your voice &mdash; and a clear creative direction you can run with.</li>
+        <li>You leave with a vivid picture of your next iteration, your positioning and your voice, plus a clear creative direction you can run with.</li>
       </ul>
     </div>
   </div>
 </section>
 
-<!-- 4 ── ANCHOR TESTIMONIAL ──────────────────────────────── -->
-<section class="anchor">
+<!-- 4 ── TESTIMONIAL SLIDER ─────────────────────────────── -->
+<section class="love">
   <div class="wrap">
-    <blockquote class="card quote" style="--accent: var(--lavender);">
-      <p>She took the time to sit with me and go over all my ideas and intentions. Through our conversations I was able to get clearer with what I actually vision for my business. She broke it all down for me &mdash; from thoughts in my head to direct messages to share. I walked away feeling so good about my offerings.</p>
-      <footer>Sabrina &middot; brand &amp; offer clarity</footer>
-    </blockquote>
+    <h2 class="sec-head">What people say <span class="swash">afterwards.</span></h2>
+
+    <div class="slider" data-interval="7000">
+      <div class="slider-track" role="region" aria-label="Client testimonials" aria-live="polite">
+
+        <blockquote class="slide card" style="--accent: var(--lavender);">
+          <p>She took the time to sit with me and go over all my ideas and intentions. Through our conversations I was able to get clearer with what I actually vision for my business. She broke it all down for me, from thoughts in my head to direct messages to share. I walked away feeling so good about my offerings.</p>
+          <footer>Sabrina &middot; brand &amp; offer clarity</footer>
+        </blockquote>
+
+        <blockquote class="slide card" style="--accent: var(--chartreuse);">
+          <p>I am obsessed with my website by Natalie Moore. It was such a beautiful, in depth, personal, soulful creative experience. She is edgy and brilliant, present, passionate and sophisticated. She reigned me in and deftly crafted the correct frame for my offering while listening to my input, worked with me to extract the jewels and transformed my ideas into something so edgy, elegant and so me.</p>
+          <footer>Qristine &middot; neonsoulpath.com</footer>
+        </blockquote>
+
+        <blockquote class="slide card" style="--accent: var(--coral);">
+          <p>Natalie significantly transformed my website, branding, and logo. Initially hesitant to delegate such personal aspects of my business, I was pleasantly surprised by how she captured and embodied my values and vision into the design. Her creative flair and ability to guide the project while respecting my input made the collaboration effortless and rewarding.</p>
+          <footer>Kandra &middot; kandraalaya.com</footer>
+        </blockquote>
+
+        <blockquote class="slide card" style="--accent: var(--pink);">
+          <p>Natalie infused the project with creative ideas while ensuring my own concepts were incorporated effectively. I was consistently impressed by her diligence, meticulously refining every detail of the logo and website. The impact of her work on my business has been profound; clients frequently commend the quality of the website.</p>
+          <footer>Caroline &middot; flowbrainhealth.com</footer>
+        </blockquote>
+
+        <blockquote class="slide card" style="--accent: var(--light-pink);">
+          <p>A beautiful co-creation where I felt like she really took into account my needs and desires, and used her amazing gifts to create an identity for my brand that really represents who I am and what I&rsquo;m here to offer the world.</p>
+          <footer>Client &middot; brand identity</footer>
+        </blockquote>
+
+      </div>
+      <div class="slider-dots" role="tablist" aria-label="Choose a testimonial"></div>
+    </div>
   </div>
 </section>
 
 <!-- 5 ── ABOUT ───────────────────────────────────────────── -->
 <section class="about">
   <div class="wrap">
+    <h2 class="sec-head">The person holding the <span class="swash">vision with you.</span></h2>
     <div class="about-grid">
       <img class="about-photo" src="../activate-media/natalie.jpg" alt="Natalie Moore" width="825" height="1100" loading="lazy"/>
-      <p>I&rsquo;m Natalie &mdash; creative director and brand designer. I help founders and entrepreneurs uncover who they&rsquo;re becoming and direct the full expression of it: story, identity, aesthetic, presence. I hold the vision, guide every creative decision, and make sure what the world sees is unmistakably you. Clients tell me they leave feeling seen, clear, and lit up. This offer comes through my partnership with Karen Fassio for the Microsoft Alumni Network.</p>
+      <p>I&rsquo;m Natalie, creative director and brand designer. I help founders and entrepreneurs uncover who they&rsquo;re becoming and direct the full expression of it: story, identity, aesthetic, presence. I hold the vision, guide every creative decision, and make sure what the world sees is unmistakably you. Clients tell me they leave feeling seen, clear, and lit up. This offer comes through my partnership with Karen Fassio for the Microsoft Alumni Network.</p>
     </div>
   </div>
 </section>
@@ -320,19 +383,16 @@ section { padding-block: var(--stack); }
 <!-- 7 ── THE OFFER ───────────────────────────────────────── -->
 <section class="offer">
   <div class="wrap">
-    <div class="offer-grid">
+    <h2 class="sec-head">Your investment in the <span class="swash">next iteration.</span></h2>
+    <div class="offer-grid offer-grid--single">
       <div class="card card--pink" style="--accent: var(--pink);">
         <div class="card-head">
           <span class="chip">THE OFFER</span>
           <span class="card-sub">Activate.</span>
         </div>
-        <p class="offer-price">Usually $500 &mdash; $300 for the first five alumni who book.</p>
-        <p class="offer-sub">And if we keep working together, your full $300 credits toward any package &mdash; the session pays for itself.</p>
+        <p class="offer-price">Usually $500. Just $300 for the first five alumni who book.</p>
+        <p class="offer-sub">And if we keep working together, your full $300 credits toward any package, so the session pays for itself.</p>
       </div>
-      <blockquote class="quote">
-        <p>A beautiful co-creation where I felt like she really took into account my needs and desires, and used her amazing gifts to create an identity for my brand that really represents who I am and what I&rsquo;m here to offer the world.</p>
-        <footer>Client &middot; brand identity</footer>
-      </blockquote>
     </div>
   </div>
 </section>
@@ -340,19 +400,20 @@ section { padding-block: var(--stack); }
 <!-- 8 ── WHAT COMES NEXT ─────────────────────────────────── -->
 <section class="next">
   <div class="wrap">
+    <h2 class="sec-head">Where this can go <span class="swash">from here.</span></h2>
     <p class="next-intro">Most people start with the session. Some keep going.</p>
     <div class="next-grid">
       <div class="card card--butter" style="--accent: var(--lavender);">
         <div class="card-head">
           <span class="chip">01</span>
-          <h3 class="card-title">Brand Foundations &mdash; $3,500</h3>
+          <h3 class="card-title">Brand Foundations &middot; $3,500</h3>
         </div>
         <p>Logo, brand voice, full visual identity, storytelling.</p>
       </div>
       <div class="card card--butter" style="--accent: var(--coral);">
         <div class="card-head">
           <span class="chip">02</span>
-          <h3 class="card-title">The Full Iteration &mdash; $7,500</h3>
+          <h3 class="card-title">The Full Iteration &middot; $7,500</h3>
         </div>
         <p>Brand and website, with creative direction and photos.</p>
       </div>
@@ -362,21 +423,15 @@ section { padding-block: var(--stack); }
 
 <!-- 9 ── PULL QUOTE ──────────────────────────────────────── -->
 <section class="pull">
-  <div class="wrap"><p>&ldquo;I&rsquo;m so happy with this &mdash; you understood the essence.&rdquo;</p></div>
+  <div class="wrap"><p>&ldquo;I&rsquo;m so happy with this. You understood the essence.&rdquo;</p></div>
 </section>
 
 <!-- 10 ── BOOKING ───────────────────────────────────────── -->
 <section class="book" id="book">
   <div class="wrap">
-    <p class="book-lead">Come as you are &mdash; half-formed idea or blank page. Your next chapter is closer than you think. Let&rsquo;s activate it, and <span class="swash">more.</span></p>
-
-    <!-- ══ ONE LINE TO CHANGE: the booking event URL ══
-         Currently points at the free 30-min Clarity Call. Swap for the paid
-         90-minute Activation Session event once it exists. ══ -->
-    <div class="book-frame" data-book-url="https://calendly.com/moorenatalisa/30min">
-      <iframe title="Book your Activation Session" loading="lazy" src="about:blank"></iframe>
-    </div>
-    <p class="book-fallback">Booking not loading? <a href="https://calendly.com/moorenatalisa/30min" rel="noopener">Open the booking page in a new tab &rarr;</a></p>
+    <h2 class="sec-head">Let’s <span class="swash">activate it.</span></h2>
+    <p class="book-lead">Come as you are, half-formed idea or blank page. Your next chapter is closer than you think. Let&rsquo;s activate it, and <span class="swash">more.</span></p>
+    <a class="cta cta--big" href="https://calendly.com/moorenatalisa/30min" target="_blank" rel="noopener">Ready to Activate? Book now</a>
   </div>
 </section>
 
@@ -390,24 +445,44 @@ section { padding-block: var(--stack); }
 </footer>
 
 <script>
+/* Auto-advancing testimonial slider. Pauses on hover/focus and for anyone
+   who prefers reduced motion; dots stay clickable either way. */
 (function () {
-  var frame = document.querySelector('.book-frame');
-  var url   = frame && frame.getAttribute('data-book-url');
-  var fb    = document.querySelector('.book-fallback');
+  var root = document.querySelector('.slider');
+  if (!root) return;
+  var slides = [].slice.call(root.querySelectorAll('.slide'));
+  var dots   = root.querySelector('.slider-dots');
+  var delay  = parseInt(root.getAttribute('data-interval'), 10) || 7000;
+  var i = 0, timer = null;
+  var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  if (!url || url.indexOf('YOUR-HANDLE') > -1) {
-    /* No event wired yet — hide the empty panel and end on a real button. */
-    frame.style.display = 'none';
-    fb.innerHTML = '<a class="cta" href="#book" rel="noopener">Book your Activation Session &mdash; $300</a>';
-    return;
+  slides.forEach(function (s, n) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.setAttribute('role', 'tab');
+    b.setAttribute('aria-label', 'Testimonial ' + (n + 1));
+    b.addEventListener('click', function () { show(n); restart(); });
+    dots.appendChild(b);
+  });
+  var buttons = [].slice.call(dots.children);
+
+  function show(n) {
+    i = (n + slides.length) % slides.length;
+    slides.forEach(function (s, k) { s.classList.toggle('is-active', k === i); });
+    buttons.forEach(function (b, k) { b.setAttribute('aria-selected', k === i ? 'true' : 'false'); });
   }
-  /* Inline embed params keep the scheduler flush inside the card and drop the
-     cookie banner. No third-party script needed — just the iframe. */
-  var sep = url.indexOf('?') > -1 ? '&' : '?';
-  frame.querySelector('iframe').src = url + sep +
-    'embed_domain=natalielisa.com&embed_type=Inline&hide_gdpr_banner=1';
-  fb.querySelector('a').href = url;
+  function start()   { if (!still) timer = setInterval(function () { show(i + 1); }, delay); }
+  function stop()    { clearInterval(timer); }
+  function restart() { stop(); start(); }
+
+  show(0);
+  start();
+  root.addEventListener('mouseenter', stop);
+  root.addEventListener('mouseleave', start);
+  root.addEventListener('focusin', stop);
+  root.addEventListener('focusout', start);
 })();
+
 </script>
 
 </body>
