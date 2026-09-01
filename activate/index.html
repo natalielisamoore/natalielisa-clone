@@ -368,6 +368,7 @@ section { padding-block: var(--stack); }
 .about { padding-inline: 0; }
 .about-bleed { display: grid; gap: clamp(1.6rem, 4vw, 3rem); align-items: center; }
 .about-photo {
+  border: var(--line);
   width: 100%; height: auto;
   aspect-ratio: 4 / 5;
   object-fit: cover;
@@ -378,7 +379,7 @@ section { padding-block: var(--stack); }
    reference does, and simply sits above the heading on narrow ones */
 .about-photo-2 {
   border: var(--line);
-  width: clamp(96px, 26vw, 150px);
+  width: clamp(140px, 34vw, 210px);
   height: auto;
   aspect-ratio: 2 / 3;
   object-fit: cover;
@@ -828,7 +829,9 @@ section { padding-block: var(--stack); }
     gap: clamp(2.5rem, 5vw, 4.5rem);
   }
   .about-photo { aspect-ratio: 3 / 4; }
-  .about-copy { padding-inline: 0 var(--gut); max-width: 640px; }
+  /* copy stops short of the framed photo's left edge, so the two never
+     overlap however tall the frame gets */
+  .about-copy { padding-inline: 0 var(--gut); max-width: 520px; }
   .about-bleed { position: relative; }
   /* flush to the page edge at the top of the section, clear of the copy,
      which is vertically centred and starts well below it */
@@ -836,7 +839,7 @@ section { padding-block: var(--stack); }
     position: absolute;
     top: 0;
     right: 0;
-    width: clamp(120px, 12vw, 185px);
+    width: clamp(170px, 17vw, 270px);
     margin: 0;
   }
   .offer-grid { grid-template-columns: 1.05fr 1fr; }
