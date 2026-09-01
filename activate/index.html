@@ -93,6 +93,9 @@ p { margin: 0; }
 
 .wrap { width: 100%; max-width: 1240px; margin: 0 auto; padding-inline: var(--gut); }
 section { padding-block: var(--stack); }
+/* the footer carries its own spacing from the sitewide CSS; the blanket
+   section padding above was adding 70px it does not have on other pages */
+.wf-footer section { padding-block: 0; }
 .swash { font-family: var(--swash); font-weight: 500; }
 
 /* ── hero: cloud photo, content lifted into its faded lower half ── */
@@ -209,7 +212,6 @@ section { padding-block: var(--stack); }
 .mirror p, .next-intro, .pull p, .book-lead,
 .sec-head { margin-left: auto; margin-right: auto; }
 .hero h1 { max-width: 20ch; }
-.mirror p { max-width: 52ch; }
 .pull p { max-width: 28ch; }
 .book-lead { max-width: 46ch; }
 .sec-head { max-width: 34ch; }
@@ -309,7 +311,7 @@ section { padding-block: var(--stack); }
 .mirror p {
   font-size: clamp(1.15rem, 1rem + 1.05vw, 1.75rem);
   line-height: 1.5;
-  max-width: 46ch;
+  max-width: 62ch;
 }
 
 /* ── the shift: full-bleed dark band, the page's one hard contrast ── */
