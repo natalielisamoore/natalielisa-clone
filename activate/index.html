@@ -175,6 +175,12 @@ section { padding-block: var(--stack); }
   transition: background-color .3s ease, color .3s ease;
 }
 .cta:hover, .cta:focus-visible { background: var(--chartreuse); color: var(--ink); }
+.cta--ghost {
+  background: transparent;
+  color: var(--ink);
+  margin-top: clamp(1.8rem, 4vw, 2.6rem);
+}
+.cta--ghost:hover, .cta--ghost:focus-visible { background: var(--chartreuse); color: var(--ink); }
 .cta--big {
   padding: 1.2em 2.6em;
   min-width: 15em;
@@ -988,6 +994,7 @@ section { padding-block: var(--stack); }
         <p>Brand and website, with creative direction and photos.</p>
       </div>
     </div>
+    <a class="cta cta--ghost" href="../services/">Explore services</a>
   </div>
 </section>
 
