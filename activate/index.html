@@ -277,6 +277,12 @@ section { padding-block: var(--stack); }
   margin-left: auto; padding-left: .6em;
 }
 
+.card-lede {
+  font-size: clamp(1.05rem, .98rem + .6vw, 1.4rem);
+  line-height: 1.35;
+  margin-bottom: clamp(1.2rem, 2.6vw, 1.8rem);
+}
+
 /* ✦ list */
 .beats { list-style: none; margin: 0; padding: 0; display: grid; gap: clamp(.85rem, 2vw, 1.25rem); }
 .beats li {
@@ -894,8 +900,9 @@ section { padding-block: var(--stack); }
     <div class="card" style="--accent: var(--chartreuse);">
       <div class="card-head">
         <span class="chip">90 MIN</span>
-        <h2 class="card-title">90 minutes. Laser-focused.</h2>
+        <h2 class="card-title">Activation Session</h2>
       </div>
+      <p class="card-lede">90 minutes. Laser-focused.</p>
       <ul class="beats">
         <li>We workshop who you are now, and who you&rsquo;re becoming.</li>
         <li>We find your brand voice and the story only you can tell.</li>
