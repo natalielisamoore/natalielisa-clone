@@ -261,6 +261,52 @@ section { padding-block: var(--stack); }
   max-width: 46ch;
 }
 
+/* ── the shift: full-bleed dark band, the page's one hard contrast ── */
+.shift {
+  background: #17151a;
+  color: #fff;
+  text-align: left;
+  padding-block: clamp(3rem, 7vw, 5.5rem);
+}
+.shift-grid { display: grid; gap: clamp(2.2rem, 5vw, 4rem); }
+.shift-head {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -.01em;
+  font-size: clamp(1.15rem, 1rem + .8vw, 1.6rem);
+  margin-bottom: clamp(1.2rem, 2.6vw, 1.8rem);
+}
+.shift-col--after .shift-head { color: var(--chartreuse); }
+.shift-list { list-style: none; margin: 0; padding: 0; display: grid; gap: clamp(.85rem, 1.8vw, 1.15rem); }
+.shift-list li {
+  position: relative;
+  padding-left: 2.1em;
+  font-size: clamp(.98rem, .94rem + .38vw, 1.14rem);
+  line-height: 1.5;
+}
+.shift-list li::before {
+  position: absolute;
+  left: 0;
+  top: .04em;
+  width: 1.35em; height: 1.35em;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: .82em;
+  line-height: 1;
+}
+.shift-col .shift-list li::before {
+  content: "\00D7";
+  background: #fff;
+  color: #17151a;
+}
+.shift-col--after .shift-list li { color: var(--chartreuse); }
+.shift-col--after .shift-list li::before {
+  content: "\2713";
+  background: var(--chartreuse);
+  color: #17151a;
+}
+
 /* ── testimonial slider ── */
 .slider { position: relative; }
 .slider-track { display: grid; }
@@ -345,14 +391,71 @@ section { padding-block: var(--stack); }
 .book-lead { font-size: clamp(1.15rem, 1rem + 1.05vw, 1.75rem); line-height: 1.45; max-width: 44ch; margin-bottom: clamp(1.6rem, 4vw, 2.4rem); }
 
 /* ── footer: brand mark only, no links competing with the CTA ── */
-.site-footer { padding-bottom: clamp(2.5rem, 6vw, 4rem); }
-.site-footer .inner {
-  border-top: var(--line);
-  padding-top: clamp(1.4rem, 3vw, 2rem);
-  display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+
+/* ── footer, rebuilt from the sitewide one so this page stays self-contained ── */
+.site-footer { background: var(--ivory); padding-top: clamp(1.5rem, 4vw, 3rem); text-align: left; }
+.f-wrap {
+  position: relative;
+  width: 95%;
+  margin: 0 auto;
+  border: var(--line);
+  border-radius: var(--r-card);
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  display: grid;
+  gap: clamp(1.5rem, 4vw, 2.5rem);
+  align-items: end;
 }
-.site-footer img { width: clamp(46px, 6vw, 70px); }
-.site-footer span { font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; }
+.f-squirrel { width: clamp(110px, 16vw, 160px); margin-bottom: clamp(1rem, 3vw, 2rem); }
+.f-worktogether {
+  font-family: var(--sans);
+  font-size: clamp(1.9rem, 1.1rem + 3.4vw, 3.7rem);
+  line-height: 1.05;
+  margin-bottom: .35em;
+}
+.f-script {
+  font-family: var(--swash);
+  font-weight: 500;
+  font-size: 1.45em;
+  line-height: 0;
+  margin-left: -.06em;
+}
+.f-touch {
+  position: relative;
+  display: block;
+  border: var(--line);
+  border-radius: 15px;
+  background-image: linear-gradient(103deg, var(--coral), var(--light-pink));
+  min-height: clamp(90px, 12vw, 120px);
+  padding: clamp(.7rem, 2vw, 1rem);
+  text-decoration: none;
+  color: var(--ink);
+  transition: background .3s ease;
+}
+.f-touch:hover { background-image: none; background-color: var(--chartreuse); }
+.f-touch-label { font-weight: 500; font-size: clamp(1rem, .95rem + .5vw, 1.5rem); }
+.f-arrow { position: absolute; right: 5%; bottom: 10%; width: 22px; }
+.f-right { display: flex; flex-direction: column; gap: clamp(1rem, 3vw, 1.6rem); }
+.f-plus { width: min(100%, 320px); margin-left: auto; }
+.f-links { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.f-links a {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: clamp(1rem, .9rem + .7vw, 1.65rem);
+  color: var(--ink);
+  text-decoration: none;
+}
+.f-links a:hover { text-decoration: underline; text-underline-offset: .25em; }
+.f-credits {
+  width: 95%;
+  margin: 0 auto;
+  padding-block: clamp(1rem, 2.5vw, 1.6rem);
+  display: flex;
+  justify-content: space-between;
+  gap: .8rem;
+  flex-wrap: wrap;
+  font-size: clamp(.7rem, .68rem + .18vw, .82rem);
+  letter-spacing: .06em;
+}
 
 @media (min-width: 820px) {
   .about-bleed {
@@ -374,6 +477,10 @@ section { padding-block: var(--stack); }
   .offer-grid { grid-template-columns: 1.05fr 1fr; }
   .offer-grid--single { grid-template-columns: minmax(0, 640px); }
   .next-grid  { grid-template-columns: 1fr 1fr; }
+  .shift-grid { grid-template-columns: 1fr 1fr; gap: clamp(3rem, 6vw, 5.5rem); }
+  .f-wrap { grid-template-columns: 1fr 1fr; min-height: 420px; padding-top: clamp(5rem, 9vw, 7rem); }
+  .f-squirrel { position: absolute; top: clamp(1.5rem, 3vw, 2.2rem); left: clamp(1.5rem, 3vw, 2.2rem); margin: 0; }
+  .f-touch { width: 70%; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -402,6 +509,34 @@ section { padding-block: var(--stack); }
   <div class="wrap">
     <h2 class="sec-head">Something in you has <span class="swash">already turned.</span></h2>
     <p>You&rsquo;ve spent years building someone else&rsquo;s story, brilliantly. Now something is stirring that&rsquo;s entirely yours: an idea, a venture, a version of you that doesn&rsquo;t fit the old title. You can feel it. What you need is someone to see it with you, and give it a shape the world recognizes.</p>
+  </div>
+</section>
+
+<!-- ── THE SHIFT ─────────────────────────────────────────── -->
+<section class="shift">
+  <div class="wrap">
+    <div class="shift-grid">
+      <div class="shift-col">
+        <h2 class="shift-head">Right now:</h2>
+        <ul class="shift-list">
+          <li>The title that explained you for years is behind you.</li>
+          <li>You can picture what you want to build. You cannot say it out loud yet.</li>
+          <li>You describe your work in the language of a job you already left.</li>
+          <li>The genius is real. The container for it is not built.</li>
+          <li>You are waiting to feel ready before you start.</li>
+        </ul>
+      </div>
+      <div class="shift-col shift-col--after">
+        <h2 class="shift-head">After 90 minutes:</h2>
+        <ul class="shift-list">
+          <li>Clear on who you are now, and who you are becoming.</li>
+          <li>A brand voice that sounds like you instead of an org chart.</li>
+          <li>Words for your work that land the first time you say them.</li>
+          <li>A creative direction you can act on this week.</li>
+          <li>Your genius pointed at the thing only you can build.</li>
+        </ul>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -521,11 +656,28 @@ section { padding-block: var(--stack); }
 </section>
 
 <footer class="site-footer">
-  <div class="wrap">
-    <div class="inner">
-      <img src="../images/66df7d06a89c23cac069cab9_Asset5.svg" alt="" width="70" height="70" loading="lazy"/>
-      <span>&copy; 2026 Moore Design</span>
+  <div class="f-wrap">
+    <img class="f-squirrel" src="../images/66df7d06a89c23cac069cab9_Asset5.svg" alt="" loading="lazy"/>
+    <div class="f-left">
+      <p class="f-worktogether">LET&rsquo;S WORK<span class="f-script"> Together</span></p>
+      <a class="f-touch" href="../contact/">
+        <span class="f-touch-label">GET IN TOUCH</span>
+        <img class="f-arrow" src="../images/65fba8473c871871705623cd_Asset15.png" alt="" width="22" loading="lazy"/>
+      </a>
     </div>
+    <div class="f-right">
+      <img class="f-plus" src="../images/663029bb22cd0cc88b11fa91_nm-plus2.png" alt="" loading="lazy"/>
+      <nav class="f-links">
+        <a href="../">HOME</a>
+        <a href="../work/">WORK</a>
+        <a href="../about/">ABOUT</a>
+        <a href="../contact/">CONTACT</a>
+      </nav>
+    </div>
+  </div>
+  <div class="f-credits">
+    <strong>&copy; 2026 MOORE DESIGN ALL RIGHTS RESERVED.</strong>
+    <strong>SITE DESIGN BY ME :)</strong>
   </div>
 </footer>
 
