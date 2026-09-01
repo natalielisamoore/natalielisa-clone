@@ -23,6 +23,19 @@
 <link rel="preload" as="font" type="font/woff2" href="../fonts/ppneuemontreal-book-webfont.woff2" crossorigin/>
 <link rel="preload" as="font" type="font/woff2" href="../fonts/PPPlayground-Medium.woff2" crossorigin/>
 <link rel="stylesheet" href="../fonts.css"/>
+<style>
+/* The copied footer CSS names fonts by their Webflow family names. Map those
+   onto the same local files fonts.css already serves, so no CDN is needed. */
+@font-face { font-family: 'Ppneuemontreal Book'; font-weight: 400; font-display: swap;
+  src: url('../fonts/ppneuemontreal-book-webfont.woff2') format('woff2'),
+       url('../fonts/ppneuemontreal-book-webfont.woff') format('woff'); }
+@font-face { font-family: 'Ppneuemontreal Medium'; font-weight: 400; font-display: swap;
+  src: url('../fonts/ppneuemontreal-medium-webfont.woff2') format('woff2'),
+       url('../fonts/ppneuemontreal-medium-webfont.woff') format('woff'); }
+@font-face { font-family: 'Ppplayground'; font-weight: 500; font-display: swap;
+  src: url('../fonts/PPPlayground-Medium.woff2') format('woff2'),
+       url('../fonts/PPPlayground-Medium.woff') format('woff'); }
+</style>
 
 <style>
 /* ═══ Activation Session ═══
@@ -42,6 +55,11 @@
   --pink:       #ff62c3;
   --ink:        #000;
   --white:      #fff;
+
+  /* aliases the copied footer CSS expects (--chartuese is the sitewide spelling) */
+  --black:      #000;
+  --orange:     #ff5434;
+  --chartuese:  #deff38;
 
   --sans:  'PP Neue Montreal', system-ui, sans-serif;
   --swash: 'PP Playground', 'PP Neue Montreal', cursive;
@@ -195,6 +213,14 @@ section { padding-block: var(--stack); }
   margin-bottom: clamp(1.1rem, 2.6vw, 1.8rem);
 }
 .sec-head .swash { font-size: 1.14em; line-height: .8; }
+/* the script word opts out of the bold caps treatment around it */
+.sec-head--bold .swash {
+  text-transform: none;
+  font-weight: 500;
+  font-size: 1.3em;
+  line-height: .8;
+  letter-spacing: 0;
+}
 .sec-head--bold {
   font-weight: 700;
   text-transform: uppercase;
@@ -392,69 +418,408 @@ section { padding-block: var(--stack); }
 
 /* ── footer: brand mark only, no links competing with the CTA ── */
 
-/* ── footer, rebuilt from the sitewide one so this page stays self-contained ── */
-.site-footer { background: var(--ivory); padding-top: clamp(1.5rem, 4vw, 3rem); text-align: left; }
-.f-wrap {
-  position: relative;
-  width: 95%;
-  margin: 0 auto;
-  border: var(--line);
-  border-radius: var(--r-card);
-  padding: clamp(1.5rem, 4vw, 2.5rem);
-  display: grid;
-  gap: clamp(1.5rem, 4vw, 2.5rem);
-  align-items: end;
+
+
+/* ══ Footer, lifted verbatim from the sitewide stylesheet ══
+   The rules below are copied unchanged from style.css. They are written in em
+   against the sitewide `body { font-size: 1vw }`, so the wrapper restores that
+   base — the footer then computes pixel-identical to every other page. ══ */
+.wf-footer {
+  font-size: 1vw;
+  line-height: 20px;
+  font-family: 'PP Neue Montreal', 'Ppneuemontreal Book', sans-serif;
+  color: #000;
+  text-align: left;
 }
-.f-squirrel { width: clamp(110px, 16vw, 160px); margin-bottom: clamp(1rem, 3vw, 2rem); }
-.f-worktogether {
-  font-family: var(--sans);
-  font-size: clamp(1.9rem, 1.1rem + 3.4vw, 3.7rem);
-  line-height: 1.05;
-  margin-bottom: .35em;
+.wf-footer img { max-width: 100%; display: inline-block; }
+.wf-footer a { text-decoration: none; }
+.w-inline-block {
+  max-width: 100%;
+  display: inline-block;
 }
-.f-script {
-  font-family: var(--swash);
+.script-txt {
+  color: var(--black);
+  margin-left: -16px;
+  font-family: Ppplayground, sans-serif;
+  font-size: 1.7em;
   font-weight: 500;
-  font-size: 1.45em;
   line-height: 0;
-  margin-left: -.06em;
 }
-.f-touch {
-  position: relative;
+.script-txt.blacktxt {
+  color: var(--black);
+  margin-left: 0;
+  padding-right: .1em;
+  font-size: 1.8em;
+}
+.script-txt.pink-text {
+  color: var(--lavender);
+  margin-left: 0;
+  padding-left: .1em;
+  font-size: 1.8em;
+}
+.footer {
+  background-color: var(--ivory);
+  justify-content: center;
+  align-items: flex-end;
+  padding-left: 0;
+  padding-right: 0;
   display: block;
-  border: var(--line);
-  border-radius: 15px;
-  background-image: linear-gradient(103deg, var(--coral), var(--light-pink));
-  min-height: clamp(90px, 12vw, 120px);
-  padding: clamp(.7rem, 2vw, 1rem);
-  text-decoration: none;
-  color: var(--ink);
-  transition: background .3s ease;
+  position: static;
 }
-.f-touch:hover { background-image: none; background-color: var(--chartreuse); }
-.f-touch-label { font-weight: 500; font-size: clamp(1rem, .95rem + .5vw, 1.5rem); }
-.f-arrow { position: absolute; right: 5%; bottom: 10%; width: 22px; }
-.f-right { display: flex; flex-direction: column; gap: clamp(1rem, 3vw, 1.6rem); }
-.f-plus { width: min(100%, 320px); margin-left: auto; }
-.f-links { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
-.f-links a {
-  font-family: var(--sans);
-  font-weight: 500;
-  font-size: clamp(1rem, .9rem + .7vw, 1.65rem);
-  color: var(--ink);
-  text-decoration: none;
-}
-.f-links a:hover { text-decoration: underline; text-underline-offset: .25em; }
-.f-credits {
+.footer-warpper {
+  background-color: var(--ivory);
+  object-fit: fill;
+  border: 1px solid #000;
+  border-radius: 20px;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
   width: 95%;
-  margin: 0 auto;
-  padding-block: clamp(1rem, 2.5vw, 1.6rem);
+  height: 500px;
+  margin-bottom: 0;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  position: static;
+}
+.logo-sqrl {
+  justify-content: center;
+  align-self: auto;
+  align-items: flex-end;
+  width: 140px;
+  margin-top: 2em;
+  margin-bottom: 2em;
+  margin-left: 2em;
+  display: block;
+  position: absolute;
+  inset: 0% auto auto 0%;
+}
+.squirrel-logo-footer {
+  margin-bottom: 0;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 1em;
+  display: block;
+  position: static;
+  inset: auto auto 0% 0%;
+}
+.footer-parent {
+  flex-flow: column;
+  justify-content: flex-end;
+  align-items: stretch;
+  width: 99%;
+  height: 100%;
   display: flex;
+  position: relative;
+}
+.getintouch-blck {
+  background-color: #0000;
+  background-image: linear-gradient(103deg, var(--orange), var(--light-pink));
+  border: 1px #000;
+  border-radius: 15px;
+  width: 33%;
+  height: 26%;
+  margin-top: 1em;
+  margin-bottom: 10px;
+  margin-left: 11px;
+}
+.getintouch-blck:hover {
+  background-color: var(--chartuese);
+  background-image: none;
+  border: 1px #000;
+}
+.text-block-15 {
+  color: #000;
+  margin-top: 0;
+  margin-bottom: .1em;
+  margin-left: 10px;
+  font-family: Ppneuemontreal Book, sans-serif;
+  font-size: 3.7em;
+  line-height: 60px;
+  position: static;
+  top: 203.586px;
+}
+.work-together-parent {
+  justify-content: flex-start;
+  align-items: center;
+  width: 50%;
+  margin-top: 3em;
+  margin-bottom: .8em;
+  line-height: 13px;
+  display: flex;
+}
+.getintouch-blck-child {
+  z-index: 0;
+  border: 1px solid #000;
+  border-radius: 15px;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.text-block-16 {
+  color: #000;
+  text-align: left;
+  margin-top: 10px;
+  margin-left: 10px;
+  font-family: Ppneuemontreal Medium, sans-serif;
+  font-size: 1.5em;
+}
+.arrow-parent {
+  position: absolute;
+  inset: auto 3% 8% auto;
+}
+.div-block-13 {
+  position: absolute;
+}
+.rightside-footer-parent {
+  order: 0;
+  justify-content: flex-end;
+  align-items: center;
+  width: 40%;
+  height: 100%;
+  display: flex;
+  position: absolute;
+  inset: 0% 0% 0% auto;
+}
+.rightside-footer-child {
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  flex-flow: row;
   justify-content: space-between;
-  gap: .8rem;
-  flex-wrap: wrap;
-  font-size: clamp(.7rem, .68rem + .18vw, .82rem);
-  letter-spacing: .06em;
+  align-items: flex-end;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 0;
+  margin-right: 1em;
+  display: flex;
+  position: absolute;
+}
+.link {
+  color: #000;
+  font-family: Ppneuemontreal Medium, sans-serif;
+  font-size: 2em;
+  text-decoration: none;
+}
+.link:hover, .link.link2foot:hover {
+  color: var(--black);
+}
+.link.link2foot.is-2 {
+  position: absolute;
+  inset: 0% auto auto 0%;
+}
+.link.link3foot:hover {
+  color: var(--black);
+}
+.link.link3foot.is-2 {
+  position: absolute;
+  inset: 0% auto auto 0%;
+}
+.link.one.w--current {
+  font-size: 2em;
+}
+.link.one.is-2.w--current {
+  position: absolute;
+  inset: 0% auto auto 0%;
+}
+.link.one.is-2.w--current:hover {
+  color: var(--black);
+}
+.link.is-2 {
+  position: absolute;
+  inset: 0% auto auto 0%;
+}
+.link-list {
+  flex-flow: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+  display: flex;
+}
+.nat-plus-img {
+  object-fit: contain;
+  justify-content: flex-end;
+  align-items: flex-end;
+  margin-bottom: 0;
+  margin-right: 1em;
+  padding-bottom: 1em;
+  display: flex;
+}
+.image-6 {
+  width: 80%;
+  display: block;
+}
+.credits {
+  color: #000;
+  justify-content: space-between;
+  align-items: center;
+  width: 95%;
+  height: 57px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+}
+.bold-text, .bold-text-2 {
+  font-size: 1em;
+  font-weight: 400;
+}
+.link-text-wrapper {
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  line-height: 30px;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+}
+@media screen and (max-width: 991px) {
+.script-txt.pink-text {
+    font-size: 1.8em;
+}
+.logo-sqrl {
+    width: 25em;
+}
+.squirrel-logo-footer {
+    width: 160px;
+    max-width: none;
+}
+.getintouch-blck {
+    width: 50%;
+}
+.text-block-15 {
+    margin-bottom: 6px;
+}
+.text-block-16 {
+    font-size: 2em;
+}
+.nat-plus-img {
+    width: 90%;
+}
+.text-block-25 {
+    font-size: 1.4em;
+}
+.text-block-26 {
+    font-size: 1.5em;
+}
+}
+@media screen and (max-width: 767px) {
+.logo-sqrl {
+    width: 26em;
+    top: 8%;
+}
+.squirrel-logo-footer {
+    width: 20em;
+}
+}
+@media screen and (max-width: 479px) {
+.script-txt {
+    margin-left: 2px;
+}
+.script-txt.pink-text {
+    font-size: 1.9em;
+}
+.footer-warpper {
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    margin-bottom: 12px;
+    display: flex;
+}
+.logo-sqrl {
+    justify-content: center;
+    align-items: center;
+    width: 31em;
+    margin-top: 22px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    position: static;
+}
+.squirrel-logo-footer {
+    width: 56em;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+.footer-parent {
+    position: static;
+}
+.getintouch-blck {
+    width: 88em;
+    height: 90px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.text-block-15 {
+    text-align: center;
+    margin: 19px auto 0;
+    font-size: 7.5em;
+    line-height: 60px;
+}
+.work-together-parent {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    position: static;
+}
+.text-block-16 {
+    font-size: 5em;
+}
+.rightside-footer-parent {
+    flex-flow: column;
+    width: 100%;
+    height: 100%;
+    position: static;
+}
+.rightside-footer-child {
+    position: static;
+    inset: auto 0% 0%;
+}
+.link {
+    padding-top: 0;
+}
+.link.link2foot {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.link.link2foot.is-2, .link.link3foot, .link.link3foot.w--current, .link.link3foot.is-2, .link.link3foot.is-2.w--current {
+    padding-top: 0;
+}
+.link.one {
+    margin-left: 0;
+}
+.link.one.w--current {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.link.is-2 {
+    padding-top: 0;
+}
+.link-list {
+    flex-flow: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    font-size: 3vw;
+    position: static;
+}
+.nat-plus-img {
+    justify-content: center;
+    align-items: flex-end;
+    width: 280px;
+}
+.credits {
+    flex-flow: column;
+}
+.bold-text-2 {
+    font-size: 1.3em;
+}
+.text-block-25 {
+    font-size: 3.9em;
+}
+.text-block-26 {
+    font-size: 3vw;
+}
 }
 
 @media (min-width: 820px) {
@@ -478,9 +843,6 @@ section { padding-block: var(--stack); }
   .offer-grid--single { grid-template-columns: minmax(0, 640px); }
   .next-grid  { grid-template-columns: 1fr 1fr; }
   .shift-grid { grid-template-columns: 1fr 1fr; gap: clamp(3rem, 6vw, 5.5rem); }
-  .f-wrap { grid-template-columns: 1fr 1fr; min-height: 420px; padding-top: clamp(5rem, 9vw, 7rem); }
-  .f-squirrel { position: absolute; top: clamp(1.5rem, 3vw, 2.2rem); left: clamp(1.5rem, 3vw, 2.2rem); margin: 0; }
-  .f-touch { width: 70%; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -561,7 +923,7 @@ section { padding-block: var(--stack); }
 <!-- 4 ── TESTIMONIAL SLIDER ─────────────────────────────── -->
 <section class="love">
   <div class="wrap">
-    <h2 class="sec-head sec-head--bold">What people are saying</h2>
+    <h2 class="sec-head sec-head--bold">Take it from <span class="swash">them</span></h2>
 
     <div class="slider" data-interval="7000">
       <div class="slider-track" role="region" aria-label="Client testimonials" aria-live="polite">
@@ -665,31 +1027,9 @@ section { padding-block: var(--stack); }
   </div>
 </section>
 
-<footer class="site-footer">
-  <div class="f-wrap">
-    <img class="f-squirrel" src="../images/66df7d06a89c23cac069cab9_Asset5.svg" alt="" loading="lazy"/>
-    <div class="f-left">
-      <p class="f-worktogether">LET&rsquo;S WORK<span class="f-script"> Together</span></p>
-      <a class="f-touch" href="../contact/">
-        <span class="f-touch-label">GET IN TOUCH</span>
-        <img class="f-arrow" src="../images/65fba8473c871871705623cd_Asset15.png" alt="" width="22" loading="lazy"/>
-      </a>
-    </div>
-    <div class="f-right">
-      <img class="f-plus" src="../images/663029bb22cd0cc88b11fa91_nm-plus2.png" alt="" loading="lazy"/>
-      <nav class="f-links">
-        <a href="../">HOME</a>
-        <a href="../work/">WORK</a>
-        <a href="../about/">ABOUT</a>
-        <a href="../contact/">CONTACT</a>
-      </nav>
-    </div>
-  </div>
-  <div class="f-credits">
-    <strong>&copy; 2026 MOORE DESIGN ALL RIGHTS RESERVED.</strong>
-    <strong>SITE DESIGN BY ME :)</strong>
-  </div>
-</footer>
+<div class="wf-footer">
+<section class="footer"><div class="footer-warpper"><div class="footer-parent"><div class="logo-sqrl"><img src="../images/66df7d06a89c23cac069cab9_Asset5.svg" loading="lazy" width="1042" alt="" class="squirrel-logo-footer"/></div><div class="work-together-parent"><div class="text-block-15">LET&#x27;S WORK<span class="script-txt"> Together</span></div></div><div class="getintouch-blck"><a href="../contact/" class="getintouch-blck-child w-inline-block"><div class="arrow-parent"><img src="../images/65fba8473c871871705623cd_Asset15.png" loading="lazy" width="22" alt=""/></div><div class="div-block-13"><div class="text-block-16">GET IN TOUCH</div></div></a></div><div class="rightside-footer-parent"><div class="nat-plus-img"><img src="../images/663029bb22cd0cc88b11fa91_nm-plus2.png" loading="lazy" width="510" sizes="(max-width: 767px) 100vw, 510px" alt="" srcset="../images/663029bb22cd0cc88b11fa91_nm-plus2-p-500.png 500w, ../images/663029bb22cd0cc88b11fa91_nm-plus2-p-800.png 800w, ../images/663029bb22cd0cc88b11fa91_nm-plus2.png 1042w" class="image-6"/></div><div class="rightside-footer-child"><div class="link-list"><div hoverstagger="link" class="link-text-wrapper"><a href="../" hoverstagger="text" class="link one">HOME</a><a href="../" hoverstagger="text" class="link one is-2">HOME</a></div><div hoverstagger="link" class="link-text-wrapper"><a hoverstagger="text" href="../work/" aria-current="page" class="link link2foot w--current">WORK</a><a hoverstagger="text" href="../work/" aria-current="page" class="link link2foot is-2 w--current">WORK</a></div><div hoverstagger="link" class="link-text-wrapper"><a hoverstagger="text" href="../about/" class="link link3foot">ABOUT</a><a hoverstagger="text" href="../about/" class="link link3foot is-2">ABOUT</a></div><div hoverstagger="link" class="link-text-wrapper"><a hoverstagger="text" href="../contact/" class="link">CONTACT</a><a hoverstagger="text" href="../contact/" class="link is-2">CONTACT</a></div></div></div></div></div></div><div class="credits"><div class="text-block-25"><strong class="bold-text">© 2026 MOORE DESIGN ALL RIGHTS RESERVED.</strong></div><div class="text-block-26"><strong class="bold-text-2">SITE DESIGN BY ME :)</strong></div></div></section>
+</div>
 
 <script>
 /* Auto-advancing testimonial slider. Pauses on hover/focus and for anyone
