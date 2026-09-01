@@ -171,6 +171,13 @@ section { padding-block: var(--stack); }
   margin-bottom: clamp(1.1rem, 2.6vw, 1.8rem);
 }
 .sec-head .swash { font-size: 1.14em; line-height: .8; }
+.sec-head--bold {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -.025em;
+  line-height: .98;
+  font-size: clamp(2rem, 1.05rem + 3.4vw, 4rem);
+}
 
 /* ── card anatomy, lifted from the tier cards on /services ── */
 .card {
@@ -262,13 +269,23 @@ section { padding-block: var(--stack); }
 .quote footer { font-size: clamp(.78rem, .76rem + .16vw, .9rem); letter-spacing: .13em; text-transform: uppercase; }
 
 /* ── about ── */
-.about-grid { display: grid; gap: clamp(1.6rem, 4vw, 3.5rem); align-items: center; }
+.about { padding-inline: 0; }
+.about-bleed { display: grid; gap: clamp(1.6rem, 4vw, 3rem); align-items: center; }
 .about-photo {
-  border: var(--line); border-radius: var(--r-card);
-  width: 100%; max-width: 420px; height: auto;
-  aspect-ratio: 3 / 4; object-fit: cover;
+  width: 100%; height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center 22%;
 }
-.about-grid p { font-size: clamp(1rem, .95rem + .45vw, 1.2rem); line-height: 1.62; max-width: 60ch; }
+.about-copy { padding-inline: var(--gut); }
+.about-kicker {
+  font-size: clamp(.78rem, .76rem + .2vw, .95rem);
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  margin: 0 0 clamp(1rem, 2.2vw, 1.5rem);
+}
+.about-copy > p:last-child { font-size: clamp(1rem, .95rem + .45vw, 1.18rem); line-height: 1.62; max-width: 54ch; }
+.about-copy .sec-head { margin-bottom: .35em; }
 
 /* ── pull quotes ── */
 .pull { padding-block: clamp(2rem, 5vw, 4rem); }
@@ -303,7 +320,12 @@ section { padding-block: var(--stack); }
 .site-footer span { font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; }
 
 @media (min-width: 820px) {
-  .about-grid { grid-template-columns: minmax(0, 400px) 1fr; gap: clamp(2.5rem, 5vw, 4rem); }
+  .about-bleed {
+    grid-template-columns: minmax(0, 40%) 1fr;
+    gap: clamp(2.5rem, 5vw, 4.5rem);
+  }
+  .about-photo { aspect-ratio: 3 / 4; }
+  .about-copy { padding-inline: 0 var(--gut); max-width: 640px; }
   .offer-grid { grid-template-columns: 1.05fr 1fr; }
   .offer-grid--single { grid-template-columns: minmax(0, 640px); }
   .next-grid  { grid-template-columns: 1fr 1fr; }
@@ -387,11 +409,12 @@ section { padding-block: var(--stack); }
 
 <!-- 5 ── ABOUT ───────────────────────────────────────────── -->
 <section class="about">
-  <div class="wrap">
-    <h2 class="sec-head">The person holding the <span class="swash">vision with you.</span></h2>
-    <div class="about-grid">
-      <img class="about-photo" src="../activate-media/natalie.jpg" alt="Natalie Moore" width="825" height="1100" loading="lazy"/>
-      <p>I&rsquo;m Natalie, creative director and brand designer. I help founders uncover who they&rsquo;re becoming and direct the full expression of it: story, identity, aesthetic, presence. I hold the vision and guide every creative decision, so what the world sees is unmistakably you. Clients leave feeling seen, clear, and lit up. This offer comes through my partnership with Karen Fassio for the Microsoft Alumni Network.</p>
+  <div class="about-bleed">
+    <img class="about-photo" src="../activate-media/natalie.jpg" alt="Natalie Moore" width="825" height="1100" loading="lazy"/>
+    <div class="about-copy">
+      <h2 class="sec-head sec-head--bold">Hey, what&rsquo;s up</h2>
+      <p class="about-kicker">Creative director &amp; brand designer</p>
+      <p>I&rsquo;m Natalie. I help founders uncover who they&rsquo;re becoming and direct the full expression of it: story, identity, aesthetic, presence. I hold the vision and guide every creative decision, so what the world sees is unmistakably you. Clients leave feeling seen, clear, and lit up. This offer comes through my partnership with Karen Fassio for the Microsoft Alumni Network.</p>
     </div>
   </div>
 </section>
