@@ -96,7 +96,7 @@ section { padding-block: var(--stack); }
 /* the footer carries its own spacing from the sitewide CSS; the blanket
    section padding above was adding 70px it does not have on other pages */
 .wf-footer section { padding-block: 0; }
-.swash { font-family: var(--swash); font-weight: 500; }
+.swash { font-family: var(--swash); font-weight: 500; font-size: 1.13em; }
 
 /* ── hero: cloud photo, content lifted into its faded lower half ── */
 .hero-media {
@@ -117,8 +117,10 @@ section { padding-block: var(--stack); }
 /* same photo closing the page, faded from the top so it grows out of the
    content rather than starting on a hard edge */
 .hero-media--foot {
-  height: clamp(220px, 38vh, 420px);
+  height: clamp(400px, 60vh, 640px);
   background-position: center 42%;
+  /* rises up behind the booking section so the CTA sits inside the clouds */
+  margin-top: clamp(-24rem, -32vh, -13rem);
 }
 .hero-media--foot::after {
   inset: 0 0 auto 0;
@@ -168,7 +170,7 @@ section { padding-block: var(--stack); }
   font-weight: 500;
   text-transform: none;
   letter-spacing: 0;
-  font-size: 1.22em;
+  font-size: 1.4em;
   line-height: .78;
   display: inline-block;
   vertical-align: -.06em;
@@ -256,12 +258,12 @@ section { padding-block: var(--stack); }
   max-width: 30ch;
   margin-bottom: clamp(1.1rem, 2.6vw, 1.8rem);
 }
-.sec-head .swash { font-size: 1.14em; line-height: .8; }
+.sec-head .swash { font-size: 1.34em; line-height: .8; padding-left: .1em; }
 /* the script word opts out of the bold caps treatment around it */
 .sec-head--bold .swash {
   text-transform: none;
   font-weight: 500;
-  font-size: 1.3em;
+  font-size: 1.5em;
   line-height: .8;
   letter-spacing: 0;
 }
@@ -310,7 +312,7 @@ section { padding-block: var(--stack); }
 .card-title { font-size: clamp(1.35rem, 1.05rem + 1.5vw, 2.25rem); line-height: 1.08; }
 .card-sub {
   font-family: var(--swash); font-weight: 500;
-  font-size: clamp(1.5rem, 1.1rem + 2vw, 2.6rem);
+  font-size: clamp(1.75rem, 1.28rem + 2.35vw, 3rem);
   line-height: .9;
   margin-left: auto; padding-left: .6em;
 }
@@ -459,7 +461,7 @@ section { padding-block: var(--stack); }
 .about-hey {
   font-family: var(--swash);
   font-weight: 500;
-  font-size: clamp(2.4rem, 1.2rem + 5.4vw, 5.2rem);
+  font-size: clamp(2.8rem, 1.4rem + 6.3vw, 6rem);
   line-height: .8;
 }
 /* the name sits in light caps, stepped in from the script line above it */
@@ -470,7 +472,7 @@ section { padding-block: var(--stack); }
   letter-spacing: -.02em;
   font-size: clamp(2.1rem, 1rem + 4.9vw, 4.6rem);
   line-height: .98;
-  margin-left: clamp(1.2rem, 6vw, 4.5rem);
+  margin-left: clamp(2.4rem, 10.5vw, 8rem);
 }
 .about-kicker {
   font-size: clamp(.78rem, .76rem + .2vw, .95rem);
@@ -485,11 +487,20 @@ section { padding-block: var(--stack); }
 .pull { padding-block: clamp(2rem, 5vw, 4rem); }
 .pull p {
   font-family: var(--swash); font-weight: 500;
-  font-size: clamp(1.85rem, .95rem + 5.2vw, 4rem);
+  font-size: clamp(2.15rem, 1.1rem + 6vw, 4.6rem);
   line-height: 1.04; max-width: 26ch;
 }
 
 /* ── offer ── */
+/* the price sits on a black band so it is the one place the eye stops */
+.offer {
+  background: #17151a;
+  color: var(--ivory);
+  padding-block: clamp(3rem, 7vw, 5.5rem);
+}
+.offer .sec-head { color: var(--ivory); }
+/* the card keeps its own ink on pink — it must not inherit the band's ivory */
+.offer .card { color: var(--ink); }
 .offer-grid { display: grid; gap: clamp(1.5rem, 3.5vw, 2.6rem); align-items: center; }
 /* old price struck through, new price ringed in chartreuse — the ellipse is
    drawn with a rotated border so it reads hand-circled rather than boxed */
@@ -524,6 +535,8 @@ section { padding-block: var(--stack); }
 .next-grid p { font-size: clamp(.96rem, .93rem + .3vw, 1.1rem); line-height: 1.5; }
 
 /* ── booking ── */
+/* sits above the closing cloud band, which is pulled up underneath it */
+.book { position: relative; z-index: 1; }
 .book-lead { font-size: clamp(1.15rem, 1rem + 1.05vw, 1.75rem); line-height: 1.45; max-width: 44ch; margin-bottom: clamp(1.6rem, 4vw, 2.4rem); }
 
 /* ── footer: brand mark only, no links competing with the CTA ── */
@@ -981,21 +994,21 @@ section { padding-block: var(--stack); }
       <div class="shift-col">
         <h2 class="shift-head">Right now:</h2>
         <ul class="shift-list">
-          <li>The title that explained you for years is behind you.</li>
-          <li>You can picture what you want to build. You cannot say it out loud yet.</li>
-          <li>You describe your work in the language of a job you already left.</li>
-          <li>The genius is real. The container for it is not built.</li>
-          <li>You are waiting to feel ready before you start.</li>
+          <li>Your former title opens doors, but it no longer tells the full story.</li>
+          <li>You know there is something next, but it is still hard to frame.</li>
+          <li>Your public presence has not caught up with who you are becoming.</li>
+          <li>You are too close to your own work to see the strongest angle.</li>
+          <li>You are waiting to feel ready before you become visible.</li>
         </ul>
       </div>
       <div class="shift-col shift-col--after">
         <h2 class="shift-head">After 90 minutes:</h2>
         <ul class="shift-list">
-          <li>Clear on who you are now, and who you are becoming.</li>
-          <li>A brand voice that sounds like you instead of an org chart.</li>
-          <li>Words for your work that land the first time you say them.</li>
-          <li>A creative direction you can act on this week.</li>
-          <li>Your genius pointed at the thing only you can build.</li>
+          <li>A clear creative direction for your next chapter.</li>
+          <li>A sharper title, frame, or organizing idea for your work.</li>
+          <li>A voice direction that feels like you beyond the corporate container.</li>
+          <li>A better sense of what your public presence should signal now.</li>
+          <li>Focused next steps for bringing the brand to life.</li>
         </ul>
       </div>
     </div>
@@ -1020,7 +1033,22 @@ section { padding-block: var(--stack); }
   </div>
 </section>
 
-<!-- 4 ── TESTIMONIAL SLIDER ─────────────────────────────── -->
+<!-- 4 ── ABOUT ───────────────────────────────────────────── -->
+<section class="about">
+  <div class="about-bleed">
+    <img class="about-photo" src="../activate-media/natalie.jpg" alt="Natalie Moore" width="825" height="1100" loading="lazy"/>
+    <div class="about-copy">
+      <h2 class="about-lockup">
+        <span class="about-hey">what&rsquo;s good!</span>
+        <span class="about-name">I&rsquo;m Natalie.</span>
+      </h2>
+      <p class="about-kicker">Creative director &amp; brand designer</p>
+      <p>I&rsquo;m Natalie. I help founders uncover who they&rsquo;re becoming and direct the full expression of it: story, identity, aesthetic, presence. I hold the vision and guide every creative decision, so what the world sees is unmistakably you. Clients leave feeling seen, clear, and lit up. This offer comes through my partnership with Karen Fassio for the Microsoft Alumni Network.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 5 ── TESTIMONIAL SLIDER ─────────────────────────────── -->
 <section class="love">
   <div class="wrap">
     <h2 class="sec-head sec-head--bold">Take it from <span class="swash">them</span></h2>
@@ -1065,21 +1093,6 @@ section { padding-block: var(--stack); }
   </div>
 </section>
 
-<!-- 5 ── ABOUT ───────────────────────────────────────────── -->
-<section class="about">
-  <div class="about-bleed">
-    <img class="about-photo" src="../activate-media/natalie.jpg" alt="Natalie Moore" width="825" height="1100" loading="lazy"/>
-    <div class="about-copy">
-      <h2 class="about-lockup">
-        <span class="about-hey">what&rsquo;s good!</span>
-        <span class="about-name">I&rsquo;m Natalie.</span>
-      </h2>
-      <p class="about-kicker">Creative director &amp; brand designer</p>
-      <p>I help founders uncover who they&rsquo;re becoming and direct the full expression of it: story, identity, aesthetic, presence. I hold the vision and guide every creative decision, so what the world sees is unmistakably you. Clients leave feeling seen, clear, and lit up. This offer comes through my partnership with Karen Fassio for the Microsoft Alumni Network.</p>
-    </div>
-  </div>
-</section>
-
 <!-- 7 ── THE OFFER ───────────────────────────────────────── -->
 <section class="offer">
   <div class="wrap">
@@ -1100,7 +1113,7 @@ section { padding-block: var(--stack); }
 <!-- 8 ── WHAT COMES NEXT ─────────────────────────────────── -->
 <section class="next">
   <div class="wrap">
-    <h2 class="sec-head">Where this can go <span class="swash">from here.</span></h2>
+    <h2 class="sec-head">Next step <span class="swash">possibilities</span></h2>
     <p class="next-intro">Most people start with the session. Some keep going.</p>
     <div class="next-grid">
       <div class="card card--butter" style="--accent: var(--lavender);">
@@ -1130,8 +1143,8 @@ section { padding-block: var(--stack); }
 <!-- 10 ── BOOKING ───────────────────────────────────────── -->
 <section class="book" id="book">
   <div class="wrap">
-    <h2 class="sec-head">Let’s <span class="swash">activate it.</span></h2>
-    <p class="book-lead">Come as you are, half-formed idea or blank page. Your next chapter is closer than you think. Let&rsquo;s activate it, and <span class="swash">more.</span></p>
+    <h2 class="sec-head">Let’s <span class="swash">activate your story.</span></h2>
+    <p class="book-lead">Come as you are. Your next chapter is waiting to be <span class="swash">written.</span></p>
     <a class="cta cta--big" href="https://calendly.com/moorenatalisa/30min" target="_blank" rel="noopener">Activate</a>
   </div>
 </section>
