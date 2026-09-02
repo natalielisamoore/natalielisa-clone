@@ -227,6 +227,28 @@ section { padding-block: var(--stack); }
 .slide p, .offer-price, .offer-sub { margin-inline: auto; }
 .next-grid .card-head { flex-direction: column; align-items: center; gap: .5em; }
 
+/* chartreuse rule that draws itself in when the heading scrolls into view */
+.mirror .sec-head {
+  position: relative;
+  display: inline-block;
+}
+.mirror .sec-head::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -.16em;
+  width: 100%;
+  height: .1em;
+  background: var(--chartreuse);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 1.1s cubic-bezier(.22, .61, .36, 1);
+}
+.mirror .sec-head.is-drawn::after { transform: scaleX(1); }
+@media (prefers-reduced-motion: reduce) {
+  .mirror .sec-head::after { transform: scaleX(1); transition: none; }
+}
+
 /* ── section headings ── */
 .sec-head {
   font-size: clamp(1.75rem, 1.15rem + 2.7vw, 3.4rem);
@@ -1123,6 +1145,24 @@ section { padding-block: var(--stack); }
 <script>
 /* Auto-advancing testimonial slider. Pauses on hover/focus and for anyone
    who prefers reduced motion; dots stay clickable either way. */
+(function () {
+  /* draw the underline once, the first time the heading comes into view */
+  var head = document.querySelector('.mirror .sec-head');
+  if (!head) return;
+  if (!('IntersectionObserver' in window)) { head.classList.add('is-drawn'); return; }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('is-drawn'); io.unobserve(e.target); }
+    });
+  }, {
+    threshold: 0.6,
+    /* pull the trigger line up off the bottom edge, so the rule draws once the
+       heading is properly on screen rather than the instant it peeks in */
+    rootMargin: '0px 0px -28% 0px'
+  });
+  io.observe(head);
+})();
+
 (function () {
   var root = document.querySelector('.slider');
   if (!root) return;
