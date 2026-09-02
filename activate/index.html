@@ -469,6 +469,29 @@ section { padding-block: var(--stack); }
 
 /* ── offer ── */
 .offer-grid { display: grid; gap: clamp(1.5rem, 3.5vw, 2.6rem); align-items: center; }
+/* old price struck through, new price ringed in chartreuse — the ellipse is
+   drawn with a rotated border so it reads hand-circled rather than boxed */
+.struck {
+  text-decoration: line-through;
+  text-decoration-thickness: .08em;
+  opacity: .5;
+}
+.circled {
+  position: relative;
+  display: inline-block;
+  padding: 0 .12em;
+  margin: 0 .38em;          /* clearance so the ring never touches its neighbours */
+  white-space: nowrap;
+}
+.circled::after {
+  content: "";
+  position: absolute;
+  inset: -.26em -.42em;
+  border: .09em solid var(--chartreuse);
+  border-radius: 50%;
+  transform: rotate(-4deg);
+  pointer-events: none;
+}
 .offer-price { font-size: clamp(1.35rem, 1.05rem + 1.55vw, 2.2rem); line-height: 1.16; margin-bottom: .6em; }
 .offer-sub { font-size: clamp(.98rem, .94rem + .38vw, 1.14rem); line-height: 1.55; }
 
@@ -1038,14 +1061,14 @@ section { padding-block: var(--stack); }
 <!-- 7 ── THE OFFER ───────────────────────────────────────── -->
 <section class="offer">
   <div class="wrap">
-    <h2 class="sec-head">Your investment in the <span class="swash">next you.</span></h2>
+    <h2 class="sec-head">Investment</h2>
     <div class="offer-grid offer-grid--single">
       <div class="card card--pink" style="--accent: var(--pink);">
         <div class="card-head">
           <span class="chip">THE OFFER</span>
           <span class="card-sub">Activate.</span>
         </div>
-        <p class="offer-price">Usually $500. Just $300 for the first five alumni who book.</p>
+        <p class="offer-price">Usually <span class="struck">$500</span>. Just <span class="circled">$300</span> for the first five alumni who book.</p>
         <p class="offer-sub">And if we keep working together, your full $300 credits toward any package, so the session pays for itself.</p>
       </div>
     </div>
