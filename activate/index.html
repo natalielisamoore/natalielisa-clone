@@ -338,6 +338,21 @@ section { padding-block: var(--stack); }
 }
 .beats li::before { content: "\2726"; position: absolute; left: 0; top: 0; }
 
+/* body-copy emphasis: a phrase in the medium weight, and a caps line marked
+   in chartreuse. box-decoration-break keeps the band tight to each wrapped
+   line instead of one rectangle behind the whole block. */
+strong, .em { font-weight: 600; }
+.mark-line {
+  display: inline;
+  background: var(--chartreuse);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  padding: .1em .32em;
+  text-transform: uppercase;
+  letter-spacing: .005em;
+}
+.mirror p.marked { line-height: 1.85; margin-top: clamp(1.5rem, 3.5vw, 2.4rem); max-width: 40ch; margin-inline: auto; }
+
 /* ── the mirror ── */
 .mirror p {
   font-size: clamp(1.15rem, 1rem + 1.05vw, 1.75rem);
@@ -990,7 +1005,8 @@ section { padding-block: var(--stack); }
 <section class="mirror">
   <div class="wrap">
     <h2 class="sec-head">Something in you has <span class="swash">awakened.</span></h2>
-    <p>You&rsquo;ve spent years building someone else&rsquo;s story, brilliantly. Now something is stirring that&rsquo;s entirely yours: an idea, a venture, a version of you that doesn&rsquo;t fit the old title. You can feel it. What you need is someone to see it with you, and give it a shape the world recognizes.</p>
+    <p>You&rsquo;ve spent years building someone else&rsquo;s story, brilliantly. Now something is stirring that&rsquo;s entirely yours: an idea, a venture, <strong>a version of you that doesn&rsquo;t fit the old title.</strong> You can feel it.</p>
+    <p class="marked"><span class="mark-line">What you need is someone to see it with you, and give it a shape the world recognizes.</span></p>
   </div>
 </section>
 
