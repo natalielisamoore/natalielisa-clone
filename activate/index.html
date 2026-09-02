@@ -519,13 +519,23 @@ strong, .em { font-weight: 600; }
   line-height: .98;
   margin-left: clamp(2.4rem, 10.5vw, 8rem);
 }
+/* the wave rides at the end of the name rather than claiming its own line */
+.about-name .wave { font-size: .55em; vertical-align: .16em; }
 .about-kicker {
   font-size: clamp(.78rem, .76rem + .2vw, .95rem);
   letter-spacing: .2em;
   text-transform: uppercase;
   margin: 0 0 clamp(1rem, 2.2vw, 1.5rem);
 }
-.about-copy > p:last-child { font-size: clamp(1rem, .95rem + .45vw, 1.18rem); line-height: 1.62; max-width: 54ch; }
+.about-copy > p { font-size: clamp(1rem, .95rem + .45vw, 1.18rem); line-height: 1.62; max-width: 54ch; margin: 0 0 1.05em; }
+.about-copy > p:last-child { margin-bottom: 0; }
+/* the line under the name: a shade larger than the body, sitting on its own */
+.about-lede {
+  font-size: clamp(1.08rem, 1rem + .6vw, 1.35rem) !important;
+  line-height: 1.4 !important;
+  max-width: 40ch !important;
+  margin-bottom: clamp(1.1rem, 2.4vw, 1.6rem) !important;
+}
 .about-copy .sec-head { margin-bottom: .35em; }
 
 /* ── pull quotes ── */
@@ -1086,10 +1096,13 @@ strong, .em { font-weight: 600; }
     <div class="about-copy">
       <h2 class="about-lockup">
         <span class="about-hey">what&rsquo;s good!</span>
-        <span class="about-name">I&rsquo;m Natalie.</span>
+        <span class="about-name">I&rsquo;m Natalie&nbsp;<span class="wave">👋</span></span>
       </h2>
-      <p class="about-kicker">Creative director &amp; brand designer</p>
-      <p>I help founders uncover who they&rsquo;re becoming and direct the full expression of it: story, identity, aesthetic, presence. I hold the vision and guide every creative decision, so what the world sees is unmistakably you. Clients leave feeling seen, clear, and lit up. This offer comes through my partnership with Karen Fassio for the Microsoft Alumni Network.</p>
+      <p class="about-lede">Creative director. Brand designer. Professional see-er of what you can&rsquo;t quite see yet.</p>
+      <p>I&rsquo;ve spent years helping founders, wellness entrepreneurs, and conscious businesses turn &ldquo;I know there&rsquo;s something here&rdquo; into a brand the world can actually fall in love with &mdash; story, voice, aesthetic, the whole beautiful thing.</p>
+      <p>And I get the leap you&rsquo;re standing in front of, because I took it. I built my practice my own way, on my own terms, from a little island in the Pacific Northwest &mdash; where I design brands, make jewelry, and live proof that the chapter after the expected path is the good one.</p>
+      <p>My last name is Moore. Consider it a promise: <strong>there is always more in you than your last job title.</strong></p>
+      <p>Here in partnership with Karen Fassio for the Microsoft Alumni Network. Come say hi &mdash; I&rsquo;d love to see what you&rsquo;re becoming.</p>
     </div>
   </div>
 </section>
