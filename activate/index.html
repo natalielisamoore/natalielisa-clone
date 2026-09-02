@@ -353,6 +353,29 @@ strong, .em { font-weight: 600; }
 }
 .mirror p.marked { line-height: 1.85; margin-top: clamp(1.5rem, 3.5vw, 2.4rem); max-width: 40ch; margin-inline: auto; }
 
+/* ══ scroll reveal ══
+   Elements start faded and slightly low, then settle as they enter the
+   viewport. The selector list below is duplicated in the observer script at
+   the foot of the page — keep the two in step. Anyone who asks for reduced
+   motion never gets the hidden state at all. */
+@media (prefers-reduced-motion: no-preference) {
+  .hero h1, .hero-sub, .hero .cta,
+  .mirror .sec-head, .mirror p,
+  .shift-col,
+  .what .card,
+  .about-photo, .about-copy,
+  .love .sec-head, .love .slider,
+  .offer .sec-head, .offer .card,
+  .next .sec-head, .next-intro, .next-grid .card, .next .cta,
+  .pull p,
+  .book .sec-head, .book-lead, .book .cta {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity .75s ease, transform .75s cubic-bezier(.22, .61, .36, 1);
+  }
+  .is-in { opacity: 1 !important; transform: none !important; }
+}
+
 /* ── the mirror ── */
 .mirror p {
   font-size: clamp(1.15rem, 1rem + 1.05vw, 1.75rem);
@@ -1066,7 +1089,7 @@ strong, .em { font-weight: 600; }
         <span class="about-name">I&rsquo;m Natalie.</span>
       </h2>
       <p class="about-kicker">Creative director &amp; brand designer</p>
-      <p>I&rsquo;m Natalie. I help founders uncover who they&rsquo;re becoming and direct the full expression of it: story, identity, aesthetic, presence. I hold the vision and guide every creative decision, so what the world sees is unmistakably you. Clients leave feeling seen, clear, and lit up. This offer comes through my partnership with Karen Fassio for the Microsoft Alumni Network.</p>
+      <p>I help founders uncover who they&rsquo;re becoming and direct the full expression of it: story, identity, aesthetic, presence. I hold the vision and guide every creative decision, so what the world sees is unmistakably you. Clients leave feeling seen, clear, and lit up. This offer comes through my partnership with Karen Fassio for the Microsoft Alumni Network.</p>
     </div>
   </div>
 </section>
@@ -1177,6 +1200,61 @@ strong, .em { font-weight: 600; }
 <div class="wf-footer">
 <section class="footer"><div class="footer-warpper"><div class="footer-parent"><div class="logo-sqrl"><img src="../images/66df7d06a89c23cac069cab9_Asset5.svg" loading="lazy" width="1042" alt="" class="squirrel-logo-footer"/></div><div class="work-together-parent"><div class="text-block-15">LET&#x27;S WORK<span class="script-txt"> Together</span></div></div><div class="getintouch-blck"><a href="../contact/" class="getintouch-blck-child w-inline-block"><div class="arrow-parent"><img src="../images/65fba8473c871871705623cd_Asset15.png" loading="lazy" width="22" alt=""/></div><div class="div-block-13"><div class="text-block-16">GET IN TOUCH</div></div></a></div><div class="rightside-footer-parent"><div class="nat-plus-img"><img src="../images/663029bb22cd0cc88b11fa91_nm-plus2.png" loading="lazy" width="510" sizes="(max-width: 767px) 100vw, 510px" alt="" srcset="../images/663029bb22cd0cc88b11fa91_nm-plus2-p-500.png 500w, ../images/663029bb22cd0cc88b11fa91_nm-plus2-p-800.png 800w, ../images/663029bb22cd0cc88b11fa91_nm-plus2.png 1042w" class="image-6"/></div><div class="rightside-footer-child"><div class="link-list"><div hoverstagger="link" class="link-text-wrapper"><a href="../" hoverstagger="text" class="link one">HOME</a><a href="../" hoverstagger="text" class="link one is-2">HOME</a></div><div hoverstagger="link" class="link-text-wrapper"><a hoverstagger="text" href="../work/" aria-current="page" class="link link2foot w--current">WORK</a><a hoverstagger="text" href="../work/" aria-current="page" class="link link2foot is-2 w--current">WORK</a></div><div hoverstagger="link" class="link-text-wrapper"><a hoverstagger="text" href="../about/" class="link link3foot">ABOUT</a><a hoverstagger="text" href="../about/" class="link link3foot is-2">ABOUT</a></div><div hoverstagger="link" class="link-text-wrapper"><a hoverstagger="text" href="../contact/" class="link">CONTACT</a><a hoverstagger="text" href="../contact/" class="link is-2">CONTACT</a></div></div></div></div></div></div><div class="credits"><div class="text-block-25"><strong class="bold-text">© 2026 MOORE DESIGN ALL RIGHTS RESERVED.</strong></div><div class="text-block-26"><strong class="bold-text-2">SITE DESIGN BY ME :)</strong></div></div></section>
 </div>
+
+<script>
+/* Scroll reveal. The selector list mirrors the one in the stylesheet above;
+   if you add an element to one, add it to the other. Siblings inside a
+   section are staggered so a block settles in sequence rather than at once. */
+(function () {
+  var SEL = [
+    '.hero h1', '.hero-sub', '.hero .cta',
+    '.mirror .sec-head', '.mirror p',
+    '.shift-col',
+    '.what .card',
+    '.about-photo', '.about-copy',
+    '.love .sec-head', '.love .slider',
+    '.offer .sec-head', '.offer .card',
+    '.next .sec-head', '.next-intro', '.next-grid .card', '.next .cta',
+    '.pull p',
+    '.book .sec-head', '.book-lead', '.book .cta'
+  ].join(',');
+
+  var els = [].slice.call(document.querySelectorAll(SEL));
+  if (!els.length) return;
+
+  var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function showAll() { els.forEach(function (el) { el.classList.add('is-in'); }); }
+  if (still || !('IntersectionObserver' in window)) { showAll(); return; }
+
+  /* stagger by position among the revealed elements of the same section */
+  var seen = {};
+  els.forEach(function (el) {
+    var sec = el.closest('section') || document.body;
+    var key = sec.className || 'x';
+    seen[key] = (seen[key] || 0) + 1;
+    el.style.transitionDelay = Math.min(seen[key] - 1, 4) * 90 + 'ms';
+  });
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('is-in');
+      io.unobserve(e.target);
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -12% 0px' });
+
+  els.forEach(function (el) { io.observe(el); });
+
+  /* anything already in view on load settles immediately rather than waiting
+     for a scroll that may never come */
+  requestAnimationFrame(function () {
+    els.forEach(function (el) {
+      var r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight * 0.9) { el.classList.add('is-in'); io.unobserve(el); }
+    });
+  });
+})();
+</script>
 
 <script>
 /* Auto-advancing testimonial slider. Pauses on hover/focus and for anyone
