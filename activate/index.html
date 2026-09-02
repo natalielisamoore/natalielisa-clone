@@ -427,6 +427,29 @@ section { padding-block: var(--stack); }
   object-position: center 22%;
 }
 .about-copy { padding-inline: var(--gut); }
+.about-lockup {
+  margin: 0 0 clamp(.9rem, 2vw, 1.3rem);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: .92;
+}
+.about-hey {
+  font-family: var(--swash);
+  font-weight: 500;
+  font-size: clamp(2.4rem, 1.2rem + 5.4vw, 5.2rem);
+  line-height: .8;
+}
+/* the name sits in light caps, stepped in from the script line above it */
+.about-name {
+  font-family: var(--sans);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: -.02em;
+  font-size: clamp(2.1rem, 1rem + 4.9vw, 4.6rem);
+  line-height: .98;
+  margin-left: clamp(1.2rem, 6vw, 4.5rem);
+}
 .about-kicker {
   font-size: clamp(.78rem, .76rem + .2vw, .95rem);
   letter-spacing: .2em;
@@ -1002,9 +1025,12 @@ section { padding-block: var(--stack); }
   <div class="about-bleed">
     <img class="about-photo" src="../activate-media/natalie.jpg" alt="Natalie Moore" width="825" height="1100" loading="lazy"/>
     <div class="about-copy">
-      <h2 class="sec-head sec-head--bold">Hey, what&rsquo;s up</h2>
+      <h2 class="about-lockup">
+        <span class="about-hey">what&rsquo;s good!</span>
+        <span class="about-name">I&rsquo;m Natalie.</span>
+      </h2>
       <p class="about-kicker">Creative director &amp; brand designer</p>
-      <p>I&rsquo;m Natalie. I help founders uncover who they&rsquo;re becoming and direct the full expression of it: story, identity, aesthetic, presence. I hold the vision and guide every creative decision, so what the world sees is unmistakably you. Clients leave feeling seen, clear, and lit up. This offer comes through my partnership with Karen Fassio for the Microsoft Alumni Network.</p>
+      <p>I help founders uncover who they&rsquo;re becoming and direct the full expression of it: story, identity, aesthetic, presence. I hold the vision and guide every creative decision, so what the world sees is unmistakably you. Clients leave feeling seen, clear, and lit up. This offer comes through my partnership with Karen Fassio for the Microsoft Alumni Network.</p>
     </div>
   </div>
 </section>
