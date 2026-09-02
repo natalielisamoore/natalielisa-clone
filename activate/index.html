@@ -225,6 +225,13 @@ section { padding-block: var(--stack); }
 .what .card, .love .card, .offer .card, .next .card { text-align: center; }
 .what .card-head, .love .card-head, .offer .card-head, .next .card-head { justify-content: center; }
 .what .card-sub, .offer .card-sub { margin-left: 0; padding-left: .5em; }
+/* the script is spent on the heading here, so the card label runs in the sans */
+.offer .card-sub {
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: clamp(1.15rem, .95rem + .95vw, 1.6rem);
+  line-height: 1.05;
+}
 .beats { text-align: left; max-width: 46ch; margin-inline: auto; }
 .slide p, .offer-price, .offer-sub { margin-inline: auto; }
 .next-grid .card-head { flex-direction: column; align-items: center; gap: .5em; }
@@ -1096,7 +1103,7 @@ section { padding-block: var(--stack); }
 <!-- 7 ── THE OFFER ───────────────────────────────────────── -->
 <section class="offer">
   <div class="wrap">
-    <h2 class="sec-head">Investment</h2>
+    <h2 class="sec-head"><span class="swash">Investment</span></h2>
     <div class="offer-grid offer-grid--single">
       <div class="card card--pink" style="--accent: var(--pink);">
         <div class="card-head">
