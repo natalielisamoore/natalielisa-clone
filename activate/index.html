@@ -173,6 +173,20 @@ section { padding-block: var(--stack); }
   display: inline-block;
   vertical-align: -.06em;
 }
+.hero-line {
+  font-family: var(--sans);
+  font-size: clamp(1.15rem, 1rem + 1.05vw, 1.75rem);
+  line-height: 1.3;
+  max-width: 30ch;
+  margin: 0 auto clamp(.9rem, 2vw, 1.3rem);
+}
+.hero-line .swash { font-size: 1.24em; line-height: .8; }
+.card-body {
+  font-size: clamp(1rem, .95rem + .5vw, 1.25rem);
+  line-height: 1.6;
+  max-width: 56ch;
+  margin: 0 auto;
+}
 .hero-sub {
   font-size: clamp(1.05rem, .95rem + .72vw, 1.45rem);
   line-height: 1.5;
@@ -207,10 +221,11 @@ section { padding-block: var(--stack); }
 /* ── centred page rhythm ──
    Text blocks centre themselves inside the wrap so whitespace is balanced on
    both sides. The About section keeps its deliberate left-bleed asymmetry. */
-.hero, .mirror, .love, .offer, .next, .pull, .book { text-align: center; }
+.hero, .mirror, .why, .leave, .forwho, .love, .offer, .next, .pull, .faq, .book { text-align: center; }
 .hero .kicker, .hero h1, .hero-sub,
 .mirror p, .next-intro, .pull p, .book-lead,
 .sec-head { margin-left: auto; margin-right: auto; }
+.leave .beats, .faq-list { margin-left: auto; margin-right: auto; }
 .hero h1 { max-width: 20ch; }
 .pull p { max-width: 28ch; }
 .book-lead { max-width: 46ch; }
@@ -380,6 +395,82 @@ section { padding-block: var(--stack); }
   content: "\2713";
   background: var(--chartreuse);
   color: #17151a;
+}
+
+/* ── why / leave with / who this is for ── */
+.why-copy, .forwho-copy {
+  font-size: clamp(1.05rem, .98rem + .62vw, 1.42rem);
+  line-height: 1.55;
+  max-width: 58ch;
+  margin: 0 auto;
+}
+.forwho-note {
+  font-size: clamp(.98rem, .94rem + .38vw, 1.14rem);
+  line-height: 1.55;
+  max-width: 50ch;
+  margin: clamp(.9rem, 2vw, 1.3rem) auto 0;
+  opacity: .78;
+}
+.leave .beats { max-width: 42ch; }
+
+/* ── FAQ ── */
+.faq-list { border-top: var(--line); max-width: 58rem; margin: 0 auto; text-align: left; }
+.faq-item { border-bottom: var(--line); }
+.faq-trigger {
+  width: 100%;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.4em;
+  padding: 1.3em 0;
+  font-family: var(--sans);
+  font-size: clamp(1rem, .95rem + .5vw, 1.28rem);
+  line-height: 1.35;
+  color: var(--ink);
+  transition: padding-left .3s ease;
+}
+.faq-trigger:hover { padding-left: .5em; }
+.faq-icon { flex: none; position: relative; width: 1em; height: 1em; }
+.faq-icon::before, .faq-icon::after {
+  content: "";
+  position: absolute;
+  top: 50%; left: 0;
+  width: 100%; height: 1px;
+  background: var(--ink);
+  transition: transform .3s ease;
+}
+.faq-icon::after { transform: rotate(90deg); }
+.faq-item.is-open .faq-icon::after { transform: rotate(0deg); }
+.faq-answer { overflow: hidden; max-height: 0; transition: max-height .4s ease; }
+.faq-answer p {
+  font-size: clamp(.98rem, .94rem + .4vw, 1.14rem);
+  line-height: 1.6;
+  max-width: 60ch;
+  margin: 0 0 1.5em;
+}
+
+/* ── trust, sitting directly above the closing CTA ── */
+.trust {
+  border: var(--line);
+  border-radius: var(--r-card);
+  background: var(--butter);
+  padding: clamp(1.5rem, 3.5vw, 2.4rem);
+  max-width: 46rem;
+  margin: 0 auto clamp(2rem, 5vw, 3rem);
+}
+.trust-quote { font-size: clamp(1rem, .95rem + .48vw, 1.22rem); line-height: 1.55; max-width: 52ch; margin: 0 auto .9em; }
+.trust-who { font-size: clamp(.76rem, .74rem + .16vw, .88rem); letter-spacing: .13em; text-transform: uppercase; margin: 0; }
+.trust-note {
+  font-size: clamp(.88rem, .86rem + .28vw, 1rem);
+  line-height: 1.55;
+  margin: clamp(1rem, 2.4vw, 1.5rem) auto 0;
+  padding-top: clamp(.9rem, 2vw, 1.2rem);
+  border-top: var(--line);
+  max-width: 44ch;
 }
 
 /* ── testimonial slider ── */
@@ -961,8 +1052,9 @@ section { padding-block: var(--stack); }
   <div class="wrap">
     <p class="kicker">For Microsoft alumni</p>
     <h1>Activate your <span class="hl"><span class="hl-word">creativity</span></span> with brand and story</h1>
+    <p class="hero-line">You learned Microsoft&rsquo;s way. Now let&rsquo;s find <span class="swash">yours.</span></p>
     <p class="hero-sub">A 90-minute Activation Session for Microsoft alumni ready for their next iteration: your story, your brand voice, the next version of you.</p>
-    <a class="cta" href="#book">Activate</a>
+    <a class="cta" href="#book">Book Your Activation Session</a>
   </div>
 </section>
 
@@ -971,6 +1063,14 @@ section { padding-block: var(--stack); }
   <div class="wrap">
     <h2 class="sec-head">Something in you has <span class="swash">awakened.</span></h2>
     <p>You&rsquo;ve spent years building someone else&rsquo;s story, brilliantly. Now something is stirring that&rsquo;s entirely yours: an idea, a venture, a version of you that doesn&rsquo;t fit the old title. You can feel it. What you need is someone to see it with you, and give it a shape the world recognizes.</p>
+  </div>
+</section>
+
+<!-- ── WHY MICROSOFT ALUMNI ──────────────────────────────── -->
+<section class="why">
+  <div class="wrap">
+    <h2 class="sec-head">Why Microsoft <span class="swash">alumni.</span></h2>
+    <p class="why-copy">You learned how to operate inside one of the most influential companies in the world. You know how to build, how to lead, and how to hold a standard. What you need now is a brand that sounds like you rather than the org you came from: your voice, your values, and the chapter you are actually walking into.</p>
   </div>
 </section>
 
@@ -1009,14 +1109,33 @@ section { padding-block: var(--stack); }
       <div class="card-head">
         <span class="chip">90 MIN</span>
         <h2 class="card-title">Activation Session</h2>
-        <span class="card-lede">90 minutes. Laser-focused.</span>
+        <span class="card-lede">90 minutes, one to one.</span>
       </div>
-      <ul class="beats">
-        <li>We workshop who you are now, and who you&rsquo;re becoming.</li>
-        <li>We find your brand voice and the story only you can tell.</li>
-        <li>You leave with a vivid picture of your next iteration, your positioning and your voice, plus a clear creative direction you can run with.</li>
-      </ul>
+      <p class="card-body">A focused creative direction session to clarify your next identity: your story, your voice, your brand direction, and how you show up publicly. We work through who you are now and who you are becoming, and we give it language the world can recognise.</p>
     </div>
+  </div>
+</section>
+
+<!-- ── YOU'LL LEAVE WITH ─────────────────────────────────── -->
+<section class="leave">
+  <div class="wrap">
+    <h2 class="sec-head">You&rsquo;ll leave <span class="swash">with.</span></h2>
+    <ul class="beats">
+      <li>Clearer positioning for your next chapter.</li>
+      <li>Language for your bio, LinkedIn, website, or offer.</li>
+      <li>Creative direction for how your new brand should feel.</li>
+      <li>A sharper story about who you are becoming.</li>
+      <li>Recommended next steps if you want to keep building.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ── WHO THIS IS FOR ───────────────────────────────────── -->
+<section class="forwho">
+  <div class="wrap">
+    <h2 class="sec-head">Who this is <span class="swash">for.</span></h2>
+    <p class="forwho-copy">Microsoft alumni moving into consulting, advising, entrepreneurship, coaching, speaking, fractional leadership, thought leadership, or a creative second chapter.</p>
+    <p class="forwho-note">You do not need a polished business idea, a name, or a website yet. Arriving with questions is enough.</p>
   </div>
 </section>
 
@@ -1090,8 +1209,8 @@ section { padding-block: var(--stack); }
           <span class="chip">THE OFFER</span>
           <span class="card-sub">Activate.</span>
         </div>
-        <p class="offer-price">Usually <span class="struck">$500</span>. Just <span class="circled">$300</span> for the first five alumni who book.</p>
-        <p class="offer-sub">And if we keep working together, your full $300 credits toward any package, so the session pays for itself.</p>
+        <p class="offer-price">Founding alumni rate. <span class="struck">$500</span> becomes <span class="circled">$300</span> for the first five sessions booked.</p>
+        <p class="offer-sub">Your full $300 credits toward any larger package booked within thirty days, so the session pays for itself.</p>
       </div>
     </div>
   </div>
@@ -1122,17 +1241,42 @@ section { padding-block: var(--stack); }
   </div>
 </section>
 
-<!-- 9 ── PULL QUOTE ──────────────────────────────────────── -->
-<section class="pull">
-  <div class="wrap"><p>&ldquo;I&rsquo;m so happy with this. You understood the essence.&rdquo;</p></div>
+<!-- ── FAQ ───────────────────────────────────────────────── -->
+<section class="faq">
+  <div class="wrap">
+    <h2 class="sec-head">Questions, <span class="swash">answered.</span></h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-trigger" type="button">What if I&rsquo;m not sure what I&rsquo;m building yet?<span class="faq-icon"></span></button>
+        <div class="faq-answer"><p>That is the most common place to start, and a good one. This session is built for the stage before the plan exists. You bring the pull you are feeling; together we give it language and shape.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" type="button">Is this only for founders?<span class="faq-icon"></span></button>
+        <div class="faq-answer"><p>No. Consultants, advisors, coaches, speakers, fractional leaders and people beginning something creative all sit comfortably here. What matters is that you are stepping into your own name.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" type="button">What happens after the session?<span class="faq-icon"></span></button>
+        <div class="faq-answer"><p>You receive a written summary of what we found: your positioning, your language, and the creative direction. Take it and run with it on your own, or we keep building together.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" type="button">How does the $300 credit work?<span class="faq-icon"></span></button>
+        <div class="faq-answer"><p>Book any larger package within thirty days of your session and the full $300 comes off the price. The session pays for itself.</p></div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- 10 ── BOOKING ───────────────────────────────────────── -->
 <section class="book" id="book">
   <div class="wrap">
     <h2 class="sec-head">Let’s <span class="swash">activate it.</span></h2>
+    <div class="trust">
+      <p class="trust-quote">&ldquo;She broke it all down, from thoughts in my head to direct messages I could share. I walked away feeling so good about my offerings.&rdquo;</p>
+      <p class="trust-who">Sabrina &middot; brand &amp; offer clarity</p>
+      <p class="trust-note">This offer comes through my partnership with <strong>Karen Fassio</strong> for the <strong>Microsoft Alumni Network</strong>.</p>
+    </div>
     <p class="book-lead">Come as you are, half-formed idea or blank page. Your next chapter is closer than you think. Let&rsquo;s activate it, and <span class="swash">more.</span></p>
-    <a class="cta cta--big" href="https://calendly.com/moorenatalisa/30min" target="_blank" rel="noopener">Activate</a>
+    <a class="cta cta--big" href="https://calendly.com/moorenatalisa/30min" target="_blank" rel="noopener">Book Your Activation Session</a>
   </div>
 </section>
 
@@ -1145,6 +1289,23 @@ section { padding-block: var(--stack); }
 <script>
 /* Auto-advancing testimonial slider. Pauses on hover/focus and for anyone
    who prefers reduced motion; dots stay clickable either way. */
+(function () {
+  document.querySelectorAll('.faq-item').forEach(function (item) {
+    var trigger = item.querySelector('.faq-trigger');
+    var answer  = item.querySelector('.faq-answer');
+    if (!trigger || !answer) return;
+    trigger.addEventListener('click', function () {
+      var open = item.classList.toggle('is-open');
+      answer.style.maxHeight = open ? answer.scrollHeight + 'px' : '0px';
+    });
+  });
+  window.addEventListener('resize', function () {
+    document.querySelectorAll('.faq-item.is-open .faq-answer').forEach(function (a) {
+      a.style.maxHeight = a.scrollHeight + 'px';
+    });
+  });
+})();
+
 (function () {
   /* draw the underline once, the first time the heading comes into view */
   var head = document.querySelector('.mirror .sec-head');
