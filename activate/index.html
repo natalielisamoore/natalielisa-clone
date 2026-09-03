@@ -378,6 +378,40 @@ strong, .em { font-weight: 600; }
   .is-in { opacity: 1 !important; transform: none !important; }
 }
 
+/* ══ floating chrome accents ══
+   Decorative only, so they carry aria-hidden and never take pointer events.
+   Each sits against a section edge and drifts gently; the drift is dropped
+   for reduced motion, and they shrink out of the way on narrow screens. */
+.charm {
+  position: absolute;
+  z-index: 2;
+  pointer-events: none;
+  user-select: none;
+  width: clamp(48px, 6.5vw, 96px);
+  height: auto;
+  animation: charm-drift 7s ease-in-out infinite;
+}
+.charm--heart { width: clamp(54px, 7.5vw, 112px); animation-duration: 8.5s; }
+@keyframes charm-drift {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%      { transform: translateY(-14px) rotate(-5deg); }
+}
+@media (prefers-reduced-motion: reduce) { .charm { animation: none; } }
+
+.mirror, .love, .book { position: relative; }
+.charm--mirror { top: 6%;  right: clamp(.5rem, 6vw, 7rem); }
+.charm--love   { top: 4%;  left:  clamp(.5rem, 6vw, 7rem); animation-delay: -2s; }
+.charm--book   { top: 14%; left:  clamp(.5rem, 8vw, 9rem); animation-delay: -4s; }
+/* on a phone the headings run the full width, so the charms tuck up into the
+   section's top padding instead of sitting beside the type */
+@media (max-width: 700px) {
+  .charm { width: 40px; }
+  .charm--heart { width: 46px; }
+  .charm--mirror { top: -.4rem; right: 1.5%; }
+  .charm--love   { top: -.6rem; left: 1.5%; }
+  .charm--book   { top: 3%;     left: 1.5%; }
+}
+
 /* ── the mirror ── */
 .mirror p {
   font-size: clamp(1.15rem, 1rem + 1.05vw, 1.75rem);
@@ -1051,6 +1085,7 @@ strong, .em { font-weight: 600; }
 
 <!-- 2 ── THE MIRROR ──────────────────────────────────────── -->
 <section class="mirror">
+  <img class="charm charm--mirror" src="../activate-media/star.png" alt="" aria-hidden="true" width="196" height="193" loading="lazy"/>
   <div class="wrap">
     <h2 class="sec-head">Something in you has <span class="swash">awakened.</span></h2>
     <p>You&rsquo;ve spent years building someone else&rsquo;s story, brilliantly. Now something is stirring that&rsquo;s entirely yours: an idea, a venture, <strong>a version of you that doesn&rsquo;t fit the old title.</strong> You can feel it.</p>
@@ -1130,6 +1165,7 @@ strong, .em { font-weight: 600; }
 
 <!-- 5 ── TESTIMONIAL SLIDER ─────────────────────────────── -->
 <section class="love">
+  <img class="charm charm--heart charm--love" src="../activate-media/heart.png" alt="" aria-hidden="true" width="299" height="285" loading="lazy"/>
   <div class="wrap">
     <h2 class="sec-head sec-head--bold">Take it from <span class="swash">them</span></h2>
 
@@ -1222,6 +1258,7 @@ strong, .em { font-weight: 600; }
 
 <!-- 10 ── BOOKING ───────────────────────────────────────── -->
 <section class="book" id="book">
+  <img class="charm charm--book" src="../activate-media/star.png" alt="" aria-hidden="true" width="196" height="193" loading="lazy"/>
   <div class="wrap">
     <h2 class="sec-head">Let’s <span class="swash">activate your story.</span></h2>
     <p class="book-lead">Come as you are. Your next chapter is waiting to be <span class="swash">written.</span></p>
