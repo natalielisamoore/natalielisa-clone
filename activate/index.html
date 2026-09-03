@@ -117,7 +117,7 @@ section { padding-block: var(--stack); }
 /* same photo closing the page, faded from the top so it grows out of the
    content rather than starting on a hard edge */
 .hero-media--foot {
-  height: clamp(400px, 60vh, 640px);
+  height: clamp(330px, 46vh, 500px);
   background-position: center 42%;
   /* rises up behind the booking section so the CTA sits inside the clouds */
   margin-top: clamp(-24rem, -32vh, -13rem);
@@ -597,8 +597,15 @@ strong, .em { font-weight: 600; }
 .next-grid p { font-size: clamp(.96rem, .93rem + .3vw, 1.1rem); line-height: 1.5; }
 
 /* ── booking ── */
-/* sits above the closing cloud band, which is pulled up underneath it */
-.book { position: relative; z-index: 1; }
+/* sits above the closing cloud band, which is pulled up underneath it. The
+   block is weighted low: it opens well clear of the pull quote and closes
+   tight under the button, so the clouds carry the eye out rather than a gap. */
+.book {
+  position: relative;
+  z-index: 1;
+  padding-top: clamp(4.5rem, 10vw, 8rem);
+  padding-bottom: clamp(.5rem, 1.2vw, 1rem);
+}
 .book-lead { font-size: clamp(1.15rem, 1rem + 1.05vw, 1.75rem); line-height: 1.45; max-width: 44ch; margin-bottom: clamp(1.6rem, 4vw, 2.4rem); }
 
 /* ── footer: brand mark only, no links competing with the CTA ── */
