@@ -398,10 +398,11 @@ strong, .em { font-weight: 600; }
 }
 @media (prefers-reduced-motion: reduce) { .charm { animation: none; } }
 
-.mirror, .love, .book { position: relative; }
+.mirror, .love, .book, .about { position: relative; }
 .charm--mirror { top: 6%;  right: clamp(.5rem, 6vw, 7rem); }
 .charm--love   { top: 4%;  left:  clamp(.5rem, 6vw, 7rem); animation-delay: -2s; }
 .charm--book   { top: 14%; left:  clamp(.5rem, 8vw, 9rem); animation-delay: -4s; }
+.charm--bio    { top: 38%; right: clamp(.5rem, 4vw, 5rem); animation-delay: -6s; }
 /* on a phone the headings run the full width, so the charms tuck up into the
    section's top padding instead of sitting beside the type */
 @media (max-width: 700px) {
@@ -410,6 +411,7 @@ strong, .em { font-weight: 600; }
   .charm--mirror { top: -.4rem; right: 1.5%; }
   .charm--love   { top: -.6rem; left: 1.5%; }
   .charm--book   { top: 3%;     left: 1.5%; }
+  .charm--bio    { top: -.6rem; right: 1.5%; }
 }
 
 /* ── the mirror ── */
@@ -1143,6 +1145,7 @@ strong, .em { font-weight: 600; }
 
 <!-- 4 ── ABOUT ───────────────────────────────────────────── -->
 <section class="about">
+  <img class="charm charm--heart charm--bio" src="../activate-media/heart.png" alt="" aria-hidden="true" width="299" height="285" loading="lazy"/>
   <div class="about-bleed">
     <img class="about-photo" src="../activate-media/natalie.jpg" alt="Natalie Moore" width="825" height="1100" loading="lazy"/>
     <div class="about-copy">
