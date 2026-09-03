@@ -186,7 +186,8 @@ section { padding-block: var(--stack); }
 .cta {
   display: inline-flex; align-items: center; justify-content: center; text-align: center;
   background: var(--ink); color: var(--white);
-  border: var(--line); border-radius: var(--r-pill);
+  /* a true pill: 30px reads as a rounded rectangle at this button height */
+  border: var(--line); border-radius: 999px;
   padding: 1.05em 2.2em;
   min-width: 13em;
   font-size: clamp(.95rem, .9rem + .3vw, 1.1rem);
