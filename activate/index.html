@@ -398,24 +398,22 @@ strong, .em { font-weight: 600; }
 }
 @media (prefers-reduced-motion: reduce) { .charm { animation: none; } }
 
-.hero, .mirror, .love, .book, .about { position: relative; }
-.charm--mirror { top: 6%;  right: clamp(.5rem, 6vw, 7rem); }
+.hero, .mirror, .love, .book, .about, .offer { position: relative; }
 .charm--love   { top: 4%;  left:  clamp(.5rem, 6vw, 7rem); animation-delay: -2s; }
 .charm--book   { top: 14%; left:  clamp(.5rem, 8vw, 9rem); animation-delay: -4s; }
 .charm--bio    { top: 38%; right: clamp(.5rem, 4vw, 5rem); animation-delay: -6s; }
 .charm--hero   { bottom: 6%; left: clamp(.5rem, 6vw, 7rem); animation-delay: -1s; }
-.charm--diamond { width: clamp(46px, 5.8vw, 84px); top: 62%; right: clamp(2rem, 8vw, 9rem); animation-delay: -3.5s; animation-duration: 9s; }
+.charm--diamond { width: clamp(52px, 6.5vw, 96px); top: 24%; right: clamp(1rem, 7vw, 8rem); animation-delay: -3.5s; animation-duration: 9s; }
 /* on a phone the headings run the full width, so the charms tuck up into the
    section's top padding instead of sitting beside the type */
 @media (max-width: 700px) {
   .charm { width: 40px; }
   .charm--heart { width: 46px; }
-  .charm--mirror { top: -.4rem; right: 1.5%; }
   .charm--love   { top: -.6rem; left: 1.5%; }
   .charm--book   { top: 3%;     left: 1.5%; }
   .charm--bio    { top: -.6rem; right: 1.5%; }
   .charm--hero   { bottom: 2%;  left: 1.5%; }
-  .charm--diamond { width: 42px; top: auto; bottom: 1%; right: 1.5%; }
+  .charm--diamond { width: 44px; top: 2%; right: 1.5%; }
 }
 
 /* ── the mirror ── */
@@ -1100,7 +1098,6 @@ strong, .em { font-weight: 600; }
 
 <!-- 2 ── THE MIRROR ──────────────────────────────────────── -->
 <section class="mirror">
-  <img class="charm charm--mirror" src="../activate-media/star.png" alt="" aria-hidden="true" width="196" height="193" loading="lazy"/>
   <div class="wrap">
     <h2 class="sec-head">Something in you has <span class="swash">awakened.</span></h2>
     <p>You&rsquo;ve spent years building someone else&rsquo;s story, brilliantly. Now something is stirring that&rsquo;s entirely yours: an idea, a venture, <strong>a version of you that doesn&rsquo;t fit the old title.</strong> You can feel it.</p>
@@ -1159,7 +1156,6 @@ strong, .em { font-weight: 600; }
 <!-- 4 ── ABOUT ───────────────────────────────────────────── -->
 <section class="about">
   <img class="charm charm--heart charm--bio" src="../activate-media/heart.png" alt="" aria-hidden="true" width="299" height="285" loading="lazy"/>
-  <img class="charm charm--diamond" src="../activate-media/diamond.png" alt="" aria-hidden="true" width="593" height="600" loading="lazy"/>
   <div class="about-bleed">
     <img class="about-photo" src="../activate-media/natalie.jpg" alt="Natalie Moore" width="825" height="1100" loading="lazy"/>
     <div class="about-copy">
@@ -1228,6 +1224,7 @@ strong, .em { font-weight: 600; }
 
 <!-- 7 ── THE OFFER ───────────────────────────────────────── -->
 <section class="offer">
+  <img class="charm charm--diamond" src="../activate-media/diamond.png" alt="" aria-hidden="true" width="593" height="600" loading="lazy"/>
   <div class="wrap">
     <h2 class="sec-head"><span class="swash">Investment</span></h2>
     <div class="offer-grid offer-grid--single">
