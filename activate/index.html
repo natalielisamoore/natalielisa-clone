@@ -520,6 +520,21 @@ strong, .em { font-weight: 600; }
   line-height: .98;
   margin-left: clamp(2.4rem, 10.5vw, 8rem);
 }
+/* "My vibe:" and its three lines, marked with the same swash star as the
+   session beats so the two lists read as one family */
+.vibe-label { margin-bottom: .5em !important; }
+.vibe {
+  list-style: none;
+  margin: 0 0 1.05em;
+  padding: 0;
+  display: grid;
+  gap: .5em;
+  max-width: 54ch;
+  font-size: clamp(1rem, .95rem + .45vw, 1.18rem);
+  line-height: 1.5;
+}
+.vibe li { position: relative; padding-left: 1.6em; }
+.vibe li::before { content: "\2726"; position: absolute; left: 0; top: 0; }
 .about-kicker {
   font-size: clamp(.78rem, .76rem + .2vw, .95rem);
   letter-spacing: .2em;
@@ -1090,10 +1105,15 @@ strong, .em { font-weight: 600; }
         <span class="about-hey">what&rsquo;s good!</span>
         <span class="about-name">I&rsquo;m Natalie.</span>
       </h2>
-      <p>I&rsquo;ve spent years helping founders, wellness entrepreneurs, and conscious businesses turn &ldquo;I know there&rsquo;s something here&rdquo; into a brand the world can actually fall in love with: story, voice, aesthetic, the whole beautiful thing.</p>
-      <p>And I get the leap you&rsquo;re standing in front of, because I took it. I built my practice my own way, on my own terms, from a little island in the Pacific Northwest, where I design brands, make jewelry, and live proof that the chapter after the expected path is the good one.</p>
-      <p>My last name is Moore. Consider it a promise: <strong>there is always more in you than your last job title.</strong></p>
-      <p>Here in partnership with Karen Fassio for the Microsoft Alumni Network. Come say hi. I&rsquo;d love to see what you&rsquo;re becoming.</p>
+      <p>I&rsquo;m Natalie Moore, a creative director and brand designer helping thoughtful brands look and feel like themselves&hellip; at their next level.</p>
+      <p>I work with everyone from wellness entrepreneurs and healers to filmmakers, makers, and founders at the start of something new. If you&rsquo;ve got a story worth telling, I&rsquo;ll help you design the brand to match.</p>
+      <p class="vibe-label">My vibe:</p>
+      <ul class="vibe">
+        <li>Collaborative, not prescriptive</li>
+        <li>Curious, not cookie-cutter</li>
+        <li>Obsessed with design that feels right, not just looks good</li>
+      </ul>
+      <p>I work one-on-one from Salt Spring Island, BC. Here through my partnership with Karen Fassio and Our Living Design Studio for the Microsoft Alumni Network.</p>
     </div>
   </div>
 </section>
