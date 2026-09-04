@@ -1823,34 +1823,47 @@ body.is-ceremony .reveal {
   padding-block: clamp(5rem, 13vh, 9.5rem);
 }
 .temple__hero {
-  /* starts exactly on the page's spine so the hero and every section below it
-     share one left rail; only the right edge is allowed to run wider */
+  /* full bleed: .temple is unconstrained, so 100% is the whole viewport width
+     without the scrollbar error 100vw would introduce */
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100svh;                  /* mobile toolbars change 100vh mid-scroll */
+  min-height: 34rem;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  align-items: center;
+  overflow: hidden;
+}
+.temple__herovid {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* lifted and drained so the rose reads as light, not as a photograph */
+  filter: brightness(1.16) saturate(.58);
+}
+/* the white the page is made of, laid back over the film. Heaviest on the left
+   where the words are, thinnest on the right so the rose still opens. */
+.temple__herowash {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg,
+      rgba(255,255,255,.90) 0%, rgba(255,255,255,.78) 34%,
+      rgba(255,255,255,.50) 68%, rgba(255,255,255,.34) 100%),
+    linear-gradient(180deg, rgba(255,255,255,.55) 0%, rgba(255,255,255,0) 22%),
+    linear-gradient(0deg,   rgba(255,255,255,.65) 0%, rgba(255,255,255,0) 26%);
+}
+.temple__herotext {
+  position: relative;             /* above the wash */
   margin-left: max(1.5rem, calc((100% - 62ch) / 2));
   margin-right: 1.5rem;
-  max-width: 94ch;
-  min-height: 82vh;
-  display: grid;
-  grid-template-columns: minmax(0, 1.28fr) minmax(0, .72fr);
-  gap: clamp(2.5rem, 6vw, 5.5rem);
-  align-items: center;
-  padding-block: clamp(7rem, 18vh, 11rem) clamp(4rem, 9vh, 7rem);
-}
-@media (max-width: 860px) {
-  .temple__hero {
-    grid-template-columns: 1fr;
-    min-height: 0;
-    gap: clamp(2.5rem, 7vw, 3.5rem);
-  }
-}
-/* The ink bloom already sits on white, so it needs no card and no shadow: a
-   frame around it would put an edge on the one thing that should have none. */
-.temple__herofig { margin: 0; }
-.temple__herofig img {
-  display: block;
-  width: 100%;
-  height: auto;
-  opacity: .82;
-  mix-blend-mode: multiply;   /* drops its white so it floats on the blooms */
+  /* ch here would resolve against the 16px base, not the 64px title, and pinch
+     the headline into an extra line */
+  max-width: min(100%, 40rem);
 }
 
 /* --- type --------------------------------------------------------------- */
