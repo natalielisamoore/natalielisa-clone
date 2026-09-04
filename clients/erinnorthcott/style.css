@@ -1733,3 +1733,325 @@ body.is-connect .footer {
   bottom: clamp(1rem, 3vh, 2rem);
   left: clamp(1rem, 3vw, 2.2rem);
 }
+
+/* ==========================================================================
+   INNER CEREMONIES — the temple page.
+
+   The homepage is a journey through a sunset; this is the room you arrive in
+   when it is over. White is the whole ground. Cream and blush are allowed to
+   exist only as a warming of that white, never as a colour you would name,
+   and gold appears exactly three times: the pullquote rule, the booking
+   button, the closing line. If you can point at the pink, it is too strong.
+   ========================================================================== */
+body.is-ceremony {
+  --dusk: 0;
+  --night: 0;
+
+  --t-ink:      #4a4038;              /* warm charcoal, never pure black */
+  --t-ink-soft: #857a6e;
+  --t-cream:    #fdfaf5;
+  --t-blush:    #fdf6f6;
+  --t-hair:     rgba(74,64,56,.09);   /* every rule on the page */
+  --t-measure:  min(100% - 3rem, 62ch);  /* ONE spine: text, columns, portrait */
+
+  background: #fff;
+  color: var(--t-ink);
+}
+
+/* the ground: white, with cream settling toward the foot like light pooling */
+/* white, and only white. The warmth belongs to the sections, not to the
+   viewport: a tint pinned to the glass would never move as you scroll, so it
+   could not read as a transition between one section and the next. */
+body.is-ceremony .sky {
+  background: radial-gradient(130% 60% at 50% 0%, #fffdfc 0%, #ffffff 55%);
+}
+/* grain stays for continuity with the film, at the edge of perception */
+body.is-ceremony .grain { opacity: .035; }
+
+/* the film edges lighten: the same strip, printed on paler stock */
+body.is-ceremony .filmedge {
+  width: 34px;
+  color: rgba(74,64,56,.30);
+  text-shadow: none;
+  font-weight: 300;
+}
+body.is-ceremony .filmedge--l {
+  background: linear-gradient(to right,
+    rgba(74,64,56,.05) 0%, rgba(74,64,56,.035) 64%, rgba(74,64,56,0) 100%);
+}
+body.is-ceremony .filmedge--r {
+  background: linear-gradient(to left,
+    rgba(74,64,56,.05) 0%, rgba(74,64,56,.035) 64%, rgba(74,64,56,0) 100%);
+}
+body.is-ceremony .filmedge::before {
+  width: 15px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15' height='58'%3E%3Crect x='3' y='17' width='9' height='24' rx='3' fill='%234a4038' fill-opacity='.13'/%3E%3C/svg%3E");
+  background-size: 15px 58px;
+}
+body.is-ceremony .filmedge--l .filmedge__print { left: 15px; right: 0; }
+body.is-ceremony .filmedge--r .filmedge__print { left: 0; right: 15px; }
+
+/* the bar sits on white, so it needs a white ground of its own */
+/* no backdrop blur: the ground behind is flat white, so it buys nothing and
+   haloes a soft band under the bar */
+body.is-ceremony .nav {
+  background: #fff;
+  border-bottom: 1px solid var(--t-hair);
+}
+body.is-ceremony .nav__name,
+body.is-ceremony .nav__link { color: var(--t-ink); font-weight: 300; }
+body.is-ceremony .nav__link[aria-disabled="true"] { color: var(--t-ink-soft); }
+
+/* the reveal is slower here than anywhere else on the site: things arrive */
+body.is-ceremony .reveal {
+  transition-duration: 1.5s;
+  transition-timing-function: cubic-bezier(.16,.64,.28,1);
+}
+
+/* --- rhythm ------------------------------------------------------------- */
+.temple { position: relative; z-index: 1; }
+.temple__measure {
+  width: var(--t-measure);
+  margin-inline: auto;
+}
+.temple__band {
+  position: relative;
+  padding-block: clamp(5rem, 13vh, 9.5rem);
+}
+.temple__hero {
+  min-height: 78vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-block: clamp(8rem, 22vh, 14rem) clamp(4rem, 9vh, 7rem);
+}
+
+/* --- type --------------------------------------------------------------- */
+.temple__title {
+  margin: 0;
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(2.1rem, 6vw, 4.1rem);
+  line-height: 1.12;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--t-ink);
+}
+.temple__sub {
+  margin: clamp(1.6rem, 3.4vw, 2.4rem) 0 0;
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1.02rem, 2.1vw, 1.35rem);
+  letter-spacing: .01em;
+  color: var(--t-ink-soft);
+}
+.temple__eyebrow {
+  margin: 0 0 clamp(1.6rem, 3.2vw, 2.4rem);
+  font-family: var(--mono);
+  font-weight: 300;
+  font-size: .68rem;
+  letter-spacing: .34em;
+  text-transform: uppercase;
+  color: var(--t-ink-soft);
+}
+.temple__lede {
+  margin: 0 0 clamp(1.5rem, 2.8vw, 2rem);
+  font-family: var(--body);
+  font-weight: 300;
+  font-size: clamp(1rem, 1.35vw, 1.12rem);
+  line-height: 1.95;                    /* the air is inside the paragraph too */
+  color: var(--t-ink);
+}
+.temple__lede em { font-style: italic; color: var(--t-ink-soft); }
+.temple__note {
+  margin: clamp(1.4rem, 3vw, 2.2rem) 0 0;
+  font-family: var(--body);
+  font-weight: 300;
+  font-size: .94rem;
+  line-height: 1.9;
+  color: var(--t-ink-soft);
+}
+
+/* the gold pullquote: one hairline of gold above it, and nothing else */
+.temple__pull {
+  width: min(100% - 3rem, 34ch);
+  margin: clamp(3.5rem, 8vh, 6rem) auto 0;
+  padding-top: clamp(2rem, 4vw, 2.8rem);
+  border-top: 1px solid rgba(201,168,76,.34);
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1.15rem, 2.5vw, 1.6rem);
+  line-height: 1.62;
+  text-align: center;
+  color: var(--gold);
+}
+/* the emotional beat: italic, centred, held apart from the argument */
+.temple__beat {
+  width: min(100% - 3rem, 40ch);
+  margin: clamp(3rem, 7vh, 5rem) auto;
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1.1rem, 2.3vw, 1.5rem);
+  line-height: 1.7;
+  text-align: center;
+  color: var(--t-ink-soft);
+}
+
+/* --- the rose ----------------------------------------------------------- */
+/* turned almost entirely to light: present as a warmth, not as an image */
+.temple__band--rose {
+  overflow: hidden;
+  /* the blush, arriving and leaving so gradually there is no edge to see */
+  background: linear-gradient(180deg,
+    rgba(253,246,246,0) 0%, var(--t-blush) 26%, var(--t-blush) 74%, rgba(253,246,246,0) 100%);
+}
+.temple__rose {
+  position: absolute;
+  top: 50%;
+  right: -14%;
+  transform: translateY(-50%);
+  width: min(46vw, 560px);
+  height: auto;
+  opacity: .13;
+  filter: saturate(.35) brightness(1.28);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* --- a session ---------------------------------------------------------- */
+.temple__parts {
+  list-style: none;
+  width: var(--t-measure);
+  margin: 0 auto;
+  padding: 0;
+  display: grid;
+  gap: clamp(1.6rem, 3vw, 2.6rem);
+  grid-template-columns: repeat(3, 1fr);
+}
+.temple__part {
+  padding-top: clamp(1.4rem, 2.4vw, 1.9rem);
+  border-top: 1px solid var(--t-hair);
+}
+.temple__partname {
+  margin: 0 0 .9rem;
+  font-family: var(--mono);
+  font-weight: 400;
+  font-size: .7rem;
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  color: var(--t-ink-soft);
+}
+.temple__parttext {
+  margin: 0;
+  font-family: var(--body);
+  font-weight: 300;
+  font-size: .96rem;
+  line-height: 1.85;
+  color: var(--t-ink);
+}
+@media (max-width: 760px) {
+  .temple__parts { grid-template-columns: 1fr; gap: 2.2rem; }
+}
+
+/* --- your guide --------------------------------------------------------- */
+/* the rose-edited portrait is 16:9 and carries its own black film border, so
+   it leads the section at full width and the text settles underneath it */
+.temple__guide {
+  width: var(--t-measure);
+  margin-inline: auto;
+}
+.temple__portrait { margin: 0 0 clamp(2.4rem, 5vw, 3.6rem); }
+.temple__portrait img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.temple__guidetext .temple__lede:last-child { margin-bottom: 0; }
+
+/* --- begin -------------------------------------------------------------- */
+.temple__offer { margin: 0; }
+.temple__offerrow {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1.5rem;
+  padding: clamp(1rem, 2vw, 1.35rem) 0;
+  border-bottom: 1px solid var(--t-hair);
+}
+.temple__offerrow:first-child { border-top: 1px solid var(--t-hair); }
+.temple__offer dt {
+  font-family: var(--body);
+  font-weight: 400;
+  font-size: 1rem;
+  color: var(--t-ink);
+}
+.temple__offer dd {
+  margin: 0;
+  font-family: var(--mono);
+  font-weight: 300;
+  font-size: .8rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--t-ink-soft);
+}
+/* the second of the three golds */
+body.is-ceremony .temple__book {
+  color: var(--gold);
+  border-color: rgba(201,168,76,.5);
+  font-weight: 400;
+}
+body.is-ceremony .temple__book:hover,
+body.is-ceremony .temple__book:focus-visible {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #fff;
+}
+
+/* --- the closing line --------------------------------------------------- */
+/* the page warms very slightly as it comes to rest */
+.temple__close {
+  background: linear-gradient(180deg, rgba(253,250,245,0) 0%, var(--t-cream) 55%);
+  padding-block: clamp(7rem, 20vh, 13rem);
+  text-align: center;
+}
+.temple__closing {
+  margin: 0;
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1.35rem, 3.4vw, 2.3rem);
+  letter-spacing: .01em;
+  color: var(--gold);
+}
+
+/* The footer was built for the homepage's night sky: cream type that relies
+   on darkness behind it. On this page that is white on white, so the whole
+   band is rebuilt light rather than dropped into a dark slab, which would
+   land like a brick at the foot of an otherwise weightless page. */
+body.is-ceremony .footer {
+  background: var(--t-cream);
+  border-top: 1px solid var(--t-hair);
+  color: var(--t-ink);
+}
+body.is-ceremony .footer__name,
+body.is-ceremony .footer__link,
+body.is-ceremony .footer__base { color: var(--t-ink); }
+body.is-ceremony .footer__name { font-weight: 500; }
+body.is-ceremony .footer__bio,
+body.is-ceremony .footer__h,
+body.is-ceremony .footer__follow-label,
+body.is-ceremony .footer__soon,
+body.is-ceremony .footer__code,
+body.is-ceremony .footer__social,
+body.is-ceremony .footer__credit { color: var(--t-ink-soft); }
+body.is-ceremony .footer__link[aria-disabled="true"] { color: var(--t-ink-soft); }
+body.is-ceremony .footer__link:hover,
+body.is-ceremony .footer__social:hover,
+body.is-ceremony .footer__credit:hover,
+body.is-ceremony .footer__credit:focus-visible { color: var(--gold); }
+body.is-ceremony .footer__base { border-top-color: var(--t-hair); }
