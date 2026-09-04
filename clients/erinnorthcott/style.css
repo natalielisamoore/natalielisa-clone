@@ -1976,6 +1976,15 @@ body.is-ceremony .reveal {
   color: var(--t-ink);
 }
 .temple__lede em { font-style: italic; color: var(--t-ink-soft); }
+/* Inline emphasis. Body sets at 300, so the lift to 600 is what makes a
+   paragraph scannable rather than a wall: you can read the bold phrases alone
+   and still get the sense of it. */
+.temple__lede strong,
+.temple__note strong,
+.temple__parttext strong {
+  font-weight: 600;
+  color: var(--t-ink);
+}
 .temple__note {
   margin: clamp(1.4rem, 3vw, 2.2rem) 0 0;
   font-family: var(--body);
