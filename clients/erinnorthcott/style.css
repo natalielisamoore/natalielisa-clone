@@ -1747,14 +1747,19 @@ body.is-ceremony {
   --dusk: 0;
   --night: 0;
 
-  --t-ink:      #4a4038;              /* warm charcoal, never pure black */
-  --t-ink-soft: #857a6e;
-  --t-cream:    #fdfaf5;
-  --t-blush:    #fdf6f6;
-  --t-hair:     rgba(74,64,56,.09);   /* every rule on the page */
+  /* Palette lifted from soniachoquette.net, her reference for this page.
+     The ground is a warm peach cream, not white, and the one loud colour is
+     a marigold reserved entirely for the thing you are meant to press. */
+  --t-ink:      #3d332b;              /* warm charcoal, never pure black */
+  --t-ink-soft: #85776a;
+  --t-cream:    #faf3ee;              /* the page ground */
+  --t-blush:    #f7e7df;              /* the deeper peach, for whole sections */
+  --t-peach:    #ffc2a7;              /* bloom only, never a fill */
+  --t-marigold: #ffca2c;              /* buttons only */
+  --t-hair:     rgba(199,116,94,.34); /* every rule: warm terracotta, never grey */
   --t-measure:  min(100% - 3rem, 62ch);  /* ONE spine: text, columns, portrait */
 
-  background: #fff;
+  background: var(--t-cream);
   color: var(--t-ink);
 }
 
@@ -1763,11 +1768,14 @@ body.is-ceremony {
    what makes a page read as luminous rather than merely blank: the light has
    somewhere to come from. Both fade to nothing by ~55%, so there is never an
    edge anywhere. Blush top-left, cream bottom-right. */
+/* Peach in from the left edge, marigold in from the right, and the middle
+   left pale so the type always has clean ground under it. The blooms are
+   edge-anchored, not corner-anchored: they bleed in from the sides. */
 body.is-ceremony .sky {
   background:
-    radial-gradient(circle at 8% 4%,  rgba(252,231,236,.52) 0%, rgba(255,255,255,0) 54%),
-    radial-gradient(circle at 94% 92%, rgba(250,242,228,.62) 0%, rgba(255,255,255,0) 56%),
-    #ffffff;
+    radial-gradient(62% 92% at 0% 42%,   rgba(248,186,150,.78) 0%, rgba(250,243,238,0) 58%),
+    radial-gradient(58% 88% at 100% 62%, rgba(255,205,88,.62)  0%, rgba(250,243,238,0) 56%),
+    var(--t-cream);
 }
 /* grain stays for continuity with the film, at the edge of perception */
 body.is-ceremony .grain { opacity: .035; }
@@ -1775,21 +1783,21 @@ body.is-ceremony .grain { opacity: .035; }
 /* the film edges lighten: the same strip, printed on paler stock */
 body.is-ceremony .filmedge {
   width: 34px;
-  color: rgba(74,64,56,.30);
+  color: rgba(61,51,43,.32);
   text-shadow: none;
   font-weight: 300;
 }
 body.is-ceremony .filmedge--l {
   background: linear-gradient(to right,
-    rgba(74,64,56,.05) 0%, rgba(74,64,56,.035) 64%, rgba(74,64,56,0) 100%);
+    rgba(61,51,43,.055) 0%, rgba(61,51,43,.04) 64%, rgba(61,51,43,0) 100%);
 }
 body.is-ceremony .filmedge--r {
   background: linear-gradient(to left,
-    rgba(74,64,56,.05) 0%, rgba(74,64,56,.035) 64%, rgba(74,64,56,0) 100%);
+    rgba(61,51,43,.055) 0%, rgba(61,51,43,.04) 64%, rgba(61,51,43,0) 100%);
 }
 body.is-ceremony .filmedge::before {
   width: 15px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15' height='58'%3E%3Crect x='3' y='17' width='9' height='24' rx='3' fill='%234a4038' fill-opacity='.13'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15' height='58'%3E%3Crect x='3' y='17' width='9' height='24' rx='3' fill='%233d332b' fill-opacity='.15'/%3E%3C/svg%3E");
   background-size: 15px 58px;
 }
 body.is-ceremony .filmedge--l .filmedge__print { left: 15px; right: 0; }
@@ -1799,7 +1807,7 @@ body.is-ceremony .filmedge--r .filmedge__print { left: 0; right: 15px; }
 /* no backdrop blur: the ground behind is flat white, so it buys nothing and
    haloes a soft band under the bar */
 body.is-ceremony .nav {
-  background: #fff;
+  background: var(--t-cream);
   border-bottom: 1px solid var(--t-hair);
 }
 body.is-ceremony .nav__name,
@@ -1853,12 +1861,12 @@ body.is-ceremony .reveal {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(70% 60% at 68% 46%, rgba(255,232,220,.30) 0%, rgba(255,232,220,0) 70%),
+    radial-gradient(70% 60% at 68% 46%, rgba(255,194,167,.26) 0%, rgba(255,194,167,0) 70%),
     linear-gradient(90deg,
-      rgba(255,248,242,.87) 0%, rgba(255,247,242,.72) 34%,
-      rgba(255,245,240,.42) 68%, rgba(255,244,239,.24) 100%),
-    linear-gradient(180deg, rgba(255,249,244,.52) 0%, rgba(255,249,244,0) 22%),
-    linear-gradient(0deg,   rgba(255,248,242,.60) 0%, rgba(255,248,242,0) 26%);
+      rgba(250,243,238,.88) 0%, rgba(250,241,235,.74) 34%,
+      rgba(249,238,231,.44) 68%, rgba(247,231,223,.26) 100%),
+    linear-gradient(180deg, rgba(250,243,238,.55) 0%, rgba(250,243,238,0) 22%),
+    linear-gradient(0deg,   rgba(247,235,228,.62) 0%, rgba(247,235,228,0) 26%);
 }
 .temple__herotext {
   position: relative;             /* above the wash */
@@ -1971,7 +1979,7 @@ body.is-ceremony .reveal {
   overflow: hidden;
   /* the blush, arriving and leaving so gradually there is no edge to see */
   background: linear-gradient(180deg,
-    rgba(253,246,246,0) 0%, var(--t-blush) 26%, var(--t-blush) 74%, rgba(253,246,246,0) 100%);
+    rgba(247,231,223,0) 0%, var(--t-blush) 26%, var(--t-blush) 74%, rgba(247,231,223,0) 100%);
 }
 .temple__rose {
   position: absolute;
@@ -2063,23 +2071,28 @@ body.is-ceremony .reveal {
   text-transform: uppercase;
   color: var(--t-ink-soft);
 }
-/* the second of the three golds */
+/* The one loud thing on the page, and the reference's clearest signature: a
+   filled marigold pill with dark text, not an outline. */
 body.is-ceremony .temple__book {
-  color: var(--gold);
-  border-color: rgba(201,168,76,.5);
-  font-weight: 400;
+  background: var(--t-marigold);
+  border-color: var(--t-marigold);
+  border-radius: 999px;
+  color: var(--t-ink);
+  font-weight: 500;
+  letter-spacing: .18em;
+  padding: 1.1rem 2.6rem;
 }
 body.is-ceremony .temple__book:hover,
 body.is-ceremony .temple__book:focus-visible {
-  background: var(--gold);
-  border-color: var(--gold);
-  color: #fff;
+  background: #f5bc16;
+  border-color: #f5bc16;
+  color: var(--t-ink);
 }
 
 /* --- the closing line --------------------------------------------------- */
 /* the page warms very slightly as it comes to rest */
 .temple__close {
-  background: linear-gradient(180deg, rgba(253,250,245,0) 0%, var(--t-cream) 55%);
+  background: linear-gradient(180deg, rgba(247,231,223,0) 0%, var(--t-blush) 60%);
   padding-block: clamp(7rem, 20vh, 13rem);
   text-align: center;
 }
@@ -2098,7 +2111,7 @@ body.is-ceremony .temple__book:focus-visible {
    band is rebuilt light rather than dropped into a dark slab, which would
    land like a brick at the foot of an otherwise weightless page. */
 body.is-ceremony .footer {
-  background: var(--t-cream);
+  background: var(--t-blush);
   border-top: 1px solid var(--t-hair);
   color: var(--t-ink);
 }
