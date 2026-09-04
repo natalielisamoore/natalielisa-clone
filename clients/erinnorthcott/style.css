@@ -1861,20 +1861,37 @@ body.is-ceremony .reveal {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(70% 60% at 68% 46%, rgba(255,194,167,.26) 0%, rgba(255,194,167,0) 70%),
+    radial-gradient(60% 70% at 50% 50%, rgba(255,194,167,.12) 0%, rgba(255,194,167,0) 72%),
     linear-gradient(90deg,
-      rgba(250,243,238,.88) 0%, rgba(250,241,235,.74) 34%,
-      rgba(249,238,231,.44) 68%, rgba(247,231,223,.26) 100%),
+      rgba(250,243,238,.93) 0%,  rgba(250,241,235,.62) 25%,
+      rgba(249,238,231,.30) 50%, rgba(250,241,235,.62) 75%,
+      rgba(247,231,223,.93) 100%),
     linear-gradient(180deg, rgba(250,243,238,.55) 0%, rgba(250,243,238,0) 22%),
     linear-gradient(0deg,   rgba(247,235,228,.62) 0%, rgba(247,235,228,0) 26%);
 }
+/* The headline splits either side of the rose, the way Malissa Pistillo puts
+   a clause on each side of her flower. The hero takes its own wider frame to
+   do it: the sections below keep the body spine. */
 .temple__herotext {
   position: relative;             /* above the wash */
-  margin-left: max(1.5rem, calc((100% - 62ch) / 2));
-  margin-right: 1.5rem;
-  /* ch here would resolve against the 16px base, not the 64px title, and pinch
-     the headline into an extra line */
-  max-width: min(100%, 40rem);
+  width: 100%;
+  padding-inline: clamp(1.5rem, 5vw, 4.5rem);
+}
+.temple__title {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+  gap: clamp(1rem, 5vw, 4rem);
+}
+.temple__title-l { justify-self: start; text-align: left; }
+.temple__title-r {
+  justify-self: end;
+  text-align: right;
+  margin-top: clamp(2.5rem, 11vh, 7rem);   /* the two halves sit off each other */
+}
+@media (max-width: 860px) {
+  .temple__title { grid-template-columns: 1fr; gap: .1em; }
+  .temple__title-r { justify-self: start; text-align: left; margin-top: 0; }
 }
 
 /* --- type --------------------------------------------------------------- */
@@ -1997,25 +2014,37 @@ body.is-ceremony .reveal {
 /* --- a session ---------------------------------------------------------- */
 .temple__parts {
   list-style: none;
-  width: var(--t-measure);
-  margin: 0 auto;
+  /* keeps the page's left rail, runs out to the right so three cards have
+     room. 62ch across gave 171px cards, which set three words to a line. */
+  margin: 0 clamp(1.5rem, 5vw, 4.5rem) 0 max(1.5rem, calc((100% - 62ch) / 2));
   padding: 0;
   display: grid;
   gap: clamp(1.6rem, 3vw, 2.6rem);
   grid-template-columns: repeat(3, 1fr);
 }
 .temple__part {
-  padding-top: clamp(1.4rem, 2.4vw, 1.9rem);
-  border-top: 1px solid var(--t-hair);
+  display: flex;
+  flex-direction: column;
+  padding: clamp(1.2rem, 2.2vw, 1.6rem);
+  border: 1px solid var(--t-hair);
+  border-radius: 6px;
+  background: rgba(255,253,251,.55);
 }
-.temple__partname {
+.temple__partnum {
   margin: 0 0 .9rem;
   font-family: var(--mono);
-  font-weight: 400;
-  font-size: .7rem;
-  letter-spacing: .26em;
-  text-transform: uppercase;
+  font-weight: 300;
+  font-size: .68rem;
+  letter-spacing: .2em;
   color: var(--t-ink-soft);
+}
+.temple__partname {
+  margin: 0 0 .7rem;
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: 1.24rem;
+  letter-spacing: 0;
+  color: var(--t-ink);
 }
 .temple__parttext {
   margin: 0;
