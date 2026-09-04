@@ -1894,6 +1894,28 @@ body.is-ceremony .reveal {
   .temple__title-r { justify-self: start; text-align: left; margin-top: 0; }
 }
 
+/* Section headings. The page had one 64px hero and then nothing above 17px
+   body, with an 11px mono label doing the work of a heading. These give the
+   page its missing middle step: 64 / 40 / 20 / 17. The hero keeps the small
+   mono kicker, which is a label rather than a heading. */
+.temple__band .temple__eyebrow,
+.temple__guidetext .temple__eyebrow {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(1.65rem, 3.3vw, 2.55rem);
+  line-height: 1.1;
+  letter-spacing: -.005em;
+  text-transform: none;
+  color: var(--t-ink);
+  gap: 1.1rem;
+  margin-bottom: clamp(1.9rem, 3.6vw, 2.8rem);
+}
+.temple__band .temple__eyebrow::before,
+.temple__guidetext .temple__eyebrow::before {
+  width: 2.6rem;
+  opacity: .38;
+}
+
 /* --- type --------------------------------------------------------------- */
 /* Large, mixed case, set tight, with a single italic word. Letterspaced caps
    read as a wordmark; this reads as a sentence someone means. */
@@ -2161,3 +2183,117 @@ body.is-ceremony .footer__social:hover,
 body.is-ceremony .footer__credit:hover,
 body.is-ceremony .footer__credit:focus-visible { color: var(--gold); }
 body.is-ceremony .footer__base { border-top-color: var(--t-hair); }
+
+/* ==========================================================================
+   INNER CEREMONIES, LIGHT VARIANT (the tester at /inner-ceremonies-tester/)
+
+   The same page built to the white brief instead of the peach one: white
+   dominant, blush and cream only as a warming of it, and #c9a84c gold in
+   three places. Scoped entirely to .is-temple-light so the live peach page
+   is not touched by any of it.
+   ========================================================================== */
+body.is-temple-light {
+  --t-ink:      #4a4038;
+  --t-ink-soft: #857a6e;
+  --t-cream:    #fdfaf5;
+  --t-blush:    #fdf6f6;
+  --t-hair:     rgba(74,64,56,.09);
+  background: #fff;
+}
+body.is-temple-light .sky {
+  background:
+    radial-gradient(circle at 8% 4%,   rgba(252,231,236,.50) 0%, rgba(255,255,255,0) 54%),
+    radial-gradient(circle at 94% 92%, rgba(250,242,228,.60) 0%, rgba(255,255,255,0) 56%),
+    #ffffff;
+}
+body.is-temple-light .nav { background: #fff; }
+body.is-temple-light .filmedge--l {
+  background: linear-gradient(to right,
+    rgba(74,64,56,.05) 0%, rgba(74,64,56,.035) 64%, rgba(74,64,56,0) 100%);
+}
+body.is-temple-light .filmedge--r {
+  background: linear-gradient(to left,
+    rgba(74,64,56,.05) 0%, rgba(74,64,56,.035) 64%, rgba(74,64,56,0) 100%);
+}
+
+/* hero: one centred title and a subtitle, not a split headline */
+body.is-temple-light .temple__hero { align-items: center; }
+body.is-temple-light .temple__herotext {
+  width: auto;
+  margin-left: max(1.5rem, calc((100% - 62ch) / 2));
+  margin-right: 1.5rem;
+  max-width: min(100%, 40rem);
+  padding-inline: 0;
+}
+body.is-temple-light .temple__title {
+  display: block;
+  font-size: clamp(2.2rem, 5.4vw, 4.2rem);
+  line-height: 1.06;
+}
+body.is-temple-light .temple__sub {
+  display: block;
+  margin: clamp(1.2rem, 2.6vw, 1.8rem) 0 0;
+  color: var(--t-ink-soft);
+}
+body.is-temple-light .temple__herowash {
+  background:
+    radial-gradient(70% 60% at 68% 46%, rgba(255,240,236,.26) 0%, rgba(255,240,236,0) 70%),
+    linear-gradient(90deg,
+      rgba(255,255,255,.90) 0%, rgba(255,255,255,.78) 34%,
+      rgba(255,255,255,.50) 68%, rgba(255,255,255,.34) 100%),
+    linear-gradient(180deg, rgba(255,255,255,.55) 0%, rgba(255,255,255,0) 22%),
+    linear-gradient(0deg,   rgba(255,255,255,.62) 0%, rgba(255,255,255,0) 26%);
+}
+
+/* the pullquote gets the gentle blush ground the brief asks for */
+body.is-temple-light .temple__pull {
+  padding: clamp(2rem, 4vw, 2.8rem) clamp(1.6rem, 4vw, 3rem) clamp(1.8rem, 3.6vw, 2.6rem);
+  border-top: 1px solid rgba(201,168,76,.34);
+  background: linear-gradient(180deg, rgba(253,246,246,.9) 0%, rgba(253,246,246,0) 100%);
+}
+
+/* A Session: three plain parts, no cards and no numbers */
+body.is-temple-light .temple__parts {
+  margin: 0 auto;
+  width: var(--t-measure);
+  gap: clamp(1.6rem, 3vw, 2.6rem);
+}
+body.is-temple-light .temple__part {
+  display: block;
+  padding: clamp(1.4rem, 2.4vw, 1.9rem) 0 0;
+  border: 0;
+  border-top: 1px solid var(--t-hair);
+  border-radius: 0;
+  background: none;
+}
+body.is-temple-light .temple__partname {
+  margin: 0 0 .9rem;
+  font-family: var(--mono);
+  font-weight: 400;
+  font-size: .7rem;
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  color: var(--t-ink-soft);
+}
+
+/* the button returns to her gold, kept soft rather than a hard outline */
+body.is-temple-light .temple__book {
+  background: var(--gold);
+  border-color: var(--gold);
+  border-radius: 999px;
+  color: #fff;
+  font-weight: 400;
+  letter-spacing: .22em;
+  padding: 1.1rem 2.6rem;
+}
+body.is-temple-light .temple__book:hover,
+body.is-temple-light .temple__book:focus-visible {
+  background: #b8963f;
+  border-color: #b8963f;
+  color: #fff;
+}
+body.is-temple-light .temple__closing em { font-style: italic; }
+body.is-temple-light .temple__close {
+  background: linear-gradient(180deg, rgba(253,250,245,0) 0%, var(--t-cream) 55%);
+}
+body.is-temple-light .footer { background: var(--t-cream); }
