@@ -1759,11 +1759,15 @@ body.is-ceremony {
 }
 
 /* the ground: white, with cream settling toward the foot like light pooling */
-/* white, and only white. The warmth belongs to the sections, not to the
-   viewport: a tint pinned to the glass would never move as you scroll, so it
-   could not read as a transition between one section and the next. */
+/* Two oversized blooms fading out well before they meet, on white. This is
+   what makes a page read as luminous rather than merely blank: the light has
+   somewhere to come from. Both fade to nothing by ~55%, so there is never an
+   edge anywhere. Blush top-left, cream bottom-right. */
 body.is-ceremony .sky {
-  background: radial-gradient(130% 60% at 50% 0%, #fffdfc 0%, #ffffff 55%);
+  background:
+    radial-gradient(circle at 8% 4%,  rgba(252,231,236,.52) 0%, rgba(255,255,255,0) 54%),
+    radial-gradient(circle at 94% 92%, rgba(250,242,228,.62) 0%, rgba(255,255,255,0) 56%),
+    #ffffff;
 }
 /* grain stays for continuity with the film, at the edge of perception */
 body.is-ceremony .grain { opacity: .035; }
@@ -1819,26 +1823,53 @@ body.is-ceremony .reveal {
   padding-block: clamp(5rem, 13vh, 9.5rem);
 }
 .temple__hero {
-  min-height: 78vh;
-  display: flex;
+  /* starts exactly on the page's spine so the hero and every section below it
+     share one left rail; only the right edge is allowed to run wider */
+  margin-left: max(1.5rem, calc((100% - 62ch) / 2));
+  margin-right: 1.5rem;
+  max-width: 94ch;
+  min-height: 82vh;
+  display: grid;
+  grid-template-columns: minmax(0, 1.28fr) minmax(0, .72fr);
+  gap: clamp(2.5rem, 6vw, 5.5rem);
   align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding-block: clamp(8rem, 22vh, 14rem) clamp(4rem, 9vh, 7rem);
+  padding-block: clamp(7rem, 18vh, 11rem) clamp(4rem, 9vh, 7rem);
+}
+@media (max-width: 860px) {
+  .temple__hero {
+    grid-template-columns: 1fr;
+    min-height: 0;
+    gap: clamp(2.5rem, 7vw, 3.5rem);
+  }
+}
+/* The ink bloom already sits on white, so it needs no card and no shadow: a
+   frame around it would put an edge on the one thing that should have none. */
+.temple__herofig { margin: 0; }
+.temple__herofig img {
+  display: block;
+  width: 100%;
+  height: auto;
+  opacity: .82;
+  mix-blend-mode: multiply;   /* drops its white so it floats on the blooms */
 }
 
 /* --- type --------------------------------------------------------------- */
+/* Large, mixed case, set tight, with a single italic word. Letterspaced caps
+   read as a wordmark; this reads as a sentence someone means. */
 .temple__title {
   margin: 0;
   font-family: var(--serif);
   font-weight: 300;
-  font-size: clamp(2.1rem, 6vw, 4.1rem);
-  line-height: 1.12;
-  letter-spacing: .16em;
-  text-transform: uppercase;
+  font-size: clamp(2.3rem, 5vw, 4.05rem);
+  line-height: .98;
+  letter-spacing: -.005em;
   color: var(--t-ink);
 }
-.temple__sub {
+.temple__title em {
+  font-style: italic;
+  font-weight: 300;
+}
+.temple__sub {              /* unused since the hero was restructured */
   margin: clamp(1.6rem, 3.4vw, 2.4rem) 0 0;
   font-family: var(--serif);
   font-style: italic;
@@ -1848,6 +1879,9 @@ body.is-ceremony .reveal {
   color: var(--t-ink-soft);
 }
 .temple__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: .85rem;
   margin: 0 0 clamp(1.6rem, 3.2vw, 2.4rem);
   font-family: var(--mono);
   font-weight: 300;
@@ -1855,6 +1889,14 @@ body.is-ceremony .reveal {
   letter-spacing: .34em;
   text-transform: uppercase;
   color: var(--t-ink-soft);
+}
+.temple__eyebrow::before {
+  content: "";
+  flex: none;
+  width: 2.1rem;
+  height: 1px;
+  background: currentColor;
+  opacity: .45;
 }
 .temple__lede {
   margin: 0 0 clamp(1.5rem, 2.8vw, 2rem);
