@@ -1795,13 +1795,15 @@ body.is-ceremony .filmedge--r {
   background: linear-gradient(to left,
     rgba(61,51,43,.055) 0%, rgba(61,51,43,.04) 64%, rgba(61,51,43,0) 100%);
 }
-body.is-ceremony .filmedge::before {
-  width: 15px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15' height='58'%3E%3Crect x='3' y='17' width='9' height='24' rx='3' fill='%233d332b' fill-opacity='.15'/%3E%3C/svg%3E");
-  background-size: 15px 58px;
-}
-body.is-ceremony .filmedge--l .filmedge__print { left: 15px; right: 0; }
-body.is-ceremony .filmedge--r .filmedge__print { left: 0; right: 15px; }
+/* No perforations on this page. The holes are the mechanically repeating,
+   hard-edged part of the film language, and this page is built on softness.
+   The edge printing stays: it reads as a watermark rather than as machinery,
+   so the family resemblance to the homepage survives.
+   To put them back, restore the ::before background-image and give the print
+   column a 15px inset again. */
+body.is-ceremony .filmedge::before { content: none; }
+body.is-ceremony .filmedge--l .filmedge__print { left: 0; right: 0; }
+body.is-ceremony .filmedge--r .filmedge__print { left: 0; right: 0; }
 
 /* the bar sits on white, so it needs a white ground of its own */
 /* no backdrop blur: the ground behind is flat white, so it buys nothing and
