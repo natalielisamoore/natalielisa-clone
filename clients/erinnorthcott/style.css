@@ -2012,30 +2012,34 @@ body.is-ceremony .reveal {
   font-size: clamp(1.1rem, 2.3vw, 1.5rem);
   line-height: 1.7;
   text-align: center;
-  color: var(--t-ink-soft);
+  color: var(--t-ink);
 }
 
 /* --- the rose ----------------------------------------------------------- */
 /* turned almost entirely to light: present as a warmth, not as an image */
 .temple__band--rose {
   overflow: hidden;
+  z-index: 0;              /* so the ink's negative z-index stays inside this band */
   /* the blush, arriving and leaving so gradually there is no edge to see */
   background: linear-gradient(180deg,
     rgba(247,231,223,0) 0%, var(--t-blush) 26%, var(--t-blush) 74%, rgba(247,231,223,0) 100%);
 }
+/* The ink laid on its side and stretched right across the band, running under
+   the text. rotate(90deg) turns the tall bloom horizontal; scaleX squashes what
+   is about to become its vertical extent, so it reads as a wide smear rather
+   than a tall column. z-index -1 puts it above the band's own background but
+   below the words, which is why the band has to be its own stacking context. */
 .temple__rose {
   position: absolute;
-  top: 52%;
-  right: -9%;
-  transform: translateY(-50%) rotate(6deg);
-  width: min(34vw, 420px);
+  left: 50%;
+  top: 47%;
+  width: min(108vw, 1320px);
   height: auto;
-  z-index: 0;
-  /* it was .13 when it was only a wash behind the text. It is the element now,
-     so it sits close to how it read on the homepage, lifted slightly so the
-     glitter stays light rather than pink on a peach ground. */
-  opacity: .72;
-  filter: saturate(.82) brightness(1.06);
+  transform: translate(-50%, -50%) rotate(90deg) scaleX(.4);
+  transform-origin: center;
+  z-index: -1;
+  opacity: .46;
+  filter: saturate(.78) brightness(1.07);
   pointer-events: none;
   user-select: none;
 }
