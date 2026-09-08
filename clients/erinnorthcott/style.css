@@ -2303,3 +2303,74 @@ body.is-temple-light .temple__close {
   background: linear-gradient(180deg, rgba(253,250,245,0) 0%, var(--t-cream) 55%);
 }
 body.is-temple-light .footer { background: var(--t-cream); }
+
+
+/* ==========================================================================
+   ARRIVING AT INNER CEREMONIES
+
+   Four things in sequence, so the click reads as one continuous move rather
+   than a cut followed by a page: the old page dissolves into this one, light
+   opens outward, the words settle, the room comes to rest. All of it off
+   under prefers-reduced-motion.
+   ========================================================================== */
+
+/* 1. The navigation itself. Cross-document view transitions turn the hard cut
+      between pages into a dissolve. Chrome and Safari honour it; Firefox
+      ignores the at-rule and navigates normally. */
+@view-transition { navigation: auto; }
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: .75s;
+  animation-timing-function: cubic-bezier(.2,.65,.25,1);
+}
+
+/* 2. The veil opens outward instead of fading in place. It is a radial wash,
+      brightest in the middle, so scaling it up carries that bright centre out
+      past you: light expanding rather than a curtain lifting. */
+body.is-ceremony .enter-veil {
+  background: radial-gradient(circle at 50% 46%, #fffdfa 0%, #fdf2ea 42%, #f6e2d5 100%);
+  animation: temple-arrive 2.5s cubic-bezier(.18,.72,.22,1) forwards;
+}
+@keyframes temple-arrive {
+  0%   { opacity: 1; transform: scale(1); }
+  62%  { opacity: .5; }
+  100% { opacity: 0; transform: scale(1.55); visibility: hidden; }
+}
+
+/* 3. The words settle rather than slide. Letter-spacing opens slightly and
+      closes, which reads as a breath going out; the 26px rise every other
+      block on the site uses would read as arriving in a hurry. */
+body.is-ceremony .temple__title {
+  animation: temple-settle-title 2.4s cubic-bezier(.16,.68,.22,1) .55s both;
+}
+body.is-ceremony .temple__sub {
+  animation: temple-settle-sub 2.4s cubic-bezier(.16,.68,.22,1) 1.05s both;
+}
+/* the end frames repeat each element's own tracking rather than using inherit,
+   which resolves to normal and leaves the type set wrong once it lands */
+@keyframes temple-settle-title {
+  0%   { opacity: 0; letter-spacing: .16em;  transform: translateY(8px); }
+  100% { opacity: 1; letter-spacing: -.005em; transform: none; }
+}
+@keyframes temple-settle-sub {
+  0%   { opacity: 0; letter-spacing: .14em; transform: translateY(8px); }
+  100% { opacity: 1; letter-spacing: .01em; transform: none; }
+}
+
+/* 4. The room comes to rest: the film opens a touch large and settles back
+      over ten seconds, slow enough to feel rather than watch. */
+body.is-ceremony .temple__herovid {
+  animation: temple-rest 10s cubic-bezier(.2,.6,.3,1) both;
+}
+@keyframes temple-rest {
+  0%   { transform: scale(1.055); }
+  100% { transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.is-ceremony .enter-veil,
+  body.is-ceremony .temple__title,
+  body.is-ceremony .temple__sub,
+  body.is-ceremony .temple__herovid { animation: none; }
+  body.is-ceremony .enter-veil { opacity: 0; visibility: hidden; }
+}
