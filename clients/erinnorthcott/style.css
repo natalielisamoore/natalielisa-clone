@@ -2308,21 +2308,16 @@ body.is-temple-light .footer { background: var(--t-cream); }
 /* ==========================================================================
    ARRIVING AT INNER CEREMONIES
 
-   Four things in sequence, so the click reads as one continuous move rather
-   than a cut followed by a page: the old page dissolves into this one, light
-   opens outward, the words settle, the room comes to rest. All of it off
-   under prefers-reduced-motion.
+   Three things in sequence, all of them inside this page: light opens
+   outward, the words settle, the room comes to rest. Off entirely under
+   prefers-reduced-motion.
    ========================================================================== */
 
-/* 1. The navigation itself. Cross-document view transitions turn the hard cut
-      between pages into a dissolve. Chrome and Safari honour it; Firefox
-      ignores the at-rule and navigates normally. */
-@view-transition { navigation: auto; }
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation-duration: .75s;
-  animation-timing-function: cubic-bezier(.2,.65,.25,1);
-}
+/* 1. (removed 2026-09-07) A site-wide @view-transition used to dissolve BETWEEN
+      pages here. It was unscoped by necessity — the at-rule is per-document and
+      every page shares this stylesheet — so building the Inner Ceremonies
+      arrival changed how the homepage and Connect navigate too. Cut for that
+      reason, not because it misbehaved. */
 
 /* 2. The veil opens outward instead of fading in place. It is a radial wash,
       brightest in the middle, so scaling it up carries that bright centre out
