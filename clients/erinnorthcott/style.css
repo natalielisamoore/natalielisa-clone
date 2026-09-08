@@ -2025,13 +2025,17 @@ body.is-ceremony .reveal {
 }
 .temple__rose {
   position: absolute;
-  top: 50%;
-  right: -14%;
-  transform: translateY(-50%);
-  width: min(46vw, 560px);
+  top: 52%;
+  right: -9%;
+  transform: translateY(-50%) rotate(6deg);
+  width: min(34vw, 420px);
   height: auto;
-  opacity: .13;
-  filter: saturate(.35) brightness(1.28);
+  z-index: 0;
+  /* it was .13 when it was only a wash behind the text. It is the element now,
+     so it sits close to how it read on the homepage, lifted slightly so the
+     glitter stays light rather than pink on a peach ground. */
+  opacity: .72;
+  filter: saturate(.82) brightness(1.06);
   pointer-events: none;
   user-select: none;
 }
