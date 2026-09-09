@@ -5580,3 +5580,203 @@ body.is-daniel .deck.is-static .dan__sec { height: auto; }
   color: #fff7ea;
 }
 #sunset .becoming__line { color: #000; }
+
+/* --------------------------------------------------------------------------
+   TRIAL (2026-09-09): Instrument Serif on the homepage titles, in place of the
+   script where it felt whimsical. Scoped to body.try-instrument so it comes
+   off with one class if she says no.
+   -------------------------------------------------------------------------- */
+body.try-instrument {
+  --display: 'Instrument Serif', 'Times New Roman', serif;
+}
+body.try-instrument .section__title {
+  font-family: var(--display);
+  font-weight: 400;
+  font-style: normal;
+  font-size: clamp(3rem, 6.4vw, 5.2rem);
+  line-height: 1.02;
+  letter-spacing: -.015em;
+}
+body.try-instrument .erin__title,
+body.try-instrument .collab__inner .section__title {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(2.6rem, 4.6vw, 4rem);
+  letter-spacing: -.015em;
+  line-height: 1.05;
+}
+body.try-instrument .becoming__text .section__title { font-size: clamp(2.8rem, 5.2vw, 4.6rem); }
+body.try-instrument .becoming__line {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: clamp(1.4rem, 2vw, 1.8rem);
+}
+body.try-instrument .hook__hand {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: clamp(1.8rem, 5vw, 3.4rem);
+}
+
+/* refinements to the trial (2026-09-09): the dying-wish line in Archivo, the
+   Inner Ceremonies title in the italic, the teaser line held to one line */
+body.try-instrument .hook__line {
+  font-family: var(--body);
+  font-style: normal;
+  font-weight: 300;
+}
+body.try-instrument .becoming__text .section__title { font-style: italic; }
+body.try-instrument .becoming__line { white-space: nowrap; font-size: clamp(1.15rem, 1.5vw, 1.45rem); }
+@media (max-width: 720px) { body.try-instrument .becoming__line { white-space: normal; } }
+
+/* --------------------------------------------------------------------------
+   Instrument Serif on Inner Ceremonies and Daniel (2026-09-09), same logic as
+   the homepage trial: section titles in the roman, the page's own title in
+   the italic; body, labels and the closing lines untouched.
+   -------------------------------------------------------------------------- */
+/* Inner Ceremonies */
+body.is-ceremony.try-instrument .temple__title {
+  font-family: var(--display);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -.01em;
+  line-height: 1.02;
+}
+body.is-ceremony.try-instrument .temple__eyebrow,
+body.is-ceremony.try-instrument .temple__band .temple__eyebrow,
+body.is-ceremony.try-instrument .temple__guidetext .temple__eyebrow {
+  font-family: var(--display);
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: -.012em;
+  line-height: 1.06;
+}
+body.is-ceremony.try-instrument .pillar__name {
+  font-family: var(--display);
+  font-size: clamp(1.7rem, 2.4vw, 2.2rem);
+  letter-spacing: -.01em;
+}
+body.is-ceremony.try-instrument .pillar__face--back .pillar__name { font-size: 1.6rem; }
+/* Daniel */
+body.is-daniel.try-instrument .dan__h2,
+body.is-daniel.try-instrument .cosmos__h2 {
+  font-family: var(--display);
+  font-weight: 400;
+  letter-spacing: -.012em;
+  line-height: 1.05;
+  font-size: clamp(2.2rem, 4vw, 3.4rem);
+}
+body.is-daniel.try-instrument .dan__pactline {
+  font-family: var(--display);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -.01em;
+  font-size: clamp(2.2rem, 5.2vw, 4.4rem);
+}
+body.is-daniel.try-instrument .dan__chnum {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 1.25em;
+}
+body.is-daniel.try-instrument .dan__sectext .dan__ch { font-family: var(--display); font-weight: 400; font-size: clamp(1.7rem, 2.4vw, 2.2rem); letter-spacing: -.01em; }
+
+/* Daniel's closing line in the script, like the homepage's (2026-09-09) */
+body.is-daniel .dan__closing,
+body.is-daniel.try-instrument .dan__closing {
+  font-family: var(--hand);
+  font-style: normal;
+  font-weight: 400;
+  font-size: clamp(2.4rem, 5.6vw, 4.6rem);
+  letter-spacing: 0;
+  line-height: 1.15;
+}
+
+/* the story's line under its title (2026-09-09) */
+body.is-daniel .dan__sub {
+  margin: .4rem 0 0;
+  font-family: var(--display, var(--body));
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.35rem, 2vw, 1.8rem);
+  line-height: 1.3;
+  color: var(--d-gold);
+}
+body.is-daniel .dan__storyhead .dan__rule { margin-top: 1.2rem; }
+
+/* the pact line: bigger, and lower, nearer the middle of the frame (2026-09-09) */
+body.is-daniel .dan__pact { padding-top: clamp(9rem, 34svh, 20rem); }
+body.is-daniel.try-instrument .dan__pactline,
+body.is-daniel .dan__pactline { font-size: clamp(2.6rem, 6.6vw, 5.6rem); }
+body.is-daniel .dan__pact::after {
+  background:
+    radial-gradient(ellipse 72% 36% at 50% 40%, rgba(20,14,10,.4) 0%, rgba(20,14,10,0) 100%),
+    linear-gradient(180deg, rgba(10,12,24,.4) 0%, rgba(10,12,24,0) 34%, rgba(10,12,24,0) 78%, rgba(10,12,24,.55) 100%);
+}
+@media (max-width: 720px) { body.is-daniel .dan__pact { padding-top: clamp(7rem, 28svh, 12rem); } }
+
+/* the photograph sits a touch lower in the frame; the line hangs just above their heads */
+body.is-daniel .dan__hero { object-position: 55% 66%; }
+body.is-daniel .dan__pact { padding-top: clamp(8rem, 27svh, 16rem); }
+@media (max-width: 720px) { body.is-daniel .dan__hero { object-position: 42% 62%; } body.is-daniel .dan__pact { padding-top: clamp(6rem, 22svh, 10rem); } }
+
+/* arrows at either edge of the strip (2026-09-09) */
+body.is-daniel .strip__arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 6;
+  width: 3.1rem;
+  height: 3.1rem;
+  margin: 0;
+  padding: 0;
+  transform: translateY(-50%);
+  border: 1px solid rgba(246,235,223,.55);
+  border-radius: 50%;
+  background: rgba(8,10,20,.45);
+  color: #f6ebdf;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  transition: background .2s ease, border-color .2s ease, transform .2s ease;
+}
+body.is-daniel .strip__arrow--prev { left: clamp(3.4rem, 4.5vw, 4.4rem); }
+body.is-daniel .strip__arrow--next { right: clamp(3.4rem, 4.5vw, 4.4rem); }
+body.is-daniel .strip__arrow svg { width: 1.2rem; height: 1.2rem; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+body.is-daniel .strip__arrow:hover,
+body.is-daniel .strip__arrow:focus-visible { background: rgba(246,235,223,.92); border-color: #f6ebdf; color: #0b1020; outline: none; }
+body.is-daniel .strip__arrow:active { transform: translateY(-50%) scale(.94); }
+@media (max-width: 720px) {
+  body.is-daniel .strip__arrow { width: 2.6rem; height: 2.6rem; }
+  body.is-daniel .strip__arrow--prev { left: 2.6rem; }
+  body.is-daniel .strip__arrow--next { right: 2.6rem; }
+}
+
+/* the pact line: a size down, a little lower (2026-09-09) */
+body.is-daniel.try-instrument .dan__pactline,
+body.is-daniel .dan__pactline { font-size: clamp(2.3rem, 5.6vw, 4.8rem); }
+body.is-daniel .dan__pact { padding-top: clamp(9rem, 32svh, 18rem); }
+
+/* the pull line on Inner Ceremonies: smaller, in the italic (2026-09-09) */
+body.is-ceremony.try-instrument .temple__band--work .temple__pull,
+body.is-ceremony.try-instrument .temple__pull {
+  font-family: var(--display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.35rem, 2.3vw, 1.9rem);
+  line-height: 1.35;
+  letter-spacing: 0;
+}
+
+/* the closing line's caret takes the line's own gold (2026-09-09) */
+body.is-daniel .dan__closing .dan__caret { background: currentColor; height: .8em; width: .05em; }
+body.is-daniel .dan__closing { min-height: 1.15em; }
+
+/* the Connect welcome in Instrument Serif (2026-09-09) */
+body.try-instrument .connect__inner .section__title,
+body.try-instrument h1.section__title {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(2.6rem, 4.8vw, 4.2rem);
+  letter-spacing: -.015em;
+  line-height: 1.05;
+}

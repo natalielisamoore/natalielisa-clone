@@ -90,6 +90,13 @@
   }, { passive: true });
   stage.addEventListener('pointercancel', () => { x0 = null; }, { passive: true });
 
+  /* the arrows at either edge */
+  stage.querySelectorAll('.strip__arrow').forEach((b) => {
+    b.addEventListener('click', (e) => { e.stopPropagation(); go(b.classList.contains('strip__arrow--next') ? 1 : -1, true); });
+    b.addEventListener('pointerdown', (e) => e.stopPropagation());
+    b.addEventListener('pointerup', (e) => e.stopPropagation());
+  });
+
   /* keys, when the stage has focus */
   stage.setAttribute('tabindex', '0');
   stage.addEventListener('keydown', (e) => {
