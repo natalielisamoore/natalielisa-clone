@@ -5837,3 +5837,273 @@ body.try-instrument.is-podcast .podcast__title {
   margin: 0;
 }
 body.is-podcast .podcast__inner .eyebrow { margin-bottom: 1.1rem; }
+
+/* ==========================================================================
+   TALISMANS (2026-09-09): every primary CTA as a small gilt object. A thin
+   warm-gold edge, a parchment fill with a candlelit inner glow, a soft pill,
+   a tiny diamond either side of the label. On hover the glow warms, the
+   button lifts a hair and a glint travels across it like light on gold foil;
+   pressed, it settles back like a small heavy thing. Two grounds only:
+   light (default) and dark (--tal-dark). Everything below overrides the
+   page-specific button rules above, so it is prefixed with `html body`.
+   ========================================================================== */
+:root {
+  --tal-ink:   #3b2a14;
+  --tal-edge:  rgba(201,168,76,.78);
+  --tal-edge-hi: #e9c766;
+  --tal-fill:  linear-gradient(180deg, rgba(255,247,229,.78), rgba(255,236,204,.62));
+  --tal-glow:  rgba(255,214,140,.55);
+  --tal-halo:  rgba(233,199,102,.16);
+  --tal-sheen: rgba(255,250,236,.95);
+}
+html body .btn-enter,
+html body .connect__send,
+html body.is-ceremony .temple__book,
+html body.is-temple-light .temple__book,
+html body.is-daniel .dan__btn,
+html body.is-daniel .dan__btn--fill,
+html body.is-daniel .cosmos__btn,
+html body .trailer__out,
+html body .filmframe__watch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .9em;
+  font-family: var(--mono);
+  font-size: .8rem;
+  font-weight: 400;
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  text-decoration: none;
+  line-height: 1;
+  color: var(--tal-ink);
+  padding: 1.05rem 2.4rem;
+  border: 1px solid var(--tal-edge);
+  border-radius: 999px;
+  background:
+    linear-gradient(115deg, transparent 0 38%, var(--tal-sheen) 50%, transparent 62% 100%) no-repeat -220% 0 / 220% 100%,
+    var(--tal-fill);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.28),
+    inset 0 0 14px var(--tal-glow),
+    0 0 0 0 var(--tal-halo),
+    0 1px 2px rgba(60,40,15,.08);
+  transform: translateY(0);
+  transition:
+    box-shadow .45s var(--ease), border-color .45s var(--ease),
+    color .45s var(--ease), transform .35s var(--ease);
+  cursor: pointer;
+}
+/* the ornaments: a tiny diamond either side, in the edge's gold */
+html body .btn-enter::before,  html body .btn-enter::after,
+html body .connect__send::before, html body .connect__send::after,
+html body.is-ceremony .temple__book::before, html body.is-ceremony .temple__book::after,
+html body.is-daniel .dan__btn::before, html body.is-daniel .dan__btn::after,
+html body.is-daniel .cosmos__btn::before, html body.is-daniel .cosmos__btn::after,
+html body .trailer__out::before, html body .trailer__out::after {
+  content: "\25C6";                                 /* ◆ */
+  font-size: .62em;
+  line-height: 1;
+  color: var(--tal-orn, var(--tal-edge-hi));
+  opacity: .75;
+  transform: translateY(-.05em);
+  transition: opacity .45s var(--ease);
+}
+/* hover: warmer glow, a hair of lift, brighter edge, clearer text, one glint */
+html body .btn-enter:hover, html body .btn-enter:focus-visible,
+html body .connect__send:hover, html body .connect__send:focus-visible,
+html body.is-ceremony .temple__book:hover, html body.is-ceremony .temple__book:focus-visible,
+html body.is-temple-light .temple__book:hover, html body.is-temple-light .temple__book:focus-visible,
+html body.is-daniel .dan__btn:hover, html body.is-daniel .dan__btn:focus-visible,
+html body.is-daniel .dan__btn--fill:hover, html body.is-daniel .dan__btn--fill:focus-visible,
+html body.is-daniel .cosmos__btn:hover, html body.is-daniel .cosmos__btn:focus-visible,
+html body .trailer__out:hover, html body .trailer__out:focus-visible {
+  color: var(--tal-ink);
+  border-color: var(--tal-edge-hi);
+  background-color: transparent;
+  transform: translateY(-1px);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.42),
+    inset 0 0 18px var(--tal-glow),
+    0 0 0 5px var(--tal-halo),
+    0 3px 8px rgba(60,40,15,.10);
+  animation: tal-glint 1.15s var(--ease) 1;
+  outline: none;
+}
+html body .btn-enter:hover::before, html body .btn-enter:hover::after,
+html body .connect__send:hover::before, html body .connect__send:hover::after,
+html body.is-ceremony .temple__book:hover::before, html body.is-ceremony .temple__book:hover::after,
+html body.is-daniel .dan__btn:hover::before, html body.is-daniel .dan__btn:hover::after,
+html body.is-daniel .cosmos__btn:hover::before, html body.is-daniel .cosmos__btn:hover::after,
+html body .trailer__out:hover::before, html body .trailer__out:hover::after { opacity: 1; }
+/* pressed: it settles, the glow gathers inward */
+html body .btn-enter:active,
+html body .connect__send:active,
+html body.is-ceremony .temple__book:active,
+html body.is-temple-light .temple__book:active,
+html body.is-daniel .dan__btn:active,
+html body.is-daniel .dan__btn--fill:active,
+html body.is-daniel .cosmos__btn:active,
+html body .trailer__out:active {
+  transform: translateY(0) scale(.985);
+  transition-duration: .12s;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.2),
+    inset 0 2px 10px rgba(120,84,30,.22),
+    inset 0 0 18px var(--tal-glow),
+    0 0 0 3px var(--tal-halo),
+    0 0 0 rgba(60,40,15,0);
+}
+html body .btn-enter:focus-visible,
+html body .connect__send:focus-visible,
+html body.is-ceremony .temple__book:focus-visible,
+html body.is-daniel .dan__btn:focus-visible,
+html body.is-daniel .cosmos__btn:focus-visible,
+html body .trailer__out:focus-visible { outline: 2px solid var(--tal-edge-hi); outline-offset: 3px; }
+/* the glint: the sheen layer crosses once, then rests off the left edge */
+@keyframes tal-glint {
+  from { background-position: -220% 0, 0 0; }
+  to   { background-position:  220% 0, 0 0; }
+}
+
+/* the ID rules on the homepage need matching weight */
+html body #sunset .btn-enter, html body #sunset .btn-enter:hover, html body #sunset .btn-enter:focus-visible,
+html body .film__cta .btn-enter, html body .film__cta .btn-enter:hover { color: var(--tal-ink); border-color: var(--tal-edge); background-color: transparent; }
+html body #sunset .btn-enter:hover, html body .film__cta .btn-enter:hover { border-color: var(--tal-edge-hi); }
+
+/* dark grounds: cream ink, a translucent gilt fill, the glow reads as candle */
+html body .becoming__text .btn-enter,
+html body .collab__inner .btn-enter,
+html body.is-daniel .dan__btn,
+html body.is-daniel .dan__btn--fill,
+html body .trailer__out,
+html body .filmframe__watch {
+  --tal-ink:   #fff1d6;
+  --tal-edge:  rgba(233,199,102,.7);
+  --tal-edge-hi: #f3d98a;
+  --tal-fill:  linear-gradient(180deg, rgba(255,226,170,.16), rgba(255,206,130,.09));
+  --tal-glow:  rgba(255,198,110,.28);
+  --tal-halo:  rgba(233,199,102,.13);
+  --tal-sheen: rgba(255,240,205,.55);
+}
+html body .becoming__text .btn-enter:hover, html body .becoming__text .btn-enter:focus-visible,
+html body .collab__inner .btn-enter:hover, html body .collab__inner .btn-enter:focus-visible { color: #fffaf0; }
+
+/* per-page tidy-ups */
+html body .connect__send { margin-top: .6rem; }
+html body .connect__send[disabled] { opacity: .6; cursor: default; }
+html body.is-ceremony .temple__book,
+html body.is-temple-light .temple__book { --tal-fill: linear-gradient(180deg, rgba(255,236,190,.9), rgba(255,220,140,.72)); --tal-edge: rgba(190,150,60,.85); --tal-orn: #b8862e; }
+/* inside the package cards the label must stay on one line */
+html body.is-ceremony .depth__cta .temple__book { white-space: nowrap; letter-spacing: .18em; padding: 1rem 1.5rem; gap: .7em; }
+html body.is-daniel .dan__btn--fill { --tal-fill: linear-gradient(180deg, rgba(255,226,170,.28), rgba(255,206,130,.18)); }
+html body.is-daniel .cosmos__btn { min-width: 0; padding: 1.15rem 2.6rem; font-size: .82rem; }
+html body.is-daniel .cosmos__btn--send { padding: .95rem 1.8rem; }
+html body .trailer__out { font-size: .66rem; padding: .7rem 1.4rem; letter-spacing: .18em; border-bottom-width: 1px; }
+html body .filmframe__watch { font-size: .6rem; padding: .55rem 1.1rem; gap: 0; backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); }
+html body .filmframe__link:hover .filmframe__watch,
+html body .filmframe__link:focus-visible .filmframe__watch { opacity: 1; transform: translate(-50%, 0); }
+html body .filmframe__watch { transform: translate(-50%, 8px); }
+
+@media (prefers-reduced-motion: reduce) {
+  html body .btn-enter, html body .connect__send, html body .temple__book, html body .dan__btn, html body .cosmos__btn, html body .trailer__out {
+    transition: box-shadow .3s, border-color .3s, color .3s; animation: none !important; transform: none !important;
+  }
+}
+
+/* ==========================================================================
+   GLINTS (2026-09-09): light catching on memory. A few warm points and hair-
+   line streaks placed by glint.js inside the heroes, along the chapter card
+   edges, around the cards and the arch. Each breathes on its own slow cycle,
+   drifts a hair while it is lit, and moves to a fresh spot every time it goes
+   dark. Never more than a few lit at once. Off under reduced motion.
+   ========================================================================== */
+.has-glints--anchor { position: relative; }   /* only hosts that were static */
+.glint {
+  position: absolute;
+  left: var(--g-x, 50%); top: var(--g-y, 50%);
+  width: var(--g-size, 3px); height: var(--g-size, 3px);
+  margin: calc(var(--g-size, 3px) / -2) 0 0 calc(var(--g-size, 3px) / -2);
+  pointer-events: none;
+  z-index: 2;
+  transform: rotate(var(--g-rot, 0deg));
+}
+.glint::before {
+  content: "";
+  position: absolute; inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,246,214,.95) 0%, rgba(255,218,150,.7) 30%, rgba(255,200,110,0) 70%);
+  opacity: 0;
+  animation: glint-breathe var(--g-dur, 10s) ease-in-out var(--g-delay, 0s) infinite;
+  will-change: opacity, transform;
+}
+.glint--line { width: var(--g-len, 16px); height: 1px; margin: 0 0 0 calc(var(--g-len, 16px) / -2); }
+.glint--line::before {
+  border-radius: 1px;
+  background: linear-gradient(90deg, rgba(255,232,180,0), rgba(255,240,205,.9) 50%, rgba(255,232,180,0));
+}
+.has-glints.is-resting .glint::before { animation-play-state: paused; }
+@keyframes glint-breathe {
+  0%        { opacity: 0; transform: translate(0, 0) scale(.55); }
+  14%       { opacity: var(--g-max, .6); transform: translate(calc(var(--g-dx, 0px) * .3), calc(var(--g-dy, 0px) * .3)) scale(1); }
+  30%       { opacity: var(--g-max, .6); transform: translate(var(--g-dx, 0px), var(--g-dy, 0px)) scale(.9); }
+  44%, 100% { opacity: 0; transform: translate(var(--g-dx, 0px), var(--g-dy, 0px)) scale(.55); }
+}
+/* light grounds want a slightly warmer, firmer fleck to be sensed at all */
+body.is-ceremony .glint::before,
+.cosmos .glint::before,
+.section--podcast .glint::before { --g-max: .75; }
+.cosmos .glint::before { background: radial-gradient(circle, rgba(255,240,200,1) 0%, rgba(232,190,110,.8) 30%, rgba(220,170,80,0) 70%); }
+@media (prefers-reduced-motion: reduce) { .glint { display: none; } }
+
+/* ==========================================================================
+   A NOTE FROM ME (2026-09-09): a short letter under the bio. Same two even
+   columns as the bio so the words line up with hers above; the photo of her
+   and Ayan sits small at the inner edge of the left column, like a snapshot
+   laid beside a letter.
+   ========================================================================== */
+body.is-ceremony .temple__band--note { padding-block: 0 clamp(4.5rem, 11vh, 7.5rem); }
+body.is-ceremony .temple__note {
+  width: min(100% - 5rem, 1240px);
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: center;
+  text-align: left;
+}
+body.is-ceremony .temple__snap {
+  margin: 0;
+  width: clamp(180px, 21vw, 270px);
+  justify-self: end;
+  transform: rotate(-1.5deg);
+}
+body.is-ceremony .temple__snap img {
+  display: block;
+  width: 100%; height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: 50% 28%;
+  border-radius: clamp(14px, 1.6vw, 20px);
+  box-shadow: 0 10px 28px rgba(120,80,50,.14);
+}
+body.is-ceremony .temple__notetext { max-width: 58ch; }
+body.is-ceremony .temple__notetext .temple__label { justify-content: flex-start; }
+body.is-ceremony .temple__noteline {
+  margin: 0 0 clamp(1.1rem, 2.2vw, 1.6rem);
+  font-family: var(--display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.7rem, 2.6vw, 2.3rem);
+  line-height: 1.15;
+  letter-spacing: -.01em;
+  color: var(--t-ink);
+  white-space: nowrap;
+}
+body.is-ceremony .temple__notetext .temple__lede:last-child { margin-bottom: 0; }
+@media (max-width: 860px) {
+  body.is-ceremony .temple__note { grid-template-columns: 1fr; gap: 1.8rem; }
+  body.is-ceremony .temple__snap { justify-self: start; width: min(52vw, 220px); }
+  body.is-ceremony .temple__noteline { white-space: normal; }
+}
