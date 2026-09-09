@@ -5568,3 +5568,15 @@ body.is-daniel .deck__stage .dan__sec { height: calc(100svh - 4rem); }
 
 /* the plain column sizes itself; the script then evens the cards up */
 body.is-daniel .deck.is-static .dan__sec { height: auto; }
+
+/* the Inner Ceremonies teaser's one line (2026-09-09) */
+.becoming__line {
+  margin: 1.3rem 0 0;
+  font-family: var(--body);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1.1rem, 1.5vw, 1.32rem);
+  line-height: 1.4;
+  color: #fff7ea;
+}
+#sunset .becoming__line { color: #000; }
