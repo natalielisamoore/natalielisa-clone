@@ -4019,3 +4019,7 @@ body.is-ceremony .temple__q { font-family: var(--serif); font-weight: 300; font-
    (2026-09-08); the gold hover stays for the credit and the socials */
 body.is-ceremony .footer__link:hover,
 body.is-ceremony .footer__link:focus-visible { color: #e2809b; }
+
+/* (2026-09-08) The automatic arch transition on clicking an Inner Ceremonies
+   link is gone: "the automatic transition is now unnecessary". The portal at
+   the top of the page is the entrance now, every time. arch.js removed. */
