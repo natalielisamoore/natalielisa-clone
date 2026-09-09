@@ -5562,3 +5562,9 @@ body.is-daniel .deck__stage .dan__mount { width: min(100%, 520px, calc((100svh -
 body.is-daniel .deck__stage .dan__mount img { max-height: none; height: auto; }
 body.is-daniel .deck__stage .dan__sec[data-folio="6"] .dan__sectext { padding-top: clamp(1.4rem, 2.6vw, 2.2rem); padding-bottom: clamp(2.2rem, 3vw, 2.8rem); }
 body.is-daniel .deck__stage .dan__sec[data-folio="6"] .dan__sectext p { line-height: 1.66; font-size: clamp(.98rem, 1.12vw, 1.06rem); }
+
+/* every deck card the same height, the tallest one's (2026-09-09) */
+body.is-daniel .deck__stage .dan__sec { height: calc(100svh - 4rem); }
+
+/* the plain column sizes itself; the script then evens the cards up */
+body.is-daniel .deck.is-static .dan__sec { height: auto; }

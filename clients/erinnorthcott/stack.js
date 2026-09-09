@@ -40,6 +40,7 @@
 
   function start() {
     deck.classList.remove('is-static');
+    cards.forEach((el) => { el.style.minHeight = ''; });
     deck.style.height = `calc(${(N - 1) * SEG + 1} * 100vh)`;
     measure();
     if (!live) { addEventListener('scroll', onScroll, { passive: true }); live = true; }
@@ -49,6 +50,10 @@
     deck.style.height = 'auto';
     cards.forEach((el) => { el.style.setProperty('--e', 1); el.style.setProperty('--x', 0); el.dataset.phase = 'cur'; });
     if (live) { removeEventListener('scroll', onScroll); live = false; }
+    /* in the column, too, every card stands as tall as the tallest */
+    cards.forEach((el) => { el.style.minHeight = ''; });
+    const tallest = Math.max(...cards.map((el) => el.getBoundingClientRect().height));
+    if (wide.matches || window.innerWidth > 820) cards.forEach((el) => { el.style.minHeight = Math.ceil(tallest) + 'px'; });
   }
   function decide() { (reduce.matches || !wide.matches) ? rest() : start(); }
   decide();
