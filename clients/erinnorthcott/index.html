@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=JetBrains+Mono:wght@300;400;500&family=Caveat:wght@500;600;700&family=Karla:wght@300..700&family=Permanent+Marker&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css?v=158" />
+  <link rel="stylesheet" href="style.css?v=236" />
 </head>
 <body>
   <!-- Arrival: a luminous veil that dissolves on load — you cross a threshold -->
@@ -101,10 +101,10 @@
     <section class="section section--hero" id="sunrise">
       <div class="hero">
         <figure class="filmframe reveal">
-          <a class="filmframe__link" href="https://www.youtube.com/watch?v=04iHR-eZIXY" target="_blank" rel="noopener" aria-label="Watch the trailer for Daniel — an HBO Original documentary">
+          <a class="filmframe__link" data-trailer href="https://www.youtube.com/watch?v=04iHR-eZIXY" target="_blank" rel="noopener" aria-haspopup="dialog" aria-label="Watch the trailer for Daniel — an HBO Original documentary">
             <div class="filmframe__img">
               <!-- data-has-audio flips to "true" the moment the clip carries sound -->
-              <video class="filmframe__vid" data-src="videos/daniel.mp4?v=158" data-has-audio="true" poster="images/daniel.jpg?v=158" loop muted playsinline preload="none" aria-hidden="true"></video>
+              <video class="filmframe__vid" data-src="videos/daniel.mp4?v=236" data-has-audio="true" poster="images/daniel.jpg?v=236" loop muted playsinline preload="none" aria-hidden="true"></video>
               <span class="filmframe__watch">Watch the trailer &rarr;</span>
             </div>
             <!-- Key-art label: the film's own line, brushed onto torn tape -->
@@ -139,9 +139,12 @@
     <!-- HOOK — archival threshold into the story -->
     <section class="section section--hook" id="hook">
       <div class="hook reveal">
-        <p class="hook__hand">Boxes of cassettes &amp; a request&hellip;</p>
+        <!-- "and", not "&", and three periods rather than &hellip;: Baxter Clean has
+             neither an ampersand nor an ellipsis, and both were falling back to Caveat
+             mid-line. Set this way the whole line is one face. -->
+        <p class="hook__hand">Boxes of cassettes and a request...</p>
         <p class="hook__line">a dying wish that became an <span class="hook__hbo">HBO&nbsp;film</span>.</p>
-        <p class="film__cta"><a class="btn-enter" href="https://www.youtube.com/watch?v=04iHR-eZIXY" target="_blank" rel="noopener">Daniel</a></p>
+        <p class="film__cta"><a class="btn-enter" data-trailer href="https://www.youtube.com/watch?v=04iHR-eZIXY" target="_blank" rel="noopener" aria-haspopup="dialog">Daniel</a></p>
       </div>
     </section>
 
@@ -268,13 +271,37 @@
     <img src="images/starskissingme2.jpg" alt="" loading="lazy" decoding="async" />
   </div>
 
-  <script src="sky.js?v=158" defer></script>
+  <!-- The trailer plays here, not on YouTube. trailer.js fills the src on open
+       and empties it on close, so the embed loads nothing until it is asked
+       for and stops dead when dismissed. -->
+  <dialog class="trailer" id="trailer" aria-label="Daniel — official trailer">
+    <div class="trailer__frame">
+      <div class="trailer__gate">
+        <iframe class="trailer__vid" title="Daniel — official trailer"
+                data-embed="https://www.youtube-nocookie.com/embed/04iHR-eZIXY?rel=0&amp;modestbranding=1&amp;playsinline=1&amp;autoplay=1"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen></iframe>
+      </div>
+      <p class="trailer__cap">
+        <span>Daniel &middot; Official trailer</span>
+        <a class="trailer__out" href="https://www.crave.ca/en/special/daniel-55294" target="_blank" rel="noopener">Watch on Crave &rarr;</a>
+      </p>
+    </div>
+    <button class="trailer__close" type="button" autofocus aria-label="Close the trailer">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </dialog>
+
+  <script src="sky.js?v=236" defer></script>
   <script src="stars.js" defer></script>
-  <script src="motes.js?v=158" defer></script>
-  <script src="cursor.js?v=158" defer></script>
-  <script src="letters.js?v=158" defer></script>
-  <script src="sound.js?v=158" defer></script>
-  <script src="petals.js?v=158" defer></script>
-  <script src="reveal.js?v=158" defer></script>
+  <script src="motes.js?v=236" defer></script>
+  <script src="cursor.js?v=236" defer></script>
+  <script src="letters.js?v=236" defer></script>
+  <script src="sound.js?v=236" defer></script>
+  <script src="petals.js?v=236" defer></script>
+  <script src="reveal.js?v=236" defer></script>
+  <script src="trailer.js?v=236" defer></script>
+  <script src="arch.js?v=236" defer></script>
 </body>
 </html>

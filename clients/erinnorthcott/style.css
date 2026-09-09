@@ -3,6 +3,74 @@
    Type: Fraunces (editorial display serif) / Karla (body) / JetBrains Mono (labels)
    ========================================================================== */
 
+/* ==========================================================================
+   SELF-HOSTED FACES (2026-09-07)
+
+   Menlo takes over the label role from JetBrains Mono, and Baxter Clean the
+   cursive one from Caveat. Both are subset to Latin plus the punctuation this
+   site actually sets, which is why they are 17KB and 59KB rather than 475KB
+   and 240KB.
+
+   Both are Regular only. font-synthesis-weight is off so the browser fakes
+   nothing: any --mono rule asking for 300 or 500 simply gets 400 rather than a
+   smeared or emboldened counterfeit of a weight that does not exist.
+   ========================================================================== */
+@font-face {
+  font-family: 'Menlo Web';
+  src: url("fonts/menlo-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+/* Bold and both italics are lifted out of the system Menlo.ttc, which carries
+   all four. Menlo is the body face now, so <strong> and <em> have to be real
+   cuts: with Regular alone every emphasis in the copy would have flattened to
+   nothing under font-synthesis-weight: none. */
+@font-face {
+  font-family: 'Menlo Web';
+  src: url("fonts/menlo-bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Menlo Web';
+  src: url("fonts/menlo-italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Menlo Web';
+  src: url("fonts/menlo-bolditalic.woff2") format("woff2");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+/* Archivo, variable 100..900 in both styles, straight from Google Fonts (OFL).
+   Latin subset only: the latin-ext and vietnamese cuts this site never sets. */
+@font-face {
+  font-family: 'Archivo';
+  src: url("fonts/archivo-normal.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Archivo';
+  src: url("fonts/archivo-italic.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Baxter Clean';
+  src: url("fonts/baxter-clean.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --white:    #ffffff;
   --gold:     #c9a84c;
@@ -16,9 +84,9 @@
   --ink-soft: #6b5a48;
 
   --serif: 'Fraunces', Georgia, Cambria, 'Times New Roman', serif; /* display */
-  --mono:  'JetBrains Mono', ui-monospace, SFMono-Regular, monospace; /* labels */
-  --hand:  'Caveat', 'Segoe Script', cursive;                        /* archival hand */
-  --body:  'Karla', 'Helvetica Neue', Arial, sans-serif;             /* warm grotesque, not a system default */
+  --mono:  'Menlo Web', Menlo, ui-monospace, SFMono-Regular, monospace; /* labels */
+  --hand:  'Baxter Clean', 'Caveat', 'Segoe Script', cursive;        /* archival hand */
+  --body:  'Archivo', 'Helvetica Neue', Arial, sans-serif;           /* paragraphs. Karla -> Menlo -> Archivo, 2026-09-07 */
 
   --accent-red: #b23a2e;   /* oxidized brick — the documentary's red, on palette */
 
@@ -27,6 +95,9 @@
 }
 
 * { box-sizing: border-box; }
+
+/* Menlo now ships 400 and 700, so only the cursive needs synthesis held off */
+[class*="hand"], .keyart__line { font-synthesis-weight: none; }
 
 html { scroll-behavior: smooth; }
 
@@ -386,13 +457,19 @@ body {
 }
 .eyebrow--light { color: var(--gold-lite); }
 
+/* the section titles are the cursive now (2026-09-07), not Fraunces italic.
+   Baxter is a copperplate: it is already slanted, so the italic comes off,
+   and a script needs air under it and none of the serif's negative tracking,
+   or the descenders of one line tangle with the capitals of the next. */
 .section__title {
-  font-family: var(--serif);
-  font-style: italic;
+  font-family: var(--hand);
+  font-style: normal;
   font-weight: 400;
-  font-size: clamp(2rem, 4.4vw, 3.2rem);
-  line-height: 1.04;
-  letter-spacing: -.01em;
+  /* Baxter's cap-height is low for its em, so it has to be set larger than
+     Fraunces was just to outrank the paragraph under it. */
+  font-size: clamp(3rem, 7vw, 5.4rem);
+  line-height: 1.14;
+  letter-spacing: 0;
   text-wrap: balance;
   margin: 0 0 1.5rem;
   color: #000;                 /* stated, not warm-brown */
@@ -771,10 +848,13 @@ body {
   margin: 0 0 .9rem;
 }
 .hook__line {
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: clamp(1rem, 4.9vw, 2.7rem);
-  line-height: 1.26;
+  font-family: var(--mono);
+  font-style: normal;
+  /* Menlo sets far wider than Fraunces did, and this line is nowrap, so the
+     ceiling has to come down or the sentence runs off a laptop screen. */
+  font-size: clamp(.72rem, 2.9vw, 1.6rem);
+  letter-spacing: -.01em;
+  line-height: 1.4;
   white-space: nowrap;                 /* one thought, one line */
   color: #000;                               /* black — the pink is the hand above it */
   margin: 0;
@@ -1494,8 +1574,29 @@ body.is-connect {
 /* the labels have a bright band of sky to hold their own against */
 body.is-connect .eyebrow { color: #9a6a3c; }
 body.is-connect .sky {
-  background: #f6d9e0 url("images/connect-sky.jpg") center / cover no-repeat;
+  background: #cdbcc4 url("images/connect-sky2.jpg?v=179") center / cover no-repeat;
 }
+/* The sunset that replaced the pale one on 2026-09-07 is a city skyline, and
+   the third label lands right where a dark tower meets the blown-out sun. The
+   line crosses that edge, so no single text colour survives it: dark type
+   disappears into the building, light type into the flare.
+
+   So the labels carry their own light instead. A warm bloom, not a white
+   halo — on a photographed sunset it reads as the sun flaring around the
+   letters, which is what the rest of the frame is already doing. The inputs
+   below need none of this; they have their own paper. */
+body.is-connect .connect__label {
+  color: var(--ink);
+  text-shadow:
+    0 0 3px  rgba(255,246,236,.92),
+    0 0 11px rgba(255,246,236,.85),
+    0 0 22px rgba(255,240,226,.55);
+}
+
+/* No film strips on Connect (2026-09-07). Hidden rather than pulled out of the
+   markup: the .filmedge block is identical in all four pages and editing one
+   copy is how they drift apart. One line to put back. */
+body.is-connect .filmedge { display: none; }
 /* the footer keeps its dark band so it still reads over a bright sky */
 body.is-connect .footer {
   background: linear-gradient(180deg, rgba(22,14,32,.62) 0%, rgba(9,6,16,.88) 100%);
@@ -1893,11 +1994,11 @@ body.is-ceremony .reveal {
    mono kicker, which is a label rather than a heading. */
 .temple__band .temple__eyebrow,
 .temple__guidetext .temple__eyebrow {
-  font-family: var(--serif);
-  font-weight: 300;
-  font-size: clamp(1.65rem, 3.3vw, 2.55rem);
-  line-height: 1.1;
-  letter-spacing: -.005em;
+  font-family: var(--hand);
+  font-weight: 400;
+  font-size: clamp(2.1rem, 4.2vw, 3.3rem);
+  line-height: 1.22;
+  letter-spacing: 0;
   text-transform: none;
   color: var(--t-ink);
   gap: 1.1rem;
@@ -1914,16 +2015,17 @@ body.is-ceremony .reveal {
    read as a wordmark; this reads as a sentence someone means. */
 .temple__title {
   margin: 0;
-  font-family: var(--serif);
-  font-weight: 300;
-  font-size: clamp(2.3rem, 5vw, 4.05rem);
-  line-height: .98;
-  letter-spacing: -.005em;
+  font-family: var(--hand);
+  font-weight: 400;
+  font-size: clamp(3rem, 6.6vw, 5.4rem);
+  line-height: 1.1;
+  letter-spacing: 0;
   color: var(--t-ink);
 }
+/* Baxter is already a slanted script, so the emphasis cannot be a slant */
 .temple__title em {
-  font-style: italic;
-  font-weight: 300;
+  font-style: normal;
+  font-weight: 400;
 }
 /* the second line steps right, the one device worth taking from the Lumina
    template: it works on the shape of the line, not on its colour */
@@ -1934,7 +2036,7 @@ body.is-ceremony .reveal {
 .temple__sub {
   display: block;
   margin: clamp(1.1rem, 2.4vw, 1.7rem) 0 0;
-  font-family: var(--serif);
+  font-family: var(--mono);
   font-style: italic;
   font-weight: 400;
   font-size: clamp(1.05rem, 2.2vw, 1.45rem);
@@ -2073,7 +2175,7 @@ body.is-ceremony .reveal {
 }
 .temple__partname {
   margin: 0 0 .7rem;
-  font-family: var(--serif);
+  font-family: var(--hand);
   font-weight: 300;
   font-size: 1.24rem;
   letter-spacing: 0;
@@ -2126,7 +2228,7 @@ body.is-ceremony .reveal {
 }
 .temple__offer dd {
   margin: 0;
-  font-family: var(--mono);
+  font-family: var(--body);
   font-weight: 300;
   font-size: .8rem;
   letter-spacing: .2em;
@@ -2274,7 +2376,7 @@ body.is-temple-light .temple__part {
 }
 body.is-temple-light .temple__partname {
   margin: 0 0 .9rem;
-  font-family: var(--mono);
+  font-family: var(--body);
   font-weight: 400;
   font-size: .7rem;
   letter-spacing: .26em;
@@ -2306,66 +2408,1609 @@ body.is-temple-light .footer { background: var(--t-cream); }
 
 
 /* ==========================================================================
-   ARRIVING AT INNER CEREMONIES
+   (removed 2026-09-07) Inner Ceremonies used to have its own arrival: the veil
+   opening outward, the title and subtitle settling their letter-spacing, and
+   the hero video creeping back from 1.055 over ten seconds. All of it is gone
+   at Natalie's word - the hero is a plain header now.
 
-   Three things in sequence, all of them inside this page: light opens
-   outward, the words settle, the room comes to rest. Off entirely under
-   prefers-reduced-motion.
+   The spiral page turn in transition.js is the site's arrival, and it does the
+   job for every page rather than choreographing one of them twice.
    ========================================================================== */
 
-/* 1. (removed 2026-09-07) A site-wide @view-transition used to dissolve BETWEEN
-      pages here. It was unscoped by necessity — the at-rule is per-document and
-      every page shares this stylesheet — so building the Inner Ceremonies
-      arrival changed how the homepage and Connect navigate too. Cut for that
-      reason, not because it misbehaved. */
+/* ==========================================================================
+   THE STAR SPIRAL  (Inner Ceremonies, 2026-09-07)
 
-/* 2. The veil opens outward instead of fading in place. It is a radial wash,
-      brightest in the middle, so scaling it up carries that bright centre out
-      past you: light expanding rather than a curtain lifting. */
-body.is-ceremony .enter-veil {
-  background: radial-gradient(circle at 50% 46%, #fffdfa 0%, #fdf2ea 42%, #f6e2d5 100%);
-  animation: temple-arrive 2.5s cubic-bezier(.18,.72,.22,1) forwards;
-}
-@keyframes temple-arrive {
-  0%   { opacity: 1; transform: scale(1); }
-  62%  { opacity: .5; }
-  100% { opacity: 0; transform: scale(1.55); visibility: hidden; }
-}
+   From the "An Ethereal Reset" cover Natalie brought. Silver on cobalt there;
+   here the ground is peach, so it is gold, and it has to stay quiet enough
+   that the two paragraphs on either side of it still lead.
 
-/* 3. The words settle rather than slide. Letter-spacing opens slightly and
-      closes, which reads as a breath going out; the 26px rise every other
-      block on the site uses would read as arriving in a hurry. */
-body.is-ceremony .temple__title {
-  animation: temple-settle-title 2.4s cubic-bezier(.16,.68,.22,1) .55s both;
+   175 stars on an Archimedean spiral, generated rather than drawn, placed at
+   even arc length so the density holds from the centre out. Four glyphs in
+   <defs>, reused: that is the difference between 41KB of inline path data and
+   23KB.
+   ========================================================================== */
+.spiral {
+  margin: clamp(2.5rem, 7vh, 5rem) auto;
+  width: min(74vw, 400px);
+  display: block;
 }
-body.is-ceremony .temple__sub {
-  animation: temple-settle-sub 2.4s cubic-bezier(.16,.68,.22,1) 1.05s both;
-}
-/* the end frames repeat each element's own tracking rather than using inherit,
-   which resolves to normal and leaves the type set wrong once it lands */
-@keyframes temple-settle-title {
-  0%   { opacity: 0; letter-spacing: .16em;  transform: translateY(8px); }
-  100% { opacity: 1; letter-spacing: -.005em; transform: none; }
-}
-@keyframes temple-settle-sub {
-  0%   { opacity: 0; letter-spacing: .14em; transform: translateY(8px); }
-  100% { opacity: 1; letter-spacing: .01em; transform: none; }
+.spiral__svg { position: relative; display: block; width: 100%; height: auto; overflow: visible; }
+
+/* the whole figure turns once, very slowly: at 240s it is never caught moving,
+   it is only ever in a slightly different place than you remember */
+.spiral__stars {
+  /* --c is the centre, written into the markup by the generator, because the
+     viewBox is sized to whatever the spiral actually came out as */
+  transform-origin: var(--c) var(--c);
+  animation: spiral-turn 240s linear infinite;
 }
 
-/* 4. The room comes to rest: the film opens a touch large and settles back
-      over ten seconds, slow enough to feel rather than watch. */
-body.is-ceremony .temple__herovid {
-  animation: temple-rest 10s cubic-bezier(.2,.6,.3,1) both;
+/* the <g> carries the placement as an SVG attribute and the opacity as CSS;
+   the <use> inside is the only thing a keyframe is allowed to transform. A CSS
+   transform on the <g> would override its transform attribute and drop every
+   star onto the origin. */
+.spiral__star { opacity: 0; }
+.spiral__star use {
+  fill: #fff;
+  transform-box: fill-box;
+  transform-origin: center;
 }
-@keyframes temple-rest {
-  0%   { transform: scale(1.055); }
-  100% { transform: scale(1); }
+/* White stars on a blush ground have almost no contrast to work with, so what
+   makes them read is not the fill, it is the warm shadow under them: the paper
+   darkens slightly where each star sits, the way foil does. Applied once on the
+   group rather than 175 times. */
+/* No dark ground behind these, so nothing but the shadow separates a white
+   star from a blush page: the paper darkens just under each one, the way foil
+   sits on paper, and a wider warm glow lifts it off. */
+.spiral__stars {
+  filter:
+    drop-shadow(0 1px 1.5px rgba(150,92,72,.62))
+    drop-shadow(0 0 7px rgba(255,238,222,.75));
+}
+/* Each star carries its own index, so the wind-in runs from the centre
+   outward: 14ms apart, which over 175 stars is 2.4s of unfurling. The final
+   opacity is per-star too, so the spiral glitters unevenly the way a page of
+   pressed foil stars does, rather than reading as one flat printed object. */
+/* Two animations on the same element: the arrival, then the twinkle, which is
+   held back until the arrival that precedes it has finished. Each star carries
+   its own period and phase, or 175 of them blink in unison and it reads as a
+   flicker rather than a sky. */
+.spiral.in .spiral__star {
+  animation: spiral-fade .9s cubic-bezier(.2,.7,.3,1) both;
+  animation-delay: calc(var(--i) * 14ms);
+}
+/* 36 of the 227, picked at random rather than every Nth so the eye cannot find
+   the rhythm. The rest hold steady, which is what makes these read as pulsing
+   at all: everything twinkling is just noise. */
+.spiral.in .spiral__star--tw {
+  animation:
+    spiral-fade .9s cubic-bezier(.2,.7,.3,1) both,
+    spiral-twinkle var(--tw) ease-in-out infinite;
+  animation-delay:
+    calc(var(--i) * 14ms),
+    calc(var(--i) * 14ms + .9s + var(--td));
+}
+.spiral.in .spiral__star--tw use {
+  animation:
+    spiral-open .9s cubic-bezier(.2,.7,.3,1) both,
+    spiral-pulse var(--tw) ease-in-out infinite;
+  animation-delay:
+    calc(var(--i) * 14ms),
+    calc(var(--i) * 14ms + .9s + var(--td));
+}
+/* A twinkle has to go brighter than its neighbours before it goes out, or it
+   only ever reads as a star dimming. Peak first, then the dip. */
+@keyframes spiral-twinkle {
+  0%   { opacity: var(--o); }
+  30%  { opacity: 1; }
+  62%  { opacity: var(--lo); }
+  100% { opacity: var(--o); }
+}
+/* and it swells as it peaks: opacity alone at this contrast is nearly nothing */
+@keyframes spiral-pulse {
+  0%   { transform: none; }
+  30%  { transform: scale(1.55); }
+  62%  { transform: scale(.82); }
+  100% { transform: none; }
+}
+.spiral.in .spiral__star use {
+  animation: spiral-open .9s cubic-bezier(.2,.7,.3,1) both;
+  animation-delay: calc(var(--i) * 14ms);
+}
+@keyframes spiral-fade { from { opacity: 0; } to { opacity: var(--o); } }
+@keyframes spiral-open {
+  from { transform: scale(.2) rotate(-40deg); }
+  to   { transform: none; }
+}
+@keyframes spiral-turn { to { transform: rotate(360deg); } }
+
+/* warm the innermost turns, so the centre reads as the source of the light */
+/* the innermost turns keep a breath of warmth so the centre reads as source */
+.spiral__star:nth-child(-n+62) use { fill: #fffaf4; }
+
+@media (prefers-reduced-motion: reduce) {
+  .spiral__stars { animation: none; }
+  .spiral.in .spiral__star,
+  .spiral.in .spiral__star--tw,
+  .spiral__star { animation: none !important; opacity: var(--o); }
+  .spiral.in .spiral__star use,
+  .spiral__star use { animation: none; transform: none; }
+}
+
+
+/* ==========================================================================
+   THE PAGE TURN  (2026-09-07)
+
+   The spiral is how you move between Erin's pages. It winds in over the page
+   you are leaving, the navigation happens under it, and it unwinds away on
+   the page you arrive at, so one continuous gesture spans the load.
+
+   Built as an overlay driven by transition.js, NOT as @view-transition: that
+   at-rule is per-document and all four pages share this stylesheet, so it
+   could not be scoped to Erin's site.
+   ========================================================================== */
+.pageturn {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  /* warm, not white: the site is lit by a sunset from end to end */
+  background: radial-gradient(circle at 50% 50%,
+    #fffaf4 0%, #fdf1e6 44%, #f7e3d4 100%);
+}
+.pageturn__svg {
+  width: min(52vw, 300px);
+  height: auto;
+  overflow: visible;
+}
+.pageturn__star { opacity: 0; }
+/* Gold, not the white of the page spiral. These stars land on a cream ground
+   rather than a blush one, and white on cream is nothing at all: the first
+   build of this was an empty screen. Gold also keeps the page turn inside the
+   sunset the site is lit by, without needing a dark ground she has already
+   turned down once. */
+.pageturn__star use {
+  fill: #d9973c;
+  transform-box: fill-box;
+  transform-origin: center;
+  filter: drop-shadow(0 1px 2px rgba(150,84,46,.35));
+}
+.pageturn__star:nth-child(-n+26) use { fill: #e8b45c; }
+
+/* --- leaving: the ground comes up, the spiral winds out from the centre --- */
+.pageturn.is-in {
+  visibility: visible;
+  animation: pt-ground .42s ease-out both;
+}
+/* opacity on the <g>, transform on the <use> inside it. A CSS transform on the
+   <g> overrides the transform attribute holding its place on the spiral, and
+   every star drops onto the SVG origin in one stack. */
+.pageturn.is-in .pageturn__star {
+  animation: pt-fade .5s cubic-bezier(.2,.7,.3,1) both;
+  animation-delay: calc(var(--i) * var(--pt-stagger));
+}
+.pageturn.is-in .pageturn__star use {
+  animation: pt-star .5s cubic-bezier(.2,.7,.3,1) both;
+  animation-delay: calc(var(--i) * var(--pt-stagger));
+}
+
+/* --- arriving: it is already there, and unwinds away from the centre ------
+   Reversed delay, so the outermost stars leave last: the spiral closes down
+   into its own middle rather than blinking off. */
+.pageturn.is-out {
+  visibility: visible;
+  opacity: 1;
+  animation: pt-ground .55s .3s ease-in reverse both;
+}
+.pageturn.is-out .pageturn__star {
+  opacity: 1;
+  animation: pt-fade .42s ease-in reverse both;
+  animation-delay: calc((var(--pt-count) - var(--i)) * var(--pt-stagger));
+}
+.pageturn.is-out .pageturn__star use {
+  animation: pt-star .42s ease-in reverse both;
+  animation-delay: calc((var(--pt-count) - var(--i)) * var(--pt-stagger));
+}
+
+@keyframes pt-ground {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes pt-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes pt-star {
+  from { transform: scale(.2) rotate(-50deg); }
+  to   { transform: none; }
+}
+
+/* transition.js bails before it builds anything under reduced motion, so this
+   is only a guard for a preference that changes mid-session */
+@media (prefers-reduced-motion: reduce) {
+  .pageturn { display: none; }
+}
+
+/* ==========================================================================
+   THE TRAILER GATE — <dialog class="trailer">, driven by trailer.js
+
+   The DANIEL button and the hero film frame open this instead of leaving for
+   YouTube. trailer.js fills the iframe src on open and strips it on close, so
+   nothing loads until asked and the sound stops dead on dismiss.
+
+   The close animation is on the dialog ITSELF: trailer.js waits for
+   `animationend` on the dialog before it calls close(), and a keyframe on a
+   child would only reach it by bubbling.
+   ========================================================================== */
+.trailer {
+  /* Third term keeps the 16:9 gate inside the viewport on a short window: the
+     close button above it and the caption below it need ~5rem between them,
+     and without this the × clips off the top edge on a laptop. */
+  width: min(92vw, 1080px, (92vh - 5rem) * 16 / 9);
+  max-width: none;
+  max-height: 92vh;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #f4e9dd;
+  overflow: visible;
+}
+.trailer::backdrop {
+  /* midnight, not black — the site has no pure black anywhere on it */
+  background: rgba(10, 10, 26, .88);
+  backdrop-filter: blur(3px);
+}
+.trailer[open] { animation: trailer-in .42s var(--ease) both; }
+.trailer.is-closing { animation: trailer-out .28s ease-in both; }
+
+@keyframes trailer-in {
+  from { opacity: 0; transform: scale(.965) translateY(10px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes trailer-out {
+  from { opacity: 1; transform: none; }
+  to   { opacity: 0; transform: scale(.985); }
+}
+
+.trailer__frame { position: relative; }
+
+/* The gate: a projector's black aperture with a warm rule around it, so the
+   embed lands as a frame being thrown rather than a card floating on a page. */
+.trailer__gate {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border: 1px solid rgba(201, 168, 76, .30);
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, .6),
+    0 30px 80px rgba(0, 0, 0, .55);
+  overflow: hidden;
+}
+.trailer__vid {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* Caption sits under the gate. The Crave link is the louder of the two: it is
+   the only thing here anyone is meant to act on. */
+.trailer__cap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: .5rem 1.5rem;
+  margin: .85rem 0 0;
+  font-family: var(--mono);
+}
+.trailer__cap > span {
+  font-size: .68rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgba(244, 233, 221, .58);
+}
+.trailer__out {
+  font-size: .84rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #f4e9dd;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(244, 233, 221, .35);
+  padding-bottom: 2px;
+  transition: color .25s var(--ease), border-color .25s var(--ease);
+}
+.trailer__out:hover,
+.trailer__out:focus-visible { color: var(--gold-lite); border-color: var(--gold-lite); }
+
+/* × clears the gate's top-right corner rather than sitting inside the picture */
+.trailer__close {
+  position: absolute;
+  top: -2.9rem;
+  right: -.25rem;
+  width: 2.2rem;
+  height: 2.2rem;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: rgba(244, 233, 221, .72);
+  cursor: pointer;
+  transition: color .25s var(--ease), transform .25s var(--ease);
+}
+.trailer__close:hover,
+.trailer__close:focus-visible { color: var(--white); transform: rotate(90deg); }
+/* The close button carries autofocus, so its ring is the first thing on screen
+   every single open. The browser default is a hard blue box on a warm film
+   frame; this keeps the affordance and drops the colour clash. */
+.trailer__close:focus-visible,
+.trailer__out:focus-visible {
+  outline: 2px solid var(--gold-lite);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+.trailer__close svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+  stroke-linecap: round;
+}
+
+@media (max-width: 640px) {
+  .trailer { width: 94vw; }
+  .trailer__close { top: -2.6rem; right: -.15rem; }
+  .trailer__cap { justify-content: flex-start; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  body.is-ceremony .enter-veil,
-  body.is-ceremony .temple__title,
-  body.is-ceremony .temple__sub,
-  body.is-ceremony .temple__herovid { animation: none; }
-  body.is-ceremony .enter-veil { opacity: 0; visibility: hidden; }
+  .trailer[open],
+  .trailer.is-closing { animation: none; }
+  .trailer__close:hover,
+  .trailer__close:focus-visible { transform: none; }
 }
+
+/* ==========================================================================
+   INNER CEREMONIES — WHITE CARDS (2026-09-07)
+
+   Every section now sits on its own pure white card, rounded, floating on the
+   peach ground. The ground keeps its two edge blooms, so the light still has
+   somewhere to come from; the cards are what the light falls on.
+
+   The card IS the band, not a wrapper inside it. Everything on this page is
+   measured against the band's own width (the 62ch spine, the three-part grid's
+   left rail, the portrait), so putting a narrower element inside would have
+   given the page two competing centres. Narrowing the band itself keeps one.
+   ========================================================================== */
+body.is-ceremony .temple__band {
+  width: min(100% - 5rem, 1060px);
+  margin-inline: auto;
+  margin-block: clamp(1rem, 2.6vh, 2.2rem);
+  padding-block: clamp(3.4rem, 8vh, 6rem);
+  background: #fff;
+  border-radius: clamp(20px, 2.4vw, 34px);
+  /* warm shadow, never grey: a grey shadow on a peach ground reads as dirt */
+  box-shadow:
+    0 26px 60px -34px rgba(150, 92, 72, .40),
+    0 2px 6px -3px rgba(150, 92, 72, .13);
+}
+/* the blush wash was the Thresholds band's ground; the card is that now */
+body.is-ceremony .temple__band--rose { background: #fff; }
+
+/* the hero runs full bleed straight into the first card, so that join needs
+   more air than the gap between two cards */
+body.is-ceremony .temple__hero + .temple__band { margin-top: clamp(2.5rem, 6vh, 4.5rem); }
+body.is-ceremony .temple__band:last-of-type { margin-bottom: clamp(2rem, 5vh, 3.6rem); }
+
+/* White stars on white paper have no fill contrast at all, so the shadow has
+   to do more work here than it did on blush. Still no dark ground behind them:
+   the paper darkens under each star and a warm glow lifts it off, the way foil
+   sits on a page. */
+body.is-ceremony .spiral__stars {
+  filter:
+    drop-shadow(0 1px 1.6px rgba(150, 92, 72, .80))
+    drop-shadow(0 0 8px rgba(222, 156, 122, .58));
+}
+
+/* --- the label above the headline --------------------------------------- */
+/* Two levels now: a small mono kicker naming the section, and the Baxter
+   headline saying the thing. The leading rule moves up to the kicker, because
+   two rules stacked read as a mistake. */
+.temple__label {
+  display: flex;
+  align-items: center;
+  gap: .85rem;
+  margin: 0 0 clamp(.85rem, 1.8vw, 1.25rem);
+  font-family: var(--mono);
+  font-weight: 400;
+  font-size: .66rem;
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  color: var(--t-ink-soft);
+}
+.temple__label::before {
+  content: "";
+  flex: none;
+  width: 2.6rem;
+  height: 1px;
+  background: currentColor;
+  opacity: .55;
+}
+.temple__label--hero {
+  justify-content: center;
+  color: var(--t-ink);
+  opacity: .78;
+}
+.temple__label--hero::before { display: none; }
+
+.temple__label + .temple__eyebrow::before { display: none; }
+.temple__label + .temple__eyebrow { gap: 0; }
+
+/* --- the three calls ----------------------------------------------------- */
+.temple__cta { margin: clamp(2.1rem, 4vw, 3rem) 0 0; }
+.temple__hero .temple__cta { margin-top: clamp(1.8rem, 3.6vw, 2.6rem); }
+
+/* the last line of the page before the closing flourish: a question and the
+   button in one breath, so the button reads as the answer to it */
+.temple__ready {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .9rem 1.2rem;
+  margin: clamp(2.1rem, 4vw, 3rem) 0 0;
+  font-family: var(--mono);
+  font-size: .95rem;
+  color: var(--t-ink);
+}
+
+@media (max-width: 640px) {
+  body.is-ceremony .temple__band {
+    width: min(100% - 1.4rem, 1140px);
+    border-radius: 18px;
+  }
+}
+
+/* ==========================================================================
+   INNER CEREMONIES v3 COPY + STRUCTURE (2026-09-08)
+   Her call: "i like the branding i have though... keep that, just add this
+   new copy and structure with some additional design edits." So the peach
+   ground, the white cards, Baxter and the marigold all stay exactly as they
+   were. This block only styles what the new structure added: the welcome
+   quote in the hero, the three kind words, the two offerings, and the
+   bigger titles she asked for the day before.
+   ========================================================================== */
+
+/* --- titles up ("make the titles bigger") --- */
+body.is-ceremony .temple__title {
+  font-size: clamp(3.6rem, 8.2vw, 6.8rem);
+  line-height: 1.05;
+}
+body.is-ceremony .temple__band .temple__eyebrow,
+body.is-ceremony .temple__guidetext .temple__eyebrow {
+  font-size: clamp(2.9rem, 6vw, 4.8rem);
+  line-height: 1.12;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+body.is-ceremony .temple__label { font-size: .72rem; }
+body.is-ceremony .temple__label--centre { justify-content: center; }
+body.is-ceremony .temple__closing { font-size: clamp(2.6rem, 5.4vw, 4.4rem); }
+/* the closing is already italic; "clear" stands out by going upright */
+body.is-ceremony .temple__closing em { font-style: normal; }
+
+/* --- hero: room for the welcome and the button under the title --- */
+body.is-ceremony .temple__hero {
+  height: auto;
+  min-height: 100svh;
+  padding-block: clamp(7rem, 15vh, 10rem) clamp(5rem, 11vh, 8rem);
+}
+/* Erin's welcome: her voice before anything is explained. A soft white pane
+   on the rose, the same family as the cards below. */
+body.is-ceremony .temple__welcome {
+  max-width: 38rem;
+  margin: clamp(2.2rem, 4.6vw, 3.4rem) auto 0;
+  padding: clamp(1.6rem, 3.4vw, 2.4rem) clamp(1.6rem, 4vw, 2.8rem);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, .72);
+  backdrop-filter: blur(6px);
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1.05rem, 1.7vw, 1.25rem);
+  line-height: 1.68;
+  text-align: center;
+  color: var(--t-ink);
+}
+body.is-ceremony .temple__welcome p { margin: 0; }
+body.is-ceremony .temple__welcome footer {
+  margin-top: 1rem;
+  font-family: var(--mono);
+  font-style: normal;
+  font-size: .64rem;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--t-ink-soft);
+}
+body.is-ceremony .temple__hero .temple__cta { margin-top: clamp(2rem, 4vw, 2.8rem); }
+
+/* --- kind words: three, italic serif, one under another --- */
+body.is-ceremony .temple__kind {
+  list-style: none;
+  margin: clamp(1rem, 3vw, 2rem) auto 0;
+  padding: 0;
+  width: var(--t-measure);
+  display: grid;
+  gap: clamp(2.4rem, 5vw, 3.6rem);
+}
+body.is-ceremony .temple__quote { text-align: center; }
+body.is-ceremony .temple__quote blockquote {
+  margin: 0;
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1.2rem, 2.2vw, 1.55rem);
+  line-height: 1.55;
+  color: var(--t-ink);
+}
+body.is-ceremony .temple__quote blockquote::before { content: "\201C"; }
+body.is-ceremony .temple__quote blockquote::after  { content: "\201D"; }
+body.is-ceremony .temple__who {
+  margin: .9rem 0 0;
+  font-family: var(--mono);
+  font-size: .64rem;
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  color: var(--t-ink-soft);
+}
+
+/* --- the two offerings: clean, minimal, terracotta hairline --- */
+body.is-ceremony .temple__plans {
+  list-style: none;
+  margin: clamp(3rem, 6vw, 4.5rem) auto 0;
+  padding: 0;
+  width: var(--t-measure);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1.2rem, 2.6vw, 2rem);
+}
+body.is-ceremony .temple__plan {
+  padding: clamp(1.8rem, 3.2vw, 2.4rem) clamp(1.5rem, 2.8vw, 2rem);
+  border: 1px solid var(--t-hair);
+  border-radius: 22px;
+  background: var(--t-cream);
+}
+body.is-ceremony .temple__planname {
+  margin: 0 0 .5rem;
+  font-family: var(--hand);
+  font-weight: 400;
+  font-size: clamp(1.7rem, 2.8vw, 2.2rem);
+  line-height: 1.15;
+  color: var(--t-ink);
+}
+body.is-ceremony .temple__planprice {
+  margin: 0 0 1.1rem;
+  font-family: var(--mono);
+  font-size: .9rem;
+  letter-spacing: .06em;
+  color: var(--t-ink);
+}
+body.is-ceremony .temple__planprice span {
+  font-size: .62rem;
+  letter-spacing: .22em;
+  vertical-align: .18em;
+  margin-left: .25rem;
+  color: var(--t-ink-soft);
+}
+body.is-ceremony .temple__plantext {
+  margin: 0;
+  font-size: .98rem;
+  line-height: 1.65;
+  color: var(--t-ink);
+}
+@media (max-width: 640px) {
+  body.is-ceremony .temple__plans { grid-template-columns: 1fr; }
+}
+
+/* --- wider and shorter (2026-09-08) ---
+   "too much space on either side of the text so it just looks really long
+   and hard to read." The spine goes from 62ch to 47rem, the card comes in to
+   meet it, and every card loses a third of its vertical padding. */
+body.is-ceremony { --t-measure: min(100% - 6rem, 47rem); }
+body.is-ceremony .temple__band {
+  width: min(100% - 5rem, 1000px);
+  padding-block: clamp(2.6rem, 6vh, 4.2rem);
+}
+body.is-ceremony .temple__band .temple__eyebrow,
+body.is-ceremony .temple__guidetext .temple__eyebrow { margin-bottom: clamp(1.4rem, 3vw, 2.2rem); }
+body.is-ceremony .temple__lede { line-height: 1.7; }
+body.is-ceremony .temple__beat { margin-block: clamp(2rem, 5vh, 3.4rem); }
+body.is-ceremony .temple__pull { margin-top: clamp(2.4rem, 6vh, 4rem); }
+
+/* --- cursive titles on one line (2026-09-08) ---
+   "all cursive titles should be on one line - do not make them two lines if
+   you can." So every Baxter title is sized against the width it has to fit,
+   not the viewport: container units, capped at the size she asked for. The
+   longest H2 is the 31-character trust quote, which sets the ratio for all
+   of them so they come out one size. Under 640px the width simply is not
+   there, and wrapping beats a 24px script. */
+body.is-ceremony .temple__measure,
+body.is-ceremony .temple__guidetext,
+body.is-ceremony .temple__herotext,
+body.is-ceremony .temple__plan { container-type: inline-size; }
+
+body.is-ceremony .temple__title {
+  white-space: nowrap;
+  font-size: min(6.8rem, 16.5cqw);
+}
+body.is-ceremony .temple__band .temple__eyebrow,
+body.is-ceremony .temple__guidetext .temple__eyebrow {
+  white-space: nowrap;
+  font-size: min(4.8rem, 9.4cqw);
+}
+body.is-ceremony .temple__planname {
+  white-space: nowrap;
+  font-size: min(2.2rem, 12.5cqw);
+}
+@media (max-width: 640px) {
+  body.is-ceremony { --t-measure: min(100% - 3rem, 47rem); }
+  body.is-ceremony .temple__band .temple__eyebrow,
+  body.is-ceremony .temple__guidetext .temple__eyebrow {
+    white-space: normal;
+    font-size: clamp(2.2rem, 9.5vw, 3rem);
+  }
+  body.is-ceremony .temple__planname { white-space: normal; font-size: 1.9rem; }
+}
+
+
+/* ==========================================================================
+   INNER CEREMONIES — PRESENCE (2026-09-08)
+   "the white blocks just aren't working... its so repetitive. remove them for
+   now, and make the sections feel like they have PRESENCE."
+   The cards go. Each section gets its own composition on the peach ground:
+   Thresholds on the left rail with the spiral of stars standing beside it;
+   The Work centred on a blush band; the Guide as portrait-and-words side by
+   side; Kind Words three across a warm band; Begin centred, with the two
+   offerings as the one card left on the page. Five rooms, not one repeated.
+   ========================================================================== */
+body.is-ceremony .temple__band {
+  width: 100%;
+  margin: 0;
+  padding-block: clamp(4.5rem, 11vh, 7.5rem);
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+body.is-ceremony .temple__hero + .temple__band { margin-top: 0; }
+body.is-ceremony .temple__band:last-of-type { margin-bottom: 0; }
+body.is-ceremony .temple__wrap {
+  width: min(100% - 6rem, 1120px);
+  margin-inline: auto;
+}
+body.is-ceremony .temple__centre { text-align: center; }
+body.is-ceremony .temple__centre .temple__label { justify-content: center; }
+
+/* --- welcome: one quiet passage on the ground, no pane --- */
+body.is-ceremony .temple__band--welcome { padding-block: clamp(3.5rem, 9vh, 6rem) 0; }
+body.is-ceremony .temple__band--welcome .temple__welcome {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  background: none;
+  backdrop-filter: none;
+  font-size: clamp(1.2rem, 2.1vw, 1.5rem);
+  line-height: 1.6;
+}
+
+/* --- thresholds: text left, the spiral standing beside it --- */
+body.is-ceremony .temple__band--thresholds { overflow: hidden; }
+body.is-ceremony .temple__cols {
+  display: grid;
+  grid-template-columns: minmax(0, 33rem) minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: center;
+}
+body.is-ceremony .temple__col { container-type: inline-size; }
+body.is-ceremony .temple__col .temple__beat { width: 100%; margin-inline: 0; }
+body.is-ceremony .temple__aside { position: relative; }
+body.is-ceremony .temple__aside .spiral {
+  width: min(100% + 6vw, 620px);
+  margin: 0 -6vw 0 auto;
+}
+
+/* --- the work: a blush band, everything centred, the pullquote large --- */
+body.is-ceremony .temple__band--work {
+  padding-block: clamp(5.5rem, 13vh, 9rem);
+  background: linear-gradient(180deg,
+    rgba(247,231,223,0) 0%, var(--t-blush) 18%, var(--t-blush) 82%, rgba(247,231,223,0) 100%);
+}
+body.is-ceremony .temple__band--work .temple__pull {
+  width: min(100% - 3rem, 46rem);
+  margin-top: clamp(3rem, 7vh, 5rem);
+  padding-top: 0;
+  border-top: 0;
+  font-size: clamp(1.6rem, 3.2vw, 2.5rem);
+  line-height: 1.4;
+}
+
+/* --- the guide: portrait large on the left, words beside it --- */
+body.is-ceremony .temple__band--guide .temple__guide {
+  width: min(100% - 6rem, 1120px);
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: clamp(2.5rem, 6vw, 6rem);
+  align-items: center;
+}
+body.is-ceremony .temple__band--guide .temple__portrait {
+  position: relative;
+  margin: 0;
+  z-index: 0;
+}
+body.is-ceremony .temple__band--guide .temple__portrait img { border-radius: 28px; }
+/* a marigold plate set behind and off to one side: the only place the button
+   colour appears as a surface */
+body.is-ceremony .temple__band--guide .temple__portrait::before {
+  content: "";
+  position: absolute;
+  inset: 1.2rem -1.2rem -1.2rem 1.2rem;
+  border-radius: 28px;
+  background: rgba(255, 202, 44, .3);
+  z-index: -1;
+}
+
+/* --- kind words: three across a warm band, each opened by a gold mark --- */
+body.is-ceremony .temple__band--kind {
+  padding-block: clamp(5rem, 12vh, 8rem);
+  background: linear-gradient(180deg,
+    rgba(255,205,88,0) 0%, rgba(255,205,88,.14) 22%, rgba(255,205,88,.14) 78%, rgba(255,205,88,0) 100%);
+}
+body.is-ceremony .temple__band--kind .temple__kind {
+  width: 100%;
+  margin-top: clamp(2.2rem, 4.5vw, 3.4rem);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(2rem, 4vw, 3.6rem);
+  align-items: start;
+}
+body.is-ceremony .temple__band--kind .temple__quote { text-align: left; }
+body.is-ceremony .temple__band--kind .temple__quote blockquote {
+  font-size: clamp(1.1rem, 1.6vw, 1.3rem);
+  line-height: 1.6;
+}
+body.is-ceremony .temple__band--kind .temple__quote blockquote::before {
+  content: "\201C";
+  display: block;
+  margin-bottom: .4rem;
+  font-family: var(--hand);
+  font-style: normal;
+  font-size: 4.2rem;
+  line-height: .55;
+  color: var(--gold);
+}
+body.is-ceremony .temple__band--kind .temple__quote blockquote::after { content: none; }
+
+/* --- begin: the two offerings, and the deeper one warmer --- */
+body.is-ceremony .temple__band--begin .temple__plans { width: min(100% - 6rem, 58rem); }
+body.is-ceremony .temple__plan--deep {
+  background: rgba(255, 202, 44, .16);
+  border-color: rgba(255, 202, 44, .55);
+}
+
+@media (max-width: 860px) {
+  body.is-ceremony .temple__cols,
+  body.is-ceremony .temple__band--guide .temple__guide { grid-template-columns: 1fr; }
+  body.is-ceremony .temple__aside .spiral { width: min(80vw, 420px); margin: 2rem auto 0; }
+  body.is-ceremony .temple__band--kind .temple__kind { grid-template-columns: 1fr; }
+  body.is-ceremony .temple__wrap,
+  body.is-ceremony .temple__band--guide .temple__guide { width: min(100% - 3rem, 1120px); }
+}
+
+
+/* --- client praise: the reference is soniachoquette.net's row --- */
+body.is-ceremony .temple__band--praise { padding-block: clamp(4.5rem, 11vh, 7.5rem) clamp(3.5rem, 8vh, 5.5rem); }
+body.is-ceremony .temple__band--praise .temple__eyebrow { margin-bottom: 0; }
+body.is-ceremony .praise { margin-top: clamp(2.4rem, 5vw, 3.6rem); }
+body.is-ceremony .praise__track {
+  --card: min(820px, 86vw);
+  list-style: none;
+  margin: 0;
+  padding: 1.5rem calc((100% - var(--card)) / 2) 2rem;   /* so the ends can centre */
+  display: flex;
+  gap: clamp(1.6rem, 3vw, 2.6rem);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+body.is-ceremony .praise__track::-webkit-scrollbar { display: none; }
+body.is-ceremony .praise__card {
+  flex: 0 0 var(--card);
+  scroll-snap-align: center;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: clamp(1.4rem, 3vw, 2.4rem);
+  align-items: start;
+  min-height: 23rem;
+  padding: clamp(2rem, 3.6vw, 3.2rem) clamp(1.8rem, 3.4vw, 3rem);
+  border-radius: 22px;
+  background: #fff;
+  box-shadow: 0 20px 50px -34px rgba(150, 92, 72, .35);
+}
+/* the sitter: a soft blush disc with an initial, until she has their photos */
+body.is-ceremony .praise__avatar {
+  width: clamp(7rem, 11vw, 10.5rem);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(circle at 35% 30%, #fbe3d6, #f3c9b6 70%);
+  font-family: var(--hand);
+  font-size: clamp(2.6rem, 4.5vw, 4rem);
+  line-height: 1;
+  color: #8b5e3c;
+}
+body.is-ceremony .praise__body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100%;
+  padding-top: .6rem;
+}
+body.is-ceremony .praise__quote {
+  margin: 0 0 2.2rem;
+  font-size: clamp(1.1rem, 1.55vw, 1.32rem);
+  line-height: 1.6;
+  color: var(--t-ink);
+}
+body.is-ceremony .praise__who {
+  margin: 0;
+  font-size: 1.02rem;
+  color: var(--t-ink);
+}
+body.is-ceremony .praise__who strong { font-weight: 600; margin-right: .5rem; }
+body.is-ceremony .praise__who span { color: var(--t-ink-soft); }
+body.is-ceremony .praise__nav {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: .4rem;
+}
+body.is-ceremony .praise__btn {
+  width: 3.6rem;
+  height: 3.6rem;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  background: #fff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  color: var(--t-ink);
+  box-shadow: 0 8px 20px -12px rgba(150, 92, 72, .4);
+  transition: border-color .2s, transform .2s;
+}
+body.is-ceremony .praise__btn:hover,
+body.is-ceremony .praise__btn:focus-visible { border-color: var(--t-marigold); outline: none; }
+body.is-ceremony .praise__btn:active { transform: scale(.94); }
+body.is-ceremony .praise__btn svg { width: 1.3rem; height: 1.3rem; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+@media (max-width: 640px) {
+  body.is-ceremony .praise__card { grid-template-columns: 1fr; min-height: 0; }
+  body.is-ceremony .praise__avatar { width: 5.5rem; font-size: 2.2rem; }
+}
+/* a centred H2 with no label above it still carried the left-rail rule */
+body.is-ceremony .temple__centre .temple__eyebrow { justify-content: center; }
+body.is-ceremony .temple__centre .temple__eyebrow::before { display: none; }
+
+/* --- guide, centred (2026-09-08): the rose-collage portrait, rounded, in
+   the middle of the section, the words centred under it --- */
+body.is-ceremony .temple__band--guide .temple__guide {
+  grid-template-columns: 1fr;
+  justify-items: center;
+  gap: clamp(2.2rem, 5vw, 3.6rem);
+  text-align: center;
+}
+body.is-ceremony .temple__band--guide .temple__portrait {
+  width: min(100%, 58rem);
+}
+body.is-ceremony .temple__band--guide .temple__portrait::before { content: none; }
+body.is-ceremony .temple__band--guide .temple__portrait img {
+  border-radius: clamp(18px, 2.4vw, 30px);
+  box-shadow: 0 30px 70px -40px rgba(61, 51, 43, .5);
+}
+body.is-ceremony .temple__band--guide .temple__guidetext {
+  width: min(100%, 44rem);
+}
+body.is-ceremony .temple__band--guide .temple__guidetext .temple__label { justify-content: center; }
+body.is-ceremony .temple__band--guide .temple__guidetext .temple__eyebrow { justify-content: center; }
+body.is-ceremony .temple__band--guide .temple__guidetext .temple__eyebrow::before { display: none; }
+
+/* --- welcome panel (2026-09-08): soniachoquette.net's overlap block ---
+   A wide blush panel, rounded, laid over the foot of the hero so the two
+   read as one piece. Her name as the title, the forest passage in italic
+   serif beneath. No button here: the hero's is a hand's width above. */
+body.is-ceremony .temple__band--welcome {
+  position: relative;
+  z-index: 2;
+  margin-top: clamp(-7rem, -12vh, -4.5rem);
+  padding-block: 0 clamp(1rem, 3vh, 2rem);
+}
+body.is-ceremony .temple__panel {
+  width: min(100% - 3rem, 1180px);
+  margin-inline: auto;
+  padding: clamp(2.8rem, 6vw, 4.6rem) clamp(1.6rem, 6vw, 5rem) clamp(3rem, 6.4vw, 4.8rem);
+  border-radius: clamp(20px, 2.4vw, 30px);
+  text-align: center;
+  background: linear-gradient(180deg, rgba(252, 240, 234, .96) 0%, rgba(249, 218, 206, .96) 100%);
+  box-shadow: 0 30px 70px -44px rgba(150, 92, 72, .45);
+}
+body.is-ceremony .temple__paneltitle {
+  margin: 0 0 clamp(1.4rem, 3vw, 2.2rem);
+  font-family: var(--hand);
+  font-weight: 400;
+  font-size: clamp(2.6rem, 5.4vw, 4.4rem);
+  line-height: 1.1;
+  color: var(--t-ink);
+}
+body.is-ceremony .temple__band--welcome .temple__welcome {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 0;
+  background: none;
+  backdrop-filter: none;
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1.35rem, 2.6vw, 2rem);
+  line-height: 1.45;
+  color: var(--t-ink);
+}
+body.is-ceremony .temple__band--welcome .temple__welcome p { margin: 0; }
+
+/* --- welcome panel, take two (2026-09-08): no name, off-white. The hero
+   itself is not touched: her words. The panel simply overlaps its foot. */
+body.is-ceremony .temple__panel {
+  padding-block: clamp(3.2rem, 7vw, 5.4rem);
+  background: linear-gradient(180deg, rgba(255, 252, 249, .97) 0%, rgba(253, 243, 238, .97) 100%);
+}
+/* The overlap never actually happened: the "hero + band" rule that zeroes the
+   gap after the hero outranked the panel's negative margin. Named here at
+   the same weight, later, so it wins. Sits ~6rem up over the roses. */
+body.is-ceremony .temple__hero + .temple__band--welcome { margin-top: clamp(-7rem, -12vh, -4.5rem); }
+
+/* --- the work: her nebula behind it (2026-09-08) ---
+   innerceremonies2.jpg, laid under the band at low opacity and washed with
+   the blush so it reads as weather behind the words, not a picture. */
+body.is-ceremony .temple__band--work {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+body.is-ceremony .temple__band--work::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: url("images/work-sky.jpg?v=196") center / cover no-repeat;
+  opacity: .32;
+  filter: saturate(.85) brightness(1.08);
+  /* soft in and out at the top and bottom edges, so there is no hard line */
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 16%, #000 84%, transparent 100%);
+  mask-image: linear-gradient(180deg, transparent 0%, #000 16%, #000 84%, transparent 100%);
+}
+
+
+/* --- drift: the marquee of client phrases (2026-09-08) ---
+   Slow enough that it is never seen to move, only to have moved. Two copies
+   of the run sit end to end and the track slides exactly one run's width,
+   so the second copy lands where the first began and the loop has no seam.
+   Edges are masked so a phrase dissolves in and out rather than being cut. */
+body.is-ceremony .temple__band--drift {
+  padding-block: clamp(3.5rem, 8vh, 6rem);
+}
+body.is-ceremony .drift {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 14%, #000 86%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 14%, #000 86%, transparent 100%);
+}
+body.is-ceremony .drift__track {
+  display: flex;
+  width: max-content;
+  animation: drift 95s linear infinite;
+  will-change: transform;
+}
+body.is-ceremony .drift:hover .drift__track { animation-duration: 170s; }
+body.is-ceremony .drift__run {
+  display: flex;
+  align-items: center;
+  flex: none;
+  padding-right: clamp(2.2rem, 4vw, 3.4rem);   /* the gap before the next run */
+  gap: clamp(2.2rem, 4vw, 3.4rem);
+  white-space: nowrap;
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1.3rem, 2.2vw, 1.8rem);
+  letter-spacing: .04em;
+  color: var(--t-ink-soft);
+}
+body.is-ceremony .drift__mark {
+  font-style: normal;
+  font-size: .62em;
+  color: var(--gold);
+  opacity: .85;
+  transform: translateY(-.08em);
+}
+@keyframes drift {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  body.is-ceremony .drift__track { animation: none; }
+  body.is-ceremony .drift { mask-image: none; -webkit-mask-image: none; }
+  body.is-ceremony .drift__track { flex-wrap: wrap; width: 100%; justify-content: center; }
+  body.is-ceremony .drift__run { flex-wrap: wrap; justify-content: center; white-space: normal; row-gap: .8rem; }
+  body.is-ceremony .drift__run[aria-hidden="true"] { display: none; }
+}
+
+/* --- guide, words left and portrait right (2026-09-08) --- */
+body.is-ceremony .temple__band--guide .temple__guide {
+  grid-template-columns: minmax(0, 7fr) minmax(0, 6fr);
+  align-items: center;
+  justify-items: stretch;
+  gap: clamp(2.5rem, 6vw, 6rem);
+  text-align: left;
+}
+body.is-ceremony .temple__band--guide .temple__guidetext { width: auto; }
+body.is-ceremony .temple__band--guide .temple__guidetext .temple__label { justify-content: flex-start; }
+body.is-ceremony .temple__band--guide .temple__guidetext .temple__eyebrow { justify-content: flex-start; }
+body.is-ceremony .temple__band--guide .temple__portrait { width: 100%; }
+/* the image is wide; cropped to a standing rectangle so it holds the column */
+body.is-ceremony .temple__band--guide .temple__portrait img {
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: 80% 40%;    /* her whole face in, the rose glow at the left edge */
+  border-radius: clamp(18px, 2.2vw, 26px);
+}
+@media (max-width: 860px) {
+  body.is-ceremony .temple__band--guide .temple__guide { grid-template-columns: 1fr; }
+  body.is-ceremony .temple__band--guide .temple__portrait { order: -1; }
+  body.is-ceremony .temple__band--guide .temple__portrait img { aspect-ratio: 16 / 10; object-position: 60% 40%; }
+}
+/* portrait left, words right (2026-09-08) */
+body.is-ceremony .temple__band--guide .temple__guide { grid-template-columns: minmax(0, 6fr) minmax(0, 7fr); }
+body.is-ceremony .temple__band--guide .temple__portrait { order: -1; }
+/* the tree portrait (2026-09-08): already standing, so it is barely cropped */
+body.is-ceremony .temple__band--guide .temple__portrait img { object-position: 50% 0%; }
+@media (max-width: 860px) {
+  body.is-ceremony .temple__band--guide .temple__portrait img { aspect-ratio: 4 / 5; object-position: 50% 0%; }
+}
+/* bigger portrait (2026-09-08): the columns go to even, the wrap widens */
+body.is-ceremony .temple__band--guide .temple__guide {
+  width: min(100% - 5rem, 1240px);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 5rem);
+}
+/* thresholds, wider column (2026-09-08): the text takes more of the width
+   and the two italic lines sit on the left rail with the paragraphs rather
+   than centred inside the column */
+body.is-ceremony .temple__band--thresholds .temple__wrap { width: min(100% - 5rem, 1240px); }
+body.is-ceremony .temple__cols {
+  grid-template-columns: minmax(0, 42rem) minmax(0, 1fr);
+  gap: clamp(2rem, 4vw, 4rem);
+}
+body.is-ceremony .temple__col .temple__beat {
+  text-align: left;
+  margin-block: clamp(1.6rem, 4vh, 2.6rem);
+}
+body.is-ceremony .temple__aside .spiral { width: min(100% + 4vw, 560px); }
+/* the marquee rides up onto the line where the nebula fades (2026-09-08) */
+body.is-ceremony .temple__band--work { padding-bottom: clamp(4rem, 9vh, 6.5rem); }
+body.is-ceremony .temple__band--drift {
+  position: relative;
+  z-index: 1;
+  margin-top: clamp(-6.5rem, -11vh, -4rem);
+  padding-block: 0 clamp(3rem, 7vh, 5rem);
+}
+/* second pass: that put it under the pullquote. Room kept below the quote,
+   and the marquee lifted only half the fade, so it sits in the fade itself. */
+body.is-ceremony .temple__band--work { padding-bottom: clamp(8rem, 15vh, 10rem); }
+body.is-ceremony .temple__band--drift { margin-top: clamp(-4rem, -7vh, -2.5rem); }
+
+/* --- the rose behind the spiral (2026-09-08) ---
+   Multiplied onto the ground so its white studio square disappears and only
+   the flower is left, held very faint, feathered out well before its edge. */
+body.is-ceremony .temple__aside { position: relative; z-index: 0; }
+body.is-ceremony .temple__aside .spiral { position: relative; z-index: 1; }
+body.is-ceremony .temple__asiderose {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(135%, 780px);
+  height: auto;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  opacity: .34;
+  mix-blend-mode: multiply;
+  filter: saturate(.8) brightness(1.06);
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 34%, transparent 66%);
+  mask-image: radial-gradient(circle at 50% 50%, #000 34%, transparent 66%);
+  pointer-events: none;
+  user-select: none;
+}
+/* no film strips on Inner Ceremonies at all (2026-09-08). The homepage and
+   Connect keep theirs; the markup stays in the page so the four files match. */
+body.is-ceremony .filmedge { display: none; }
+
+/* rose centred on the spiral itself (2026-09-08): it now lives inside the
+   figure, so its centre is the spiral's centre (--c is the viewBox middle).
+   Fainter, and feathered tighter. Paragraph column a step narrower. */
+body.is-ceremony .temple__aside .spiral { position: relative; }
+body.is-ceremony .temple__aside .spiral__svg { position: relative; z-index: 1; }
+body.is-ceremony .temple__asiderose {
+  width: 150%;
+  max-width: none;
+  opacity: .2;
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 26%, transparent 58%);
+  mask-image: radial-gradient(circle at 50% 50%, #000 26%, transparent 58%);
+}
+body.is-ceremony .temple__cols { grid-template-columns: minmax(0, 38rem) minmax(0, 1fr); }
+/* The rose sits on the INNER COIL, not the box centre: the spiral's first
+   turn is centred at (213, 218) of a 398 box, so the flower goes there. And
+   bigger. (2026-09-08) */
+body.is-ceremony .temple__asiderose {
+  left: 53.6%;
+  top: 54.6%;
+  width: 190%;
+  opacity: .2;
+}
+/* settled size: a step up from where it was, feathered inside the outer coil */
+body.is-ceremony .temple__asiderose {
+  width: 172%;
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 22%, transparent 52%);
+  mask-image: radial-gradient(circle at 50% 50%, #000 22%, transparent 52%);
+}
+/* spiral and rose nudged left (2026-09-08): the figure was bleeding 6vw off
+   the right edge; it now sits inside the column with a little air */
+body.is-ceremony .temple__aside .spiral { margin: 0 1vw 0 auto; }
+/* section titles up again (2026-09-08), still one line each: the ratio to
+   the column rises, except in the guide, where the 31-character trust quote
+   already fills its column at the old ratio */
+body.is-ceremony .temple__band .temple__eyebrow { font-size: min(5.6rem, 10.6cqw); }
+body.is-ceremony .temple__guidetext .temple__eyebrow { font-size: min(5.6rem, 9.4cqw); }
+
+/* emphasis in the paragraphs (2026-09-08): bold for the claim, italic for
+   the felt phrase. Archivo has real cuts of both. */
+body.is-ceremony .temple__lede strong,
+body.is-ceremony .temple__plantext strong { font-weight: 600; color: var(--t-ink); }
+body.is-ceremony .temple__lede em,
+body.is-ceremony .temple__plantext em { font-style: italic; font-weight: 300; }
+
+/* rose a touch fainter (2026-09-08) */
+body.is-ceremony .temple__asiderose { opacity: .11; }
+
+
+/* --- the three pillars (2026-09-08) ---
+   Three columns on the ground, names in gold, a hairline root running under
+   all three with a short stem rising to each: three trees grown together,
+   drawn in one line. Stacks under 860px, root becoming a left rail. */
+body.is-ceremony .temple__band--pillars { padding-block: clamp(4.5rem, 11vh, 7.5rem) clamp(4rem, 9vh, 6rem); }
+body.is-ceremony .pillars {
+  --root: rgba(201, 168, 76, .55);
+  list-style: none;
+  position: relative;
+  width: min(100% - 5rem, 1180px);
+  margin: clamp(2.6rem, 5vw, 4rem) auto 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(2rem, 4vw, 4rem);
+}
+body.is-ceremony .pillar {
+  position: relative;
+  padding-top: 2.4rem;
+}
+/* the stem: a short vertical hairline above each name */
+body.is-ceremony .pillar::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1px;
+  height: 1.6rem;
+  background: var(--root);
+}
+/* the root: one line across all three, sitting on the stems */
+body.is-ceremony .pillars::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(201,168,76,0) 0%, var(--root) 8%, var(--root) 92%, rgba(201,168,76,0) 100%);
+}
+body.is-ceremony .pillar__name {
+  margin: 0 0 .9rem;
+  font-family: var(--hand);
+  font-weight: 400;
+  font-size: clamp(1.8rem, 2.6vw, 2.4rem);
+  line-height: 1.15;
+  white-space: nowrap;
+  color: var(--gold);
+}
+body.is-ceremony .pillar__text {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--t-ink);
+}
+body.is-ceremony .pillar__text strong { font-weight: 600; }
+body.is-ceremony .pillar__text em { font-style: italic; font-weight: 300; }
+@media (max-width: 860px) {
+  body.is-ceremony .pillars { grid-template-columns: 1fr; gap: 2.4rem; width: min(100% - 3rem, 1180px); padding-left: 1.4rem; }
+  body.is-ceremony .pillars::before { top: 0; bottom: 0; left: 0; right: auto; width: 1px; height: auto;
+    background: linear-gradient(180deg, rgba(201,168,76,0) 0%, var(--root) 6%, var(--root) 94%, rgba(201,168,76,0) 100%); }
+  body.is-ceremony .pillar { padding-top: 0; padding-left: 0; }
+  body.is-ceremony .pillar::before { left: -1.4rem; top: .9rem; width: 1rem; height: 1px; }
+  body.is-ceremony .pillar__name { white-space: normal; }
+}
+
+/* --- pillars, take two (2026-09-08): soniachoquette.net's three-up ---
+   Centred columns, a delicate line icon over each name, hairlines standing
+   between the columns. The root and stems go. */
+body.is-ceremony .pillars { width: min(100% - 5rem, 1140px); gap: 0; }
+body.is-ceremony .pillars::before { content: none; }
+body.is-ceremony .pillar {
+  padding: .5rem clamp(1.4rem, 3vw, 2.8rem) .5rem;
+  text-align: center;
+}
+body.is-ceremony .pillar::before { content: none; }
+body.is-ceremony .pillar + .pillar { border-left: 1px solid rgba(201, 168, 76, .45); }
+body.is-ceremony .pillar__icon {
+  width: 4.4rem;
+  height: 4.4rem;
+  margin: 0 auto 1.4rem;
+  display: block;
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: 1.3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  color: var(--gold);
+}
+body.is-ceremony .pillar__name { margin-bottom: 1rem; }
+body.is-ceremony .pillar__text { font-size: .98rem; line-height: 1.65; max-width: 22rem; margin-inline: auto; }
+@media (max-width: 860px) {
+  body.is-ceremony .pillars { padding-left: 0; gap: 2.8rem; width: min(100% - 3rem, 1140px); }
+  body.is-ceremony .pillar + .pillar { border-left: 0; border-top: 1px solid rgba(201, 168, 76, .45); padding-top: 2.4rem; }
+  body.is-ceremony .pillar::before { content: none; }
+}
+
+
+/* ==========================================================================
+   THE ARCHWAY (2026-09-08) — drawn, not photographed
+   One pointed arch, used twice: as the way into Inner Ceremonies from any
+   page (arch.js, an overlay), and as a threshold inside the page that the
+   scroll carries you through (threshold.js, a pinned stage).
+
+   The wall is the page's own ground with the arch cut out of it by a mask;
+   what lies beyond shows through the opening. The mask image is a large
+   white field with a small black arch in its middle, so scaling mask-size
+   scales the opening while the wall keeps covering the screen. Two stroked
+   outlines make the frame. Everything scales from the same centre.
+   ========================================================================== */
+:root {
+  /* one evenodd path: the field, with the arch as a hole in it. A CSS mask
+     reads an SVG image by ALPHA, so the hole has to be transparent, not black. */
+  --arch-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4000 4000'><path fill='white' fill-rule='evenodd' d='M0 0H4000V4000H0Z M1970 2080V1990C1970 1962 1984 1944 2000 1930C2016 1944 2030 1962 2030 1990V2080Z'/></svg>");
+}
+
+/* --- the overlay: the way in --- */
+.archway {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .32s ease, visibility 0s .32s;
+}
+.archway.is-up { opacity: 1; visibility: visible; transition: opacity .22s ease; pointer-events: auto; }
+.archway__beyond,
+.archway__wall { position: absolute; inset: 0; }
+.archway__beyond {
+  background-position: center;
+  background-size: cover;
+  /* washed the way the hero is, so the glimpse is the same roses */
+  filter: brightness(1.12) saturate(.9);
+}
+.archway__beyond::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 248, 242, .42);
+}
+.archway__wall {
+  background: #faf3ee;
+  -webkit-mask-image: var(--arch-mask);
+  mask-image: var(--arch-mask);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  /* opening ≈ 46vh tall to start: 4000 units of mask for 160 of arch */
+  -webkit-mask-size: 1150vh;
+  mask-size: 1150vh;
+}
+.archway__frame {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: calc(46vh / 1.6);
+  height: 46vh;
+  transform: translate(-50%, -50%) scale(1);
+  transform-origin: 50% 50%;
+  overflow: visible;
+  fill: none;
+  stroke: #c9a84c;
+  stroke-width: .9;
+  stroke-linejoin: round;
+}
+/* pass through: the opening grows past the screen, the frame with it */
+.archway.is-through .archway__wall,
+.archway.is-through .archway__frame {
+  transition: mask-size .62s cubic-bezier(.4, 0, .2, 1), -webkit-mask-size .62s cubic-bezier(.4, 0, .2, 1), transform .62s cubic-bezier(.4, 0, .2, 1), opacity .5s ease .12s;
+}
+.archway.is-through .archway__wall { -webkit-mask-size: 6200vh; mask-size: 6200vh; }
+.archway.is-through .archway__frame { transform: translate(-50%, -50%) scale(5.4); opacity: 0; }
+/* arriving: already through; the roses over the roses, and gone */
+.archway.is-out { opacity: 0; visibility: visible; transition: opacity .45s ease .05s, visibility 0s .5s; }
+.archway.is-out .archway__wall { -webkit-mask-size: 6200vh; mask-size: 6200vh; }
+.archway.is-out .archway__frame { opacity: 0; }
+
+/* --- inside the page: the threshold --- */
+body.is-ceremony .temple__band--arch {
+  --p: 0;
+  height: 165vh;                      /* the runway: 65vh of scroll to pass through */
+  padding: 0;
+  margin: 0;
+}
+body.is-ceremony .arch {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  /* the whole stage goes as you come out the other side */
+  opacity: calc(1 - max(0, (var(--p) - .72) / .28));
+}
+body.is-ceremony .arch__beyond,
+body.is-ceremony .arch__wall { position: absolute; inset: 0; }
+body.is-ceremony .arch__beyond {
+  background-position: center;
+  background-size: cover;
+  filter: brightness(1.12) saturate(.9);
+  transform: scale(calc(1.06 + var(--p) * .18));
+}
+body.is-ceremony .arch__beyond::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 248, 242, .38);
+}
+body.is-ceremony .arch__wall {
+  background: transparent;
+  -webkit-mask-image: var(--arch-mask);
+  mask-image: var(--arch-mask);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: calc(1150vh * (1 + var(--p) * 4.6));
+  mask-size: calc(1150vh * (1 + var(--p) * 4.6));
+}
+/* the wall IS the page ground: painted here so the mask has something to cut */
+body.is-ceremony .arch__wall::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(62% 92% at 0% 42%,   rgba(248,186,150,.78) 0%, rgba(250,243,238,0) 58%),
+    radial-gradient(58% 88% at 100% 62%, rgba(255,205,88,.62)  0%, rgba(250,243,238,0) 56%),
+    #faf3ee;
+}
+body.is-ceremony .arch__frame {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: calc(46vh / 1.6);
+  height: 46vh;
+  transform: translate(-50%, -50%) scale(calc(1 + var(--p) * 4.6));
+  transform-origin: 50% 50%;
+  overflow: visible;
+  fill: none;
+  stroke: #c9a84c;
+  stroke-width: .9;
+  stroke-linejoin: round;
+  opacity: calc(1 - max(0, (var(--p) - .55) / .3));
+}
+@media (prefers-reduced-motion: reduce) {
+  .archway { display: none; }
+  body.is-ceremony .temple__band--arch { height: auto; }
+  body.is-ceremony .arch { position: relative; height: 70vh; opacity: 1; }
+}
+
+
+/* --- the rings (2026-09-08): her gold glitter ring, four times, concentric,
+   behind the closing line. Each turns at its own pace, alternating ways, so
+   the glitter drifts against itself. Faint: the words stay the point. --- */
+body.is-ceremony .temple__close {
+  position: relative;
+  overflow: hidden;
+  min-height: min(80vh, 46rem);
+  display: grid;
+  place-items: center;
+}
+body.is-ceremony .temple__closing { position: relative; z-index: 1; }
+body.is-ceremony .rings {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(92vw, 52rem);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+body.is-ceremony .rings__ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: .5;
+  animation: rings-turn 140s linear infinite;
+  will-change: transform;
+}
+body.is-ceremony .rings__ring:nth-child(2) { transform: scale(.76); animation: rings-turn-back 110s linear infinite; opacity: .55; }
+body.is-ceremony .rings__ring:nth-child(3) { transform: scale(.54); animation: rings-turn 85s linear infinite; opacity: .6; }
+body.is-ceremony .rings__ring:nth-child(4) { transform: scale(.34); animation: rings-turn-back 60s linear infinite; opacity: .65; }
+@keyframes rings-turn      { from { transform: scale(var(--s, 1)) rotate(0deg); }   to { transform: scale(var(--s, 1)) rotate(360deg); } }
+@keyframes rings-turn-back { from { transform: scale(var(--s, 1)) rotate(360deg); } to { transform: scale(var(--s, 1)) rotate(0deg); } }
+body.is-ceremony .rings__ring:nth-child(1) { --s: 1; }
+body.is-ceremony .rings__ring:nth-child(2) { --s: .76; }
+body.is-ceremony .rings__ring:nth-child(3) { --s: .54; }
+body.is-ceremony .rings__ring:nth-child(4) { --s: .34; }
+@media (prefers-reduced-motion: reduce) {
+  body.is-ceremony .rings__ring { animation: none; }
+}
+
+
+/* --- the gate (2026-09-08): the ARCH as the entrance to the page ---
+   The archway overlay from arch.js, held open and waiting. Her name above
+   the arch, ENTER beneath. Click, and it is the same pass-through. The page
+   does not scroll while the gate is up. */
+html.has-gate { overflow: hidden; }
+.archway--gate { cursor: pointer; }
+.archway--gate.is-up { pointer-events: auto; transition: opacity .7s ease; }
+.archway--gate:focus-visible { outline: none; }
+.archway--gate.is-through { pointer-events: none; }
+.archway--gate.is-gone { opacity: 0; transition: opacity .6s ease; }
+.archway__name,
+.archway__enter {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  text-align: center;
+  white-space: nowrap;
+  transition: opacity .35s ease;
+}
+.archway__name {
+  bottom: calc(50% + 23vh + 1.6rem);
+  font-family: var(--hand);
+  font-weight: 400;
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  line-height: 1.1;
+  color: #3d332b;
+}
+.archway__enter {
+  top: calc(50% + 23vh + 1.6rem);
+  font-family: var(--mono);
+  font-size: .68rem;
+  letter-spacing: .34em;
+  text-transform: uppercase;
+  color: #c9a84c;
+  animation: gate-breathe 3.4s ease-in-out infinite;
+}
+@keyframes gate-breathe { 0%, 100% { opacity: .55; } 50% { opacity: 1; } }
+.archway.is-through .archway__name,
+.archway.is-through .archway__enter { opacity: 0; animation: none; }
+
+/* --- the portal at the top (2026-09-08) ---
+   The page opens on the arch. There is no click: the first scroll opens it
+   and the hero is beneath. The hero's own rules assumed it was first; the
+   panel overlap still follows the hero, so nothing there changes. If you came
+   in through the arch from another page, this one stands down. */
+body.is-ceremony .temple__band--arch { height: 170vh; }
+body.is-ceremony .temple__band--arch + .temple__hero { margin-top: calc(-1 * clamp(2rem, 6vh, 4rem)); }
+html.arrived-by-arch body.is-ceremony .temple__band--arch { display: none; }
+/* The hero waits directly beneath the portal's last screen, so as the arch
+   opens past the frame the roses through it become the roses of the hero
+   with no ground showing between. 70vh of scroll takes you through. */
+body.is-ceremony .temple__band--arch { position: relative; z-index: 3; height: 170vh; }
+body.is-ceremony .temple__band--arch + .temple__hero { margin-top: -100vh; z-index: 0; }
+body.is-ceremony .arch { opacity: calc(1 - max(0, (var(--p) - .6) / .4)); }
+/* No cross-fade while the arch is still visible: the opening grows until it
+   is wider than any screen (46vh * 8 = 230vh across on a 16:9 window), and
+   only then, with nothing but roses on screen, does the stage give way. */
+body.is-ceremony .arch__wall {
+  -webkit-mask-size: calc(1150vh * (1 + var(--p) * 7));
+  mask-size: calc(1150vh * (1 + var(--p) * 7));
+}
+body.is-ceremony .arch__frame { transform: translate(-50%, -50%) scale(calc(1 + var(--p) * 7)); opacity: calc(1 - max(0, (var(--p) - .5) / .3)); }
+body.is-ceremony .arch { opacity: calc(1 - max(0, (var(--p) - .88) / .12)); }
+
+/* Hand over with a cut, not a fade, and make the two sides of the cut the
+   same picture: the roses beyond the arch carry the hero's own wash, sit at
+   the hero's own scale, and the stage drops in the last 2% of the runway,
+   once the opening is already wider than the screen. Nothing is ever seen
+   through anything. */
+body.is-ceremony .arch__beyond { transform: none; filter: none; }
+body.is-ceremony .arch__beyond::after { content: none; }
+body.is-ceremony .arch__beyond .temple__herowash { position: absolute; inset: 0; }
+body.is-ceremony .arch { opacity: calc(1 - clamp(0, (var(--p) - .95) * 50, 1)); }
+/* The arch path is 60 units wide in its 100-unit box, so the opening needs
+   x14 (not x8) to clear the edges of a 16:9 screen: 1150vh * 14 * 60/4000
+   = 241vh across. It is past the edges from p≈.72; the cut is at .94. */
+body.is-ceremony .arch__wall {
+  -webkit-mask-size: calc(1150vh * (1 + var(--p) * 13));
+  mask-size: calc(1150vh * (1 + var(--p) * 13));
+}
+body.is-ceremony .arch__frame { transform: translate(-50%, -50%) scale(calc(1 + var(--p) * 13)); opacity: calc(1 - max(0, (var(--p) - .4) / .25)); }
+body.is-ceremony .arch { opacity: calc(1 - clamp(0, (var(--p) - .94) * 50, 1)); }
+
+/* ==========================================================================
+   PORTAL, SMOOTH (2026-09-08) — the hero lives inside the stage
+   "when i enter it still jigs a bit and doesnt land smoothly on the hero, i
+   want it to slowly fade in." The hero is now the thing beyond the arch,
+   pinned in the same sticky stage, so nothing scrolls under anything. Its
+   roses are what you see through the opening; its words fade in slowly once
+   the opening has cleared the screen. Then the stage releases and the hero
+   scrolls away as any hero would.
+   ========================================================================== */
+body.is-ceremony .temple__band--arch { z-index: 1; height: 190vh; }
+body.is-ceremony .arch { opacity: 1; }
+body.is-ceremony .arch .temple__hero {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  min-height: 0;
+  margin: 0;
+  padding-block: 0;
+  display: grid;
+  place-items: center;
+}
+body.is-ceremony .arch .temple__herotext {
+  opacity: calc(clamp(0, (var(--p) - .66) / .3, 1));
+  transform: translateY(calc((1 - clamp(0, (var(--p) - .66) / .3, 1)) * 10px));
+}
+/* the wall and frame sit over the hero */
+body.is-ceremony .arch__wall, body.is-ceremony .arch__frame { z-index: 2; }
+/* the welcome panel now follows the portal band, not a bare hero */
+body.is-ceremony .temple__band--arch + .temple__band--welcome { margin-top: clamp(-7rem, -12vh, -4.5rem); z-index: 2; }
+/* arrived through the arch from another page: no runway, the hero stands open */
+html.arrived-by-arch body.is-ceremony .temple__band--arch { display: block; height: 100svh; }
+/* closing line in the page's own hand, ink not gold; rings smaller (2026-09-08) */
+body.is-ceremony .temple__closing {
+  font-family: var(--hand);
+  font-style: normal;
+  font-weight: 400;
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  line-height: 1.1;
+  color: var(--t-ink);
+  white-space: nowrap;
+}
+body.is-ceremony .temple__closing em { font-style: normal; }
+body.is-ceremony .rings { width: min(70vw, 34rem); }
+body.is-ceremony .temple__close { min-height: min(64vh, 36rem); }
+@media (max-width: 640px) { body.is-ceremony .temple__closing { white-space: normal; font-size: 2.4rem; } }
+/* Baxter has no question mark; this one is set on purpose, in Fraunces */
+body.is-ceremony .temple__q { font-family: var(--serif); font-weight: 300; font-size: .82em; margin-left: .04em; }
