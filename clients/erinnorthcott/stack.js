@@ -17,7 +17,7 @@
 
   const SEG = 1;                          /* viewports of scroll per card */
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const wide = window.matchMedia('(min-width: 821px)');
+  const wide = window.matchMedia('(min-width: 821px) and (min-height: 700px)');   /* short windows read as a column */
   const clamp = (n, lo, hi) => (n < lo ? lo : n > hi ? hi : n);
   const ease = (n) => { const t = clamp(n, 0, 1); return t * t * (3 - 2 * t); };
 
