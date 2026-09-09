@@ -5823,3 +5823,17 @@ body.is-daniel .dan__film, body.is-daniel .dan__cosmos { border-top: 0; }
 
 /* the marquee sits a little lower under The Work (2026-09-09) */
 body.is-ceremony .temple__band--drift { margin-top: clamp(-1.2rem, -2vh, -.4rem); padding-top: clamp(1rem, 2.5vh, 1.8rem); }
+
+/* --------------------------------------------------------------------------
+   PODCAST (2026-09-09): a splash on the Connect sky until there are episodes.
+   -------------------------------------------------------------------------- */
+body.is-podcast .connect__inner,
+body.is-podcast .podcast__inner { max-width: none; text-align: center; }
+body.is-podcast .section--podcast { justify-content: center; }
+body.try-instrument.is-podcast .podcast__title {
+  font-style: italic;                       /* the page's own title, like the others */
+  font-size: clamp(3rem, 7.2vw, 6rem);
+  white-space: nowrap;
+  margin: 0;
+}
+body.is-podcast .podcast__inner .eyebrow { margin-bottom: 1.1rem; }

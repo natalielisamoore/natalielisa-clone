@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Connect &mdash; Erin Northcott</title>
-  <meta name="description" content="Bring a story, a gathering, or a project to Erin Northcott." />
+  <title>Podcast &mdash; Erin Northcott</title>
+  <meta name="description" content="Erin Northcott's podcast is coming soon." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=JetBrains+Mono:wght@300;400;500&family=Caveat:wght@500;600;700&family=Karla:wght@300..700&family=Permanent+Marker&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../style.css?v=260" />
 </head>
-<body class="try-instrument is-connect">
+<body class="try-instrument is-connect is-podcast">
   <!-- Arrival: a luminous veil that dissolves on load — you cross a threshold -->
   <div class="enter-veil" aria-hidden="true"></div>
   <!-- Layer 1: the sky (fixed, scroll-interpolated gradient) -->
@@ -59,49 +59,17 @@
       <!-- Inner pages are built next; links are non-clickable stubs for now -->
       <a class="nav__link" href="../daniel/">Daniel</a>
       <a class="nav__link" href="../inner-ceremonies/">Inner Ceremonies</a>
-      <a class="nav__link" href="../podcast/">Podcast</a>
-      <a class="nav__link nav__link--here" href="./" aria-current="page">Connect</a>
+      <a class="nav__link nav__link--here" href="./" aria-current="page">Podcast</a>
+      <a class="nav__link" href="../connect/">Connect</a>
     </nav>
   </header>
 
   <main class="page">
 
-    <section class="section section--connect" id="connect">
-      <div class="connect__inner">
-
-        <div class="connect__intro reveal">
-          <p class="eyebrow">Reel 03 &mdash; Connect</p>
-          <h1 class="section__title">I&rsquo;d love to hear from you</h1>
-        </div>
-
-        <form class="connect__form reveal" id="connect-form" method="POST" action="https://api.web3forms.com/submit" novalidate>
-          <!-- TODO before launch: swap this for Erin's own Web3Forms key so
-               enquiries reach her directly. This one is natalielisa.com's. -->
-          <input type="hidden" name="access_key" value="a48f1cb4-d685-48e1-9d8e-890a86eee1db" />
-          <input type="hidden" name="subject" value="New enquiry from erinnorthcott" />
-          <input type="hidden" name="from_name" value="Erin Northcott — site" />
-          <input type="checkbox" name="botcheck" class="connect__botcheck" tabindex="-1" autocomplete="off" />
-
-          <p class="connect__field">
-            <label class="connect__label" for="cf-name">Your name</label>
-            <input class="connect__input" id="cf-name" name="name" type="text" autocomplete="name" maxlength="120" required />
-          </p>
-
-          <p class="connect__field">
-            <label class="connect__label" for="cf-email">Email</label>
-            <input class="connect__input" id="cf-email" name="email" type="email" autocomplete="email" maxlength="180" required />
-          </p>
-
-          <p class="connect__field">
-            <label class="connect__label" for="cf-message">What are you bringing?</label>
-            <textarea class="connect__input connect__input--area" id="cf-message" name="message" rows="6" maxlength="4000" required></textarea>
-          </p>
-
-          <button class="btn-enter connect__send" type="submit">Send</button>
-
-          <p class="connect__note" id="connect-note" role="status" aria-live="polite"></p>
-        </form>
-
+    <section class="section section--connect section--podcast" id="podcast">
+      <div class="podcast__inner reveal">
+        <p class="eyebrow">The podcast</p>
+        <h1 class="section__title podcast__title">Coming soon..</h1>
       </div>
     </section>
 
@@ -126,8 +94,8 @@
       </nav>
       <nav class="footer__col reveal" aria-label="More">
         <p class="footer__h">More</p>
-        <a class="footer__link" href="../podcast/">Podcast<span class="footer__soon">Coming soon</span></a>
-        <a class="footer__link" href="./">Connect</a>
+        <a class="footer__link" href="./">Podcast<span class="footer__soon">Coming soon</span></a>
+        <a class="footer__link" href="../connect/">Connect</a>
       </nav>
 
     </div>
@@ -142,6 +110,5 @@
   <script src="../motes.js?v=260" defer></script>
   <script src="../cursor.js?v=260" defer></script>
   <script src="../reveal.js?v=260" defer></script>
-  <script src="../connect.js?v=260" defer></script>
 </body>
 </html>
