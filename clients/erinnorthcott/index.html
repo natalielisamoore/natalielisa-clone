@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=JetBrains+Mono:wght@300;400;500&family=Caveat:wght@500;600;700&family=Karla:wght@300..700&family=Permanent+Marker&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css?v=238" />
+  <link rel="stylesheet" href="style.css?v=240" />
 </head>
 <body>
   <!-- Arrival: a luminous veil that dissolves on load — you cross a threshold -->
@@ -51,44 +51,13 @@
       <feDisplacementMap in="SourceGraphic" in2="n" scale="7" xChannelSelector="R" yChannelSelector="G" />
     </filter>
   </svg>
-  <!-- Film-edge markings. The printing is ON the film, so it travels with
-       the perforations: ten identical blocks, shifted by exactly one block
-       per cycle, which makes the loop seamless. -->
-  <div class="filmedge filmedge--l" aria-hidden="true">
-    <div class="filmedge__print">
-      <span class="filmedge__mark">16A &#8594; KODAK 400 &#8226;&#8226; 5</span>
-      <span class="filmedge__mark">16A &#8594; KODAK 400 &#8226;&#8226; 5</span>
-      <span class="filmedge__mark">16A &#8594; KODAK 400 &#8226;&#8226; 5</span>
-      <span class="filmedge__mark">16A &#8594; KODAK 400 &#8226;&#8226; 5</span>
-      <span class="filmedge__mark">16A &#8594; KODAK 400 &#8226;&#8226; 5</span>
-      <span class="filmedge__mark">16A &#8594; KODAK 400 &#8226;&#8226; 5</span>
-      <span class="filmedge__mark">16A &#8594; KODAK 400 &#8226;&#8226; 5</span>
-      <span class="filmedge__mark">16A &#8594; KODAK 400 &#8226;&#8226; 5</span>
-      <span class="filmedge__mark">16A &#8594; KODAK 400 &#8226;&#8226; 5</span>
-      <span class="filmedge__mark">16A &#8594; KODAK 400 &#8226;&#8226; 5</span>
-    </div>
-  </div>
-  <div class="filmedge filmedge--r" aria-hidden="true">
-    <div class="filmedge__print">
-      <span class="filmedge__mark">56 &#8226;&#8226; KODAK 400 &#8594; 16A</span>
-      <span class="filmedge__mark">56 &#8226;&#8226; KODAK 400 &#8594; 16A</span>
-      <span class="filmedge__mark">56 &#8226;&#8226; KODAK 400 &#8594; 16A</span>
-      <span class="filmedge__mark">56 &#8226;&#8226; KODAK 400 &#8594; 16A</span>
-      <span class="filmedge__mark">56 &#8226;&#8226; KODAK 400 &#8594; 16A</span>
-      <span class="filmedge__mark">56 &#8226;&#8226; KODAK 400 &#8594; 16A</span>
-      <span class="filmedge__mark">56 &#8226;&#8226; KODAK 400 &#8594; 16A</span>
-      <span class="filmedge__mark">56 &#8226;&#8226; KODAK 400 &#8594; 16A</span>
-      <span class="filmedge__mark">56 &#8226;&#8226; KODAK 400 &#8594; 16A</span>
-      <span class="filmedge__mark">56 &#8226;&#8226; KODAK 400 &#8594; 16A</span>
-    </div>
-  </div>
 
   <!-- Navigation -->
   <header class="nav">
     <a class="nav__name" href="#sunrise">Erin Northcott</a>
     <nav class="nav__links" aria-label="Sections">
       <!-- Inner pages are built next; links are non-clickable stubs for now -->
-      <span class="nav__link" aria-disabled="true">Daniel</span>
+      <a class="nav__link" href="daniel/">Daniel</a>
       <a class="nav__link" href="inner-ceremonies/">Inner Ceremonies</a>
       <span class="nav__link" aria-disabled="true">Podcast</span>
       <a class="nav__link" href="connect/">Connect</a>
@@ -104,7 +73,7 @@
           <a class="filmframe__link" data-trailer href="https://www.youtube.com/watch?v=04iHR-eZIXY" target="_blank" rel="noopener" aria-haspopup="dialog" aria-label="Watch the trailer for Daniel — an HBO Original documentary">
             <div class="filmframe__img">
               <!-- data-has-audio flips to "true" the moment the clip carries sound -->
-              <video class="filmframe__vid" data-src="videos/daniel.mp4?v=238" data-has-audio="true" poster="images/daniel.jpg?v=238" loop muted playsinline preload="none" aria-hidden="true"></video>
+              <video class="filmframe__vid" data-src="videos/daniel.mp4?v=240" data-has-audio="true" poster="images/daniel.jpg?v=240" loop muted playsinline preload="none" aria-hidden="true"></video>
               <span class="filmframe__watch">Watch the trailer &rarr;</span>
             </div>
             <!-- Key-art label: the film's own line, brushed onto torn tape -->
@@ -156,7 +125,7 @@
 
         <figure class="erin__photo reveal">
           <div class="erin__plate">
-            <img src="images/erin2.jpg" alt="Erin Northcott" loading="lazy" decoding="async" width="900" height="894" />
+            <img src="images/erin-rose.jpg?v=240" alt="Erin Northcott" loading="lazy" decoding="async" width="1920" height="1042" />
           </div>
         </figure>
 
@@ -248,7 +217,7 @@
       <nav class="footer__col reveal" aria-label="Explore">
         <p class="footer__h">Explore</p>
         <a class="footer__link" href="./">Home</a>
-        <span class="footer__link" aria-disabled="true">Daniel</span>
+        <a class="footer__link" href="daniel/">Daniel</a>
         <a class="footer__link" href="inner-ceremonies/">Inner Ceremonies</a>
       </nav>
       <nav class="footer__col reveal" aria-label="More">
@@ -294,14 +263,14 @@
     </button>
   </dialog>
 
-  <script src="sky.js?v=238" defer></script>
+  <script src="sky.js?v=240" defer></script>
   <script src="stars.js" defer></script>
-  <script src="motes.js?v=238" defer></script>
-  <script src="cursor.js?v=238" defer></script>
-  <script src="letters.js?v=238" defer></script>
-  <script src="sound.js?v=238" defer></script>
-  <script src="petals.js?v=238" defer></script>
-  <script src="reveal.js?v=238" defer></script>
-  <script src="trailer.js?v=238" defer></script>
+  <script src="motes.js?v=240" defer></script>
+  <script src="cursor.js?v=240" defer></script>
+  <script src="letters.js?v=240" defer></script>
+  <script src="sound.js?v=240" defer></script>
+  <script src="petals.js?v=240" defer></script>
+  <script src="reveal.js?v=240" defer></script>
+  <script src="trailer.js?v=240" defer></script>
 </body>
 </html>
