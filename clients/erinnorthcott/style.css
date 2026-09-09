@@ -5517,3 +5517,60 @@ body.is-daniel .deck__stage .dan__sec--flip[data-folio="4"] { grid-template-colu
 /* the opening settles straight into the story: no gap under the hero (2026-09-09) */
 body.is-daniel .dan__story { padding-top: clamp(2rem, 5vh, 3.2rem); }
 body.is-daniel .dan__storyhead { margin-bottom: clamp(1.4rem, 3.5vh, 2.2rem); }
+
+/* "Erin Northcott, Producer" is a credit, not a flourish: Archivo, stated (2026-09-09) */
+.erin__title {
+  font-family: var(--body);
+  font-weight: 300;
+  font-style: normal;
+  font-size: clamp(1.9rem, 3.2vw, 2.8rem);
+  line-height: 1.12;
+  letter-spacing: -.015em;
+  white-space: nowrap;
+}
+@media (max-width: 560px) { .erin__title { white-space: normal; } }
+
+/* "Have a creative idea?" and the Connect welcome: Archivo, one line (2026-09-09) */
+.collab__inner .section__title,
+.connect__inner .section__title,
+body:not(.is-ceremony) h1.section__title {
+  font-family: var(--body);
+  font-weight: 300;
+  font-style: normal;
+  font-size: clamp(1.9rem, 3.4vw, 3rem);
+  line-height: 1.12;
+  letter-spacing: -.015em;
+  white-space: nowrap;
+}
+@media (max-width: 600px) {
+  .collab__inner .section__title,
+  .connect__inner .section__title,
+  body:not(.is-ceremony) h1.section__title { white-space: normal; }
+}
+
+/* the Living Room card goes back to the balanced split; only To Build a Home stays wide */
+body.is-daniel .deck__stage .dan__sec--flip[data-folio="4"] { grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); }
+body.is-daniel .deck__stage .dan__sec[data-folio="4"] .dan__mount { width: min(100%, 480px); }
+body.is-daniel .deck__stage .dan__sec[data-folio="4"] .dan__sectext p { line-height: 1.75; }
+
+/* the deck cards are taller, the polaroids bigger; no chapter gets a narrow photo (2026-09-09) */
+body.is-daniel .deck__stage .dan__sec { max-height: calc(100svh - 4rem); }
+body.is-daniel .deck__stage .dan__sectext,
+body.is-daniel .deck__stage .dan__secphoto { max-height: calc(100svh - 4rem); }
+body.is-daniel .deck__stage .dan__sec--flip[data-folio="4"],
+body.is-daniel .deck__stage .dan__sec--flip[data-folio="6"] { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); }
+body.is-daniel .deck__stage .dan__sec[data-folio="4"] .dan__mount,
+body.is-daniel .deck__stage .dan__sec[data-folio="6"] .dan__mount { width: min(100%, 520px); }
+body.is-daniel .deck__stage .dan__mount { width: min(100%, 520px); }
+body.is-daniel .deck__stage .dan__sec[data-folio="6"] .dan__sectext { padding-top: clamp(1.4rem, 2.6vw, 2.2rem); padding-bottom: clamp(2.2rem, 3vw, 2.8rem); }
+body.is-daniel .deck__stage .dan__sec[data-folio="6"] .dan__sectext p { line-height: 1.66; font-size: clamp(.98rem, 1.12vw, 1.06rem); }
+
+/* the orb on the Daniel page: one warm orange lamp, screened onto the night (2026-09-09) */
+body.is-daniel .lamp--warm {
+  mix-blend-mode: screen;
+  background: radial-gradient(circle at 50% 50%,
+    rgba(255,150,60,.55) 0%, rgba(255,120,50,.32) 22%, rgba(230,90,40,.14) 45%, rgba(230,90,40,0) 70%);
+  filter: blur(18px);
+}
+body.is-daniel .lamp--warm.is-lit { opacity: .9; }
+body.is-daniel .dan__pact .dan__hero { z-index: -2; }
