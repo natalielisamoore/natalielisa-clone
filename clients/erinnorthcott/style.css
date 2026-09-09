@@ -4014,3 +4014,8 @@ body.is-ceremony .temple__close { min-height: min(64vh, 36rem); }
 @media (max-width: 640px) { body.is-ceremony .temple__closing { white-space: normal; font-size: 2.4rem; } }
 /* Baxter has no question mark; this one is set on purpose, in Fraunces */
 body.is-ceremony .temple__q { font-family: var(--serif); font-weight: 300; font-size: .82em; margin-left: .04em; }
+
+/* footer links hover pink on Inner Ceremonies too, like the rest of the site
+   (2026-09-08); the gold hover stays for the credit and the socials */
+body.is-ceremony .footer__link:hover,
+body.is-ceremony .footer__link:focus-visible { color: #e2809b; }
