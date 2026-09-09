@@ -6014,8 +6014,8 @@ html body .filmframe__watch { transform: translate(-50%, 8px); }
 
 /* ==========================================================================
    GLINTS (2026-09-09): light catching on memory. A few warm points and hair-
-   line streaks placed by glint.js inside the heroes, along the chapter card
-   edges, around the cards and the arch. Each breathes on its own slow cycle,
+   line streaks placed by glint.js inside the heroes, around the cards and
+   the arch (never inside the chapter cards: their children are grid items). Each breathes on its own slow cycle,
    drifts a hair while it is lit, and moves to a fresh spot every time it goes
    dark. Never more than a few lit at once. Off under reduced motion.
    ========================================================================== */
@@ -6063,7 +6063,7 @@ body.is-ceremony .glint::before,
    and Ayan sits small at the inner edge of the left column, like a snapshot
    laid beside a letter.
    ========================================================================== */
-body.is-ceremony .temple__band--note { padding-block: 0 clamp(4.5rem, 11vh, 7.5rem); }
+body.is-ceremony .temple__band--note { padding-block: clamp(2rem, 6vh, 4rem) clamp(4.5rem, 11vh, 7.5rem); }
 body.is-ceremony .temple__note {
   width: min(100% - 5rem, 1240px);
   margin-inline: auto;
@@ -6075,7 +6075,7 @@ body.is-ceremony .temple__note {
 }
 body.is-ceremony .temple__snap {
   margin: 0;
-  width: clamp(180px, 21vw, 270px);
+  width: clamp(260px, 32vw, 420px);
   justify-self: end;
   transform: rotate(-1.5deg);
 }
@@ -6104,6 +6104,29 @@ body.is-ceremony .temple__noteline {
 body.is-ceremony .temple__notetext .temple__lede:last-child { margin-bottom: 0; }
 @media (max-width: 860px) {
   body.is-ceremony .temple__note { grid-template-columns: 1fr; gap: 1.8rem; }
-  body.is-ceremony .temple__snap { justify-self: start; width: min(52vw, 220px); }
+  body.is-ceremony .temple__snap { justify-self: start; width: min(76vw, 340px); }
   body.is-ceremony .temple__noteline { white-space: normal; }
 }
+
+/* the closing rings breathe instead of turning (2026-09-09): each on its own
+   slow period, a 3% swell and a little brightening, nothing else */
+body.is-ceremony .rings__ring,
+body.is-ceremony .rings__ring:nth-child(2),
+body.is-ceremony .rings__ring:nth-child(3),
+body.is-ceremony .rings__ring:nth-child(4) { animation: rings-breathe var(--rb, 12s) ease-in-out var(--rd, 0s) infinite; }
+body.is-ceremony .rings__ring:nth-child(1) { --rb: 14s; --rd: 0s; }
+body.is-ceremony .rings__ring:nth-child(2) { --rb: 11s; --rd: -4s; }
+body.is-ceremony .rings__ring:nth-child(3) { --rb: 13s; --rd: -8s; }
+body.is-ceremony .rings__ring:nth-child(4) { --rb: 9s;  --rd: -2s; }
+@keyframes rings-breathe {
+  0%, 100% { transform: scale(var(--s, 1)); opacity: var(--ro, .55); }
+  50%      { transform: scale(calc(var(--s, 1) * 1.03)); opacity: calc(var(--ro, .55) + .18); }
+}
+body.is-ceremony .rings__ring:nth-child(1) { --ro: .5; }
+body.is-ceremony .rings__ring:nth-child(2) { --ro: .55; }
+body.is-ceremony .rings__ring:nth-child(3) { --ro: .6; }
+body.is-ceremony .rings__ring:nth-child(4) { --ro: .65; }
+@media (prefers-reduced-motion: reduce) { body.is-ceremony .rings__ring { animation: none; } }
+
+/* the package cards run wider (2026-09-09), the same span as the bio */
+body.is-ceremony .depth { width: min(100% - 5rem, 1240px); }

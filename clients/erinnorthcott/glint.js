@@ -6,11 +6,11 @@
   'use strict';
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  /* where, how many, and how: 'edge' keeps them near the card's borders */
+  /* where and how many. NOT inside the chapter cards: `.dan__sec > *` makes
+     every child a grid item and the deck layout breaks (2026-09-09). */
   var SPOTS = [
     ['.section--hero',        5, 'field'],
     ['.dan__pact',            5, 'field'],
-    ['.deck__stage .dan__sec', 3, 'edge'],
     ['.cosmos__row',          5, 'field'],
     ['.arch',                 4, 'field'],
     ['.temple__hero',         4, 'field'],
