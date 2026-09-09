@@ -3450,7 +3450,8 @@ body.is-ceremony .drift__track {
   animation: drift 95s linear infinite;
   will-change: transform;
 }
-body.is-ceremony .drift:hover .drift__track { animation-duration: 170s; }
+/* the marquee ignores the pointer: no slow-down on hover, no stutter (2026-09-09) */
+body.is-ceremony .drift, body.is-ceremony .drift__track { pointer-events: none; }
 body.is-ceremony .drift__run {
   display: flex;
   align-items: center;
@@ -5780,3 +5781,45 @@ body.try-instrument h1.section__title {
   letter-spacing: -.015em;
   line-height: 1.05;
 }
+
+/* the wordmark, nav and footer: Archivo at regular weight, not bold (2026-09-09) */
+.nav__name,
+.footer__name,
+body.is-ceremony .nav__name,
+body.is-ceremony .footer__name,
+body.is-daniel .nav__name,
+body.is-daniel .footer__name {
+  font-family: var(--body);
+  font-weight: 400;
+  letter-spacing: .18em;
+}
+
+/* "Scroll to enter" under the arch, in the small mono; it goes as you pass through (2026-09-09) */
+body.is-ceremony .arch__hint {
+  position: absolute;
+  left: 50%;
+  top: calc(50% + 23vh + 2.4rem);
+  transform: translateX(-50%);
+  margin: 0;
+  font-family: var(--mono);
+  font-size: .66rem;
+  letter-spacing: .32em;
+  text-transform: uppercase;
+  color: var(--t-ink-soft);
+  white-space: nowrap;
+  opacity: calc(1 - min(1, var(--p, 0) * 4));
+  animation: arch-hint 2.6s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes arch-hint { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(4px); } }
+@media (prefers-reduced-motion: reduce) { body.is-ceremony .arch__hint { animation: none; } }
+@media (max-width: 720px) { body.is-ceremony .arch__hint { top: auto; bottom: 2rem; } }
+
+/* the hint sits above the wall */
+body.is-ceremony .arch__hint { z-index: 6; }
+
+/* no rule above The Film or the cards (2026-09-09) */
+body.is-daniel .dan__film, body.is-daniel .dan__cosmos { border-top: 0; }
+
+/* the marquee sits a little lower under The Work (2026-09-09) */
+body.is-ceremony .temple__band--drift { margin-top: clamp(-1.2rem, -2vh, -.4rem); padding-top: clamp(1rem, 2.5vh, 1.8rem); }
