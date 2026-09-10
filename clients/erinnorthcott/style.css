@@ -6329,3 +6329,30 @@ body.is-daniel .dan__review p {
 }
 @media (max-width: 960px) { body.is-daniel .dan__reviewgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 600px) { body.is-daniel .dan__reviewgrid { grid-template-columns: minmax(0, 1fr); } }
+
+/* THE FILM with its poster (2026-09-10): the HBO one-sheet at the left,
+   at its own size (the file is 367px wide, so it is never scaled up), the
+   words and the two buttons beside it. Stacks under 760px. */
+body.is-daniel .dan__filmgrid {
+  width: min(100%, 1040px);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 320px) minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
+}
+body.is-daniel .dan__film .dan__measure { margin: 0; }
+body.is-daniel .dan__poster { margin: 0; }
+body.is-daniel .dan__poster img {
+  display: block;
+  width: 100%;
+  max-width: 367px;
+  height: auto;
+  border-radius: 4px;
+  border: 1px solid rgba(246,235,223,.14);
+  box-shadow: 0 18px 44px rgba(0,0,0,.4);
+}
+@media (max-width: 760px) {
+  body.is-daniel .dan__filmgrid { grid-template-columns: minmax(0, 1fr); gap: 2rem; }
+  body.is-daniel .dan__poster { width: min(64vw, 300px); margin: 0 auto; }
+}
