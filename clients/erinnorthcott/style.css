@@ -6415,3 +6415,17 @@ html body.is-ceremony .temple__book::before, html body.is-ceremony .temple__book
 html body.is-daniel .dan__btn::before, html body.is-daniel .dan__btn::after,
 html body.is-daniel .cosmos__btn::before, html body.is-daniel .cosmos__btn::after,
 html body .trailer__out::before, html body .trailer__out::after { content: none; }
+
+/* BLACK TYPE on Inner Ceremonies (2026-09-10): "this whole page should just
+   have black font with the gold accent, the grey is too illegible". Every
+   ink token goes to near-black, so the soft grey (italic phrases, labels,
+   footnotes, FAQ answers) reads as black too; gold stays on the accents. */
+body.is-ceremony,
+body.is-ceremony.is-temple-light {
+  --t-ink: #121110;
+  --t-ink-soft: #121110;
+}
+/* the pull line under The Work: black, not gold */
+body.is-ceremony .temple__band--work .temple__pull,
+body.is-ceremony.try-instrument .temple__band--work .temple__pull,
+body.is-ceremony.try-instrument .temple__pull { color: var(--t-ink); }
