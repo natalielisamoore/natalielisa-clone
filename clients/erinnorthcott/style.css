@@ -6143,7 +6143,20 @@ body.is-daniel .lamp--warm {
   mix-blend-mode: normal;          /* screen vanished on the photo and the paper */
   width: 360px; height: 360px;
   background: radial-gradient(circle at 50% 50%,
-    rgba(255,222,160,.9) 0%, rgba(255,186,100,.62) 14%, rgba(255,150,70,.34) 30%, rgba(245,120,55,.12) 48%, rgba(245,120,55,0) 66%);
-  filter: blur(12px);
+    rgba(255,222,160,.62) 0%, rgba(255,186,100,.40) 14%, rgba(255,150,70,.20) 30%, rgba(245,120,55,.07) 48%, rgba(245,120,55,0) 66%);
+  filter: blur(16px);
 }
-body.is-daniel .lamp--warm.is-lit { opacity: .95; }
+body.is-daniel .lamp--warm.is-lit { opacity: .72; }   /* "a bit intense" at .95, softened 2026-09-10 */
+
+/* film-subtitle yellow for the chapter titles (2026-09-10): the gold read as
+   gilt; she wants the feel of subtitles on a print. Night cards take the
+   pact line's marigold family, paper cards a deeper amber-yellow that still
+   holds on cream. */
+body.is-daniel {
+  --d-sub: #ffd84a;
+  --pg-sub: #c79b0e;
+}
+body.is-daniel .dan__chnum,
+body.is-daniel.try-instrument .dan__chnum,
+body.is-daniel .dan__sub { color: var(--d-sub); }
+body.is-daniel .dan__sec--paper .dan__chnum { color: var(--pg-sub); }
