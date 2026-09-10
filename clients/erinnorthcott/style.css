@@ -6516,3 +6516,26 @@ html body .filmframe__watch { --tal-solid: #e2b866; --tal-hover-ink: #fff1d6; }
 html body.is-ceremony .temple__book,
 html body.is-temple-light .temple__book { --tal-solid: #ffca2c; }
 html body .filmframe__watch { background: rgba(226,184,102,.92); }
+
+/* the arch overlay never takes the pointer (2026-09-10): its frame and wall
+   sat over the hero's Book a Complimentary Call button and swallowed every
+   hover and click once you had scrolled through */
+body.is-ceremony .arch__wall,
+body.is-ceremony .arch__frame,
+body.is-ceremony .arch__hint { pointer-events: none; }   /* the hero lives INSIDE .arch, so only the overlays */
+
+/* ONE button colour everywhere (2026-09-10): her marigold, on every ground */
+html body .btn-enter,
+html body .connect__send,
+html body.is-ceremony .temple__book,
+html body.is-temple-light .temple__book,
+html body.is-daniel .dan__btn,
+html body.is-daniel .dan__btn--fill,
+html body.is-daniel .cosmos__btn,
+html body .trailer__out,
+html body .filmframe__watch,
+html body #sunset .btn-enter,
+html body .film__cta .btn-enter,
+html body .becoming__text .btn-enter,
+html body .collab__inner .btn-enter { --tal-solid: #ffca2c; }
+html body .filmframe__watch { background: rgba(255,202,44,.94); }
