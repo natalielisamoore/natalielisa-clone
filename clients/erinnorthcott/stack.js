@@ -16,6 +16,7 @@
   if (N < 2) return;
 
   const SEG = 1;                          /* viewports of scroll per card */
+  const CLOSE = 0.7;                      /* viewports for the deck to sink and dim after the last card (2026-09-10) */
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
   const wide = window.matchMedia('(min-width: 821px) and (min-height: 700px)');   /* short windows read as a column */
   const clamp = (n, lo, hi) => (n < lo ? lo : n > hi ? hi : n);
@@ -29,6 +30,8 @@
     const vh = window.innerHeight;
     const y = -deck.getBoundingClientRect().top;
     const s = clamp(y / (vh * SEG), 0, N - 1);
+    /* --c: 0 while the cards are still arriving, 1 once the deck has closed */
+    stage.style.setProperty('--c', ease((y / vh - (N - 1) * SEG) / CLOSE).toFixed(4));
     cards.forEach((el, i) => {
       const t = clamp(s - i, -1, 1);
       el.style.setProperty('--e', ease(1 + Math.min(t, 0)).toFixed(4));
@@ -41,19 +44,21 @@
   function start() {
     deck.classList.remove('is-static');
     cards.forEach((el) => { el.style.minHeight = ''; });
-    deck.style.height = `calc(${(N - 1) * SEG + 1} * 100vh)`;
+    deck.style.height = `calc(${(N - 1) * SEG + 1 + CLOSE} * 100vh)`;
     measure();
     if (!live) { addEventListener('scroll', onScroll, { passive: true }); live = true; }
   }
   function rest() {
     deck.classList.add('is-static');
     deck.style.height = 'auto';
+    stage.style.setProperty('--c', 0);
     cards.forEach((el) => { el.style.setProperty('--e', 1); el.style.setProperty('--x', 0); el.dataset.phase = 'cur'; });
     if (live) { removeEventListener('scroll', onScroll); live = false; }
     /* in the column, too, every card stands as tall as the tallest */
     cards.forEach((el) => { el.style.minHeight = ''; });
-    const tallest = Math.max(...cards.map((el) => el.getBoundingClientRect().height));
-    if (wide.matches || window.innerWidth > 820) cards.forEach((el) => { el.style.minHeight = Math.ceil(tallest) + 'px'; });
+    const chapters = cards.filter((el) => !el.classList.contains('dan__sec--end'));   /* the end card keeps its own height */
+    const tallest = Math.max(...chapters.map((el) => el.getBoundingClientRect().height));
+    if (wide.matches || window.innerWidth > 820) chapters.forEach((el) => { el.style.minHeight = Math.ceil(tallest) + 'px'; });
   }
   function decide() { (reduce.matches || !wide.matches) ? rest() : start(); }
   decide();
