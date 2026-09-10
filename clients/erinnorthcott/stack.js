@@ -18,7 +18,9 @@
   const SEG = 1;                          /* viewports of scroll per card */
   const CLOSE = 0.7;                      /* viewports for the deck to sink and dim after the last card (2026-09-10) */
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const wide = window.matchMedia('(min-width: 821px) and (min-height: 700px)');   /* short windows read as a column */
+  /* the deck runs on phones too since 2026-09-10 (one column, polaroid over words);
+     only a SHORT window falls back to the plain column */
+  const wide = window.matchMedia('(min-height: 560px)');
   const clamp = (n, lo, hi) => (n < lo ? lo : n > hi ? hi : n);
   const ease = (n) => { const t = clamp(n, 0, 1); return t * t * (3 - 2 * t); };
 
