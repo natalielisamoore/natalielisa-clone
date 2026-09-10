@@ -6133,41 +6133,4 @@ body.is-ceremony .depth { width: min(100% - 5rem, 1240px); }
 
 /* the teaser tried an arch portal on 2026-09-09; it flickered on her machine, so it is a square again */
 
-/* ==========================================================================
-   THE CURTAIN (2026-09-09): scrolling past the Daniel hero, the daisies hold
-   still while the story rises over them as a solid card, the way the chapter
-   deck's next card rises over the last. curtain.js writes --cover (0 → 1).
-   Desktop only (the deck's own conditions), never under reduced motion, so
-   phones keep the plain flow. The hero takes no pointer events once it is a
-   backdrop, so nothing beneath is ever blocked.
-   ========================================================================== */
-@media (min-width: 821px) and (min-height: 700px) and (prefers-reduced-motion: no-preference) {
-  body.is-daniel .dan__pact {
-    position: sticky;
-    top: 0;
-    z-index: 0;
-    height: 100svh;
-    min-height: 0;
-    pointer-events: none;
-    transform-origin: 50% 35%;
-    transform: scale(calc(1 - var(--cover, 0) * .05));
-    filter: brightness(calc(1 - var(--cover, 0) * .62));
-    opacity: calc(1 - max(0, var(--cover, 0) - .9) * 10);
-    will-change: transform, filter, opacity;
-  }
-  body.is-daniel .dan__pact.is-covered { visibility: hidden; }
-  body.is-daniel .dan__story {
-    position: relative;
-    z-index: 2;
-    border-radius: 22px 22px 0 0;
-    box-shadow: 0 -24px 70px rgba(0,0,0,.42);
-    /* the same night as .sky, pinned to the viewport so the seam is invisible */
-    background:
-      radial-gradient(ellipse 34% 40% at 78% 96%, rgba(236,178,170,.85) 0%, rgba(236,178,170,0) 100%),
-      radial-gradient(ellipse 40% 60% at 92% 70%, rgba(150,140,160,.55) 0%, rgba(150,140,160,0) 100%),
-      radial-gradient(ellipse 30% 55% at 48% 72%, rgba(46,72,170,.75) 0%, rgba(46,72,170,0) 100%),
-      radial-gradient(ellipse 60% 80% at 10% 30%, rgba(8,12,26,1) 0%, rgba(8,12,26,0) 100%),
-      linear-gradient(90deg, #080c1a 0%, #141c34 30%, #22305c 55%, #3a3f66 78%, #5a4a66 100%);
-    background-attachment: fixed;
-  }
-}
+/* a curtain (sticky hero, story rising over it) was tried on 2026-09-09 and reverted at her ask */
