@@ -6160,3 +6160,38 @@ body.is-daniel .dan__chnum,
 body.is-daniel.try-instrument .dan__chnum,
 body.is-daniel .dan__sub { color: var(--d-sub); }
 body.is-daniel .dan__sec--paper .dan__chnum { color: var(--pg-sub); }
+
+/* ==========================================================================
+   THRESHOLDS, rebalanced (2026-09-10). What was off: the spiral's arm ran to
+   within a title's height of the words while the outer edge had twice that
+   air; the column carried four voices (bold, body, grey italic, pull lines);
+   and the spiral's dense side faced the text. So: an even gutter, the figure
+   centred in its column and turned so its open end faces the words, the
+   grey inline italics back to plain body, the pull lines a touch smaller
+   with the first one broken on purpose, and the paragraph rhythm tightened.
+   ========================================================================== */
+body.is-ceremony .temple__band--thresholds .temple__cols {
+  grid-template-columns: minmax(0, 38rem) minmax(0, 1fr);
+  gap: clamp(3rem, 6vw, 6.5rem);
+  align-items: center;
+}
+body.is-ceremony .temple__band--thresholds .temple__aside .spiral {
+  width: min(100%, 520px);
+  margin: 0 auto;
+}
+/* turned half a circle: the arms now bunch on the outer side, the opening
+   faces the column. The rose follows the inner coil to its new spot. */
+body.is-ceremony .temple__band--thresholds .spiral__svg { transform: rotate(180deg); }
+body.is-ceremony .temple__band--thresholds .temple__asiderose { left: 46.4%; top: 45.4%; }
+/* one italic voice, not two */
+body.is-ceremony .temple__band--thresholds .temple__lede em { font-style: normal; font-weight: inherit; color: inherit; }
+body.is-ceremony .temple__band--thresholds .temple__beat {
+  font-size: clamp(1.1rem, 1.9vw, 1.4rem);
+  line-height: 1.5;
+  margin-block: clamp(1.3rem, 3vh, 2rem);
+}
+body.is-ceremony .temple__band--thresholds .temple__lede { margin-bottom: clamp(1.1rem, 2.2vw, 1.5rem); line-height: 1.8; }
+body.is-ceremony .temple__band--thresholds .temple__col > :last-child { margin-bottom: 0; }
+@media (max-width: 1140px) and (min-width: 821px) {
+  body.is-ceremony .temple__band--thresholds .temple__cols { grid-template-columns: minmax(0, 30rem) minmax(0, 1fr); }
+}
