@@ -6206,8 +6206,8 @@ body.is-ceremony .temple__band--thresholds .temple__col > :last-child { margin-b
 body.is-daniel .deck__stage {
   transform-origin: 50% 60%;
   transform: scale(calc(1 - var(--c, 0) * .08));
-  filter: brightness(calc(1 - var(--c, 0) * .55));
-  opacity: calc(1 - var(--c, 0) * .5);
+  filter: brightness(calc(1 - var(--c, 0) * .7));
+  opacity: calc(1 - var(--c, 0) * .92);     /* all but gone by the time the pin lets go (her ask, 2026-09-10) */
   will-change: transform, filter, opacity;
 }
 body.is-daniel .deck.is-static .deck__stage { transform: none; filter: none; opacity: 1; }
@@ -6223,7 +6223,7 @@ body.is-daniel .dan__sec--end > * { grid-area: 1 / 1; }
 body.is-daniel .dan__endring {
   width: min(52vh, 26rem);
   height: auto;
-  opacity: .42;
+  opacity: .16;                    /* very faint, her ask (2026-09-10) */
   pointer-events: none;
 }
 body.is-daniel .dan__endline {
