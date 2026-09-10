@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=JetBrains+Mono:wght@300;400&family=Caveat:wght@500;600&family=Karla:wght@200..600&family=Permanent+Marker&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../style.css?v=285" />
+  <link rel="stylesheet" href="../style.css?v=286" />
 </head>
 <body class="is-ceremony try-instrument">
   <!-- Arrival: a luminous veil that dissolves on load -->
@@ -39,7 +39,7 @@
         <!-- the hero IS what lies beyond the arch: pinned here while you pass
              through, its words fading in once the opening has cleared -->
         <section class="temple__hero">
-          <video class="temple__herovid" data-src="../videos/rose-water.mp4?v=285" poster="../images/rose-water-poster.jpg?v=285" loop muted playsinline preload="none" aria-hidden="true"></video>
+          <video class="temple__herovid" data-src="../videos/rose-water.mp4?v=286" poster="../images/rose-water-poster.jpg?v=286" loop muted playsinline preload="none" aria-hidden="true"></video>
           <span class="temple__herowash" aria-hidden="true"></span>
           <div class="temple__herotext">
             <h1 class="temple__title">Inner Ceremonies</h1>
@@ -68,7 +68,9 @@
 
     <!-- THRESHOLDS: the words on the left rail, the spiral of stars standing
          beside them, running off the right edge. The pattern coming round. -->
-    <section class="temple__band temple__band--thresholds">
+    <!-- is-forest (2026-09-10): the faded forest stands in for the rose spiral;
+         drop the class to bring the spiral back -->
+    <section class="temple__band temple__band--thresholds is-forest">
       <div class="temple__wrap temple__cols">
         <div class="temple__col reveal">
           <p class="temple__label">Thresholds</p>
@@ -80,8 +82,9 @@
           <p class="temple__beat">Wherever you&rsquo;re standing, the work meets you there.</p>
         </div>
         <div class="temple__aside">
+          <img class="temple__forest reveal" src="../images/forest-light.jpg?v=286" alt="" aria-hidden="true" loading="lazy" decoding="async" width="789" height="1400" />
       <figure class="spiral reveal" role="presentation">
-      <img class="temple__asiderose" src="../images/spiral-rose.jpg?v=285" alt="" aria-hidden="true" loading="lazy" decoding="async" width="1400" height="1400" />
+      <img class="temple__asiderose" src="../images/spiral-rose.jpg?v=286" alt="" aria-hidden="true" loading="lazy" decoding="async" width="1400" height="1400" />
       <svg class="spiral__svg" viewBox="0 0 398 398" aria-hidden="true" focusable="false">
         <defs>
           <path id="sp4" d="M0.000,-1.000L0.212,-0.212L1.000,0.000L0.212,0.212L0.000,1.000L-0.212,0.212L-1.000,0.000L-0.212,-0.212Z"/>
@@ -365,7 +368,7 @@
           <p class="temple__lede"><strong>A producer, somatic guide, and mother. Everyone is welcome here.</strong></p>
         </div>
         <figure class="temple__portrait reveal">
-          <img src="../images/erin-tree.jpg?v=285" alt="Erin Northcott" loading="lazy" decoding="async" width="920" height="1118" />
+          <img src="../images/erin-tree.jpg?v=286" alt="Erin Northcott" loading="lazy" decoding="async" width="920" height="1118" />
         </figure>
       </div>
     </section>
@@ -529,7 +532,7 @@
     <section class="temple__band temple__band--note">
       <div class="temple__wrap temple__note">
         <figure class="temple__snap reveal">
-          <img src="../images/erin-ayan.jpg?v=285" alt="Erin with Ayan" loading="lazy" decoding="async" width="933" height="1400" />
+          <img src="../images/erin-ayan.jpg?v=286" alt="Erin with Ayan" loading="lazy" decoding="async" width="933" height="1400" />
         </figure>
         <div class="temple__notetext reveal">
           <p class="temple__label">A note from me</p>
@@ -574,10 +577,10 @@
       <!-- her gold ring, layered four times into concentric circles, each
            turning at its own pace, behind the closing line -->
       <div class="rings reveal" aria-hidden="true">
-        <img class="rings__ring" src="../images/gold-ring.png?v=285" alt="" loading="eager" decoding="async" width="800" height="796" />
-        <img class="rings__ring" src="../images/gold-ring.png?v=285" alt="" loading="lazy" decoding="async" width="800" height="796" />
-        <img class="rings__ring" src="../images/gold-ring.png?v=285" alt="" loading="lazy" decoding="async" width="800" height="796" />
-        <img class="rings__ring" src="../images/gold-ring.png?v=285" alt="" loading="lazy" decoding="async" width="800" height="796" />
+        <img class="rings__ring" src="../images/gold-ring.png?v=286" alt="" loading="eager" decoding="async" width="800" height="796" />
+        <img class="rings__ring" src="../images/gold-ring.png?v=286" alt="" loading="lazy" decoding="async" width="800" height="796" />
+        <img class="rings__ring" src="../images/gold-ring.png?v=286" alt="" loading="lazy" decoding="async" width="800" height="796" />
+        <img class="rings__ring" src="../images/gold-ring.png?v=286" alt="" loading="lazy" decoding="async" width="800" height="796" />
       </div>
       <p class="temple__closing reveal">How <em>clear</em> could you feel<span class="temple__q">?</span></p>
     </section>
@@ -614,12 +617,12 @@
     </div>
   </footer>
 
-  <script src="../reveal.js?v=285" defer></script>
-  <script src="../glint.js?v=285" defer></script>
-  <script src="../threshold.js?v=285" defer></script>
-  <script src="../praise.js?v=285" defer></script>
-  <script src="../pillars.js?v=285" defer></script>
-  <script src="../faq.js?v=285" defer></script>
-  <script src="../dust.js?v=285" defer></script>
+  <script src="../reveal.js?v=286" defer></script>
+  <script src="../glint.js?v=286" defer></script>
+  <script src="../threshold.js?v=286" defer></script>
+  <script src="../praise.js?v=286" defer></script>
+  <script src="../pillars.js?v=286" defer></script>
+  <script src="../faq.js?v=286" defer></script>
+  <script src="../dust.js?v=286" defer></script>
 </body>
 </html>

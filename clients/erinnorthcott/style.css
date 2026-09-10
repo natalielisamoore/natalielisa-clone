@@ -6585,3 +6585,25 @@ html body:not(.is-daniel):not(.is-ceremony):not(.is-connect) #sunset .btn-enter 
 html body:not(.is-daniel):not(.is-ceremony):not(.is-connect) #sunset .btn-enter:hover,
 html body:not(.is-daniel):not(.is-ceremony):not(.is-connect) #sunset .btn-enter:focus-visible { background: transparent; border-color: var(--hp-ink); color: var(--hp-ink); }
 html body:not(.is-daniel):not(.is-ceremony):not(.is-connect) #sunset .btn-enter:active { background: var(--hp-ink); color: var(--hp-paper); }
+
+/* ==========================================================================
+   THE FOREST beside "When life is asking you to change" (2026-09-10). A
+   trial: `.is-forest` on the Thresholds section shows a faded, warm-graded
+   photo of light through redwoods and hides the rose spiral. Remove the
+   class from the section (and nothing else) to get the spiral back.
+   ========================================================================== */
+body.is-ceremony .temple__forest { display: none; }
+body.is-ceremony .temple__band--thresholds.is-forest .spiral { display: none; }
+body.is-ceremony .temple__band--thresholds.is-forest .temple__forest {
+  display: block;
+  width: min(100%, 520px);
+  aspect-ratio: 4 / 5;
+  height: auto;
+  margin: 0 auto;
+  object-fit: cover;
+  object-position: 50% 45%;
+  opacity: .82;
+  filter: sepia(.28) saturate(.78) brightness(1.06) contrast(.96);   /* warmed toward the page */
+  -webkit-mask-image: radial-gradient(ellipse 62% 58% at 50% 50%, #000 42%, rgba(0,0,0,.55) 66%, transparent 100%);
+  mask-image: radial-gradient(ellipse 62% 58% at 50% 50%, #000 42%, rgba(0,0,0,.55) 66%, transparent 100%);
+}
