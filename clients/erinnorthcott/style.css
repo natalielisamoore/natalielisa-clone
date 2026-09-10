@@ -6253,3 +6253,19 @@ body.is-daniel .deck__stage .dan__endline {
   will-change: transform, opacity;
 }
 body.is-daniel .deck.is-static .dan__endline { transform: none; opacity: 1; filter: none; }
+
+/* the trust line under her name in the bio (2026-09-10): the thing people
+   say to her, so the paragraph that follows ("It's the thing people say to
+   me again and again") has its antecedent. Instrument italic, one line. */
+body.is-ceremony .temple__trust {
+  margin: calc(-1 * clamp(.6rem, 1.6vw, 1.2rem)) 0 clamp(1.4rem, 3vw, 2.2rem);
+  font-family: var(--display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.35rem, 2.1vw, 1.9rem);
+  line-height: 1.2;
+  letter-spacing: -.01em;
+  color: var(--t-ink);
+  white-space: nowrap;
+}
+@media (max-width: 720px) { body.is-ceremony .temple__trust { white-space: normal; } }
