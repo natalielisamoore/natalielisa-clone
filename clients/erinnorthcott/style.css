@@ -6407,3 +6407,11 @@ body.is-daniel .dan__poster img {
   body.is-daniel .deck.is-static .dan__mount { width: min(100% - 1rem, 320px); }
   body.is-daniel .deck.is-static .dan__sec--end { min-height: 60svh; }
 }
+
+/* no ornaments on the buttons (2026-09-10): "remove the little stars, it's too much" */
+html body .btn-enter::before,  html body .btn-enter::after,
+html body .connect__send::before, html body .connect__send::after,
+html body.is-ceremony .temple__book::before, html body.is-ceremony .temple__book::after,
+html body.is-daniel .dan__btn::before, html body.is-daniel .dan__btn::after,
+html body.is-daniel .cosmos__btn::before, html body.is-daniel .cosmos__btn::after,
+html body .trailer__out::before, html body .trailer__out::after { content: none; }
