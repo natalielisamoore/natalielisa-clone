@@ -6130,3 +6130,10 @@ body.is-ceremony .rings__ring:nth-child(4) { --ro: .65; }
 
 /* the package cards run wider (2026-09-09), the same span as the bio */
 body.is-ceremony .depth { width: min(100% - 5rem, 1240px); }
+
+/* the Inner Ceremonies teaser is a PORTAL (2026-09-09): the top two corners
+   of the gold plate and the film inside it are fully round, like the arch on
+   the ceremony page, and the frame stands a little taller than square */
+.becoming__media { border-radius: 999px 999px 0 0; }
+.becoming__film  { border-radius: 999px 999px 0 0; aspect-ratio: 5 / 6; }
+.becoming__media::before { border-radius: 999px 999px 0 0; }
