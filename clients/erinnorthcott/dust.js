@@ -21,8 +21,9 @@
   const STEP = 2;            /* read every 2nd pixel: ~1/4 of the grains */
   const PUSH_R = 22;         /* px: the reach of the brush around the moving point */
   const PUSH = 0.55;         /* how much of the hand's speed a grain takes on */
-  const SPRING = 0.0035;     /* how eagerly a grain heads home (small = slow) */
-  const DRAG = 0.965;        /* velocity kept per frame: high, so a nudge keeps travelling */
+  const SPRING = 0.006;      /* how eagerly a grain heads home */
+  const DRAG = 0.90;         /* velocity kept per frame: low enough that a grain glides home
+                                and settles, never overshoots and bounces (2026-09-10) */
   const JITTER = 0.04;       /* a little life, so it never freezes solid */
 
   const canvas = document.createElement('canvas');
@@ -35,7 +36,7 @@
   let grains = [];           /* {ring, bx, by (unit, -0.5..0.5), x, y, vx, vy, a (alpha bucket)} */
   let colour = '212,168,75';
   let mouse = { x: -9999, y: -9999, px: -9999, py: -9999, on: false, moved: false };
-  let running = false, raf = 0, t0 = performance.now();
+  let running = false, raf = 0, t0 = performance.now(), pausedAt = 0;
 
   function sample() {
     const off = document.createElement('canvas');
@@ -155,8 +156,11 @@
     raf = requestAnimationFrame(frame);
   }
 
-  function start() { if (running) return; running = true; t0 = performance.now() - (t0 ? 0 : 0); raf = requestAnimationFrame(frame); }
-  function stop() { running = false; cancelAnimationFrame(raf); }
+  /* the clock PAUSES while the close is off screen and resumes where it was;
+     resetting it (as this once did) snapped every ring back to its start
+     angle each time the section scrolled in, and the grains bounced (2026-09-10) */
+  function start() { if (running) return; running = true; if (pausedAt) { t0 += performance.now() - pausedAt; pausedAt = 0; } raf = requestAnimationFrame(frame); }
+  function stop() { if (!running) return; running = false; pausedAt = performance.now(); cancelAnimationFrame(raf); }
 
   function onMove(e) {
     const r = close.getBoundingClientRect();
