@@ -6134,3 +6134,16 @@ body.is-ceremony .depth { width: min(100% - 5rem, 1240px); }
 /* the teaser tried an arch portal on 2026-09-09; it flickered on her machine, so it is a square again */
 
 /* a curtain (sticky hero, story rising over it) was tried on 2026-09-09 and reverted at her ask */
+
+/* the orb rides ABOVE the page on Daniel (2026-09-10): she wants it as a
+   cursor everywhere, over the hero, the cards and the cream band, not only
+   on the open night sky. Under the nav, never over the pointer's targets. */
+body.is-daniel .lamp--warm {
+  z-index: 40;
+  mix-blend-mode: normal;          /* screen vanished on the photo and the paper */
+  width: 360px; height: 360px;
+  background: radial-gradient(circle at 50% 50%,
+    rgba(255,222,160,.9) 0%, rgba(255,186,100,.62) 14%, rgba(255,150,70,.34) 30%, rgba(245,120,55,.12) 48%, rgba(245,120,55,0) 66%);
+  filter: blur(12px);
+}
+body.is-daniel .lamp--warm.is-lit { opacity: .95; }
