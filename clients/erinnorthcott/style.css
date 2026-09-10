@@ -6539,3 +6539,49 @@ html body .film__cta .btn-enter,
 html body .becoming__text .btn-enter,
 html body .collab__inner .btn-enter { --tal-solid: #ffca2c; }
 html body .filmframe__watch { background: rgba(255,202,44,.94); }
+
+/* ==========================================================================
+   HOMEPAGE BUTTONS follow the sky (2026-09-10). The marigold got lost on the
+   peach and orange grounds, so on the homepage the buttons take an INK that
+   moves with the sky's own scroll value (--dusk, written by sky.js: 0 on the
+   light sky, 1 by the night): black on the light sky, cream on the dark,
+   every shade between as you scroll. DANIEL, the first, is an outline; the
+   other two are solid. Hover swaps each one to its opposite.
+   ========================================================================== */
+html body:not(.is-daniel):not(.is-ceremony):not(.is-connect) .btn-enter {
+  /* a quick crossfade around the sky's midpoint, not a slow blend: a slow
+     blend put ink and paper at the same grey exactly where Learn more sits */
+  --hp-t:     clamp(0, calc((var(--dusk, 0) - .42) * 8), 1);
+  --hp-ink:   color-mix(in oklab, #121110, #fff6e8 calc(var(--hp-t) * 100%));
+  --hp-paper: color-mix(in oklab, #fff6e8, #121110 calc(var(--hp-t) * 100%));
+  background: var(--hp-ink);
+  border-color: var(--hp-ink);
+  color: var(--hp-paper);
+}
+html body:not(.is-daniel):not(.is-ceremony):not(.is-connect) .btn-enter:hover,
+html body:not(.is-daniel):not(.is-ceremony):not(.is-connect) .btn-enter:focus-visible {
+  background: transparent;
+  border-color: var(--hp-ink);
+  color: var(--hp-ink);
+}
+html body:not(.is-daniel):not(.is-ceremony):not(.is-connect) .btn-enter:active {
+  background: var(--hp-ink);
+  border-color: var(--hp-ink);
+  color: var(--hp-paper);
+}
+/* the first button, DANIEL on the sunset: an outline that fills on hover */
+html body:not(.is-daniel):not(.is-ceremony):not(.is-connect) .film__cta .btn-enter {
+  background: transparent;
+  border-color: var(--hp-ink);
+  color: var(--hp-ink);
+}
+html body:not(.is-daniel):not(.is-ceremony):not(.is-connect) .film__cta .btn-enter:hover,
+html body:not(.is-daniel):not(.is-ceremony):not(.is-connect) .film__cta .btn-enter:focus-visible {
+  background: var(--hp-ink);
+  color: var(--hp-paper);
+}
+/* the sunset section's ID rule outranks the class rules, so it is said again with the ID */
+html body:not(.is-daniel):not(.is-ceremony):not(.is-connect) #sunset .btn-enter { background: var(--hp-ink); border-color: var(--hp-ink); color: var(--hp-paper); }
+html body:not(.is-daniel):not(.is-ceremony):not(.is-connect) #sunset .btn-enter:hover,
+html body:not(.is-daniel):not(.is-ceremony):not(.is-connect) #sunset .btn-enter:focus-visible { background: transparent; border-color: var(--hp-ink); color: var(--hp-ink); }
+html body:not(.is-daniel):not(.is-ceremony):not(.is-connect) #sunset .btn-enter:active { background: var(--hp-ink); color: var(--hp-paper); }
