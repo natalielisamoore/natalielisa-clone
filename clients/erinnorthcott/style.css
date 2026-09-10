@@ -6242,3 +6242,14 @@ body.is-daniel .dan__endline {
 }
 body.is-daniel .deck.is-static .dan__sec--end { min-height: 0; padding: clamp(3rem, 8vh, 5rem) 1.5rem; }
 @media (max-width: 560px) { body.is-daniel .dan__endline { white-space: normal; font-size: 2rem; } }
+
+/* the line shrinks into the dark as the deck fades (2026-09-10): a little
+   scale on top of the stage's own, and it goes a beat sooner than the card */
+body.is-daniel .deck__stage .dan__endline {
+  transform: scale(calc(1 - var(--c, 0) * .32));
+  opacity: calc(1 - var(--c, 0) * .6);
+  filter: blur(calc(var(--c, 0) * 1.5px));
+  transform-origin: 50% 50%;
+  will-change: transform, opacity;
+}
+body.is-daniel .deck.is-static .dan__endline { transform: none; opacity: 1; filter: none; }
