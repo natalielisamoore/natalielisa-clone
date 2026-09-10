@@ -6269,3 +6269,20 @@ body.is-ceremony .temple__trust {
   white-space: nowrap;
 }
 @media (max-width: 720px) { body.is-ceremony .temple__trust { white-space: normal; } }
+
+/* PHONE FIX (2026-09-10): the "bigger portrait" rule above re-split the bio
+   into two columns after the 860px rule that stacks it, so on phones the
+   words were squeezed beside an empty column and the page scrolled sideways.
+   Restated here, after it, so the stack wins on small screens. */
+@media (max-width: 860px) {
+  body.is-ceremony .temple__band--guide .temple__guide { grid-template-columns: minmax(0, 1fr); width: min(100% - 3rem, 1120px); }
+}
+/* the marquee's track is thousands of pixels wide; clip it sideways at the
+   band so the page itself never scrolls horizontally on phones (2026-09-10) */
+body.is-ceremony .temple__band--drift { overflow-x: clip; }
+/* phones: the package cards back to the narrow measure (the wider desktop
+   rule above had overtaken the 820px rule) and never wider than the screen */
+@media (max-width: 820px) {
+  body.is-ceremony .depth { width: min(100% - 2rem, 560px); }
+  body.is-ceremony .depth__card { min-width: 0; max-width: 100%; }
+}
