@@ -6416,16 +6416,103 @@ html body.is-daniel .dan__btn::before, html body.is-daniel .dan__btn::after,
 html body.is-daniel .cosmos__btn::before, html body.is-daniel .cosmos__btn::after,
 html body .trailer__out::before, html body .trailer__out::after { content: none; }
 
-/* BLACK TYPE on Inner Ceremonies (2026-09-10): "this whole page should just
-   have black font with the gold accent, the grey is too illegible". Every
-   ink token goes to near-black, so the soft grey (italic phrases, labels,
-   footnotes, FAQ answers) reads as black too; gold stays on the accents. */
+/* TYPE on Inner Ceremonies (2026-09-10, settled after two rounds): titles,
+   labels, pull lines and the closing keep the warm CHARCOAL; every paragraph
+   of body copy is BLACK ("go back to the charcoal but for body font, always
+   BLACK"); the soft grey is gone, nothing on the page is grey any more. */
 body.is-ceremony,
 body.is-ceremony.is-temple-light {
-  --t-ink: #121110;
-  --t-ink-soft: #121110;
+  --t-ink: #3d332b;
+  --t-ink-soft: #3d332b;
+  --t-body: #121110;
 }
-/* the pull line under The Work: black, not gold */
+body.is-ceremony .temple__lede,
+body.is-ceremony .temple__plantext,
+body.is-ceremony .temple__lede em,
+body.is-ceremony .temple__plantext em,
+body.is-ceremony .temple__lede strong,
+body.is-ceremony .faq__inner p,
+body.is-ceremony .depth__text,
+body.is-ceremony .depth__list,
+body.is-ceremony .depth__sub,
+body.is-ceremony .depth__foot,
+body.is-ceremony .depth__note,
+body.is-ceremony .pillar__text,
+body.is-ceremony .praise__quote,
+body.is-ceremony .praise__who,
+body.is-ceremony .temple__notetext .temple__lede,
+body.is-ceremony .temple__sub { color: var(--t-body); }
+/* the pull line under The Work: charcoal like the titles, not gold */
 body.is-ceremony .temple__band--work .temple__pull,
 body.is-ceremony.try-instrument .temple__band--work .temple__pull,
 body.is-ceremony.try-instrument .temple__pull { color: var(--t-ink); }
+
+/* ==========================================================================
+   SOLID BUTTONS (2026-09-10). Her call: the site is already luminous, so the
+   buttons should feel grounded: a solid gold pill at rest, and on hover the
+   fill drops away to an outline. No glow, no sheen, no lift. Overrides the
+   TALISMANS block above with the same selectors, later in the file.
+   ========================================================================== */
+html body .btn-enter,
+html body .connect__send,
+html body.is-ceremony .temple__book,
+html body.is-temple-light .temple__book,
+html body.is-daniel .dan__btn,
+html body.is-daniel .dan__btn--fill,
+html body.is-daniel .cosmos__btn,
+html body .trailer__out,
+html body .filmframe__watch,
+html body #sunset .btn-enter,
+html body .film__cta .btn-enter {
+  --tal-solid: #c9a84c;
+  --tal-hover-ink: #121110;
+  background: var(--tal-solid);
+  border: 1px solid var(--tal-solid);
+  color: #1a1408;
+  box-shadow: none;
+  transform: none;
+  animation: none;
+  transition: background-color .35s var(--ease), color .35s var(--ease), border-color .35s var(--ease);
+}
+html body .btn-enter:hover, html body .btn-enter:focus-visible,
+html body .connect__send:hover, html body .connect__send:focus-visible,
+html body.is-ceremony .temple__book:hover, html body.is-ceremony .temple__book:focus-visible,
+html body.is-temple-light .temple__book:hover, html body.is-temple-light .temple__book:focus-visible,
+html body.is-daniel .dan__btn:hover, html body.is-daniel .dan__btn:focus-visible,
+html body.is-daniel .dan__btn--fill:hover, html body.is-daniel .dan__btn--fill:focus-visible,
+html body.is-daniel .cosmos__btn:hover, html body.is-daniel .cosmos__btn:focus-visible,
+html body .trailer__out:hover, html body .trailer__out:focus-visible,
+html body #sunset .btn-enter:hover, html body #sunset .btn-enter:focus-visible,
+html body .film__cta .btn-enter:hover, html body .film__cta .btn-enter:focus-visible {
+  background: transparent;
+  border-color: var(--tal-solid);
+  color: var(--tal-hover-ink);
+  box-shadow: none;
+  transform: none;
+  animation: none;
+}
+html body .btn-enter:active,
+html body .connect__send:active,
+html body.is-ceremony .temple__book:active,
+html body.is-temple-light .temple__book:active,
+html body.is-daniel .dan__btn:active,
+html body.is-daniel .dan__btn--fill:active,
+html body.is-daniel .cosmos__btn:active,
+html body .trailer__out:active {
+  background: color-mix(in oklab, var(--tal-solid), #000 14%);
+  border-color: color-mix(in oklab, var(--tal-solid), #000 14%);
+  color: #1a1408;
+  transform: none;
+  box-shadow: none;
+}
+/* dark grounds: a lighter gold, and the outline's text goes cream */
+html body .becoming__text .btn-enter,
+html body .collab__inner .btn-enter,
+html body.is-daniel .dan__btn,
+html body.is-daniel .dan__btn--fill,
+html body .trailer__out,
+html body .filmframe__watch { --tal-solid: #e2b866; --tal-hover-ink: #fff1d6; }
+/* the ceremony page keeps her marigold */
+html body.is-ceremony .temple__book,
+html body.is-temple-light .temple__book { --tal-solid: #ffca2c; }
+html body .filmframe__watch { background: rgba(226,184,102,.92); }
