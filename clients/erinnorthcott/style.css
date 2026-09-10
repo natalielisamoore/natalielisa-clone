@@ -6286,3 +6286,46 @@ body.is-ceremony .temple__band--drift { overflow-x: clip; }
   body.is-ceremony .depth { width: min(100% - 2rem, 560px); }
   body.is-ceremony .depth__card { min-width: 0; max-width: 100%; }
 }
+
+/* ==========================================================================
+   FROM THE AUDIENCE (2026-09-10): a band of its own under The Film. Six
+   reviews she sent, five gold stars over each, Archivo italic on night cards
+   with the chapter cards' thin rule. Three across, two, then one.
+   ========================================================================== */
+body.is-daniel .dan__reviews { border-top: 0; padding-top: clamp(1rem, 3vh, 2rem); }
+body.is-daniel .dan__reviewshead { text-align: center; margin-bottom: clamp(1.8rem, 4vh, 2.8rem); }
+body.is-daniel .dan__reviewgrid {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  width: min(100%, 1180px);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1rem, 2vw, 1.6rem);
+  align-items: start;
+}
+body.is-daniel .dan__review {
+  margin: 0;
+  padding: clamp(1.4rem, 2.4vw, 2rem) clamp(1.3rem, 2.2vw, 1.8rem);
+  background: rgba(13,19,39,.72);
+  border: 1px solid rgba(246,235,223,.12);
+  border-radius: 6px;
+}
+body.is-daniel .dan__stars {
+  display: block;
+  font-size: .82rem;
+  letter-spacing: .22em;
+  color: var(--d-gold);
+  text-shadow: 0 0 10px rgba(226,184,102,.35);
+}
+body.is-daniel .dan__review p {
+  margin: .7rem 0 0;
+  font-family: var(--body);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(.98rem, 1.1vw, 1.06rem);
+  line-height: 1.75;
+  color: var(--d-ink);
+}
+@media (max-width: 960px) { body.is-daniel .dan__reviewgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) { body.is-daniel .dan__reviewgrid { grid-template-columns: minmax(0, 1fr); } }
