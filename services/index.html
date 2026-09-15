@@ -338,6 +338,85 @@ body {
   margin-top: 2.2em;
 }
 
+/* ---------- testimonial slider ----------
+   Same behaviour as the /activate slider: arrows sit in their own grid
+   columns so they never cover the card; slides stack in one grid cell. */
+.svc-love { padding-top: 6em; }
+.svc-slider {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: 1.6em;
+}
+.svc-slider-track { grid-column: 2; grid-row: 1; display: grid; }
+.svc-slide {
+  /* style.css gives blockquote a fixed 18px size, which the em type would multiply */
+  font-size: inherit;
+  line-height: normal;
+  margin: 0;
+  grid-area: 1 / 1;
+  border: 1px solid var(--svc-line);
+  border-radius: var(--svc-radius);
+  background-color: var(--ivory);
+  border-top: .55em solid var(--svc-accent, var(--lavender));
+  padding: 3em 3.5em;
+  text-align: center;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity .6s ease, transform .6s ease, visibility .6s;
+}
+.svc-slide.is-active { opacity: 1; visibility: visible; transform: none; }
+.svc-slide p {
+  font-family: 'Otminiature Webfont Italic', 'Ppneuemontreal Book', 'PP Neue Montreal', serif;
+  font-style: italic;
+  font-size: 1.7em;
+  line-height: 1.45em;
+  max-width: 36em;
+  margin: 0 auto 1.2em;
+  text-wrap: pretty;
+}
+.svc-slide-name {
+  font-family: 'Ppneuemontreal Book', 'PP Neue Montreal', sans-serif;
+  font-size: 1em;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.svc-slider-arrow {
+  grid-row: 1;
+  display: grid;
+  place-items: center;
+  width: clamp(38px, 3.4vw, 50px);
+  height: clamp(38px, 3.4vw, 50px);
+  padding: 0;
+  border: 1px solid var(--svc-line);
+  border-radius: 50%;
+  background-color: var(--chartuese);
+  color: #000;
+  cursor: pointer;
+  transition: background-color .3s ease;
+}
+.svc-slider-arrow:hover, .svc-slider-arrow:focus-visible { background-color: var(--lavender); }
+.svc-slider-arrow.is-prev { grid-column: 1; }
+.svc-slider-arrow.is-next { grid-column: 3; }
+.svc-slider-dots {
+  grid-column: 1 / -1; grid-row: 2;
+  display: flex; gap: .6rem; justify-content: center;
+  margin-top: 1.6em;
+}
+.svc-slider-dots button {
+  width: 11px; height: 11px; padding: 0;
+  border: 1px solid var(--svc-line); border-radius: 50%;
+  background: transparent; cursor: pointer;
+  transition: background-color .3s ease;
+}
+.svc-slider-dots button[aria-selected="true"] { background-color: #000; }
+
+/* two closing buttons side by side */
+.svc-btn-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 1em; margin: .4em 0 1.4em; }
+.svc-btn-row .svc-btn { margin: 0; }
+.svc-btn--ghost { background-color: transparent; color: #000; }
+
 /* ---------- FAQ ---------- */
 .svc-faq { padding-top: 6em; }
 .svc-faq-list {
@@ -431,7 +510,7 @@ body {
   margin-top: 6em;
 }
 .svc-closing .svc-sec-head { margin-bottom: .3em; }
-.svc-closing .svc-btn { margin: .4em 0 1.4em; }
+
 .svc-closing p {
   font-family: 'Ppneuemontreal Book', 'PP Neue Montreal', sans-serif;
   font-size: 1.6em;
@@ -479,6 +558,9 @@ body {
   .svc-step h3 { font-size: 2.8em; }
   .svc-step p { font-size: 2em; }
   .svc-closing p { font-size: 2.4em; }
+  .svc-slide p { font-size: 2.5em; }
+  .svc-slide-name { font-size: 1.7em; }
+  .svc-slide { padding: 2.6em 2.4em; }
 }
 
 /* ---------- phone ---------- */
@@ -513,6 +595,15 @@ body {
   .svc-step h3 { font-size: 5.4em; }
   .svc-step p { font-size: 3.9em; }
   .svc-closing p { font-size: 4.6em; }
+  .svc-slider { grid-template-columns: 1fr; row-gap: 1em; }
+  .svc-slider-track { grid-column: 1; }
+  .svc-slider-arrow { grid-row: 2; }
+  .svc-slider-arrow.is-prev { grid-column: 1; justify-self: start; }
+  .svc-slider-arrow.is-next { grid-column: 1; justify-self: end; }
+  .svc-slider-dots { grid-column: 1; grid-row: 2; align-self: center; margin-top: 0; }
+  .svc-slide { padding: 2.4em 1.8em; }
+  .svc-slide p { font-size: 4.3em; }
+  .svc-slide-name { font-size: 3.2em; }
 }
 </style>
 </head><body class="body-2">
@@ -758,6 +849,48 @@ body {
     <p class="svc-deposit">A 50% deposit books your spot. The balance is due before final files.</p>
   </section>
 
+  <!-- ══════════ TESTIMONIALS ══════════ -->
+  <section class="svc-love">
+    <h2 class="svc-sec-head">Kind <span class="svc-swash">words</span></h2>
+    <div class="svc-slider" data-interval="7000">
+      <div class="svc-slider-track" role="region" aria-label="Client testimonials" aria-live="polite">
+
+        <blockquote class="svc-slide" style="--svc-accent: var(--chartuese);">
+          <p>&ldquo;We feel like we won the lottery finding Natalie! As new business owners, the process felt daunting, but she immediately put us at ease. She got to know our values, wishes, and vision, then wove it all into something elegant, accessible, and truly beautiful.&rdquo;</p>
+          <span class="svc-slide-name">Nicolas &amp; Amei &middot; Willow Loft</span>
+        </blockquote>
+
+        <blockquote class="svc-slide" style="--svc-accent: var(--lavender);">
+          <p>&ldquo;It was such a beautiful, in depth, personal, soulful creative experience. She is edgy and brilliant, present, passionate and sophisticated. She worked with me to extract the jewels, and transformed my ideas into something so edgy, elegant and so me.&rdquo;</p>
+          <span class="svc-slide-name">Qristine &middot; Neon Soul</span>
+        </blockquote>
+
+        <blockquote class="svc-slide" style="--svc-accent: var(--coral);">
+          <p>&ldquo;Initially hesitant to delegate such personal aspects of my business, I was pleasantly surprised by how she captured and embodied my values and vision into the design. The collaboration was effortless and rewarding.&rdquo;</p>
+          <span class="svc-slide-name">Kandra &middot; Kandra Alaya</span>
+        </blockquote>
+
+        <blockquote class="svc-slide" style="--svc-accent: var(--pink);">
+          <p>&ldquo;The impact of her work on my business has been profound; clients frequently commend the quality and user-friendliness of the website.&rdquo;</p>
+          <span class="svc-slide-name">Caroline &middot; Flow Brain Health</span>
+        </blockquote>
+
+        <blockquote class="svc-slide" style="--svc-accent: var(--light-pink);">
+          <p>&ldquo;A beautiful co-creation where I felt like she really took into account my needs and desires, and used her amazing gifts to create an identity for my brand that really represents who I am.&rdquo;</p>
+          <span class="svc-slide-name">Brand identity client</span>
+        </blockquote>
+
+      </div>
+      <button class="svc-slider-arrow is-prev" type="button" aria-label="Previous testimonial">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="10,3 5,8 10,13"/></svg>
+      </button>
+      <button class="svc-slider-arrow is-next" type="button" aria-label="Next testimonial">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="6,3 11,8 6,13"/></svg>
+      </button>
+      <div class="svc-slider-dots" role="tablist" aria-label="Choose a testimonial"></div>
+    </div>
+  </section>
+
   <!-- ══════════ FAQ ══════════ -->
   <section class="svc-faq">
     <h2 class="svc-sec-head">FAQ</h2>
@@ -809,7 +942,10 @@ body {
   <!-- ══════════ CLOSING CTA ══════════ -->
   <section class="svc-closing">
     <h2 class="svc-sec-head">Ready when <span class="svc-swash">you are.</span></h2>
-    <a href="../contact/?service=discovery-call" class="svc-btn">BOOK YOUR FREE DISCOVERY CALL</a>
+    <div class="svc-btn-row">
+      <a href="../contact/?service=discovery-call" class="svc-btn">BOOK A DISCOVERY CALL</a>
+      <a href="../contact/?service=work-with-me" class="svc-btn svc-btn--ghost">WORK WITH ME</a>
+    </div>
     <p>I take on a limited number of projects at a time so every client receives my full creative attention.</p>
   </section>
 
@@ -836,6 +972,43 @@ body {
       a.style.maxHeight = a.scrollHeight + 'px';
     });
   });
+})();
+</script>
+<script>
+/* Auto-advancing testimonial slider. Pauses on hover/focus and for reduced motion. */
+(function () {
+  var root = document.querySelector('.svc-slider');
+  if (!root) return;
+  var slides = [].slice.call(root.querySelectorAll('.svc-slide'));
+  var dots = root.querySelector('.svc-slider-dots');
+  var delay = parseInt(root.getAttribute('data-interval'), 10) || 7000;
+  var i = 0, timer = null;
+  var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  slides.forEach(function (s, n) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.setAttribute('role', 'tab');
+    b.setAttribute('aria-label', 'Testimonial ' + (n + 1));
+    b.addEventListener('click', function () { show(n); restart(); });
+    dots.appendChild(b);
+  });
+  var buttons = [].slice.call(dots.children);
+  function show(n) {
+    i = (n + slides.length) % slides.length;
+    slides.forEach(function (s, k) { s.classList.toggle('is-active', k === i); });
+    buttons.forEach(function (b, k) { b.setAttribute('aria-selected', k === i ? 'true' : 'false'); });
+  }
+  function start() { if (!still) timer = setInterval(function () { show(i + 1); }, delay); }
+  function stop() { clearInterval(timer); }
+  function restart() { stop(); start(); }
+  root.querySelector('.is-prev').addEventListener('click', function () { show(i - 1); restart(); });
+  root.querySelector('.is-next').addEventListener('click', function () { show(i + 1); restart(); });
+  show(0);
+  start();
+  root.addEventListener('mouseenter', stop);
+  root.addEventListener('mouseleave', start);
+  root.addEventListener('focusin', stop);
+  root.addEventListener('focusout', start);
 })();
 </script>
 <script src="../menu.js" type="text/javascript"></script>
