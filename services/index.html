@@ -338,6 +338,31 @@ body {
   margin-top: 2.2em;
 }
 
+/* ---------- brand examples: square flipbook ----------
+   All ten images are stacked and loaded up front, and the script swaps the
+   visible one with no fade, so it reads as a quick flick rather than a slideshow. */
+.svc-examples { padding-top: 6em; }
+.svc-flick {
+  position: relative;
+  width: 38em;
+  max-width: 100%;
+  aspect-ratio: 1 / 1;
+  margin: 0 auto;
+  border: 1px solid var(--svc-line);
+  border-radius: var(--svc-radius);
+  overflow: hidden;
+  background-color: var(--ivory);
+}
+.svc-flick img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+}
+.svc-flick img.is-on { opacity: 1; }
+
 /* ---------- testimonial slider ----------
    Same behaviour as the /activate slider: arrows sit in their own grid
    columns so they never cover the card; slides stack in one grid cell. */
@@ -558,6 +583,7 @@ body {
   .svc-step h3 { font-size: 2.8em; }
   .svc-step p { font-size: 2em; }
   .svc-closing p { font-size: 2.4em; }
+  .svc-flick { width: 62em; }
   .svc-slide p { font-size: 2.5em; }
   .svc-slide-name { font-size: 1.7em; }
   .svc-slide { padding: 2.6em 2.4em; }
@@ -601,6 +627,7 @@ body {
   .svc-slider-arrow.is-prev { grid-column: 1; justify-self: start; }
   .svc-slider-arrow.is-next { grid-column: 1; justify-self: end; }
   .svc-slider-dots { grid-column: 1; grid-row: 2; align-self: center; margin-top: 0; }
+  .svc-flick { width: 100%; }
   .svc-slide { padding: 2.4em 1.8em; }
   .svc-slide p { font-size: 4.3em; }
   .svc-slide-name { font-size: 3.2em; }
@@ -845,9 +872,26 @@ body {
     <p class="svc-deposit">A 50% deposit books your spot. The balance is due before final files.</p>
   </section>
 
+  <!-- ══════════ BRAND EXAMPLES ══════════ -->
+  <section class="svc-examples">
+    <h2 class="svc-sec-head">Brand <span class="svc-swash">examples</span></h2>
+    <div class="svc-flick" data-interval="900">
+      <img src="../services-media/services-examples/01-calmunion.jpg" alt="Calmunion angel logo" width="900" height="900" class="is-on"/>
+      <img src="../services-media/services-examples/02-honeybee.jpg" alt="Honeybee illustration" width="900" height="900"/>
+      <img src="../services-media/services-examples/03-muddypaws.jpg" alt="Muddy Paws packaging" width="900" height="900"/>
+      <img src="../services-media/services-examples/04-sheshedtour.jpg" alt="She Shed Tour 2025" width="900" height="900"/>
+      <img src="../services-media/services-examples/05-skintosky.jpg" alt="Skin to Sky business cards" width="900" height="900"/>
+      <img src="../services-media/services-examples/06-flow.jpg" alt="Flow Brain Health letterpress" width="900" height="900"/>
+      <img src="../services-media/services-examples/07-kandra-logo.jpg" alt="Kandra Alaya logo" width="900" height="900"/>
+      <img src="../services-media/services-examples/08-kandra-web.jpg" alt="Kandra Alaya website" width="900" height="900"/>
+      <img src="../services-media/services-examples/09-neonsoul.jpg" alt="Neon Soul website" width="900" height="900"/>
+      <img src="../services-media/services-examples/10-willowloft.jpg" alt="Willow Loft identity" width="900" height="900"/>
+    </div>
+  </section>
+
   <!-- ══════════ TESTIMONIALS ══════════ -->
   <section class="svc-love">
-    <h2 class="svc-sec-head">Client <span class="svc-swash">love</span></h2>
+    <h2 class="svc-sec-head">Client <span class="svc-swash">Love</span></h2>
     <div class="svc-slider" data-interval="7000">
       <div class="svc-slider-track" role="region" aria-label="Client testimonials" aria-live="polite">
 
@@ -943,6 +987,27 @@ body {
       a.style.maxHeight = a.scrollHeight + 'px';
     });
   });
+})();
+</script>
+<script>
+/* Brand examples: flick through the stacked images. Pauses on hover; holds on
+   the first image for anyone who prefers reduced motion. */
+(function () {
+  var box = document.querySelector('.svc-flick');
+  if (!box || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var imgs = [].slice.call(box.querySelectorAll('img'));
+  var delay = parseInt(box.getAttribute('data-interval'), 10) || 900;
+  var i = 0, timer = null;
+  function tick() {
+    imgs[i].classList.remove('is-on');
+    i = (i + 1) % imgs.length;
+    imgs[i].classList.add('is-on');
+  }
+  function start() { if (!timer) timer = setInterval(tick, delay); }
+  function stop() { clearInterval(timer); timer = null; }
+  box.addEventListener('mouseenter', stop);
+  box.addEventListener('mouseleave', start);
+  start();
 })();
 </script>
 <script>
