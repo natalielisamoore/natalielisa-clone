@@ -1,4 +1,4 @@
-<!DOCTYPE html><html data-wf-domain="natalielisa.com" data-wf-site="65c5586c812f9f3723ee3036" lang="en"><head><meta charset="utf-8"/><title>Services | Natalie Lisa Moore</title><meta content="Brand identity, brand photography, and web design for conscious founders. Creative Strategy Sessions, Logo Love, Brand Foundation, Brand Atmosphere, and the full Brand World." name="description"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<!DOCTYPE html><html data-wf-domain="natalielisa.com" data-wf-site="65c5586c812f9f3723ee3036" lang="en"><head><meta charset="utf-8"/><title>Services | Natalie Lisa Moore</title><meta content="Identity, imagery and websites for founders who want every piece to belong together. Spark, Signature, Constellation, Aura, Cosmos and Orbit." name="description"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
 <link href="../fonts.css" rel="stylesheet" type="text/css"/>
 <link href="../style.css" rel="stylesheet" type="text/css"/>
 <link href="../images/66569c76c0de5ae7fa67127a_n-favicon.png" rel="shortcut icon" type="image/x-icon"/>
@@ -95,6 +95,15 @@ body {
   font-size: 1.35em;
   font-weight: 500;
   line-height: 0.8em;
+}
+.svc-hero-intro {
+  color: #000;
+  font-family: 'Ppneuemontreal Book', 'PP Neue Montreal', sans-serif;
+  font-size: 1.25em;
+  line-height: 1.55em;
+  max-width: 40em;
+  margin: 1.4em 0 0;
+  text-wrap: pretty;
 }
 .svc-hero-lead {
   color: #000;
@@ -229,9 +238,55 @@ body {
 
 /* investment block */
 .svc-invest {
-  border-top: 1px solid var(--svc-line);
-  padding-top: 1.1em;
-  margin-bottom: .4em;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .3em 1.2em;
+  margin: -.4em 0 1.8em;
+}
+.svc-invest .svc-meta { margin: 0; }
+.svc-tier-desc, .svc-tier-for { text-wrap: pretty; }
+
+/* testimonial under "who it's for" */
+.svc-quote {
+  border-left: 1px solid var(--svc-line);
+  padding-left: 1.2em;
+  margin-top: 1.8em;
+}
+.svc-quote p {
+  font-family: 'Otminiature Webfont Italic', 'Ppneuemontreal Book', 'PP Neue Montreal', serif;
+  font-style: italic;
+  font-size: 1.4em;
+  line-height: 1.4em;
+  margin: 0;
+  text-wrap: pretty;
+}
+.svc-quote-name {
+  display: block;
+  font-family: 'Ppneuemontreal Book', 'PP Neue Montreal', sans-serif;
+  font-size: .8em;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  margin-top: .7em;
+}
+
+/* hourly strip */
+.svc-hourly {
+  border: 1px solid var(--svc-line);
+  border-radius: var(--svc-radius);
+  padding: 1.8em 3.2em;
+  margin-top: 2.2em;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .4em 2em;
+}
+.svc-hourly .svc-tier-for { flex: 1 1 20em; }
+.svc-deposit {
+  font-family: 'Ppneuemontreal Book', 'PP Neue Montreal', sans-serif;
+  font-size: 1.3em;
+  line-height: 1.5em;
+  margin: 1.6em 0 0;
 }
 .svc-price {
   font-family: 'Ppneuemontreal Book', 'PP Neue Montreal', sans-serif;
@@ -250,7 +305,7 @@ body {
   font-style: italic;
   font-size: 1.1em;
   line-height: 1.45em;
-  margin: .5em 0 0;
+  margin: -.6em 0 0;
 }
 
 /* button — mirrors .workwithme-button, with a per-tier hover fill */
@@ -282,8 +337,6 @@ body {
   padding: 3em 3.2em 3.2em;
   margin-top: 2.2em;
 }
-.svc-expansion .svc-includes { columns: 2; column-gap: 3em; margin-bottom: 1.4em; }
-.svc-expansion .svc-includes li { break-inside: avoid; }
 
 /* ---------- FAQ ---------- */
 .svc-faq { padding-top: 6em; }
@@ -336,7 +389,7 @@ body {
 
 /* ---------- how to book ---------- */
 .svc-book { padding-top: 6em; }
-.svc-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.6em; }
+.svc-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.6em; }
 .svc-step {
   border: 1px solid var(--svc-line);
   border-radius: var(--svc-radius);
@@ -371,8 +424,10 @@ body {
   background-color: var(--lavender);
   text-align: center;
   padding: 3.5em 2em 3em;
-  margin-top: 2.2em;
+  margin-top: 6em;
 }
+.svc-closing .svc-sec-head { margin-bottom: .3em; }
+.svc-closing .svc-btn { margin: .4em 0 1.4em; }
 .svc-closing p {
   font-family: 'Ppneuemontreal Book', 'PP Neue Montreal', sans-serif;
   font-size: 1.6em;
@@ -396,12 +451,16 @@ body {
   .svc-hero { padding: 2.5em 0 3em; }
   .svc-hero-title { font-size: 6.4em; }
   .svc-hero-lead { font-size: 2.3em; }
+  .svc-hero-intro { font-size: 2em; }
+  .svc-quote p { font-size: 2.2em; }
+  .svc-deposit { font-size: 2em; }
+  .svc-hourly { padding: 2em 2.4em; }
   .svc-sec-head { font-size: 5.4em; }
   .svc-sec-sub { font-size: 2.2em; }
   .svc-tier { padding: 2.6em 2.4em 2.8em; }
   .svc-tier-head { flex-wrap: wrap; }
   .svc-tier-name { font-size: 4em; }
-  .svc-tier-sub { font-size: 4.3em; margin-left: 0; padding-left: 0; width: 100%; white-space: normal; }
+  .svc-tier-sub { font-size: 4.3em; margin-left: 0; padding-left: 0; width: 100%; }
   .svc-tier-num { font-size: 2em; }
   .svc-tier-body { grid-template-columns: 1fr; gap: 2em; }
   .svc-tier-desc { font-size: 2.2em; }
@@ -409,10 +468,9 @@ body {
   .svc-price { font-size: 2.9em; }
   .svc-meta, .svc-credit { font-size: 1.8em; }
   .svc-btn { font-size: 1.9em; }
-  .svc-expansion .svc-includes { columns: 1; }
   .svc-faq-trigger { font-size: 2.4em; }
   .svc-faq-answer p { font-size: 2em; }
-  .svc-steps { grid-template-columns: 1fr; }
+  .svc-steps { grid-template-columns: 1fr 1fr; }
   .svc-step-num { font-size: 5.2em; }
   .svc-step h3 { font-size: 2.8em; }
   .svc-step p { font-size: 2em; }
@@ -429,6 +487,11 @@ body {
   .svc-hero { padding: 2em 0 2.5em; }
   .svc-hero-title { font-size: 9.2em; }
   .svc-hero-lead { font-size: 4.4em; }
+  .svc-hero-intro { font-size: 3.9em; }
+  .svc-quote p { font-size: 4.2em; }
+  .svc-deposit { font-size: 3.9em; }
+  .svc-hourly { padding: 2em 1.8em; }
+  .svc-steps { grid-template-columns: 1fr; }
   .svc-sec-head { font-size: 8.5em; }
   .svc-sec-sub { font-size: 4.2em; }
   .svc-tier { padding: 2.2em 1.8em 2.4em; }
@@ -461,177 +524,234 @@ body {
 
   <!-- ══════════ HERO ══════════ -->
   <section class="svc-hero">
-    <h1 class="svc-hero-title">Enter a world where your brand becomes <span class="svc-swash">fully, unmistakably you.</span></h1>
-    <p class="svc-hero-lead">Every brand is experienced in layers — the identity that grounds it, the atmosphere that surrounds it, and the world it inhabits. My offerings are designed to meet you exactly where you are, whether you&#x27;re just beginning or ready for the full vision.</p>
+    <h1 class="svc-hero-title">Brands that feel <span class="svc-swash">like you.</span></h1>
+    <p class="svc-hero-lead">Identity, imagery and websites for founders who want every piece to belong together.</p>
+    <p class="svc-hero-intro">A brand is more than a logo. It&#x27;s the first impression, the mood people pick up on, and the space they step into when they find you. I design all three, so nothing feels bolted on.</p>
   </section>
 
   <!-- ══════════ TIERS ══════════ -->
   <section class="svc-tiers">
 
-    <!-- 01 — Creative Strategy Session -->
+    <!-- 01 · Spark -->
     <article class="svc-tier" style="--svc-accent: var(--butter);">
       <div class="svc-tier-head">
         <div class="svc-tier-num">01</div>
-        <h2 class="svc-tier-name">Creative Strategy Session</h2>
-        <div class="svc-tier-sub">Clarity Before Creation</div>
+        <h2 class="svc-tier-name">Spark</h2>
+        <div class="svc-tier-sub">Strategy Session</div>
+      </div>
+      <div class="svc-invest">
+        <p class="svc-price">$300</p>
+        <p class="svc-meta">90 minutes, online</p>
       </div>
       <div class="svc-tier-body">
         <div>
-          <p class="svc-tier-desc">A focused 90-minute deep dive into your brand, digital presence, or creative direction. Structured, intentional thinking time with someone who knows how to ask the right questions and see what others miss.</p>
-          <p class="svc-tier-for"><span class="svc-label">Who it&#x27;s for</span>Founders who need clarity before committing to a full project — or anyone feeling stuck and ready for direction.</p>
+          <p class="svc-tier-desc">A focused session to get clear on your story, your next move, and how your brand should feel. Sometimes you don&#x27;t need a whole project. You need someone to ask the right questions and help you see what&#x27;s already there. You leave with direction you can act on right away.</p>
+          <p class="svc-tier-for"><span class="svc-label">Who it&#x27;s for</span>Founders who need clarity before committing to a full project, or anyone feeling stuck and unsure what their brand should look like next.</p>
+          <div class="svc-quote"><p>&ldquo;She worked with me to extract the jewels.&rdquo;</p><span class="svc-quote-name">Qristine Hrvatin</span></div>
         </div>
         <div>
+          <span class="svc-label">Includes</span>
           <ul class="svc-includes">
-            <li>90-minute recorded session</li>
-            <li>Written summary of insights and recommendations</li>
-            <li>A clear creative roadmap — whether that&#x27;s with me or on your own</li>
+            <li>Pre-session questionnaire</li>
+            <li>90-minute 1:1 call</li>
+            <li>Brand and business read</li>
+            <li>Clear next steps</li>
+            <li>$300 credit toward any package</li>
           </ul>
-          <div class="svc-invest">
-            <p class="svc-price">$300</p>
-            <p class="svc-credit">Applied as credit toward any package within 30 days.</p>
-          </div>
-          <a href="../contact/?service=strategy-session" class="svc-btn">BOOK A SESSION</a>
+          <a href="../contact/?service=spark" class="svc-btn">BOOK YOUR SESSION</a>
         </div>
       </div>
     </article>
 
-    <!-- 02 — Logo Love -->
+    <!-- 02 · Signature -->
     <article class="svc-tier" style="--svc-accent: var(--lavender);">
       <div class="svc-tier-head">
         <div class="svc-tier-num">02</div>
-        <h2 class="svc-tier-name">Logo Love</h2>
-        <div class="svc-tier-sub">A Single, Considered Mark</div>
+        <h2 class="svc-tier-name">Signature</h2>
+        <div class="svc-tier-sub">Logo Design</div>
+      </div>
+      <div class="svc-invest">
+        <p class="svc-price">From $800</p>
+        <p class="svc-meta">1&ndash;2 weeks</p>
       </div>
       <div class="svc-tier-body">
         <div>
-          <p class="svc-tier-desc">Sometimes you just need a beautiful logo. One crafted mark that captures your essence — made with the same intentionality and care as a full identity.</p>
-          <p class="svc-tier-for"><span class="svc-label">Who it&#x27;s for</span>Founders with clear brand direction who need a stunning logo to anchor it.</p>
+          <p class="svc-tier-desc">One strong, custom mark for when you need something that works now. A logo is the smallest piece of a brand and often the hardest to get right. This is that one thing, made with full attention.</p>
+          <p class="svc-tier-for"><span class="svc-label">Who it&#x27;s for</span>Founders with a clear sense of direction who need one beautiful mark to anchor it, or a business ready to launch without the full identity build.</p>
+          <div class="svc-quote"><p>&ldquo;The most beautiful logo I&#x27;ve ever seen.&rdquo;</p></div>
         </div>
         <div>
+          <span class="svc-label">Includes</span>
           <ul class="svc-includes">
-            <li>Primary logo design</li>
-            <li>Submark version</li>
-            <li>Colour palette (up to 3 colours)</li>
-            <li>Font pairing recommendation</li>
-            <li>Final files in all formats</li>
+            <li>One refined logo concept</li>
             <li>2 rounds of revisions</li>
+            <li>Primary + alternate logo</li>
+            <li>Files for print and web</li>
           </ul>
-          <div class="svc-invest">
-            <p class="svc-price">Starting at $800</p>
-            <p class="svc-meta">Timeline: 1–2 weeks</p>
-            <p class="svc-credit">Applied as credit toward Brand Foundation when you&#x27;re ready for more.</p>
-          </div>
-          <a href="../contact/?service=logo-love" class="svc-btn">BEGIN INQUIRY</a>
+          <p class="svc-credit">Applied as credit toward Constellation when you&#x27;re ready for more.</p>
+          <a href="../contact/?service=signature" class="svc-btn">START YOUR LOGO</a>
         </div>
       </div>
     </article>
 
-    <!-- 03 — Brand Foundation -->
+    <!-- 03 · Constellation -->
     <article class="svc-tier" style="--svc-accent: var(--chartuese);">
       <div class="svc-tier-head">
         <div class="svc-tier-num">03</div>
-        <h2 class="svc-tier-name">Brand Foundation</h2>
-        <div class="svc-tier-sub">Refined Identity</div>
+        <h2 class="svc-tier-name">Constellation</h2>
+        <div class="svc-tier-sub">Brand Identity</div>
+      </div>
+      <div class="svc-invest">
+        <p class="svc-price">From $2,500</p>
+        <p class="svc-meta">2&ndash;4 weeks · Payment plans available</p>
       </div>
       <div class="svc-tier-body">
         <div>
-          <p class="svc-tier-desc">The visual bedrock of your brand. A cohesive identity that captures your essence, communicates your values, and grows with you.</p>
-          <p class="svc-tier-for"><span class="svc-label">Who it&#x27;s for</span>Emerging businesses and conscious founders ready to show up with intention from the very beginning.</p>
+          <p class="svc-tier-desc">The core of your brand, built to last. Individual pieces (logo, colour, type, voice) arranged into one recognizable whole, so everything you make from here already belongs together.</p>
+          <p class="svc-tier-for"><span class="svc-label">Who it&#x27;s for</span>New and growing businesses who want to start out looking like themselves, with everything they need to show up consistently from day one.</p>
+          <div class="svc-quote"><p>&ldquo;You understood the essence.&rdquo;</p></div>
         </div>
         <div>
+          <span class="svc-label">Includes</span>
           <ul class="svc-includes">
             <li>Custom logo suite</li>
-            <li>Typography &amp; colour palette</li>
-            <li>Core brand guidelines</li>
-            <li>Essential marketing materials</li>
+            <li>Colour palette + typography</li>
+            <li>Brand guidelines</li>
+            <li>Key marketing pieces</li>
             <li>Social media graphics</li>
           </ul>
-          <div class="svc-invest">
-            <p class="svc-price">Starting at $2,500</p>
-            <p class="svc-meta">Payment plans available · Timeline: 2–4 weeks</p>
-          </div>
-          <a href="../contact/?service=brand-foundation" class="svc-btn">BEGIN INQUIRY</a>
+          <a href="../work/" class="svc-btn">VIEW BRANDING</a>
         </div>
       </div>
     </article>
 
-    <!-- 04 — Brand Atmosphere -->
+    <!-- 04 · Aura -->
     <article class="svc-tier" style="--svc-accent: var(--coral);">
       <div class="svc-tier-head">
         <div class="svc-tier-num">04</div>
-        <h2 class="svc-tier-name">Brand Atmosphere</h2>
-        <div class="svc-tier-sub">Embodied Expression</div>
+        <h2 class="svc-tier-name">Aura</h2>
+        <div class="svc-tier-sub">Brand Photography</div>
+      </div>
+      <div class="svc-invest">
+        <p class="svc-price">From $950</p>
+        <p class="svc-meta">Payment plans available</p>
       </div>
       <div class="svc-tier-body">
         <div>
-          <p class="svc-tier-desc">Brand photography that brings the feeling of your brand to life — the mood, the texture, the world behind the work.</p>
-          <p class="svc-tier-for"><span class="svc-label">Who it&#x27;s for</span>Founders who want imagery that conveys depth, soul, and the felt essence of what they do.</p>
+          <p class="svc-tier-desc">The mood around your brand. Creative direction and imagery that show what your work feels like, not just what it looks like: the texture, the light, the world behind the work.</p>
+          <p class="svc-tier-for"><span class="svc-label">Who it&#x27;s for</span>Founders whose work is felt as much as seen. Practitioners, makers, and creatives who need imagery with depth and soul rather than stock-photo polish.</p>
+          <div class="svc-quote"><p>&ldquo;Her attention to detail plus devotion to design is inspired.&rdquo;</p><span class="svc-quote-name">Qristine Hrvatin</span></div>
         </div>
         <div>
+          <span class="svc-label">Includes</span>
           <ul class="svc-includes">
             <li>Creative direction</li>
             <li>Styling guidance</li>
-            <li>Professional photography session</li>
-            <li>Post-production editing</li>
-            <li>Imagery for website, social, and marketing</li>
+            <li>Photography session</li>
+            <li>Editing</li>
+            <li>A bank of visuals for your website, social and launches</li>
           </ul>
-          <div class="svc-invest">
-            <p class="svc-price">Starting at $950</p>
-            <p class="svc-meta">Payment plans available · Timeline: 1–2 weeks</p>
-          </div>
-          <a href="../contact/?service=brand-atmosphere" class="svc-btn">BEGIN INQUIRY</a>
+          <a href="../work/" class="svc-btn">VIEW IMAGERY</a>
         </div>
       </div>
     </article>
 
-    <!-- 05 — Brand World -->
+    <!-- 05 · Cosmos -->
     <article class="svc-tier svc-tier--flagship" style="--svc-accent: var(--pink);">
       <div class="svc-tier-head">
         <div class="svc-tier-num">05</div>
-        <h2 class="svc-tier-name">Brand World</h2>
-        <div class="svc-tier-sub">Integrated Presence</div>
+        <h2 class="svc-tier-name">Cosmos</h2>
+        <div class="svc-tier-sub">Complete Brand &amp; Website</div>
+      </div>
+      <div class="svc-invest">
+        <p class="svc-price">From $6,000</p>
+        <p class="svc-meta">3&ndash;5 months · Payment plans available</p>
       </div>
       <div class="svc-tier-body">
         <div>
-          <p class="svc-tier-desc">The full vision. A complete journey weaving identity, atmosphere, and digital presence into one cohesive, luminous whole. This is the deepest way to work with me.</p>
-          <p class="svc-tier-for"><span class="svc-label">Who it&#x27;s for</span>Founders and creatives ready for complete coherence across every touchpoint of their brand.</p>
+          <p class="svc-tier-desc">Everything, designed together. Your identity, your imagery and your website, all speaking the same language. This is the deepest way to work with me, and the only way to get a brand where nothing feels bolted on.</p>
+          <p class="svc-tier-for"><span class="svc-label">Who it&#x27;s for</span>Founders ready for complete coherence, when the identity, the imagery and the website all need to speak the same language, and you want one person holding the whole vision.</p>
+          <div class="svc-quote"><p>&ldquo;It&#x27;s the most beautiful website I&#x27;ve ever seen!&rdquo;</p></div>
         </div>
         <div>
+          <span class="svc-label">Includes</span>
           <ul class="svc-includes">
-            <li>Brand Foundation — full identity</li>
-            <li>Brand Atmosphere — photography</li>
+            <li>Constellation: full identity</li>
+            <li>Aura: brand imagery</li>
             <li>Custom website design &amp; development</li>
-            <li>Strategy &amp; creative direction across all layers</li>
+            <li>Strategy + creative direction throughout</li>
           </ul>
-          <div class="svc-invest">
-            <p class="svc-price">Starting at $7,500</p>
-            <p class="svc-meta">Payment plans available · Timeline: 3–5 months</p>
-          </div>
-          <a href="../contact/?service=brand-world" class="svc-btn">BEGIN INQUIRY</a>
+          <a href="../contact/?service=cosmos" class="svc-btn">BOOK YOUR PROJECT</a>
         </div>
       </div>
     </article>
 
   </section>
 
-  <!-- ══════════ BRAND EXPANSION ══════════ -->
+  <!-- ══════════ ORBIT ══════════ -->
   <section class="svc-expansion">
     <div class="svc-tier-head">
-      <h2 class="svc-tier-name">Brand Expansion</h2>
-      <div class="svc-tier-sub">Optional Enhancements</div>
+      <h2 class="svc-tier-name">Orbit</h2>
+      <div class="svc-tier-sub">Expansions</div>
     </div>
-    <p class="svc-tier-desc">Thoughtful additions for brands ready to go deeper — the details that make a visual world complete.</p>
-    <ul class="svc-includes">
-      <li>Packaging &amp; print design</li>
-      <li>Illustration systems</li>
-      <li>Campaign direction</li>
-      <li>Merchandise design</li>
-      <li>Custom paintings</li>
-    </ul>
     <div class="svc-invest">
-      <p class="svc-price">Custom quote per project</p>
+      <p class="svc-price">Custom quote</p>
     </div>
-    <a href="../contact/?service=brand-expansion" class="svc-btn">BEGIN INQUIRY</a>
+    <div class="svc-tier-body">
+      <div>
+        <p class="svc-tier-desc">For brands ready to grow their world. Once the core exists, everything else becomes possible: packaging, print, campaigns, illustration, and the pieces that only make sense once you know who you are.</p>
+        <p class="svc-tier-for"><span class="svc-label">Who it&#x27;s for</span>Established brands ready to extend their world into new territory.</p>
+        <div class="svc-quote"><p>&ldquo;She understands the energy behind what she is creating, which makes it truly come alive.&rdquo;</p><span class="svc-quote-name">Jasmine Bee</span></div>
+      </div>
+      <div>
+        <span class="svc-label">Includes</span>
+        <ul class="svc-includes">
+          <li>Packaging + print</li>
+          <li>Illustration</li>
+          <li>Campaign direction</li>
+          <li>Editorial design</li>
+          <li>Merchandise</li>
+          <li>Animated logo</li>
+          <li>Custom paintings</li>
+        </ul>
+        <a href="../contact/?service=orbit" class="svc-btn">LET&#x27;S TALK</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ HOURLY ══════════ -->
+  <section class="svc-hourly">
+    <h2 class="svc-tier-name">Hourly</h2>
+    <p class="svc-price">$150/hr</p>
+    <p class="svc-tier-for">For edits, updates, and anything outside agreed scope. Always discussed before proceeding.</p>
+  </section>
+
+  <!-- ══════════ HOW IT WORKS ══════════ -->
+  <section class="svc-book">
+    <h2 class="svc-sec-head">How it <span class="svc-swash">works</span></h2>
+    <div class="svc-steps">
+      <div class="svc-step">
+        <span class="svc-step-num">01</span>
+        <h3>Discover</h3>
+        <p>Fill out the questionnaire, build a moodboard, and we get clear on the vision.</p>
+      </div>
+      <div class="svc-step">
+        <span class="svc-step-num">02</span>
+        <h3>Create</h3>
+        <p>I design your logo and core identity, with rounds of feedback built in.</p>
+      </div>
+      <div class="svc-step">
+        <span class="svc-step-num">03</span>
+        <h3>Expand</h3>
+        <p>We build out the rest: secondary marks, graphics, marketing pieces.</p>
+      </div>
+      <div class="svc-step">
+        <span class="svc-step-num">04</span>
+        <h3>Deliver</h3>
+        <p>You get your full brand kit, ready to use from day one.</p>
+      </div>
+    </div>
+    <p class="svc-deposit">A 50% deposit books your spot. The balance is due before final files.</p>
   </section>
 
   <!-- ══════════ FAQ ══════════ -->
@@ -640,52 +760,53 @@ body {
     <div class="svc-faq-list">
 
       <div class="svc-faq-item">
-        <button class="svc-faq-trigger" type="button">How does your design process work?<span class="svc-faq-icon"></span></button>
-        <div class="svc-faq-answer"><p>Every project follows the same shape. We begin with a conversation about where you are and where you&#x27;re going. That feeds research and direction, where the visual world starts to take form. From there into design, where you see real concepts and we refine them together. And finally delivery — every file you need, plus guidance on using them well. You will never be guessing what happens next: you&#x27;ll know what&#x27;s coming, and when.</p></div>
+        <button class="svc-faq-trigger" type="button">How much does it cost?<span class="svc-faq-icon"></span></button>
+        <div class="svc-faq-answer"><p>Branding starts at $2,500, imagery at $950, and full Cosmos projects at $6,000. Book a free 30-minute discovery call and I&#x27;ll send my full investment guide.</p></div>
       </div>
 
       <div class="svc-faq-item">
         <button class="svc-faq-trigger" type="button">Do you offer payment plans?<span class="svc-faq-icon"></span></button>
-        <div class="svc-faq-answer"><p>Yes — on Brand Foundation, Brand Atmosphere, and Brand World. A deposit secures your place in my calendar, and the balance is spread across the life of the project. We agree the full schedule together before any work begins, so you know exactly what is due and when.</p></div>
+        <div class="svc-faq-answer"><p>Yes. Most packages can be split into smaller payments. Just ask.</p></div>
       </div>
 
       <div class="svc-faq-item">
-        <button class="svc-faq-trigger" type="button">I&#x27;m not sure which offering is right for me.<span class="svc-faq-icon"></span></button>
-        <div class="svc-faq-answer"><p>Then start with a Creative Strategy Session. Ninety minutes, recorded, with a written summary and a clear roadmap afterward — whether that roadmap involves me or not. It&#x27;s $300, and it&#x27;s credited toward any package you book within thirty days. It is the lowest-risk way to find out whether we should work together.</p></div>
+        <button class="svc-faq-trigger" type="button">Can I get just a logo?<span class="svc-faq-icon"></span></button>
+        <div class="svc-faq-answer"><p>Yes, that&#x27;s Signature. If you also need colours, fonts and guidelines, Constellation will serve you better.</p></div>
       </div>
 
       <div class="svc-faq-item">
-        <button class="svc-faq-trigger" type="button">How long does a project take, and when could we start?<span class="svc-faq-icon"></span></button>
-        <div class="svc-faq-answer"><p>Timelines are listed with each offering and run from the day we begin, not the day you enquire. Because I take on a limited number of projects at a time, start dates are usually a few weeks out — so if you have a launch or a season you&#x27;re working toward, tell me early and we&#x27;ll build backward from it.</p></div>
+        <button class="svc-faq-trigger" type="button">Do you design websites?<span class="svc-faq-icon"></span></button>
+        <div class="svc-faq-answer"><p>Yes. I design and build custom websites, usually as part of Cosmos so your site matches everything else. Standalone websites start at $3,000 for clients with an established identity.</p></div>
+      </div>
+
+      <div class="svc-faq-item">
+        <button class="svc-faq-trigger" type="button">What platforms do you build on?<span class="svc-faq-icon"></span></button>
+        <div class="svc-faq-answer"><p>Squarespace for clients who want a familiar, simple backend, or fully custom development for unlimited creative freedom, unique animations, and a site that feels like art. We choose together based on your needs.</p></div>
+      </div>
+
+      <div class="svc-faq-item">
+        <button class="svc-faq-trigger" type="button">Will I be able to edit my own site?<span class="svc-faq-icon"></span></button>
+        <div class="svc-faq-answer"><p>Yes. Every website includes a video walkthrough of your backend. You can also keep me on hand for ongoing edits at $150/hr.</p></div>
+      </div>
+
+      <div class="svc-faq-item">
+        <button class="svc-faq-trigger" type="button">How far ahead should I book?<span class="svc-faq-icon"></span></button>
+        <div class="svc-faq-answer"><p>2&ndash;4 weeks is ideal. Reach out early if you have a launch date.</p></div>
+      </div>
+
+      <div class="svc-faq-item">
+        <button class="svc-faq-trigger" type="button">What if I&#x27;m not sure which package fits?<span class="svc-faq-icon"></span></button>
+        <div class="svc-faq-answer"><p>Start with a Spark session. We&#x27;ll figure it out together, and the $300 goes toward whatever comes next.</p></div>
       </div>
 
     </div>
   </section>
 
-  <!-- ══════════ HOW TO BOOK ══════════ -->
-  <section class="svc-book">
-    <h2 class="svc-sec-head">How to <span class="svc-swash">book</span></h2>
-    <div class="svc-steps">
-      <div class="svc-step">
-        <span class="svc-step-num">01</span>
-        <h3>Inquire</h3>
-        <p>Fill out my inquiry form and tell me about your project.</p>
-      </div>
-      <div class="svc-step">
-        <span class="svc-step-num">02</span>
-        <h3>Discovery Call</h3>
-        <p>We connect for 30 minutes to explore your vision and confirm the fit.</p>
-      </div>
-      <div class="svc-step">
-        <span class="svc-step-num">03</span>
-        <h3>Proposal &amp; Deposit</h3>
-        <p>You receive a custom proposal, contract, and invoice. Deposit secures your project — and then we begin.</p>
-      </div>
-    </div>
-    <div class="svc-closing">
-      <p>I take on a limited number of projects at a time so every client receives my full creative attention. If you feel the pull — reach out.</p>
-      <a href="../contact/?service=general" class="svc-btn">BEGIN INQUIRY</a>
-    </div>
+  <!-- ══════════ CLOSING CTA ══════════ -->
+  <section class="svc-closing">
+    <h2 class="svc-sec-head">Ready when <span class="svc-swash">you are.</span></h2>
+    <a href="../contact/?service=discovery-call" class="svc-btn">BOOK YOUR FREE DISCOVERY CALL</a>
+    <p>I take on a limited number of projects at a time so every client receives my full creative attention.</p>
   </section>
 
 </div>
