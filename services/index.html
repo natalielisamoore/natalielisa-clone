@@ -170,8 +170,10 @@ body {
   overflow: hidden;
   transition: box-shadow .4s ease;
 }
-/* faint pink glow behind the card on hover */
-.svc-tier:hover { box-shadow: 0 0 3.2em .4em rgba(255, 98, 195, .28); }
+/* faint glow behind the card on hover, in the card's own strip colour */
+.svc-tier:hover {
+  box-shadow: 0 0 3.2em .4em color-mix(in srgb, var(--svc-accent, var(--pink)) 55%, transparent);
+}
 @media (prefers-reduced-motion: reduce) { .svc-tier { transition: none; } }
 /* thin accent rule across the top of each card */
 .svc-tier::before {
