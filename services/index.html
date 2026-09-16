@@ -78,19 +78,20 @@ body {
 }
 
 /* ---------- hero ----------
-   Two columns: the copy, and the smile sitting beside it on the right. */
+   Full-width copy, with the smile floating over it on the right. */
 .svc-hero {
   padding: 3em 0 4em;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  column-gap: 4em;
-  align-items: center;
+  position: relative;
 }
 .svc-hero-smile {
-  width: 16em;
-  max-width: 100%;
+  position: absolute;
+  top: 50%;
+  right: 1%;
+  transform: translateY(-50%);
+  width: 17em;
   height: auto;
-  justify-self: end;
+  z-index: 5;
+  pointer-events: none;
 }
 
 .svc-hero-title {
@@ -100,7 +101,7 @@ body {
   font-weight: 400;
   line-height: 1.05em;
   letter-spacing: -0.01em;
-  max-width: 20em;
+  white-space: nowrap;
   margin: 0 0 .6em;
 }
 .svc-swash {
@@ -114,7 +115,7 @@ body {
   font-family: 'Ppneuemontreal Book', 'PP Neue Montreal', sans-serif;
   font-size: 1.25em;
   line-height: 1.55em;
-  max-width: 40em;
+  max-width: 54em;
   margin: 1.4em 0 0;
   text-wrap: pretty;
 }
@@ -124,7 +125,7 @@ body {
   font-size: 1.5em;
   font-weight: 400;
   line-height: 1.45em;
-  max-width: 34em;
+  max-width: 45em;
   margin: 0;
 }
 
@@ -583,9 +584,10 @@ body {
 @media screen and (max-width: 991px) {
   .svc-hero-media { height: 60vh; }
   .svc-main { margin-top: -36vh; }
-  .svc-hero { padding: 2.5em 0 3em; grid-template-columns: 1fr; row-gap: 1.4em; }
-  .svc-hero-smile { width: 13em; justify-self: start; grid-row: 1; }
-  .svc-hero-title { font-size: 6.4em; }
+  /* No room to overlay on a phone, so the smile sits above the headline. */
+  .svc-hero { padding: 2.5em 0 3em; display: flex; flex-direction: column-reverse; align-items: flex-start; }
+  .svc-hero-smile { position: static; transform: none; width: 14em; margin-bottom: .8em; }
+  .svc-hero-title { font-size: 6.4em; white-space: normal; }
   .svc-hero-lead { font-size: 2.3em; }
   .svc-hero-intro { font-size: 2em; }
   .svc-quote p { font-size: 2.2em; }
@@ -629,7 +631,7 @@ body {
   .svc-hero-media { height: 48vh; min-height: 300px; }
   .svc-main { margin-top: -27vh; }
   .svc-hero { padding: 2em 0 2.5em; }
-  .svc-hero-smile { width: 22em; }
+  .svc-hero-smile { width: 24em; }
   .svc-hero-title { font-size: 9.2em; }
   .svc-hero-lead { font-size: 4.4em; }
   .svc-hero-intro { font-size: 3.9em; }
