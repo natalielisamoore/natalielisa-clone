@@ -77,8 +77,21 @@ body {
   pointer-events: none;
 }
 
-/* ---------- hero ---------- */
-.svc-hero { padding: 3em 0 4em; }
+/* ---------- hero ----------
+   Two columns: the copy, and the smile sitting beside it on the right. */
+.svc-hero {
+  padding: 3em 0 4em;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: 4em;
+  align-items: center;
+}
+.svc-hero-smile {
+  width: 16em;
+  max-width: 100%;
+  height: auto;
+  justify-self: end;
+}
 
 .svc-hero-title {
   color: #000;
@@ -570,7 +583,8 @@ body {
 @media screen and (max-width: 991px) {
   .svc-hero-media { height: 60vh; }
   .svc-main { margin-top: -36vh; }
-  .svc-hero { padding: 2.5em 0 3em; }
+  .svc-hero { padding: 2.5em 0 3em; grid-template-columns: 1fr; row-gap: 1.4em; }
+  .svc-hero-smile { width: 13em; justify-self: start; grid-row: 1; }
   .svc-hero-title { font-size: 6.4em; }
   .svc-hero-lead { font-size: 2.3em; }
   .svc-hero-intro { font-size: 2em; }
@@ -615,6 +629,7 @@ body {
   .svc-hero-media { height: 48vh; min-height: 300px; }
   .svc-main { margin-top: -27vh; }
   .svc-hero { padding: 2em 0 2.5em; }
+  .svc-hero-smile { width: 22em; }
   .svc-hero-title { font-size: 9.2em; }
   .svc-hero-lead { font-size: 4.4em; }
   .svc-hero-intro { font-size: 3.9em; }
@@ -664,10 +679,13 @@ body {
 
   <!-- ══════════ HERO ══════════ -->
   <section class="svc-hero">
-    <h1 class="svc-hero-title">Thoughtful design for <span class="svc-swash">intentional brands.</span></h1>
-    <p class="svc-hero-lead">An integrative approach, for visions that need somewhere to land.</p>
-    <p class="svc-hero-intro">A brand is more than a logo. It&#x27;s the first impression, the mood people pick up on, the space they step into when they find you. I design all three, so nothing feels bolted on.</p>
-    <p class="svc-hero-intro">Most people arrive with more than they can explain. A lot of ideas, a lot of feeling, no clear container for any of it. My work is to hold the whole vision while we find its form together.</p>
+    <div class="svc-hero-copy">
+      <h1 class="svc-hero-title">Thoughtful design for <span class="svc-swash">intentional brands.</span></h1>
+      <p class="svc-hero-lead">An integrative approach, for visions that need somewhere to land.</p>
+      <p class="svc-hero-intro">A brand is more than a logo. It&#x27;s the first impression, the mood people pick up on, the space they step into when they find you. I design all three, so nothing feels bolted on.</p>
+      <p class="svc-hero-intro">Most people arrive with more than they can explain. A lot of ideas, a lot of feeling, no clear container for any of it. My work is to hold the whole vision while we find its form together.</p>
+    </div>
+    <img class="svc-hero-smile" src="../services-media/happy-smile.png" alt="" aria-hidden="true" width="640" height="721"/>
   </section>
 
   <!-- ══════════ TIERS ══════════ -->
