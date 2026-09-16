@@ -80,9 +80,16 @@ overflow-x: hidden;
   overflow: visible;
 }
 </style><script type="text/javascript">window.__WEBFLOW_CURRENCY_SETTINGS = {"currencyCode":"CAD","symbol":"$","decimal":".","fractionDigits":2,"group":",","template":"{{wf {\"path\":\"symbol\",\"type\":\"PlainText\"} }} {{wf {\"path\":\"amount\",\"type\":\"CommercePrice\"} }} {{wf {\"path\":\"currencyCode\",\"type\":\"PlainText\"} }}","hideDecimalForWholeNumbers":false};</script><style>
-/* full-width photo under the bio */
-.about-full-img { width: 100%; margin-top: 4em; }
-.about-full-img img { display: block; width: 100%; height: auto; }
+/* the portrait beside the bio */
+.nat-img { background-image: url("../about-media/natalie-headshot3.jpg"); }
+
+/* On phones the Webflow sheet asks for "Trjndavinci Webfont", a family that has
+   no @font-face, so the line fell back to a system font. Same face as desktop. */
+@media screen and (max-width: 479px) {
+  .text-block-67 { font-family: Trjndavinci, Arial, sans-serif; line-height: 1.05; }
+  /* the phone crop is shorter than the portrait, so hold it on her face */
+  .nat-img { background-position: 50% 18% !important; }
+}
 </style>
 </head><body><div data-animation="default" class="navbar1_component w-nav" data-easing2="ease" fs-scrolldisable-element="smart-nav" data-easing="ease" data-collapse="medium" data-w-id="7a5712d2-428a-76c4-82bd-60e573de2251" role="banner" data-duration="400"><div class="navbar1_container"><a href="../" class="navbar1_logo-link w-nav-brand"><img width="210" loading="lazy" alt="" src="../images/nav-logo.svg" class="navbar1_logo"/></a><div class="ham-cart-wrapper"><div data-w-id="7a5712d2-428a-76c4-82bd-60e573de2262" class="hamburber"><div class="burgerline top"></div><div class="burgerline middle"></div><div class="burgerline bottom"></div></div></div></div><div class="blacklinenavigator"></div></div><div class="lines-section" style="height:calc(100vh - 70px);overflow:hidden;">
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" style="position:sticky;top:0;width:100%;height:calc(100vh - 70px);display:block;pointer-events:none;">
@@ -123,7 +130,7 @@ overflow-x: hidden;
   onScroll();
 })();
 </script>
-<div class="w-layout-blockcontainer container-1280 w-container"><div class="about-wrapper"><h2 class="heading-15">About</h2><h1 words-slide-from-right="" text-split="" class="heading-16">Natalie Lisa Moore</h1><div class="aboutwrapper2"><div class="div-block-36"><div class="nat-img"></div></div><div class="div-block-37"><div class="text-block-67">I&#x27;m so happy you&#x27;re <span class="heart-text-span">here.</span><br/></div><p class="paragraph-3">I&#x27;m Natalie, a brand designer and visual artist on Salt Spring Island. I make identities, imagery and websites for people whose work comes from somewhere deep.<br/><br/>Most of my clients arrive with a big vision and no clear container for it. Yoga teachers, herbalists, hypnotherapists, spiritual guides, DJs, makers. My work is to hold the whole picture while we find its form together, so everything you put into the world feels like it came from the same place.<br/><br/>I&#x27;m inspired by nature, art, style and photography. I work collaboratively, intuitively and with curiosity, always looking for the meaning written in the stars.</p></div></div></div></div><div class="about-full-img"><img src="../about-media/natalie-about.jpg" alt="Natalie Lisa Moore" width="2400" height="1580" loading="lazy"/></div><section class="shopart3"><div class="page-wrap"><div class="global-styles"><div class="custom-styles w-embed"><style>
+<div class="w-layout-blockcontainer container-1280 w-container"><div class="about-wrapper"><h2 class="heading-15">About</h2><h1 words-slide-from-right="" text-split="" class="heading-16">Natalie Lisa Moore</h1><div class="aboutwrapper2"><div class="div-block-36"><div class="nat-img"></div></div><div class="div-block-37"><div class="text-block-67">I&#x27;m so happy you&#x27;re <span class="heart-text-span">here.</span><br/></div><p class="paragraph-3">I&#x27;m Natalie, a brand designer and visual artist on Salt Spring Island. I make identities, imagery and websites for people whose work comes from somewhere deep.<br/><br/>Most of my clients arrive with a big vision and no clear container for it. Yoga teachers, herbalists, hypnotherapists, spiritual guides, DJs, makers. My work is to hold the whole picture while we find its form together, so everything you put into the world feels like it came from the same place.<br/><br/>I&#x27;m inspired by nature, art, style and photography. I work collaboratively, intuitively and with curiosity, always looking for the meaning written in the stars.</p></div></div></div></div><section class="shopart3"><div class="page-wrap"><div class="global-styles"><div class="custom-styles w-embed"><style>
 .w-slider-dot.w-active {
 	background: #deff38 !important
 }
