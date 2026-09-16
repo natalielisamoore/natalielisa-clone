@@ -77,6 +77,18 @@ body {
   pointer-events: none;
 }
 
+/* Glass butterfly in the clouds. Sits under the ::after gradient so the photo's
+   fade veils its lower edge the same way it veils the clouds. */
+.svc-hero-butterfly {
+  position: absolute;
+  left: 7%;
+  top: 14%;
+  width: 20em;
+  height: auto;
+  transform: rotate(-6deg);
+  pointer-events: none;
+}
+
 /* ---------- hero ----------
    Full-width copy, with the smile floating over it on the right. */
 .svc-hero {
@@ -674,7 +686,7 @@ body {
 
 <div data-animation="default" class="navbar1_component w-nav" data-easing2="ease" fs-scrolldisable-element="smart-nav" data-easing="ease" data-collapse="medium" role="banner" data-duration="400"><div class="navbar1_container"><a href="../" class="navbar1_logo-link w-nav-brand"><img width="210" loading="lazy" alt="" src="../images/nav-logo.svg" class="navbar1_logo"/></a><div class="ham-cart-wrapper"><div class="hamburber"><div class="burgerline top"></div><div class="burgerline middle"></div><div class="burgerline bottom"></div></div></div></div><div class="blacklinenavigator"></div></div>
 
-<div class="svc-hero-media"></div>
+<div class="svc-hero-media"><img class="svc-hero-butterfly" src="../services-media/glass-butterfly.png" alt="" aria-hidden="true" width="800" height="533"/></div>
 
 <main class="svc-main">
 <div class="svc-wrap">
