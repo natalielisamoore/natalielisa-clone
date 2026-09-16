@@ -77,18 +77,30 @@ body {
   pointer-events: none;
 }
 
+/* Glass butterfly in the clouds. Sits under the ::after gradient so the photo's
+   fade veils its lower edge the same way it veils the clouds. */
+.svc-hero-butterfly {
+  position: absolute;
+  left: 7%;
+  top: 14%;
+  width: 20em;
+  height: auto;
+  transform: rotate(-6deg);
+  pointer-events: none;
+}
+
 /* ---------- hero ----------
    Full-width copy, with the smile floating over it on the right. */
 .svc-hero {
   padding: 3em 0 4em;
   position: relative;
 }
-.svc-hero-butterfly {
+.svc-hero-smile {
   position: absolute;
   top: 50%;
   right: 1%;
   transform: translateY(-50%);
-  width: 24em;
+  width: 17em;
   height: auto;
   z-index: 5;
   pointer-events: none;
@@ -562,16 +574,6 @@ body {
   padding: 3.5em 2em 3em;
   margin-top: 6em;
 }
-.svc-closing { position: relative; }
-.svc-closing-smile {
-  position: absolute;
-  top: 50%;
-  right: 4%;
-  transform: translateY(-50%);
-  width: 11em;
-  height: auto;
-  pointer-events: none;
-}
 .svc-closing .svc-sec-head { margin-bottom: .3em; }
 
 .svc-closing p {
@@ -596,8 +598,7 @@ body {
   .svc-main { margin-top: -36vh; }
   /* No room to overlay on a phone, so the smile sits above the headline. */
   .svc-hero { padding: 2.5em 0 3em; display: flex; flex-direction: column-reverse; align-items: flex-start; }
-  .svc-hero-butterfly { position: static; transform: none; width: 20em; margin-bottom: .8em; }
-  .svc-closing-smile { position: static; transform: none; display: block; width: 15em; margin: 0 auto .6em; }
+  .svc-hero-smile { position: static; transform: none; width: 14em; margin-bottom: .8em; }
   .svc-hero-title { font-size: 6.4em; white-space: normal; }
   .svc-hero-lead { font-size: 2.3em; }
   .svc-hero-intro { font-size: 2em; }
@@ -642,8 +643,7 @@ body {
   .svc-hero-media { height: 48vh; min-height: 300px; }
   .svc-main { margin-top: -27vh; }
   .svc-hero { padding: 2em 0 2.5em; }
-  .svc-hero-butterfly { width: 34em; }
-  .svc-closing-smile { width: 24em; }
+  .svc-hero-smile { width: 24em; }
   .svc-hero-title { font-size: 9.2em; }
   .svc-hero-lead { font-size: 4.4em; }
   .svc-hero-intro { font-size: 3.9em; }
@@ -686,7 +686,7 @@ body {
 
 <div data-animation="default" class="navbar1_component w-nav" data-easing2="ease" fs-scrolldisable-element="smart-nav" data-easing="ease" data-collapse="medium" role="banner" data-duration="400"><div class="navbar1_container"><a href="../" class="navbar1_logo-link w-nav-brand"><img width="210" loading="lazy" alt="" src="../images/nav-logo.svg" class="navbar1_logo"/></a><div class="ham-cart-wrapper"><div class="hamburber"><div class="burgerline top"></div><div class="burgerline middle"></div><div class="burgerline bottom"></div></div></div></div><div class="blacklinenavigator"></div></div>
 
-<div class="svc-hero-media"></div>
+<div class="svc-hero-media"><img class="svc-hero-butterfly" src="../services-media/glass-butterfly.png" alt="" aria-hidden="true" width="800" height="533"/></div>
 
 <main class="svc-main">
 <div class="svc-wrap">
@@ -699,7 +699,7 @@ body {
       <p class="svc-hero-intro">A brand is more than a logo. It&#x27;s the first impression, the mood people pick up on, the space they step into when they find you. I design all three, so nothing feels bolted on.</p>
       <p class="svc-hero-intro">Most people arrive with more than they can explain. A lot of ideas, a lot of feeling, no clear container for any of it. My work is to hold the whole vision while we find its form together.</p>
     </div>
-    <img class="svc-hero-butterfly" src="../services-media/glass-butterfly.png" alt="" aria-hidden="true" width="800" height="533"/>
+    <img class="svc-hero-smile" src="../services-media/happy-smile.png" alt="" aria-hidden="true" width="640" height="721"/>
   </section>
 
   <!-- ══════════ TIERS ══════════ -->
@@ -1036,7 +1036,6 @@ body {
 
   <!-- ══════════ CLOSING CTA ══════════ -->
   <section class="svc-closing">
-    <img class="svc-closing-smile" src="../services-media/happy-smile.png" alt="" aria-hidden="true" width="640" height="721"/>
     <h2 class="svc-sec-head">Ready when <span class="svc-swash">you are.</span></h2>
     <p>I take on a limited number of projects at a time, so every client gets my full creative attention.</p>
     <div class="svc-btn-row">
