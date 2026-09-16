@@ -80,18 +80,71 @@ overflow-x: hidden;
   overflow: visible;
 }
 </style><script type="text/javascript">window.__WEBFLOW_CURRENCY_SETTINGS = {"currencyCode":"CAD","symbol":"$","decimal":".","fractionDigits":2,"group":",","template":"{{wf {\"path\":\"symbol\",\"type\":\"PlainText\"} }} {{wf {\"path\":\"amount\",\"type\":\"CommercePrice\"} }} {{wf {\"path\":\"currencyCode\",\"type\":\"PlainText\"} }}","hideDecimalForWholeNumbers":false};</script><style>
-/* the portrait beside the bio */
-.nat-img { background-image: url("../about-media/natalie-headshot3.jpg"); }
+/* the portrait beside the bio: the first photo is the background so it still
+   shows without JS, and the stacked slides crossfade over it. To add another
+   photo, drop one more .nat-slide div in and the script picks it up. */
+.nat-img { background-image: url("../about-media/natalie-headshot3.jpg"); position: relative; overflow: hidden; width: 560px; height: 740px; }
+.nat-slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: 50% 50%;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 1.4s ease;
+}
+.nat-slide.is-on { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .nat-slide { transition: none; } }
 
-/* chrome cherry perched on the top left of the portrait */
-.div-block-36 { position: relative; }
+/* no lone word on a paragraph's last line */
+.paragraph-3 { text-wrap: pretty; }
+
+/* Two-line opener: the script greeting, then the name big and set in from the
+   left so the script's tail runs over it. */
+.text-block-67 { line-height: 1; }
+.about-hi, .about-name { display: block; }
+.about-hi {
+  font-family: Ppplayground, Arial, sans-serif;
+  font-weight: 500;
+  font-size: 1.62em;
+  line-height: .95;
+}
+.about-name {
+  font-family: "Ppneuemontreal Book", Arial, sans-serif;
+  text-transform: uppercase;
+  font-size: 1.4em;
+  font-weight: 400;
+  line-height: .95;
+  margin-left: 2.1em;
+  margin-top: -.12em;
+}
+
+/* "My vibe:" and its three lines, set to match the bio paragraphs.
+   The shared sheet puts a 100px padding-left on a bare <p>, which .paragraph-3 clears. */
+.about-vibe-head { margin: 1.4em 0 .5em; padding-left: 0; font-weight: 500; text-align: left; }
+.about-vibe { margin: 0; padding-left: 1.2em; list-style: none; text-align: left; }
+.about-vibe li { position: relative; margin-bottom: .45em; text-wrap: pretty; }
+.about-vibe li::before {
+  content: "\2726";
+  position: absolute;
+  left: -1.25em;
+  top: 0;
+  font-size: .85em;
+  line-height: 1.65;
+}
+/* .paragraph-3 sets its own size, so match that rather than inheriting the wrapper */
+.about-vibe-head, .about-vibe li { font-size: 1.5em; line-height: 1.4; }
+.about-outro { margin-top: 1.4em; }
+
+/* chrome cherry on the right of the section, under the bio copy */
+.div-block-37 { position: relative; }
 .about-cherry {
   position: absolute;
-  left: -7em;
-  top: -5em;
-  width: 16em;
+  right: -2em;
+  bottom: -17em;
+  width: 32.6em;
   height: auto;
-  transform: rotate(-10deg);
+  transform: rotate(-8deg);
   pointer-events: none;
   z-index: 2;
 }
@@ -102,6 +155,19 @@ overflow-x: hidden;
   .text-block-67 { font-family: Trjndavinci, Arial, sans-serif; line-height: 1.05; }
   /* the phone crop is shorter than the portrait, so hold it on her face */
   .nat-img { background-position: 50% 18% !important; }
+  .nat-slide { background-position: 50% 18%; }
+  /* the desktop 560x740 would run 170px off a phone, so hand the portrait back
+     to the shared sheet's phone size */
+  .nat-img { width: 90vw; height: 480px; }
+  /* the em unit shrinks right down on a phone, so the cherry needs its size back */
+  /* only ~45px sits between the copy and the card here, so the cherry peeks
+     over the card's top right corner instead of floating in the gap */
+  .about-cherry { width: 60em; right: -1em; bottom: -30em; }
+  /* the wrapper's em is only 3.9px here, so match .paragraph-3's own size */
+  .about-vibe-head, .about-vibe li { font-size: 15px; line-height: 1.4; }
+  .about-vibe li { margin-bottom: .35em; }
+  /* "I'M NATALIE." has to stay on one line */
+  .about-name { font-size: 1.05em; margin-left: 1.3em; }
 }
 </style>
 </head><body><div data-animation="default" class="navbar1_component w-nav" data-easing2="ease" fs-scrolldisable-element="smart-nav" data-easing="ease" data-collapse="medium" data-w-id="7a5712d2-428a-76c4-82bd-60e573de2251" role="banner" data-duration="400"><div class="navbar1_container"><a href="../" class="navbar1_logo-link w-nav-brand"><img width="210" loading="lazy" alt="" src="../images/nav-logo.svg" class="navbar1_logo"/></a><div class="ham-cart-wrapper"><div data-w-id="7a5712d2-428a-76c4-82bd-60e573de2262" class="hamburber"><div class="burgerline top"></div><div class="burgerline middle"></div><div class="burgerline bottom"></div></div></div></div><div class="blacklinenavigator"></div></div><div class="lines-section" style="height:calc(100vh - 70px);overflow:hidden;">
@@ -143,7 +209,7 @@ overflow-x: hidden;
   onScroll();
 })();
 </script>
-<div class="w-layout-blockcontainer container-1280 w-container"><div class="about-wrapper"><h2 class="heading-15">About</h2><h1 words-slide-from-right="" text-split="" class="heading-16">Natalie Lisa Moore</h1><div class="aboutwrapper2"><div class="div-block-36"><img class="about-cherry" src="../about-media/chrome-cherry.png" alt="" aria-hidden="true" width="800" height="533"/><div class="nat-img"></div></div><div class="div-block-37"><div class="text-block-67">I&#x27;m so happy you&#x27;re <span class="heart-text-span">here.</span><br/></div><p class="paragraph-3">I&#x27;m Natalie, a brand designer and visual artist on Salt Spring Island. I make identities, imagery and websites for people whose work comes from somewhere deep.<br/><br/>Most of my clients arrive with a big vision and no clear container for it. Yoga teachers, herbalists, hypnotherapists, spiritual guides, DJs, makers. My work is to hold the whole picture while we find its form together, so everything you put into the world feels like it came from the same place.<br/><br/>I&#x27;m inspired by nature, art, style and photography. I work collaboratively, intuitively and with curiosity, always looking for the meaning written in the stars.</p></div></div></div></div><section class="shopart3"><div class="page-wrap"><div class="global-styles"><div class="custom-styles w-embed"><style>
+<div class="w-layout-blockcontainer container-1280 w-container"><div class="about-wrapper"><div class="aboutwrapper2"><div class="div-block-36"><div class="nat-img"><div class="nat-slide is-on" style="background-image:url(../about-media/natalie-headshot3.jpg)"></div><div class="nat-slide" style="background-image:url(../about-media/natalie-hat-flowers.jpg)"></div><div class="nat-slide" style="background-image:url(../about-media/nat-bio-2.jpg)"></div><div class="nat-slide" style="background-image:url(../about-media/nat-bio-3.jpg)"></div></div></div><div class="div-block-37"><div class="text-block-67"><span class="about-hi">what&rsquo;s good!</span><span class="about-name">I&rsquo;m Natalie.</span></div><p class="paragraph-3">I&rsquo;m Natalie Moore, a creative director and brand designer on Salt Spring Island, helping thoughtful brands look and feel like themselves&hellip; at their next level.<br/><br/>I work with everyone from wellness entrepreneurs and healers to filmmakers, makers, and founders at the start of something new. Most people show up with a big vision and no container for it yet. That&rsquo;s where I come in. If you&rsquo;ve got a story worth telling, I&rsquo;ll help you design the brand to match.</p><p class="about-vibe-head">My vibe:</p><ul class="about-vibe"><li>Collaborative, not prescriptive</li><li>Curious, not cookie-cutter</li><li>Obsessed with design that feels right, not just looks good</li></ul><p class="paragraph-3 about-outro">I work one-on-one from Salt Spring Island, BC. Here through my partnership with Karen Fassio and Our Living Design Studio for the Microsoft Alumni Network.</p><img class="about-cherry" src="../about-media/chrome-cherry.png" alt="" aria-hidden="true" width="800" height="533"/></div></div></div></div><section class="shopart3"><div class="page-wrap"><div class="global-styles"><div class="custom-styles w-embed"><style>
 .w-slider-dot.w-active {
 	background: #deff38 !important
 }
@@ -948,4 +1014,22 @@ for ( let i = 0, splideLength = splides.length; i < splideLength; i++ ) {
 slider1();
 
 </script><script src="../menu.js"></script>
-<script src="../cursor.js"></script><script src="../ambient.js"></script><script src="../magnetic.js"></script><script src="../menu-hover.js"></script><script src="../transition.js"></script><script src="../scroll-bloom.js"></script><script src="../squirrel.js"></script></body></html>
+<script src="../cursor.js"></script><script src="../ambient.js"></script><script src="../magnetic.js"></script><script src="../menu-hover.js"></script><script src="../transition.js"></script><script src="../scroll-bloom.js"></script><script src="../squirrel.js"></script>
+<script>
+/* Crossfade the portrait through however many .nat-slide layers are present.
+   One slide means nothing moves. */
+(function () {
+  var wrap = document.querySelector('.nat-img');
+  if (!wrap) return;
+  var slides = [].slice.call(wrap.querySelectorAll('.nat-slide'));
+  if (slides.length < 2) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var i = 0;
+  setInterval(function () {
+    slides[i].classList.remove('is-on');
+    i = (i + 1) % slides.length;
+    slides[i].classList.add('is-on');
+  }, 4000);
+})();
+</script>
+</body></html>
