@@ -574,6 +574,18 @@ body {
   padding: 3.5em 2em 3em;
   margin-top: 6em;
 }
+.svc-closing { position: relative; }
+/* A small found treasure at the end of the page: the cherry peeks over the
+   bottom-left corner of the card rather than announcing itself. */
+.svc-cherry {
+  position: absolute;
+  left: -2.2em;
+  bottom: -3.4em;
+  width: 17em;
+  height: auto;
+  transform: rotate(-12deg);
+  pointer-events: none;
+}
 .svc-closing .svc-sec-head { margin-bottom: .3em; }
 
 .svc-closing p {
@@ -625,6 +637,7 @@ body {
   .svc-step h3 { font-size: 2.8em; }
   .svc-step p { font-size: 2em; }
   .svc-closing p { font-size: 2.4em; }
+  .svc-cherry { width: 22em; left: -1.6em; bottom: -2.6em; }
   .svc-flick { width: 62em; }
   /* no room for words either side: Brand above left, examples below right */
   .svc-examples-row { grid-template-columns: 1fr; row-gap: .6em; justify-items: center; }
@@ -1036,6 +1049,7 @@ body {
 
   <!-- ══════════ CLOSING CTA ══════════ -->
   <section class="svc-closing">
+    <img class="svc-cherry" src="../services-media/chrome-cherry.png" alt="" aria-hidden="true" width="800" height="533"/>
     <h2 class="svc-sec-head">Ready when <span class="svc-swash">you are.</span></h2>
     <p>I take on a limited number of projects at a time, so every client gets my full creative attention.</p>
     <div class="svc-btn-row">
