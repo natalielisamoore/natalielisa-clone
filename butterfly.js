@@ -30,6 +30,10 @@
 
   function rand(min, max) { return min + Math.random() * (max - min); }
 
+  /* The artwork is drawn head-up, so the heading needs a quarter turn to line
+     up with the direction of travel. Change this if the art is redrawn. */
+  var ART_HEADING = 90;
+
   function fly(wrap) {
     var vw = window.innerWidth;
     var vh = window.innerHeight;
@@ -46,6 +50,19 @@
     var svg = wrap.querySelector('.bf-svg');
     if (svg) svg.style.animationDuration = flapDur;
 
+    /* layered sine waves → organic butterfly flutter path */
+    function posAt(tt) {
+      return {
+        x: startX + (endX - startX) * tt,
+        y: baseY
+          + Math.sin(tt * Math.PI * 11)        * 12   /* fast flutter  */
+          + Math.sin(tt * Math.PI * 3.2 + 0.8) * 40   /* mid wandering */
+          + Math.sin(tt * Math.PI * 1.1 + 1.5) * 18   /* slow drift    */
+      };
+    }
+
+    var angleNow = null;
+
     function tick(now) {
       var t = Math.min((now - t0) / duration, 1);
 
@@ -55,30 +72,27 @@
         return;
       }
 
-      var x = startX + (endX - startX) * t;
+      var p = posAt(t);
 
-      /* layered sine waves → organic butterfly flutter path */
-      var y = baseY
-        + Math.sin(t * Math.PI * 11)        * 12   /* fast flutter       */
-        + Math.sin(t * Math.PI * 3.2 + 0.8) * 40   /* mid wandering      */
-        + Math.sin(t * Math.PI * 1.1 + 1.5) * 18;  /* slow overall drift */
-
-      /* tilt to match vertical velocity */
-      var dyDt = (Math.cos(t * Math.PI * 11) * 12 * Math.PI * 11
-               + Math.cos(t * Math.PI * 3.2 + 0.8) * 40 * Math.PI * 3.2
-               + Math.cos(t * Math.PI * 1.1 + 1.5) * 18 * Math.PI * 1.1) / duration * 1000;
-      var speed = Math.abs(endX - startX) / (duration / 1000);
-      var angle = Math.atan2(dyDt, speed) * 180 / Math.PI;
-      angle = Math.max(-20, Math.min(20, angle));
+      /* Point the butterfly along the path it is actually travelling: take the
+         heading from the next step, then ease into it so the wing-beat wobble
+         nudges the angle instead of spinning it. */
+      var ahead   = posAt(Math.min(t + 0.004, 1));
+      var heading = Math.atan2(ahead.y - p.y, ahead.x - p.x) * 180 / Math.PI + ART_HEADING;
+      if (angleNow === null) {
+        angleNow = heading;
+      } else {
+        var delta = ((heading - angleNow + 540) % 360) - 180;
+        angleNow += delta * 0.07;
+      }
 
       /* fade in/out at screen edges */
       var opacity = 1;
       if (t < 0.06) opacity = t / 0.06;
       if (t > 0.94) opacity = (1 - t) / 0.06;
 
-      wrap.style.transform = 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px)'
-        + ' scaleX(' + (goRight ? 1 : -1) + ')'
-        + ' rotate(' + angle.toFixed(1) + 'deg)';
+      wrap.style.transform = 'translate(' + p.x.toFixed(1) + 'px,' + p.y.toFixed(1) + 'px)'
+        + ' rotate(' + angleNow.toFixed(1) + 'deg)';
       wrap.style.opacity = opacity.toFixed(3);
 
       requestAnimationFrame(tick);
