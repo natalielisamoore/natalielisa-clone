@@ -6779,3 +6779,30 @@ body.is-ceremony .temple__cite {
   body.is-ceremony .temple__quote--work,
   body.is-ceremony .temple__quote--pillars { width: min(100% - 2rem, 40ch); }
 }
+
+/* ── "WHAT HAPPENS IN AN INNER CEREMONY" SPLIT IN TWO (2026-10-02) ─────────
+   Her final copy made this section 303 words, and it was the only place on
+   the page carrying a long argument CENTRED — Thresholds, the bio and the
+   note all run this long and read fine because they are left-aligned. So:
+   two stacked parts at the seam in her own copy (the frame, then the session
+   itself), each with its own label and heading, body ranged left on the same
+   62ch spine. The band element itself is untouched, so the nebula, the blush
+   fade and the marquee lifting into that fade all stay exactly as tuned. */
+body.is-ceremony .work__part .temple__lede {
+  text-align: left;
+  text-wrap: pretty;
+}
+body.is-ceremony .work__part--second {
+  margin-top: clamp(3.2rem, 7vh, 5rem);
+  padding-top: clamp(2.6rem, 5.5vh, 4rem);
+  border-top: 1px solid rgba(201, 168, 76, .34);
+}
+/* the second label sits a touch closer to its rule than a band label would */
+body.is-ceremony .work__part--second .temple__label { margin-top: 0; }
+
+@media (max-width: 820px) {
+  body.is-ceremony .work__part--second {
+    margin-top: clamp(2.4rem, 5vh, 3.4rem);
+    padding-top: clamp(2rem, 4vh, 2.8rem);
+  }
+}
