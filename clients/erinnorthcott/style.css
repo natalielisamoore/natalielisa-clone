@@ -3367,9 +3367,9 @@ body.is-ceremony .temple__band--welcome {
   padding-block: 0 clamp(1rem, 3vh, 2rem);
 }
 body.is-ceremony .temple__panel {
-  width: min(100% - 3rem, 1180px);
+  width: min(100% - 3rem, 1040px);
   margin-inline: auto;
-  padding: clamp(2.8rem, 6vw, 4.6rem) clamp(1.6rem, 6vw, 5rem) clamp(3rem, 6.4vw, 4.8rem);
+  padding: clamp(2.5rem, 5.3vw, 4rem) clamp(1.4rem, 5.3vw, 4.4rem) clamp(2.6rem, 5.6vw, 4.2rem);
   border-radius: clamp(20px, 2.4vw, 30px);
   text-align: center;
   background: linear-gradient(180deg, rgba(252, 240, 234, .96) 0%, rgba(249, 218, 206, .96) 100%);
@@ -3401,7 +3401,8 @@ body.is-ceremony .temple__band--welcome .temple__welcome p { margin: 0; }
 /* --- welcome panel, take two (2026-09-08): no name, off-white. The hero
    itself is not touched: her words. The panel simply overlaps its foot. */
 body.is-ceremony .temple__panel {
-  padding-block: clamp(3.2rem, 7vw, 5.4rem);
+  padding-top: clamp(1.9rem, 4.3vw, 3.3rem);
+  padding-bottom: clamp(2.8rem, 6.2vw, 4.75rem);
   background: linear-gradient(180deg, rgba(255, 252, 249, .97) 0%, rgba(253, 243, 238, .97) 100%);
 }
 /* The overlap never actually happened: the "hero + band" rule that zeroes the
