@@ -6870,3 +6870,45 @@ body.is-ceremony .faq__inner p {
    supersedes that, so the rule there is no longer doing anything. Kept
    explicit so the two do not read as a conflict later. */
 body.is-ceremony .work__part .temple__lede { text-align: justify; }
+
+/* ── PILLAR CARDS LIFT AND TILT ON HOVER (2026-10-02) ──────────────────────
+   The flip owns `.pillar__card` (rotateY(180deg) on .is-flipped), so the
+   hover cannot live there without the two transforms fighting. It goes on the
+   `.pillar--flip` LI instead: two different elements, two transforms, no
+   conflict, and the flip keeps its own .85s curve.
+
+   The li carries `perspective: 1400px` as a property for its child; the tilt
+   needs a perspective for ITSELF, which is the perspective() transform
+   function below. Set at rest too, so hovering does not jump between a
+   transformed and an untransformed box.
+
+   --prx/--pry come from pillars.js. They default to 0, so with no JS a hover
+   still lifts and deepens the shadow, it just does not lean. */
+body.is-ceremony .pillar--flip {
+  transform: perspective(900px);
+  transition: transform .3s ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  body.is-ceremony .pillar--flip:hover {
+    transform: perspective(900px) translateY(-6px)
+               rotateX(var(--prx, 0deg)) rotateY(var(--pry, 0deg));
+  }
+  /* the shadow belongs to whichever face is showing, so the lift reads the
+     same whether the card is front up or flipped */
+  body.is-ceremony .pillar--flip:hover .pillar__face--front,
+  body.is-ceremony .pillar--flip:hover .pillar__face--back {
+    box-shadow: 0 30px 64px rgba(120, 80, 60, .22);
+  }
+}
+body.is-ceremony .pillar__face--back {
+  box-shadow: 0 18px 44px rgba(120, 80, 60, .10);
+  transition: box-shadow .3s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.is-ceremony .pillar--flip,
+  body.is-ceremony .pillar--flip:hover {
+    transform: none;
+    transition: none;
+  }
+}
