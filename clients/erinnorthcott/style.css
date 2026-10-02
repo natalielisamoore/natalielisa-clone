@@ -6807,3 +6807,38 @@ body.is-ceremony .work__part--second .temple__label { margin-top: 0; }
     padding-top: clamp(2rem, 4vh, 2.8rem);
   }
 }
+
+/* ── THE WORDS PART AROUND THE CURSOR (2026-10-02, Inner Ceremonies) ───────
+   words.js splits the body paragraphs into one span per word and writes a
+   target transform/filter on the few nearest the pointer each frame. The
+   easing lives here: the transition is what makes a word chase the cursor
+   and then settle back rather than snapping. Short enough to feel responsive,
+   long enough to trail.
+
+   display: inline-block is required for transform to apply to a run of text.
+   The real spaces between words are kept as text nodes, so wrapping, the
+   measure and text-wrap: pretty/balance all behave exactly as before. */
+body.is-ceremony .cw {
+  display: inline-block;
+  font: inherit;
+  font-style: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+  white-space: pre-wrap;
+  transition: transform .34s cubic-bezier(.22, .61, .36, 1),
+              filter    .34s cubic-bezier(.22, .61, .36, 1);
+}
+
+/* no pointer to hover with, or motion turned down: leave the text alone.
+   The spans stay in the markup and simply behave as plain text. */
+@media (hover: none), (pointer: coarse) {
+  body.is-ceremony .cw { display: inline; transition: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  body.is-ceremony .cw {
+    display: inline;
+    transition: none;
+    transform: none !important;
+    filter: none !important;
+  }
+}
