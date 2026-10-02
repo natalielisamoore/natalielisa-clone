@@ -6842,3 +6842,31 @@ body.is-ceremony .cw {
     filter: none !important;
   }
 }
+
+/* ── JUSTIFIED BODY COPY (2026-10-02, Inner Ceremonies) ────────────────────
+   At her ask: every line of the body paragraphs fills the column, the last
+   line included. Headings, labels and every quote-voiced line are left out
+   by design — the pull lines, the beats, the forest quote, client praise,
+   the trust line and the two attributed quotes all stay as they were.
+
+   text-align-last: justify is the aggressive half of this. It stretches the
+   final line of every paragraph across the full measure however few words it
+   holds, and it treats a one-line paragraph as a last line too. See the note
+   in MEMORY: this is a deliberate choice, not an oversight. */
+body.is-ceremony .temple__lede,
+body.is-ceremony .depth__text,
+body.is-ceremony .depth__foot,
+body.is-ceremony .depth__note,
+body.is-ceremony .consult__refund,
+body.is-ceremony .consult__text,
+body.is-ceremony .pillar__text,
+body.is-ceremony .faq__inner p {
+  text-align: justify;
+  text-align-last: justify;
+  text-justify: inter-word;
+}
+
+/* The Work's two parts were ranged left on purpose a few hours ago; justify
+   supersedes that, so the rule there is no longer doing anything. Kept
+   explicit so the two do not read as a conflict later. */
+body.is-ceremony .work__part .temple__lede { text-align: justify; }
