@@ -6808,40 +6808,12 @@ body.is-ceremony .work__part--second .temple__label { margin-top: 0; }
   }
 }
 
-/* ── THE WORDS PART AROUND THE CURSOR (2026-10-02, Inner Ceremonies) ───────
-   words.js splits the body paragraphs into one span per word and writes a
-   target transform/filter on the few nearest the pointer each frame. The
-   easing lives here: the transition is what makes a word chase the cursor
-   and then settle back rather than snapping. Short enough to feel responsive,
-   long enough to trail.
-
-   display: inline-block is required for transform to apply to a run of text.
-   The real spaces between words are kept as text nodes, so wrapping, the
-   measure and text-wrap: pretty/balance all behave exactly as before. */
-body.is-ceremony .cw {
-  display: inline-block;
-  font: inherit;
-  font-style: inherit;
-  color: inherit;
-  letter-spacing: inherit;
-  white-space: pre-wrap;
-  transition: transform .34s cubic-bezier(.22, .61, .36, 1),
-              filter    .34s cubic-bezier(.22, .61, .36, 1);
-}
-
-/* no pointer to hover with, or motion turned down: leave the text alone.
-   The spans stay in the markup and simply behave as plain text. */
-@media (hover: none), (pointer: coarse) {
-  body.is-ceremony .cw { display: inline; transition: none; }
-}
-@media (prefers-reduced-motion: reduce) {
-  body.is-ceremony .cw {
-    display: inline;
-    transition: none;
-    transform: none !important;
-    filter: none !important;
-  }
-}
+/* The words-part-around-the-cursor effect (v=302) was REMOVED at her ask on
+   2026-10-02 (v=309): "remove the text hover animation - we need to come up
+   with something better than that". words.js, its script tag and the `.cw`
+   rules are all deleted rather than left dormant, so the paragraphs are plain
+   text nodes again. If a text hover ever comes back it starts from scratch;
+   do not resurrect this one. */
 
 /* ── BODY COPY RANGED LEFT (2026-10-02, Inner Ceremonies) ────────────────
    These paragraphs were justified (both edges flush, last line stretched)
@@ -7016,16 +6988,16 @@ body.is-ceremony .temple__band--note .temple__snap img {
 }
 
 /* ── HOVER STATES INSIDE THE NOTE SECTION (2026-10-02) ─────────────────────
-   At her ask. Three things, and one of them is a placeholder:
+   At her ask. Two things, and one of them is a placeholder.
 
-   1. The word-parting hover (words.js) already ran on this section's four
-      paragraphs — `.temple__lede` has been in its selector list since v=302.
-      What it did NOT cover was the section's own heading, so
-      `.temple__noteline` is now in that list too. Nothing here in CSS; the
-      `.cw` transition already in the WORDS block does the settling.
-   2. The snapshot lifts a little and brightens on hover: the only other
-      element in the section a pointer can land on.
-   3. A gold underline that sweeps in from the left for links. THERE ARE NO
+   What she asked for third — "the text hover effect from the rest of the
+   page applied here too" — is NOT here, because an hour later she asked for
+   that effect to be removed from the whole page (see the note where the
+   WORDS block used to be). There is no page-wide text hover to apply.
+
+   1. The snapshot lifts a little and brightens on hover: the one element in
+      the section a pointer can land on.
+   2. A gold underline that sweeps in from the left for links. THERE ARE NO
       LINKS OR BUTTONS IN THIS SECTION YET — the note is four paragraphs, a
       heading and a photo — so this rule is waiting for the first one she adds
       rather than changing anything today. Scoped to the band so it can never
