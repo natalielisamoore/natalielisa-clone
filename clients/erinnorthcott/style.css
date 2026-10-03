@@ -1513,33 +1513,41 @@ body {
 .erin__photo { margin: 0; }
 
 /* a plain gilt frame — the light falls across it once and stays put */
-/* HER BIO PHOTO HAS NO FRAME (2026-10-02, at her ask): "i want her bio pic
-   on the homepage to be wider, and remove the gold boarder, make it better
-   sizing. this is not looking good". So the plate is not a plate any more —
-   no gold, no padding, no hairline, no ring around the print. Just the
-   photograph, on a soft shadow so it still sits on the ground.
+/* HER BIO PHOTO: A THIN FLAT GOLD MAT (2026-10-02) ─────────────────────────
+   Two asks in a row. First: "i want her bio pic on the homepage to be wider,
+   and remove the gold boarder, make it better sizing. this is not looking
+   good" — so the frame came off entirely. Then, straight after: "i just want
+   it thinner, and lose the gradient - just make it more elegent". Read as
+   the border, not the photo (she had just asked for the photo WIDER, so
+   "thinner" cannot be the photo), and read as a walk-back of removing it:
+   she wants the mat kept, only thin and flat. The gradient she can still see
+   is v=309 on her screen; it has been flat since v=310.
 
-   WIDER is doing two things at once here, and the second is the one that
-   matters. The column widened (.erin__grid went 0.88fr/1.12fr to 1fr/1.1fr),
-   AND the crop went from 4/5 portrait to 5/4 landscape. The source
-   erin-rose.jpg is a 1920x1042 composite — a rose double exposure on the
-   left, Erin on the right — and `object-fit: cover` takes its scale from
-   whichever axis needs more. At 4/5 the HEIGHT drove it, so the box showed
-   only 43% of the image's width and her face filled the whole thing. At 5/4
-   the width drives it instead and the same box shows about 68%, so she comes
-   down in the frame and the rose edge she is composited with finally reads.
-   That is also what her #15 was asking for.
+   So: a 6px flat mat in the site's --gold #c9a84c. No gradient, no inset
+   bevel, no hairline, and no dark ring around the print — all three of those
+   were what made the old frame heavy. Thickness went clamp(.5rem, 1.1vw,
+   .8rem), which is 8-12.8px, down to a flat 6px that does not grow with the
+   viewport: a mat reads as elegant when it stays hairline-thin next to the
+   image, and scaling it up with the page is what made it a slab.
 
-   object-position 70% (was 88%): with a window that much wider, 88% pinned
-   the crop to the right edge and cut the rose back off. 70% puts her face
-   just right of centre and leaves the bloom on the left.
+   WIDER is a separate thing and it stays: the column widened (.erin__grid
+   0.88fr/1.12fr -> 1fr/1.1fr) and the crop went 4/5 portrait to 5/4
+   landscape. erin-rose.jpg is a 1920x1042 composite — a rose double exposure
+   on the left, Erin on the right — and `object-fit: cover` scales by
+   whichever axis needs more. At 4/5 that was the HEIGHT, so the box showed
+   only 43% of the image's width and her face filled it. At 5/4 the width
+   drives it and the box shows about 68%, so she comes down in the frame on
+   her own and the bloom reads. That is also what her #15 wanted.
 
-   NOTE: .becoming__media (the rose teaser) still has its flat gold plate
-   from v=310. She named only the bio pic, so the two are deliberately out
-   of step until she says otherwise. */
+   NOTE: .becoming__media (the rose teaser) still carries the thicker flat
+   plate from v=310. She has only ever named the bio pic, so the two are
+   deliberately out of step until she says which way to settle it. */
 .erin__plate {
   width: 100%;
   max-width: 560px;
+  padding: 6px;
+  background: #c9a84c;
+  box-shadow: 0 20px 46px rgba(74,42,20,.26);
 }
 .erin__plate img {
   display: block;
@@ -1549,7 +1557,6 @@ body {
   object-fit: cover;
   object-position: 70% 50%;   /* her face right of centre, the bloom kept on the left */
   filter: saturate(1.02) brightness(1.02);
-  box-shadow: 0 20px 46px rgba(74,42,20,.26);   /* no frame now, so the photo casts its own */
 }
 
 .erin__text { max-width: 60ch; }
