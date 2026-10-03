@@ -1513,19 +1513,27 @@ body {
 .erin__photo { margin: 0; }
 
 /* a plain gilt frame — the light falls across it once and stays put */
+/* FLAT (2026-10-02, at her ask): the five-stop gold gradient and the inset
+   lit edge that bevelled it are gone. One flat tone — the site's own --gold
+   #c9a84c, which was the gradient's 78% stop, so the plate keeps the colour
+   it read as — plus a single 1px hairline a little darker than the face, so
+   the plate still has an edge against the night ground. The drop shadow is
+   left alone: she listed what flatten meant (one tone, 1px hairline or none,
+   no inner shadow or bevel) and the outer shadow was not in that list.
+
+   SIZE: her #14 asked for these slightly wider and her #15, minutes later,
+   asked for them scaled DOWN 15-20% so less of the frame is Erin and more of
+   it is the ground around her. #15 is the later word, so it wins: 470px as
+   rendered -> 390px, about 17% off. The widening from #14 was never on the
+   live site (the grid column capped it at 470 whatever max-width said).
+   Its twin is .becoming__media; keep the two in step. */
 .erin__plate {
   width: 100%;
-  max-width: 440px;
+  max-width: 390px;
   padding: clamp(.5rem, 1.1vw, .8rem);
-  background: linear-gradient(135deg,
-    #e8c87c 0%,
-    #d0ae58 34%,
-    #b8933c 58%,
-    #c9a84c 78%,
-    #ddba6b 100%);
-  box-shadow:
-    0 20px 46px rgba(74,42,20,.26),
-    inset 0 0 0 1px rgba(255,242,206,.5);   /* a crisp lit edge on the outside */
+  background: #c9a84c;
+  border: 1px solid rgba(138, 110, 44, .55);
+  box-shadow: 0 20px 46px rgba(74,42,20,.26);
 }
 .erin__plate img {
   display: block;
@@ -1776,19 +1784,22 @@ body.is-connect .footer {
 /* the rose's right edge lines up with the panels below it */
 /* a smaller rose, still right-aligned with the panels below */
 /* the same gilt frame as Erin's portrait */
+/* the teaser plate, flattened exactly like .erin__plate above (2026-10-02).
+   Same flat --gold, same hairline, same drop shadow kept, and scaled down
+   with it: 500 -> 415px, the same ~17%. The grid column below has to come
+   down with it or the plate just sits left in a 500px slot with dead space
+   at the right. If one of these two ever changes, change both. */
 .becoming__media {
-  max-width: 500px;
+  max-width: 415px;
   margin: 0;
   padding: clamp(.5rem, 1.1vw, .8rem);
-  background: linear-gradient(135deg,
-    #e8c87c 0%, #d0ae58 34%, #b8933c 58%, #c9a84c 78%, #ddba6b 100%);
-  box-shadow:
-    0 20px 46px rgba(74,42,20,.26),
-    inset 0 0 0 1px rgba(255,242,206,.5);
+  background: #c9a84c;
+  border: 1px solid rgba(138, 110, 44, .55);
+  box-shadow: 0 20px 46px rgba(74,42,20,.26);
 }
 .becoming__grid {
   max-width: 1040px;
-  grid-template-columns: minmax(0, 52ch) 500px;
+  grid-template-columns: minmax(0, 52ch) 415px;   /* tracks .becoming__media */
   justify-content: center;
   gap: clamp(1.5rem, 3.4vw, 3rem);
 }
