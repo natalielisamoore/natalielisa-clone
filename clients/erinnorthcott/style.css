@@ -1505,7 +1505,7 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 0.88fr 1.12fr;
+  grid-template-columns: 1fr 1.1fr;   /* was .88/1.12: her photo column widened 2026-10-02 */
   gap: clamp(1.75rem, 4.6vw, 4.25rem);
   align-items: center;
   text-align: left;
@@ -1513,37 +1513,43 @@ body {
 .erin__photo { margin: 0; }
 
 /* a plain gilt frame — the light falls across it once and stays put */
-/* FLAT (2026-10-02, at her ask): the five-stop gold gradient and the inset
-   lit edge that bevelled it are gone. One flat tone — the site's own --gold
-   #c9a84c, which was the gradient's 78% stop, so the plate keeps the colour
-   it read as — plus a single 1px hairline a little darker than the face, so
-   the plate still has an edge against the night ground. The drop shadow is
-   left alone: she listed what flatten meant (one tone, 1px hairline or none,
-   no inner shadow or bevel) and the outer shadow was not in that list.
+/* HER BIO PHOTO HAS NO FRAME (2026-10-02, at her ask): "i want her bio pic
+   on the homepage to be wider, and remove the gold boarder, make it better
+   sizing. this is not looking good". So the plate is not a plate any more —
+   no gold, no padding, no hairline, no ring around the print. Just the
+   photograph, on a soft shadow so it still sits on the ground.
 
-   SIZE: her #14 asked for these slightly wider and her #15, minutes later,
-   asked for them scaled DOWN 15-20% so less of the frame is Erin and more of
-   it is the ground around her. #15 is the later word, so it wins: 470px as
-   rendered -> 390px, about 17% off. The widening from #14 was never on the
-   live site (the grid column capped it at 470 whatever max-width said).
-   Its twin is .becoming__media; keep the two in step. */
+   WIDER is doing two things at once here, and the second is the one that
+   matters. The column widened (.erin__grid went 0.88fr/1.12fr to 1fr/1.1fr),
+   AND the crop went from 4/5 portrait to 5/4 landscape. The source
+   erin-rose.jpg is a 1920x1042 composite — a rose double exposure on the
+   left, Erin on the right — and `object-fit: cover` takes its scale from
+   whichever axis needs more. At 4/5 the HEIGHT drove it, so the box showed
+   only 43% of the image's width and her face filled the whole thing. At 5/4
+   the width drives it instead and the same box shows about 68%, so she comes
+   down in the frame and the rose edge she is composited with finally reads.
+   That is also what her #15 was asking for.
+
+   object-position 70% (was 88%): with a window that much wider, 88% pinned
+   the crop to the right edge and cut the rose back off. 70% puts her face
+   just right of centre and leaves the bloom on the left.
+
+   NOTE: .becoming__media (the rose teaser) still has its flat gold plate
+   from v=310. She named only the bio pic, so the two are deliberately out
+   of step until she says otherwise. */
 .erin__plate {
   width: 100%;
-  max-width: 390px;
-  padding: clamp(.5rem, 1.1vw, .8rem);
-  background: #c9a84c;
-  border: 1px solid rgba(138, 110, 44, .55);
-  box-shadow: 0 20px 46px rgba(74,42,20,.26);
+  max-width: 560px;
 }
 .erin__plate img {
   display: block;
   width: 100%;
   height: auto;              /* beat the height="894" attribute so the ratio applies */
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 5 / 4;
   object-fit: cover;
-  object-position: 88% 50%;   /* her face, out of the wide rose composite */
+  object-position: 70% 50%;   /* her face right of centre, the bloom kept on the left */
   filter: saturate(1.02) brightness(1.02);
-  box-shadow: 0 0 0 1px rgba(66,46,12,.4);   /* the print seated inside the metal */
+  box-shadow: 0 20px 46px rgba(74,42,20,.26);   /* no frame now, so the photo casts its own */
 }
 
 .erin__text { max-width: 60ch; }
@@ -1560,7 +1566,9 @@ body {
     max-width: 34rem;
     text-align: center;
   }
-  .erin__plate { margin: 0 auto; max-width: 300px; }
+  /* the 300px cap was for the framed portrait; frameless and landscape it
+     just made the photo narrower than the words under it */
+  .erin__plate { margin: 0 auto; max-width: 100%; }
   .erin__text { max-width: none; }
   .erin__ink { width: 52vw; right: -18%; top: 78%; opacity: .38; }
 }
