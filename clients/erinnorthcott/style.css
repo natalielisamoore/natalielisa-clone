@@ -6843,16 +6843,12 @@ body.is-ceremony .cw {
   }
 }
 
-/* ── JUSTIFIED BODY COPY (2026-10-02, Inner Ceremonies) ────────────────────
-   At her ask: every line of the body paragraphs fills the column, the last
-   line included. Headings, labels and every quote-voiced line are left out
-   by design — the pull lines, the beats, the forest quote, client praise,
-   the trust line and the two attributed quotes all stay as they were.
-
-   text-align-last: justify is the aggressive half of this. It stretches the
-   final line of every paragraph across the full measure however few words it
-   holds, and it treats a one-line paragraph as a last line too. See the note
-   in MEMORY: this is a deliberate choice, not an oversight. */
+/* ── BODY COPY RANGED LEFT (2026-10-02, Inner Ceremonies) ────────────────
+   These paragraphs were justified (both edges flush, last line stretched)
+   earlier the same day; at her ask the stretching is gone and they range
+   left with a natural ragged right edge. Same selectors, so the set of
+   paragraphs covered is unchanged — headings, labels and every
+   quote-voiced line were never in this list. */
 body.is-ceremony .temple__lede,
 body.is-ceremony .depth__text,
 body.is-ceremony .depth__foot,
@@ -6861,15 +6857,13 @@ body.is-ceremony .consult__refund,
 body.is-ceremony .consult__text,
 body.is-ceremony .pillar__text,
 body.is-ceremony .faq__inner p {
-  text-align: justify;
-  text-align-last: justify;
-  text-justify: inter-word;
+  text-align: left;
 }
 
-/* The Work's two parts were ranged left on purpose a few hours ago; justify
-   supersedes that, so the rule there is no longer doing anything. Kept
-   explicit so the two do not read as a conflict later. */
-body.is-ceremony .work__part .temple__lede { text-align: justify; }
+/* The Work's two parts were ranged left when that band was split, which is
+   what every paragraph above does again now. Kept explicit so the two rules
+   do not read as a conflict later. */
+body.is-ceremony .work__part .temple__lede { text-align: left; }
 
 /* ── PILLAR CARDS LIFT AND TILT ON HOVER (2026-10-02) ──────────────────────
    The flip owns `.pillar__card` (rotateY(180deg) on .is-flipped), so the
@@ -6911,4 +6905,167 @@ body.is-ceremony .pillar__face--back {
     transform: none;
     transition: none;
   }
+}
+
+/* ── THE PRAISE ROW IS DRAGGABLE (2026-10-02) ──────────────────────────────
+   praise.js does the work; these two classes are the only thing CSS owes it.
+   `.is-free` lifts scroll-snap for the length of a drag and its throw, which
+   it has to: under `scroll-snap-type: x mandatory` every scrollLeft we write
+   is yanked back to the nearest snap point and the card never moves with the
+   hand. `.is-grab` is the cursor and the select guard, and comes off the
+   moment the pointer lets go, while `.is-free` stays until the throw lands.
+   Touch keeps the native snap untouched (the script never arms for a finger),
+   so the grab cursor is hidden from pointer-coarse devices too. */
+body.is-ceremony .praise__track { cursor: grab; }
+body.is-ceremony .praise__track.is-grab {
+  cursor: grabbing;
+  user-select: none;
+  -webkit-user-select: none;
+}
+body.is-ceremony .praise__track.is-free { scroll-snap-type: none; }
+@media (hover: none), (pointer: coarse) {
+  body.is-ceremony .praise__track { cursor: auto; }
+}
+
+/* ── THE PACKAGES READ AS A LIST (2026-10-02) ──────────────────────────────
+   At her ask: what you get should be scannable, not a ruled table. The
+   hairline between every row is gone (it made four items look like a price
+   sheet); each line now carries a small gold dot, sits on more air, and is
+   set a weight lighter than the paragraph above it so the description still
+   leads and the list reads as the detail under it. Archivo is variable
+   100..900 here, so 300 is a real cut, not a synthesised one.
+
+   "Includes:" takes the card's existing tiny-label idiom exactly (the same
+   Menlo, tracking and gold as `.depth__label` above it, a size down): a
+   kicker, which is the one role Menlo keeps on this site. */
+body.is-ceremony .depth__includes {
+  margin: .2rem 0 .9rem;
+  font-family: var(--mono);
+  font-weight: 400;
+  font-size: .64rem;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+body.is-ceremony .depth__list {
+  margin: 0 0 1.6rem;
+  padding: 0;
+  list-style: none;
+  border-top: 0;
+  display: grid;
+  gap: .8rem;
+}
+body.is-ceremony .depth__list li {
+  position: relative;
+  padding: 0 0 0 1.4rem;
+  border-bottom: 0;
+  font-family: var(--body);
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--t-ink);
+  text-align: left;
+  text-wrap: pretty;
+}
+body.is-ceremony .depth__list li::before {
+  content: "";
+  position: absolute;
+  left: .1rem;
+  top: .8em;                /* on the first line's middle, not the box top, so
+                               a two-line item keeps its dot beside line one */
+  width: .36rem;
+  height: .36rem;
+  margin-top: -.18rem;
+  border-radius: 50%;
+  background: var(--gold);
+}
+
+/* ── "I'VE BEEN WHERE YOU ARE" IS ITS OWN ZONE (2026-10-02) ────────────────
+   At her ask: deep navy, cream words, gold label and heading, and enough
+   padding that the page changes mood when you reach it. LAYOUT IS UNTOUCHED
+   — the two even columns, the photo's size, tilt and inner-edge placement,
+   and the order of the paragraphs are all exactly as they were; only the
+   ground, the ink and the breathing room change.
+
+   Every ceremony band is FULL BLEED: the override at ~line 3110 sets
+   `body.is-ceremony .temple__band` to `width: 100%` with `border-radius: 0`,
+   so this is a true edge-to-edge stripe and the measure comes from the
+   `.temple__note` grid inside it. That is why there is no radius and no
+   margin here — a rounded corner or a cream gap at the viewport edge would
+   read as a mistake on a stripe, and the padding alone makes the zone.
+
+   These selectors have to come last in the file: the TYPE COLOUR block above
+   sets `body.is-ceremony .temple__notetext .temple__lede` to `--t-body` at
+   the same specificity, so this wins on order alone. Don't move it up. */
+body.is-ceremony .temple__band--note {
+  background: #12122e;
+  padding-block: clamp(5.5rem, 13vh, 9rem);
+}
+body.is-ceremony .temple__band--note .temple__label { color: var(--gold-lite); }
+body.is-ceremony .temple__notetext .temple__label { color: var(--gold-lite); }
+body.is-ceremony .temple__band--note .temple__noteline { color: var(--gold-lite); }
+body.is-ceremony .temple__notetext .temple__lede,
+body.is-ceremony .temple__band--note .temple__lede {
+  color: var(--t-cream);
+}
+/* the snapshot's shadow was a warm brown for the cream ground; on navy it
+   reads as nothing, so it goes deeper and cooler to keep the photo sitting
+   on the ground rather than floating on it */
+body.is-ceremony .temple__band--note .temple__snap img {
+  box-shadow: 0 18px 44px rgba(0, 0, 0, .45);
+}
+
+/* ── HOVER STATES INSIDE THE NOTE SECTION (2026-10-02) ─────────────────────
+   At her ask. Three things, and one of them is a placeholder:
+
+   1. The word-parting hover (words.js) already ran on this section's four
+      paragraphs — `.temple__lede` has been in its selector list since v=302.
+      What it did NOT cover was the section's own heading, so
+      `.temple__noteline` is now in that list too. Nothing here in CSS; the
+      `.cw` transition already in the WORDS block does the settling.
+   2. The snapshot lifts a little and brightens on hover: the only other
+      element in the section a pointer can land on.
+   3. A gold underline that sweeps in from the left for links. THERE ARE NO
+      LINKS OR BUTTONS IN THIS SECTION YET — the note is four paragraphs, a
+      heading and a photo — so this rule is waiting for the first one she adds
+      rather than changing anything today. Scoped to the band so it can never
+      touch the page's real buttons, which keep their own solid/transparent
+      hover from the SOLID BUTTONS block. */
+body.is-ceremony .temple__band--note .temple__snap {
+  transition: transform .35s ease, filter .35s ease;
+}
+body.is-ceremony .temple__band--note .temple__snap:hover {
+  transform: rotate(-1.5deg) translateY(-4px) scale(1.012);
+  filter: brightness(1.06);
+}
+body.is-ceremony .temple__band--note a:not(.btn-enter) {
+  position: relative;
+  color: var(--gold-lite);
+  text-decoration: none;
+  transition: color .25s ease;
+}
+body.is-ceremony .temple__band--note a:not(.btn-enter)::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -.14em;
+  height: 1px;
+  background: var(--gold-lite);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform .34s cubic-bezier(.22, .61, .36, 1);
+}
+body.is-ceremony .temple__band--note a:not(.btn-enter):hover,
+body.is-ceremony .temple__band--note a:not(.btn-enter):focus-visible {
+  color: #fff6e2;
+}
+body.is-ceremony .temple__band--note a:not(.btn-enter):hover::after,
+body.is-ceremony .temple__band--note a:not(.btn-enter):focus-visible::after {
+  transform: scaleX(1);
+}
+@media (prefers-reduced-motion: reduce) {
+  body.is-ceremony .temple__band--note .temple__snap,
+  body.is-ceremony .temple__band--note a:not(.btn-enter)::after { transition: none; }
+  body.is-ceremony .temple__band--note .temple__snap:hover { transform: rotate(-1.5deg); }
 }

@@ -25,6 +25,10 @@
 (function () {
   var SELECT = [
     '.temple__lede',
+    '.temple__noteline',   /* 2026-10-02: the one heading in the list, so the
+                              note section's own line parts like its paragraphs.
+                              Safe to split because it is nowrap on desktop and
+                              one line either way, so no line break can move. */
     '.temple__beat',
     '.temple__welcome p',
     '.temple__pull',
