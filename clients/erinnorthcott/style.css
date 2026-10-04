@@ -151,15 +151,25 @@ body {
   transform: translateY(-50%);
   z-index: -2;
   pointer-events: none;
+  /* MINIMISED 2026-10-04: "whatever this white blurry line is, it needs to
+     be minimized". This is the band across the night sky. Three changes,
+     all of them making it less of a LINE and more of a glow:
+       - opacity ceiling .78 -> .26 at full night (about a third), and the
+         floor .16 -> .06 so it barely registers before the night
+       - the ellipse goes 58% -> 96% of the element's height, so the same
+         light is spread over nearly twice the band, and the stops move out
+         (40->46, 66->74) so the core is less concentrated
+       - blur 34px -> 54px
+     Kept, not deleted: it is what stops the night reading as flat. */
   background:
-    radial-gradient(220% 58% at 50% 50%,
+    radial-gradient(220% 96% at 50% 50%,
       rgba(255,244,222,.55) 0%,
-      rgba(233,199,102,.30) 40%,
-      rgba(201,168,76,.12) 66%,
-      transparent 92%);
-  filter: blur(34px);
+      rgba(233,199,102,.30) 46%,
+      rgba(201,168,76,.12) 74%,
+      transparent 94%);
+  filter: blur(54px);
   mix-blend-mode: screen;
-  opacity: calc(.16 + var(--night, 0) * .62);
+  opacity: calc(.06 + var(--night, 0) * .20);
   will-change: opacity;
 }
 
@@ -1420,15 +1430,36 @@ body {
 
      Then she asked for it in the file itself: "i need the file of the
      nightsky with daniels eyes overlaid to have a gradient opacity at the
-     top, so it fades better". So there is NO MASK HERE ANY MORE. The fade
-     is the alpha channel of images/starskissingme2-fade.webp, the same
-     smoothstep over the top 54% of the frame. WebP because PNG with that
-     alpha is 3.07MB for a starfield this noisy, while WebP at q90 is 274KB
-     — smaller than the 687KB JPG it replaces. The .jpg stays on disk as the
-     original and as the <picture> fallback.
+     top, so it fades better". So there is NO MASK HERE ANY MORE — the fade
+     is an alpha channel. WebP because PNG with that alpha is 3.07MB for a
+     starfield this noisy, while WebP at q90 is ~280KB, smaller than the
+     687KB JPG.
 
-     If the fade ever needs retuning, it is the END constant in the recipe
-     in the commit message, not CSS. */
+     THE RAMP IS NOW HERS (2026-10-04, "please update the photo to the new
+     one, 2.2"). starskissingme2.2.jpg is the SAME PHOTOGRAPH as
+     starskissingme2.jpg — below y=300 they are pixel-identical, max
+     difference 3/255, which is JPEG noise. The only thing in 2.2 is a fade
+     she painted at the top, and because JPEG has no alpha it is flattened
+     onto WHITE. Dropped in as-is it would read as a pale haze over the
+     night, not a fade.
+
+     So the ramp was recovered instead of copied. Flattening on white means
+     flat = a*orig + (1-a)*255, so a = (255 - flat) / (255 - orig), taken per
+     row (her ramp is horizontal), lightly smoothed, and pinned to opaque
+     below the ramp. Reconstructing her file from it lands within 0.11/255
+     mean, 1.1 max — her curve exactly. The RGB comes from the UNTOUCHED
+     .jpg, not from 2.2, so none of the white she flattened onto is carried
+     into the half-transparent rows.
+
+     Her curve: alpha .67 at the very top, .73 by y=30, .90 by y=100, full by
+     y=232 (20% of the frame). It is deliberately much shallower than the
+     54% smoothstep that shipped at v=314 four minutes before she sent 2.2,
+     so this is read as her saying that faded too far. NOTE it stops at .67
+     rather than reaching 0, so the photo still arrives at two thirds
+     strength at the element's top edge.
+
+     To go back to the generated 54% smoothstep, point the <picture> at
+     starskissingme2-fade.webp, which is still in images/. */
 }
 .endsky img {
   display: block;
