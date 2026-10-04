@@ -6986,12 +6986,13 @@ body.is-ceremony .work__part--second .temple__label { margin-top: 0; }
    text nodes again. If a text hover ever comes back it starts from scratch;
    do not resurrect this one. */
 
-/* ── BODY COPY RANGED LEFT (2026-10-02, Inner Ceremonies) ────────────────
-   These paragraphs were justified (both edges flush, last line stretched)
-   earlier the same day; at her ask the stretching is gone and they range
-   left with a natural ragged right edge. Same selectors, so the set of
-   paragraphs covered is unchanged — headings, labels and every
-   quote-voiced line were never in this list. */
+/* ── BODY COPY JUSTIFIED, LAST LINE LEFT (2026-10-04, Inner Ceremonies) ───
+   History: justified 2026-10-02 (both edges flush AND the last line
+   stretched across the measure), ranged left later the same day because the
+   stretched last line was the problem, and now justified again at her ask
+   with `text-align-last: left` so the final line of every paragraph stays
+   short and ranged left. Same selectors throughout — headings, labels and
+   every quote-voiced line were never in this list. */
 body.is-ceremony .temple__lede,
 body.is-ceremony .depth__text,
 body.is-ceremony .depth__foot,
@@ -7000,13 +7001,16 @@ body.is-ceremony .consult__refund,
 body.is-ceremony .consult__text,
 body.is-ceremony .pillar__text,
 body.is-ceremony .faq__inner p {
-  text-align: left;
+  text-align: justify;
+  text-align-last: left;
 }
 
-/* The Work's two parts were ranged left when that band was split, which is
-   what every paragraph above does again now. Kept explicit so the two rules
-   do not read as a conflict later. */
-body.is-ceremony .work__part .temple__lede { text-align: left; }
+/* The Work's two parts take the same treatment as every paragraph above.
+   Kept explicit so the two rules do not read as a conflict later. */
+body.is-ceremony .work__part .temple__lede {
+  text-align: justify;
+  text-align-last: left;
+}
 
 /* ── PILLAR CARDS LIFT AND TILT ON HOVER (2026-10-02) ──────────────────────
    The flip owns `.pillar__card` (rotateY(180deg) on .is-flipped), so the
