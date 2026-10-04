@@ -6202,11 +6202,17 @@ body.is-ceremony .glint::before,
    laid beside a letter.
    ========================================================================== */
 body.is-ceremony .temple__band--note { padding-block: clamp(2rem, 6vh, 4rem) clamp(4.5rem, 11vh, 7.5rem); }
+/* "move the photo to the left, widen the text paragraph" (2026-10-04): the
+   grid was two even halves with the photo right-aligned inside the left one,
+   which left 146px of dead navy to its left and held the letter to 580px.
+   The left column now sizes to the photo itself and the photo sits at the
+   start of it, so the letter takes everything that frees up. Photo size,
+   tilt and the gap between the two are unchanged. */
 body.is-ceremony .temple__note {
   width: min(100% - 5rem, 1240px);
   margin-inline: auto;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-columns: auto minmax(0, 1fr);
   gap: clamp(2rem, 5vw, 5rem);
   align-items: center;
   text-align: left;
@@ -6214,7 +6220,7 @@ body.is-ceremony .temple__note {
 body.is-ceremony .temple__snap {
   margin: 0;
   width: clamp(260px, 32vw, 420px);
-  justify-self: end;
+  justify-self: start;
   transform: rotate(-1.5deg);
 }
 body.is-ceremony .temple__snap img {
@@ -6232,7 +6238,7 @@ body.is-ceremony .temple__snap img {
    means the column itself sets the measure and the lines run the full width
    of the text half. NOTHING MOVES: the grid is still two even columns and
    the photo is still right-aligned at the inner edge of the left one. */
-body.is-ceremony .temple__notetext { max-width: min(100%, 68ch); }
+body.is-ceremony .temple__notetext { max-width: 100%; }
 body.is-ceremony .temple__notetext .temple__label { justify-content: flex-start; }
 body.is-ceremony .temple__noteline {
   margin: 0 0 clamp(1.1rem, 2.2vw, 1.6rem);
