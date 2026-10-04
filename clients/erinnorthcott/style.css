@@ -658,29 +658,12 @@ body {
   filter: contrast(1.03) saturate(.85); /* gently muted to sit in the palette */
 }
 
-/* "Watch the trailer →" cue, revealed on hover */
-.filmframe__watch {
-  position: absolute;
-  left: 50%; bottom: 16px;
-  transform: translate(-50%, 8px);
-  z-index: 3;
-  font-family: var(--mono);
-  font-size: .64rem;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-  color: #fff7ea;
-  padding: .55rem 1rem;
-  border: 1px solid rgba(255,247,234,.55);
-  border-radius: 0;
-  background: rgba(20,12,20,.4);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  opacity: 0;
-  transition: opacity .4s var(--ease), transform .4s var(--ease);
-  pointer-events: none;
-}
-.filmframe__link:hover .filmframe__watch,
-.filmframe__link:focus-visible .filmframe__watch { opacity: 1; transform: translate(-50%, 0); }
+/* The "Watch the trailer" cue is GONE (2026-10-02, at her ask): "i dont
+   want to see that watch the trailer button, it shouldn't be there". The
+   span is out of index.html and every rule that existed only for it is out
+   of here. The hero image itself is still the link — the <a> wrapping it
+   still opens the trailer dialog and still carries the aria-label — so
+   nothing is lost but the badge. */
 .filmframe__img::after {               /* subtle warm grade for cohesion */
   content: "";
   position: absolute; inset: 0;
@@ -768,7 +751,8 @@ body {
   aspect-ratio: 1 / 1;
   overflow: hidden;
   border-radius: 0;
-  box-shadow: 0 0 0 1px rgba(66,46,12,.4);   /* seated inside the metal */
+  /* the dark ring that seated the print in the metal is gone with the
+     emboss (2026-10-02) — same as .erin__plate img */
 }
 .becoming__film video {
   width: 100%;
@@ -1424,9 +1408,27 @@ body {
   z-index: 0;
   overflow: hidden;
   pointer-events: none;
-  /* no seam at the top — it surfaces out of the night sky */
-  -webkit-mask-image: linear-gradient(180deg, transparent 0%, rgba(0,0,0,.6) 12%, #000 26%);
-          mask-image: linear-gradient(180deg, transparent 0%, rgba(0,0,0,.6) 12%, #000 26%);
+  /* THE TOP SEAM (2026-10-02). Two passes, and the second is what is here.
+
+     It started as `transparent 0%, rgba(0,0,0,.6) 12%, #000 26%` — three
+     stops, the first leg carrying 60% of the opacity in 12% of the height.
+     That knee is a sharp change in SLOPE, and the eye reads a slope change
+     as an edge even though no stop is hard: "the transition here feels
+     harsh, i dont want to see such a stark outline". Replacing it with a
+     smoothstep measured 22% less slope change and stretched the ramp from
+     187px to 274px.
+
+     Then she asked for it in the file itself: "i need the file of the
+     nightsky with daniels eyes overlaid to have a gradient opacity at the
+     top, so it fades better". So there is NO MASK HERE ANY MORE. The fade
+     is the alpha channel of images/starskissingme2-fade.webp, the same
+     smoothstep over the top 54% of the frame. WebP because PNG with that
+     alpha is 3.07MB for a starfield this noisy, while WebP at q90 is 274KB
+     — smaller than the 687KB JPG it replaces. The .jpg stays on disk as the
+     original and as the <picture> fallback.
+
+     If the fade ever needs retuning, it is the END constant in the recipe
+     in the commit message, not CSS. */
 }
 .endsky img {
   display: block;
@@ -1439,7 +1441,11 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(6,7,18,.22) 0%, rgba(6,7,18,.34) 55%, rgba(6,7,18,.60) 100%);
+  /* this used to be masked along with the photo; with the fade moved into
+     the file, its own top has to fade or IT becomes the hard edge */
+  background: linear-gradient(180deg,
+    rgba(6,7,18,0) 0%, rgba(6,7,18,.10) 22%, rgba(6,7,18,.22) 40%,
+    rgba(6,7,18,.34) 62%, rgba(6,7,18,.60) 100%);
 }
 
 
@@ -1565,7 +1571,15 @@ body {
 
    Phones get their ratio back below 820px, where the two stack and there is
    no text beside the photo to match. */
-.erin__photo { height: 100%; }
+/* "i want erins bio pic to be a bit taller" (2026-10-02). It was exactly as
+   tall as the text, which is what she asked for an hour earlier; now it
+   overhangs the words by half of 3.5rem at each end. align-self: center
+   takes the figure OUT of the row's stretch so it can be taller than its
+   own row — leave it stretching and height can never exceed the row, which
+   is the text. The row is still the text's height, so the section does not
+   grow; the photo just overhangs into padding that was already there
+   (50px above, 57px below). */
+.erin__photo { align-self: center; height: calc(100% + 3.5rem); }
 .erin__plate {
   width: 100%;
   height: 100%;
@@ -1832,17 +1846,28 @@ body.is-connect .footer {
 /* the rose's right edge lines up with the panels below it */
 /* a smaller rose, still right-aligned with the panels below */
 /* the same gilt frame as Erin's portrait */
-/* the teaser plate, flattened exactly like .erin__plate above (2026-10-02).
-   Same flat --gold, same hairline, same drop shadow kept, and scaled down
-   with it: 500 -> 415px, the same ~17%. The grid column below has to come
-   down with it or the plate just sits left in a 500px slot with dead space
-   at the right. If one of these two ever changes, change both. */
+/* the teaser plate, now matched to .erin__plate above (2026-10-02): "also
+   the inner cereomies rose image boarder needs to be ajusted, make it
+   thinner with no gradient or emboss".
+
+   Same answer as the bio photo, so the two finally agree again: a flat 6px
+   mat in --gold #c9a84c. The gradient went at v=310 — what she can still
+   see is an older version on her screen — and this takes the last two heavy
+   things with it, the 1px hairline and the emboss. The emboss was never one
+   property: it was the `inset 0 0 0 1px rgba(255,242,206,.5)` lit edge on
+   this element (gone at v=310) PLUS the dark ring on .becoming__film below,
+   which read as the print sunk into metal. Both are gone now.
+
+   6px is a flat value on purpose, not a clamp: growing the mat with the
+   viewport is exactly what made it read as a slab.
+
+   Width stays 415px from v=310, and .becoming__grid's second track tracks
+   it. If one of these two plates changes, change both. */
 .becoming__media {
   max-width: 415px;
   margin: 0;
-  padding: clamp(.5rem, 1.1vw, .8rem);
+  padding: 6px;
   background: #c9a84c;
-  border: 1px solid rgba(138, 110, 44, .55);
   box-shadow: 0 20px 46px rgba(74,42,20,.26);
 }
 .becoming__grid {
@@ -5923,8 +5948,7 @@ html body.is-temple-light .temple__book,
 html body.is-daniel .dan__btn,
 html body.is-daniel .dan__btn--fill,
 html body.is-daniel .cosmos__btn,
-html body .trailer__out,
-html body .filmframe__watch {
+html body .trailer__out {
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -6037,8 +6061,7 @@ html body .becoming__text .btn-enter,
 html body .collab__inner .btn-enter,
 html body.is-daniel .dan__btn,
 html body.is-daniel .dan__btn--fill,
-html body .trailer__out,
-html body .filmframe__watch {
+html body .trailer__out {
   --tal-ink:   #fff1d6;
   --tal-edge:  rgba(233,199,102,.7);
   --tal-edge-hi: #f3d98a;
@@ -6061,10 +6084,6 @@ html body.is-daniel .dan__btn--fill { --tal-fill: linear-gradient(180deg, rgba(2
 html body.is-daniel .cosmos__btn { min-width: 0; padding: 1.15rem 2.6rem; font-size: .82rem; }
 html body.is-daniel .cosmos__btn--send { padding: .95rem 1.8rem; }
 html body .trailer__out { font-size: .66rem; padding: .7rem 1.4rem; letter-spacing: .18em; border-bottom-width: 1px; }
-html body .filmframe__watch { font-size: .6rem; padding: .55rem 1.1rem; gap: 0; backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); }
-html body .filmframe__link:hover .filmframe__watch,
-html body .filmframe__link:focus-visible .filmframe__watch { opacity: 1; transform: translate(-50%, 0); }
-html body .filmframe__watch { transform: translate(-50%, 8px); }
 
 @media (prefers-reduced-motion: reduce) {
   html body .btn-enter, html body .connect__send, html body .temple__book, html body .dan__btn, html body .cosmos__btn, html body .trailer__out {
@@ -6521,7 +6540,6 @@ html body.is-daniel .dan__btn,
 html body.is-daniel .dan__btn--fill,
 html body.is-daniel .cosmos__btn,
 html body .trailer__out,
-html body .filmframe__watch,
 html body #sunset .btn-enter,
 html body .film__cta .btn-enter {
   --tal-solid: #c9a84c;
@@ -6570,12 +6588,10 @@ html body .becoming__text .btn-enter,
 html body .collab__inner .btn-enter,
 html body.is-daniel .dan__btn,
 html body.is-daniel .dan__btn--fill,
-html body .trailer__out,
-html body .filmframe__watch { --tal-solid: #e2b866; --tal-hover-ink: #fff1d6; }
+html body .trailer__out { --tal-solid: #e2b866; --tal-hover-ink: #fff1d6; }
 /* the ceremony page keeps her marigold */
 html body.is-ceremony .temple__book,
 html body.is-temple-light .temple__book { --tal-solid: #ffca2c; }
-html body .filmframe__watch { background: rgba(226,184,102,.92); }
 
 /* the arch overlay never takes the pointer (2026-09-10): its frame and wall
    sat over the hero's Book a Complimentary Call button and swallowed every
@@ -6593,12 +6609,10 @@ html body.is-daniel .dan__btn,
 html body.is-daniel .dan__btn--fill,
 html body.is-daniel .cosmos__btn,
 html body .trailer__out,
-html body .filmframe__watch,
 html body #sunset .btn-enter,
 html body .film__cta .btn-enter,
 html body .becoming__text .btn-enter,
 html body .collab__inner .btn-enter { --tal-solid: #ffca2c; }
-html body .filmframe__watch { background: rgba(255,202,44,.94); }
 
 /* ==========================================================================
    HOMEPAGE BUTTONS follow the sky (2026-09-10). The marigold got lost on the

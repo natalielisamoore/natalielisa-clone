@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=JetBrains+Mono:wght@300;400;500&family=Caveat:wght@500;600;700&family=Karla:wght@300..700&family=Permanent+Marker&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css?v=313" />
+  <link rel="stylesheet" href="style.css?v=314" />
 </head>
 <body class="try-instrument">
   <!-- Arrival: a luminous veil that dissolves on load — you cross a threshold -->
@@ -105,8 +105,7 @@
           <a class="filmframe__link" data-trailer href="https://www.youtube.com/watch?v=04iHR-eZIXY" target="_blank" rel="noopener" aria-haspopup="dialog" aria-label="Watch the trailer for Daniel — an HBO Original documentary">
             <div class="filmframe__img">
               <!-- data-has-audio flips to "true" the moment the clip carries sound -->
-              <video class="filmframe__vid" data-src="videos/daniel.mp4?v=313" data-has-audio="true" poster="images/daniel.jpg?v=313" loop muted playsinline preload="none" aria-hidden="true"></video>
-              <span class="filmframe__watch">Watch the trailer &rarr;</span>
+              <video class="filmframe__vid" data-src="videos/daniel.mp4?v=314" data-has-audio="true" poster="images/daniel.jpg?v=314" loop muted playsinline preload="none" aria-hidden="true"></video>
             </div>
             <!-- Key-art label: the film's own line, brushed onto torn tape -->
             <span class="keyart">
@@ -157,7 +156,7 @@
 
         <figure class="erin__photo reveal">
           <div class="erin__plate">
-            <img src="images/erin-rose.jpg?v=313" alt="Erin Northcott" loading="lazy" decoding="async" width="1920" height="1042" />
+            <img src="images/erin-rose.jpg?v=314" alt="Erin Northcott" loading="lazy" decoding="async" width="1920" height="1042" />
           </div>
         </figure>
 
@@ -258,7 +257,14 @@
   <!-- Daniel in the starfield — the page ends inside him, behind the closing
        quote and the footer alike -->
   <div class="endsky" aria-hidden="true">
-    <img src="images/starskissingme2.jpg" alt="" loading="lazy" decoding="async" />
+    <!-- The fade at the top is baked into the WebP's alpha channel, not done
+         in CSS (2026-10-02, at her ask). The .jpg is the original and the
+         fallback; it carries no alpha, so on anything too old for WebP alpha
+         this meets the night with a hard edge, as it always did. -->
+    <picture>
+      <source srcset="images/starskissingme2-fade.webp?v=314" type="image/webp" />
+      <img src="images/starskissingme2.jpg?v=314" alt="" loading="lazy" decoding="async" />
+    </picture>
   </div>
 
   <!-- The trailer plays here, not on YouTube. trailer.js fills the src on open
@@ -283,15 +289,15 @@
     </button>
   </dialog>
 
-  <script src="sky.js?v=313" defer></script>
+  <script src="sky.js?v=314" defer></script>
   <script src="stars.js" defer></script>
-  <script src="motes.js?v=313" defer></script>
-  <script src="cursor.js?v=313" defer></script>
-  <script src="letters.js?v=313" defer></script>
-  <script src="sound.js?v=313" defer></script>
-  <script src="petals.js?v=313" defer></script>
-  <script src="reveal.js?v=313" defer></script>
-  <script src="glint.js?v=313" defer></script>
-  <script src="trailer.js?v=313" defer></script>
+  <script src="motes.js?v=314" defer></script>
+  <script src="cursor.js?v=314" defer></script>
+  <script src="letters.js?v=314" defer></script>
+  <script src="sound.js?v=314" defer></script>
+  <script src="petals.js?v=314" defer></script>
+  <script src="reveal.js?v=314" defer></script>
+  <script src="glint.js?v=314" defer></script>
+  <script src="trailer.js?v=314" defer></script>
 </body>
 </html>
