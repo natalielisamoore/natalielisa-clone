@@ -1505,9 +1505,13 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 1.1fr;   /* was .88/1.12: her photo column widened 2026-10-02 */
+  /* 2026-10-02: her photo column was .88fr against 1.12fr and is now the
+     WIDER of the two. align-items is stretch, not centre, because she asked
+     for the photo to match the length of the text — stretch makes the row
+     its own answer at every width instead of a height I guessed once. */
+  grid-template-columns: 1.15fr 1fr;
   gap: clamp(1.75rem, 4.6vw, 4.25rem);
-  align-items: center;
+  align-items: stretch;
   text-align: left;
 }
 .erin__photo { margin: 0; }
@@ -1542,18 +1546,39 @@ body {
    NOTE: .becoming__media (the rose teaser) still carries the thicker flat
    plate from v=310. She has only ever named the bio pic, so the two are
    deliberately out of step until she says which way to settle it. */
+/* THE PHOTO IS AS TALL AS THE TEXT (2026-10-02, her ask: "make the photo
+   taller, so it natches the length of the text", and "NO I MEANT IT WIDER").
+
+   There is no aspect-ratio here any more, and that is the point. A ratio is
+   a height guessed once; the text block's height changes with the column
+   width, the copy and the font, so a guessed ratio only matches at one
+   viewport. Instead the grid row stretches and the photo takes whatever
+   height the words next to it come to — so they are flush top and bottom at
+   EVERY width, which is also what "the spacing is all off" was about.
+
+   The chain has to be unbroken for that to work: the grid stretches the
+   figure, .erin__photo passes the height to .erin__plate, and the plate is a
+   grid so the img can be height: 100% of it. `min-height: 0` on the img is
+   load-bearing — a grid item's default min-height is auto, which is the
+   image's own intrinsic height, and without it the photo refuses to shrink
+   below 1042px and drags the whole section down with it.
+
+   Phones get their ratio back below 820px, where the two stack and there is
+   no text beside the photo to match. */
+.erin__photo { height: 100%; }
 .erin__plate {
   width: 100%;
-  max-width: 560px;
+  height: 100%;
   padding: 6px;
   background: #c9a84c;
   box-shadow: 0 20px 46px rgba(74,42,20,.26);
+  display: grid;
 }
 .erin__plate img {
   display: block;
   width: 100%;
-  height: auto;              /* beat the height="894" attribute so the ratio applies */
-  aspect-ratio: 5 / 4;
+  height: 100%;
+  min-height: 0;
   object-fit: cover;
   object-position: 70% 50%;   /* her face right of centre, the bloom kept on the left */
   filter: saturate(1.02) brightness(1.02);
@@ -1561,6 +1586,10 @@ body {
 
 .erin__text { max-width: 60ch; }
 .erin__text .lede { margin-top: clamp(.9rem, 2vw, 1.35rem); }
+/* the photo column took width off this one, which left the second paragraph
+   ending on a lone "own." — text-wrap: pretty pulls a word down to keep the
+   last line company. See the no-orphans rule. */
+.erin__text .lede { text-wrap: pretty; }
 .erin__title {
   font-size: clamp(2.8rem, 5vw, 4.2rem);
   margin: .35rem 0 0;
@@ -1574,8 +1603,12 @@ body {
     text-align: center;
   }
   /* the 300px cap was for the framed portrait; frameless and landscape it
-     just made the photo narrower than the words under it */
-  .erin__plate { margin: 0 auto; max-width: 100%; }
+     just made the photo narrower than the words under it. Stacked there is
+     no text beside the photo to match, so the ratio comes back and the
+     full-height chain is undone. */
+  .erin__photo { height: auto; }
+  .erin__plate { margin: 0 auto; max-width: 100%; height: auto; }
+  .erin__plate img { height: auto; aspect-ratio: 5 / 4; }
   .erin__text { max-width: none; }
   .erin__ink { width: 52vw; right: -18%; top: 78%; opacity: .38; }
 }
