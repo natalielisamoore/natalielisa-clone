@@ -1625,7 +1625,26 @@ body {
   height: 100%;
   min-height: 0;
   object-fit: cover;
-  object-position: 70% 50%;   /* her face right of centre, the bloom kept on the left */
+  /* CENTRED ON HER FACE (2026-10-04, "i need erins photo centered to her
+     face"). This is 50% because the FILE is now centred on her, not because
+     50% of erin-rose.jpg is her face.
+
+     No object-position value could do it. erin-rose.jpg is a 1920x1042
+     composite with the rose on the left and Erin at 68% across, and this
+     box's aspect changes with the viewport because its height follows the
+     text beside it. Work out the X that centres her at each width and you
+     get 82% at 1024, 91% at 1200, 99% at 1280, 98% at 1440, 92% at 1680 —
+     there is no single number, so she would drift at every breakpoint.
+
+     So the crop moved into the file: erin-rose-face.jpg is erin-rose.jpg
+     cropped to (692, 0, 1920, 1042), as wide as it can be while staying
+     centred on her, which puts her face at exactly 50.0%. Now 50% centres
+     her at EVERY width whatever the box does. 1228x1042, 197KB, down from
+     355KB. The rose is gone from this frame — it was only ever reachable
+     by pulling the crop left, which is the thing that de-centred her.
+
+     erin-rose.jpg stays in images/ as the source of the crop. */
+  object-position: 50% 50%;
   filter: saturate(1.02) brightness(1.02);
 }
 
@@ -1892,10 +1911,12 @@ body.is-connect .footer {
    6px is a flat value on purpose, not a clamp: growing the mat with the
    viewport is exactly what made it read as a slab.
 
-   Width stays 415px from v=310, and .becoming__grid's second track tracks
-   it. If one of these two plates changes, change both. */
+   SIZE, 2026-10-04: "make the inner ceremonies rose square bigger" —
+   415px -> 500px, which is where it was before her #15 shrank it 17%.
+   .becoming__grid's second track has to move with it or the plate sits
+   left in its old slot with dead space beside it. */
 .becoming__media {
-  max-width: 415px;
+  max-width: 500px;
   margin: 0;
   padding: 6px;
   background: #c9a84c;
@@ -1903,7 +1924,7 @@ body.is-connect .footer {
 }
 .becoming__grid {
   max-width: 1040px;
-  grid-template-columns: minmax(0, 52ch) 415px;   /* tracks .becoming__media */
+  grid-template-columns: minmax(0, 52ch) 500px;   /* tracks .becoming__media */
   justify-content: center;
   gap: clamp(1.5rem, 3.4vw, 3rem);
 }
