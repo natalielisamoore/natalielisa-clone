@@ -6226,7 +6226,13 @@ body.is-ceremony .temple__snap img {
   border-radius: clamp(14px, 1.6vw, 20px);
   box-shadow: 0 10px 28px rgba(120,80,50,.14);
 }
-body.is-ceremony .temple__notetext { max-width: 58ch; }
+/* "the paragraph text needs to be wider too" (2026-10-04): the letter was
+   capped at 58ch (499px) inside a 580px column, so it stopped 81px short of
+   its own column for no reason. The cap now sits past the column, which
+   means the column itself sets the measure and the lines run the full width
+   of the text half. NOTHING MOVES: the grid is still two even columns and
+   the photo is still right-aligned at the inner edge of the left one. */
+body.is-ceremony .temple__notetext { max-width: min(100%, 68ch); }
 body.is-ceremony .temple__notetext .temple__label { justify-content: flex-start; }
 body.is-ceremony .temple__noteline {
   margin: 0 0 clamp(1.1rem, 2.2vw, 1.6rem);
@@ -6895,9 +6901,21 @@ body.is-ceremony .temple__quote--work {
 body.is-ceremony .temple__quote--work blockquote { text-wrap: balance; }
 
 body.is-ceremony .temple__quote--pillars {
-  width: min(100% - 3rem, 52ch);
+  width: min(100% - 3rem, 60rem);
   margin: clamp(3rem, 6.5vh, 4.6rem) auto 0;
   padding: 0;
+}
+/* ── MADONNA ON ONE LINE (2026-10-04) ──────────────────────────────────────
+   "this line needs to be longer too, one line". The 52ch box broke it after
+   "no real", so the measure is widened and the line is held on one row with
+   nowrap, the same treatment the script headings take. The size is tied to
+   vw as well as rem so it shrinks instead of overflowing on a narrow
+   desktop window; under 820px it goes back to wrapping. */
+@media (min-width: 821px) {
+  body.is-ceremony .temple__quote--pillars blockquote {
+    white-space: nowrap;
+    font-size: min(1.72rem, 2.5vw);
+  }
 }
 /* the same italic the pull lines take on this page, so the two quotes sit in
    the page's own voice rather than the older serif */
