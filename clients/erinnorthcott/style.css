@@ -1637,11 +1637,18 @@ body {
      there is no single number, so she would drift at every breakpoint.
 
      So the crop moved into the file: erin-rose-face.jpg is erin-rose.jpg
-     cropped to (692, 0, 1920, 1042), as wide as it can be while staying
-     centred on her, which puts her face at exactly 50.0%. Now 50% centres
-     her at EVERY width whatever the box does. 1228x1042, 197KB, down from
-     355KB. The rose is gone from this frame — it was only ever reachable
-     by pulling the crop left, which is the thing that de-centred her.
+     cropped to (876, 0, 1920, 1042) — as wide as it can be while staying
+     centred on her, since she sits close to the right edge of the source.
+     1044x1042, 176KB, down from 355KB.
+
+     TOOK TWO GOES. The first crop used a face centre of 68% read off a
+     grid over the source, and she came back with "the photo is still not
+     centered". Gridding the CROP instead showed her face at 57.5% of it,
+     i.e. 72.8% of the source: 5 points out, which at this zoom is most of
+     a face. **Measure the face on the CROP and check the 50% line lands on
+     her nose — do not trust a reading taken off the wide composite.**
+     The rose is gone from this frame; it was only ever in shot by pulling
+     the crop left, which is the same thing that pushed her off centre.
 
      erin-rose.jpg stays in images/ as the source of the crop. */
   object-position: 50% 50%;
@@ -6872,6 +6879,21 @@ body.is-ceremony .consult__refund {
 body.is-ceremony .consult__text { font-size: 1rem; }
 
 body.is-ceremony .temple__quote--work,
+/* ── THE WORK QUOTE GETS A REAL MEASURE (2026-10-04) ───────────────────────
+   "in the inner ceremonies page, this text needs to have a wider paragraph
+   box". `.temple__quote--work` had NO width of its own, so as a shrink-to-
+   fit child of the band it sized to its own longest line: 476px at 1440,
+   against 752px for the paragraphs above it and 736px for the pull line
+   below. That is why it broke to five short lines between two much wider
+   blocks. Given the page's own measure it lines up with the body copy and
+   the pull line instead. text-wrap: balance so the lines come out even,
+   the same treatment its sibling --pillars quote already has. */
+body.is-ceremony .temple__quote--work {
+  width: var(--t-measure);
+  margin-inline: auto;
+}
+body.is-ceremony .temple__quote--work blockquote { text-wrap: balance; }
+
 body.is-ceremony .temple__quote--pillars {
   width: min(100% - 3rem, 52ch);
   margin: clamp(3rem, 6.5vh, 4.6rem) auto 0;
