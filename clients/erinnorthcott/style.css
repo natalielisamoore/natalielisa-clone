@@ -3194,10 +3194,14 @@ body.is-ceremony .temple__plantext {
    and hard to read." The spine goes from 62ch to 47rem, the card comes in to
    meet it, and every card loses a third of its vertical padding. */
 body.is-ceremony { --t-measure: min(100% - 6rem, 47rem); }
-/* the indigo of the "meets you there" block (2026-10-04). Sampled from the
-   card she pointed at on soniachoquette.net/good-vibes-tribe: rgb(49,23,178),
-   with its #fbfbfb words and an 18px radius on a 1067px card. */
-body.is-ceremony { --t-indigo: #3117b2; }
+/* the indigo of the "meets you there" block (2026-10-04). The card she
+   pointed at on soniachoquette.net/good-vibes-tribe computes to exactly
+   rgb(49,23,178), and that shipped at v=327 — but on screen she read it as
+   too cold against her warm page, so it is warmed here: more red, a little
+   more green, the blue pulled down. Her screenshot of that card is wide-gamut,
+   which is part of why the same value looks warmer in her capture than in the
+   browser. #fbfbfb words and an 18px radius are hers. */
+body.is-ceremony { --t-indigo: #4226bd; }
 body.is-ceremony .temple__band {
   width: min(100% - 5rem, 1000px);
   padding-block: clamp(2.6rem, 6vh, 4.2rem);
