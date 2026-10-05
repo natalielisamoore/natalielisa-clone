@@ -7371,23 +7371,42 @@ body.is-ceremony .temple__band--note a:not(.btn-enter):focus-visible::after {
    needs no extra width rule here, only the removal of the fades.
    ═══════════════════════════════════════════════════════════════════════════ */
 body.is-ceremony .temple__band--work {
-  padding-block: clamp(4.5rem, 11vh, 7.5rem);
-  background: #f6e5dc;
+  padding-block: clamp(5.5rem, 13vh, 9rem) clamp(6.5rem, 15vh, 10rem);
+  background: transparent;
+}
+/* THE TWO EDGES (2026-10-04, second pass): "the soft gradient went missing,
+   the background has a sharp line on both top and bottom of the image."
+   Cutting the old mask to make the band read as a block left the image
+   stopping dead at both edges. Both edges are soft again, each into the
+   thing it actually meets:
+     TOP — the sky fades out over the first 15% and the page's own ground
+       shows through, which is what the original mask did.
+     BOTTOM — it does NOT fade to nothing, or a pale strip would appear
+       between the stars and the navy below. The navy itself is laid over
+       the last 30% as a gradient, so the sky dissolves straight into The
+       Session's ground and the two bands meet with no line at all.
+   The cream wash carries the same top mask, otherwise the wash alone would
+   draw the hard line the image no longer does. */
+body.is-ceremony .temple__band--work::before,
+body.is-ceremony .temple__band--work::after {
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 15%, #000 100%);
+  mask-image: linear-gradient(180deg, transparent 0%, #000 15%, #000 100%);
 }
 body.is-ceremony .temple__band--work::before {
   background: url("images/work-sky.jpg?v=323") center / cover no-repeat;
   opacity: .9;
   filter: saturate(.92) brightness(1.04);
-  -webkit-mask-image: none;
-  mask-image: none;
 }
-/* the cream wash that keeps the ink legible over the sky */
+/* the cream wash that keeps the ink legible over the sky, and under it the
+   dissolve into the navy of the band below */
 body.is-ceremony .temple__band--work::after {
   content: "";
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: rgba(250, 243, 238, .58);
+  background:
+    linear-gradient(180deg, rgba(18, 18, 46, 0) 64%, #12122e 97%, #12122e 100%),
+    rgba(250, 243, 238, .58);
   pointer-events: none;
 }
 
