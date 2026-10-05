@@ -3201,7 +3201,18 @@ body.is-ceremony { --t-measure: min(100% - 6rem, 47rem); }
    more green, the blue pulled down. Her screenshot of that card is wide-gamut,
    which is part of why the same value looks warmer in her capture than in the
    browser. #fbfbfb words and an 18px radius are hers. */
-body.is-ceremony { --t-indigo: #4226bd; }
+body.is-ceremony { --t-indigo: #96591a; }
+/* AMBER TRIAL (2026-10-04): "lets try the amber" then "keep it more
+   monochromatic", so this is not a contrasting colour but the page's own hue
+   taken deep: #96591a sits at ~30 degrees, between the blush ground (#f7e7df,
+   ~23) and the gold (#c9a84c, ~43), so the coloured blocks read as the dark
+   end of the same family rather than a second colour. White clears 5:1 on it.
+   The token keeps its name so the swap back to the indigo is one line.
+   The gold label and script heading on the note band go cream for this
+   (gold-lite on amber is gold on gold); those rules are at the END of the
+   file, because the note band's own gold-lite rules live there and win on
+   order from here.
+   REVERT = `--t-indigo: #4226bd` here, and the amber block at the file end. */
 body.is-ceremony .temple__band {
   width: min(100% - 5rem, 1000px);
   padding-block: clamp(2.6rem, 6vh, 4.2rem);
@@ -6498,10 +6509,21 @@ body.is-ceremony .temple__meets .temple__hl {
 body.is-ceremony .temple__meets--quotes {
   margin-top: clamp(3rem, 7vh, 5rem);
 }
+/* the quotes fill the card (2026-10-04, "make the text wider here again"):
+   the figure was still on the page's 47rem spine and the pull line on 46rem
+   inside a 1080px card, so both stopped ~200px short of their own box. */
 body.is-ceremony .temple__meets--quotes .temple__quote--work {
   width: 100%;
   margin: 0;
   padding: 0;
+}
+/* balance was what kept them narrow: it evens the lines by SHRINKING the
+   measure, so the quote sat at 663px inside a 965px box. Pretty instead, so
+   the lines run the width of the card and only the last one is protected. */
+body.is-ceremony .temple__meets--quotes .temple__quote--work blockquote,
+body.is-ceremony.try-instrument .temple__meets--quotes .temple__quote--work blockquote {
+  width: 100%;
+  text-wrap: pretty;
 }
 body.is-ceremony .temple__meets--quotes .temple__quote blockquote,
 body.is-ceremony.try-instrument .temple__meets--quotes .temple__quote blockquote,
@@ -6510,11 +6532,14 @@ body.is-ceremony.try-instrument .temple__meets--quotes .temple__pull { color: #f
 body.is-ceremony .temple__meets--quotes .temple__cite { color: rgba(251, 251, 251, .72); }
 /* the pull line closes the card, so it keeps its size but loses the big
    outer margin it had when it stood alone on the page */
-body.is-ceremony .temple__meets--quotes .temple__pull {
-  width: min(100%, 46rem);
+/* the band rule below sets this to 46rem at the same specificity and comes
+   later in the file, so the card scope has to name the band too */
+body.is-ceremony .temple__band--session .temple__meets--quotes .temple__pull {
+  width: 100%;
   margin: clamp(2.4rem, 5vh, 3.4rem) auto 0;
   padding-top: 0;
   border-top: 0;
+  text-wrap: pretty;
 }
 /* the two questions and the closing line stay centred, the paragraph between
    them keeps the justified setting every other paragraph on the page has */
@@ -7502,3 +7527,13 @@ body.is-ceremony .temple__band--session .temple__pull {
    The Work no longer sits directly above it — The Session does, with its own
    padding — so the lift has nothing to lift into and stays cancelled. */
 body.is-ceremony .temple__band--drift { margin-top: 0; }
+
+
+/* ── AMBER TRIAL, the part that has to come last (2026-10-04) ─────────────
+   The note band sets its label and "I've been where you are." to gold-lite
+   near the end of the file; on amber that is gold on gold, so they go cream.
+   These have to sit after that block to win on order. Delete this whole
+   block when the indigo comes back. */
+body.is-ceremony .temple__band--note .temple__label,
+body.is-ceremony .temple__notetext .temple__label,
+body.is-ceremony .temple__band--note .temple__noteline { color: #fdf4e6; }
