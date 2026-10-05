@@ -5732,7 +5732,7 @@ body.is-daniel .dan__sec:not(.dan__sec--paper) {
 }
 body.is-daniel .dan__sec:not(.dan__sec--paper) .dan__secphoto { background: rgba(0,0,0,.18); }
 
-/* the photo corners in gold, with a little metal in them (2026-09-09) */
+/* the photo corners in gold: one flat colour, no gradient (2026-10-05) */
 body.is-daniel .dan__mount::before,
 body.is-daniel .dan__mount::after,
 body.is-daniel .dan__mountc::before,
@@ -5746,14 +5746,9 @@ body.is-daniel .dan__sec--paper .dan__mount::after,
 body.is-daniel .dan__sec--paper .dan__mountc::before,
 body.is-daniel .dan__sec--paper .dan__mountc::after {
   opacity: 1;
-  background: linear-gradient(135deg,
-    #fff3c4 0%, #e9c766 18%, #c9a84c 38%, #a67c2a 55%, #d8b657 72%, #f4e2a2 88%, #b8913a 100%);
+  background: var(--gold);
   filter: drop-shadow(0 1px 1px rgba(0,0,0,.35));
 }
-/* each corner's light comes from the top-left, so the gradient turns with it */
-body.is-daniel .dan__mount::after  { background: linear-gradient(225deg, #fff3c4 0%, #e9c766 18%, #c9a84c 38%, #a67c2a 55%, #d8b657 72%, #f4e2a2 88%, #b8913a 100%); }
-body.is-daniel .dan__mountc::before { background: linear-gradient(45deg,  #fff3c4 0%, #e9c766 18%, #c9a84c 38%, #a67c2a 55%, #d8b657 72%, #f4e2a2 88%, #b8913a 100%); }
-body.is-daniel .dan__mountc::after  { background: linear-gradient(315deg, #fff3c4 0%, #e9c766 18%, #c9a84c 38%, #a67c2a 55%, #d8b657 72%, #f4e2a2 88%, #b8913a 100%); }
 
 /* the opening settles straight into the story: no gap under the hero (2026-09-09) */
 body.is-daniel .dan__story { padding-top: clamp(2rem, 5vh, 3.2rem); }
