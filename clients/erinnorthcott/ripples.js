@@ -33,6 +33,7 @@
   /* the rain: only while the card is on screen, and only while the tab is
      being looked at */
   let timer = 0;
+  let greeted = false;              /* the first drop is the invitation */
   function rainOnce() {
     const r = card.getBoundingClientRect();
     /* keep drops off the very edge so a ring always reads as a circle */
@@ -41,7 +42,12 @@
   }
   function schedule() {
     clearTimeout(timer);
-    timer = setTimeout(rainOnce, 3800 + Math.random() * 3600);
+    /* the first one lands about a second after the card arrives, so the
+       surface is seen to answer before anyone touches it; after that the
+       rain settles into its own slow rhythm */
+    const wait = greeted ? 3800 + Math.random() * 3600 : 1100;
+    greeted = true;
+    timer = setTimeout(rainOnce, wait);
   }
   function stop() { clearTimeout(timer); timer = 0; }
 

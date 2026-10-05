@@ -7544,6 +7544,7 @@ body.is-ceremony .temple__band--drift { margin-top: 0; }
 body.is-ceremony .temple__band--meets .temple__meets {
   position: relative;
   overflow: hidden;              /* rings stop at the rounded corners */
+  cursor: pointer;               /* the hand is told the water can be touched */
 }
 /* the words stay above the water. The drops are excluded: this rule outranks
    .drip's own position:absolute, which dropped them into the text flow. */
