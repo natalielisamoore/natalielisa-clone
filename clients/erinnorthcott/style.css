@@ -7346,3 +7346,90 @@ body.is-ceremony .temple__band--note a:not(.btn-enter):focus-visible::after {
   body.is-ceremony .temple__band--note a:not(.btn-enter)::after { transition: none; }
   body.is-ceremony .temple__band--note .temple__snap:hover { transform: rotate(-1.5deg); }
 }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   THE WORK AND THE SESSION BECOME TWO BANDS (2026-10-04)
+   Her ask: "i want the 'what happens in an inner ceremony' section to just be
+   the background of the starry image - dont extend it into two sections, have
+   it match the width of the screen and the 'inside a session' can be the navy
+   blue full background."
+
+   They were one `.temple__band--work` holding two `.work__part` blocks with a
+   gold rule between them. Now they are two sections in the markup:
+   `--work` keeps the first part, `--session` is new and carries the second
+   part plus Erin's quote and the pull line, in the reading order they had.
+
+   THE WORK: the nebula stops being weather behind the words and becomes the
+   section's background. The blush gradient and the top/bottom mask are both
+   gone — that fade was what made it bleed into the sections either side, and
+   she asked for a block the width of the screen. The image is held just off
+   full strength and a soft cream wash sits over it so the warm charcoal body
+   copy still reads over the darker corners of the sky.
+
+   Both bands are already full bleed: the ceremony override sets every
+   `.temple__band` to width 100% with no radius, so "the width of the screen"
+   needs no extra width rule here, only the removal of the fades.
+   ═══════════════════════════════════════════════════════════════════════════ */
+body.is-ceremony .temple__band--work {
+  padding-block: clamp(4.5rem, 11vh, 7.5rem);
+  background: #f6e5dc;
+}
+body.is-ceremony .temple__band--work::before {
+  background: url("images/work-sky.jpg?v=323") center / cover no-repeat;
+  opacity: .9;
+  filter: saturate(.92) brightness(1.04);
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+/* the cream wash that keeps the ink legible over the sky */
+body.is-ceremony .temple__band--work::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: rgba(250, 243, 238, .58);
+  pointer-events: none;
+}
+
+/* THE SESSION: full-bleed navy, the same #12122e as the note zone further
+   down the page, so the two dark stripes on this page are the one colour.
+   Cream body, gold label and heading, and the two quotes that follow take
+   the cream as well. */
+body.is-ceremony .temple__band--session {
+  padding-block: clamp(5rem, 12vh, 8.5rem);
+  background: #12122e;
+}
+body.is-ceremony .temple__band--session .temple__label { color: var(--gold-lite); }
+body.is-ceremony .temple__band--session .temple__eyebrow { color: var(--gold-lite); }
+body.is-ceremony .temple__band--session .temple__lede,
+body.is-ceremony .temple__band--session .work__part .temple__lede,
+body.is-ceremony .temple__band--session .temple__quote blockquote,
+body.is-ceremony .temple__band--session .temple__pull,
+body.is-ceremony.try-instrument .temple__band--session .temple__pull { color: var(--t-cream); }
+body.is-ceremony .temple__band--session .temple__cite { color: rgba(250, 243, 238, .72); }
+/* strong and em were set in the warm charcoal for a light ground; on navy
+   the em was all but invisible (near-black italic on #12122e), so both take
+   the cream, strong a shade brighter than the body */
+body.is-ceremony .temple__band--session .temple__lede strong { color: #fff; }
+body.is-ceremony .temple__band--session .temple__lede em { color: var(--gold-lite); }
+/* the rule above the second part was the seam between two parts of one band;
+   there is no seam now, so the part starts flush at the top of its own band */
+body.is-ceremony .temple__band--session .work__part--second {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+}
+body.is-ceremony .temple__band--session .temple__pull {
+  width: min(100% - 3rem, 46rem);
+  margin-top: clamp(3rem, 7vh, 5rem);
+  padding-top: 0;
+  border-top: 0;
+  font-size: clamp(1.6rem, 3.2vw, 2.5rem);
+  line-height: 1.4;
+}
+
+/* The marquee used to be pulled up into the bottom of The Work's blush fade.
+   There is no fade now and the band below it is a solid navy block, so the
+   lift is cancelled: a negative margin here would drag the praise strip up
+   onto the navy. */
+body.is-ceremony .temple__band--drift { margin-top: 0; }
