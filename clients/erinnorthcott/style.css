@@ -7334,8 +7334,12 @@ body.is-ceremony .depth__list li::before {
    These selectors have to come last in the file: the TYPE COLOUR block above
    sets `body.is-ceremony .temple__notetext .temple__lede` to `--t-body` at
    the same specificity, so this wins on order alone. Don't move it up. */
+/* 2026-10-04: "change 'i've been where you are' to the brighter blue instead
+   of the navy" — the zone takes the same `--t-indigo` the two cards above it
+   use, so every coloured surface on this page is the one blue. The gold label
+   and heading and the cream body all still clear 6:1 on it. */
 body.is-ceremony .temple__band--note {
-  background: #12122e;
+  background: var(--t-indigo);
   padding-block: clamp(5.5rem, 13vh, 9rem);
 }
 body.is-ceremony .temple__band--note .temple__label { color: var(--gold-lite); }
