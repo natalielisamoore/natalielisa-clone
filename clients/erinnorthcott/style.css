@@ -5342,9 +5342,24 @@ body.is-daniel .cosmos__img {
   height: auto;
   border-radius: 6px;
   box-shadow: 0 14px 30px rgba(30,26,23,.18), 0 0 0 1px rgba(30,26,23,.08);
+  /* the tilt lives in --rot now, so the drag can add its own translate
+     without throwing the card straight (2026-10-05) */
+  --dx: 0px; --dy: 0px; --rot: 0deg;
+  transform: translate(var(--dx), var(--dy)) rotate(var(--rot));
+  cursor: grab;
+  touch-action: none;                /* the card takes the drag, not the page */
+  -webkit-user-drag: none;
+  user-select: none;
+  position: relative;
+  z-index: 1;
 }
-body.is-daniel .cosmos__obj:nth-child(1) .cosmos__img { transform: rotate(-3deg); }
-body.is-daniel .cosmos__obj:nth-child(3) .cosmos__img { transform: rotate(2.5deg); }
+body.is-daniel .cosmos__obj:nth-child(1) .cosmos__img { --rot: -3deg; }
+body.is-daniel .cosmos__obj:nth-child(3) .cosmos__img { --rot: 2.5deg; }
+/* picked up: lifted off the table and above its neighbours */
+body.is-daniel .cosmos__img.is-drag {
+  cursor: grabbing;
+  box-shadow: 0 26px 48px rgba(30,26,23,.3), 0 0 0 1px rgba(30,26,23,.1);
+}
 body.is-daniel .cosmos__btn { min-width: min(100%, 360px); padding: 1rem 2rem; font-size: clamp(.82rem, 1vw, .95rem); }
 body.is-daniel .cosmos__form { width: min(100%, 420px); }
 

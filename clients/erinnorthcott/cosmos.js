@@ -33,3 +33,55 @@
     }
   });
 })();
+
+/* The three cards can be picked up and moved (2026-10-05). The tilt stays in
+   --rot and the drag writes --dx/--dy, so a card keeps its angle while it
+   travels. A card stays where it is dropped, and cannot be pushed outside the
+   section. */
+(function () {
+  const cards = document.querySelectorAll('.cosmos__img');
+  if (!cards.length) return;
+  const section = document.querySelector('.cosmos');
+  if (!section) return;
+
+  let top = 1;                       /* the card last picked up sits above the rest */
+
+  cards.forEach((card) => {
+    let dx = 0, dy = 0;              /* where this card has been moved to */
+    let sx = 0, sy = 0;              /* pointer origin, minus the offset so far */
+    let lo = {}, hi = {};            /* how far it may travel before leaving the section */
+    let active = null;
+
+    card.addEventListener('pointerdown', (e) => {
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      active = e.pointerId;
+      card.setPointerCapture(active);
+      sx = e.clientX - dx;
+      sy = e.clientY - dy;
+      const s = section.getBoundingClientRect();
+      const c = card.getBoundingClientRect();
+      lo = { x: dx - (c.left - s.left), y: dy - (c.top - s.top) };
+      hi = { x: dx + (s.right - c.right), y: dy + (s.bottom - c.bottom) };
+      card.classList.add('is-drag');
+      card.style.zIndex = String(++top + 1);
+      e.preventDefault();
+    });
+
+    card.addEventListener('pointermove', (e) => {
+      if (e.pointerId !== active) return;
+      dx = Math.min(hi.x, Math.max(lo.x, e.clientX - sx));
+      dy = Math.min(hi.y, Math.max(lo.y, e.clientY - sy));
+      card.style.setProperty('--dx', dx + 'px');
+      card.style.setProperty('--dy', dy + 'px');
+    });
+
+    const drop = (e) => {
+      if (e.pointerId !== active) return;
+      active = null;
+      card.classList.remove('is-drag');
+    };
+    card.addEventListener('pointerup', drop);
+    card.addEventListener('pointercancel', drop);
+    card.addEventListener('dragstart', (e) => e.preventDefault());
+  });
+})();
