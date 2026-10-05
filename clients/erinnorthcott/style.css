@@ -6451,18 +6451,26 @@ body.is-ceremony .temple__band--meets {
 body.is-ceremony .temple__meets {
   width: min(100% - 3rem, 48rem);
   margin: 0 auto;
-  padding: clamp(2rem, 4.5vw, 3.1rem) clamp(1.8rem, 4vw, 3rem);
+  padding: clamp(2.2rem, 5vw, 3.4rem) clamp(1.8rem, 4vw, 3.2rem);
   border-radius: 14px;
   background: #fff;
   box-shadow: 0 14px 36px rgba(120, 80, 50, .12);
-  font-family: var(--serif);
-  font-style: italic;
-  font-weight: 300;
-  font-size: clamp(1.18rem, 2.1vw, 1.55rem);
-  line-height: 1.5;
+}
+/* the two questions and the closing line stay centred, the paragraph between
+   them keeps the justified setting every other paragraph on the page has */
+body.is-ceremony .temple__meets .temple__beat {
+  width: 100%;
+  margin: 0 auto clamp(1.4rem, 3.2vh, 2.1rem);
+  font-size: clamp(1.14rem, 2vw, 1.45rem);
+  line-height: 1.55;
   text-align: center;
-  text-wrap: balance;
-  color: var(--t-ink);
+}
+body.is-ceremony .temple__meets .temple__lede {
+  margin: 0;
+  line-height: 1.8;
+}
+body.is-ceremony .temple__meets .temple__beat--close {
+  margin: clamp(1.6rem, 3.6vh, 2.4rem) auto 0;
 }
 @media (max-width: 1140px) and (min-width: 821px) {
   body.is-ceremony .temple__band--thresholds .temple__cols { grid-template-columns: minmax(0, 30rem) minmax(0, 1fr); }
