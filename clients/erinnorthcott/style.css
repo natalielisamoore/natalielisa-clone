@@ -4384,6 +4384,7 @@ body.is-ceremony .faq {
 body.is-ceremony .faq__item { border-bottom: 1px solid rgba(201, 168, 76, .4); }
 body.is-ceremony .faq__q { margin: 0; font-size: inherit; font-weight: inherit; }
 body.is-ceremony .faq__btn {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -4442,6 +4443,99 @@ body.is-ceremony .faq__inner p {
   transition: opacity .4s ease .08s, transform .4s ease .08s;
 }
 body.is-ceremony .faq__item.is-open .faq__inner p { opacity: 1; transform: none; }
+
+/* ── FAQ ROWS LIGHT UP ON HOVER (2026-10-04) ──────────────────────────────
+   "make the FAQ hover with a white block. something interactive". A white
+   card wipes in from the left behind the row: it grows out past the
+   hairlines on both sides so it reads as a block lifting off the gradient
+   rather than a highlight inside the list. The question and its answer ride
+   8px to the right as it lands, a soft gold disc opens behind the plus, and
+   the row carries a shadow for the length of the hover.
+
+   The card lives on `.faq__item`, NOT on the button: a closed item is just
+   the question row, so it covers exactly that, and an open one is question
+   plus answer, so the whole thing becomes one white card while you read.
+   It is a ::before at z-index 0 with the question and panel lifted to
+   z-index 1 — z-index: -1 would drop it behind the band's own background
+   and show nothing at all. */
+body.is-ceremony .faq__item { position: relative; isolation: isolate; }
+body.is-ceremony .faq__item::before {
+  content: "";
+  position: absolute;
+  inset: 3px clamp(-1.4rem, -1.2vw, -.9rem);
+  z-index: 0;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 12px 30px rgba(120, 80, 50, .13);
+  opacity: 0;
+  transform: scaleX(.94);
+  transform-origin: left center;
+  transition: opacity .28s ease, transform .5s cubic-bezier(.2, .7, .2, 1);
+  pointer-events: none;
+}
+body.is-ceremony .faq__q,
+body.is-ceremony .faq__panel { position: relative; z-index: 1; }
+body.is-ceremony .faq__item:hover::before,
+body.is-ceremony .faq__item:focus-within::before,
+body.is-ceremony .faq__item.is-open::before { opacity: 1; transform: scaleX(1); }
+
+/* the question text and the answer slide together, so they stay aligned
+   with each other on the card instead of stepping apart */
+body.is-ceremony .faq__btn > span:not(.faq__mark),
+body.is-ceremony .faq__inner p {
+  transition: transform .45s cubic-bezier(.2, .7, .2, 1),
+              opacity .4s ease .08s;
+}
+body.is-ceremony .faq__item:hover .faq__btn > span:not(.faq__mark),
+body.is-ceremony .faq__item:focus-within .faq__btn > span:not(.faq__mark),
+body.is-ceremony .faq__item.is-open .faq__btn > span:not(.faq__mark) {
+  transform: translateX(8px);
+}
+body.is-ceremony .faq__item.is-open .faq__inner p { opacity: 1; transform: translateX(8px); }
+body.is-ceremony .faq__item.is-open .faq__inner p { padding-right: 3.2rem; }
+
+/* the mark leans back the other way, with a gold disc opening behind it */
+body.is-ceremony .faq__mark { transition: transform .45s cubic-bezier(.2, .7, .2, 1); }
+body.is-ceremony .faq__item:hover .faq__mark,
+body.is-ceremony .faq__item:focus-within .faq__mark,
+body.is-ceremony .faq__item.is-open .faq__mark { transform: translateX(-8px); }
+body.is-ceremony .faq__btn::after {
+  content: "";
+  position: absolute;
+  right: -.65rem;
+  top: 50%;
+  width: 2.3rem; height: 2.3rem;
+  margin-top: -1.15rem;
+  z-index: -1;
+  border-radius: 50%;
+  background: rgba(255, 202, 44, .22);
+  opacity: 0;
+  transform: translateX(0) scale(.4);
+  transition: transform .5s cubic-bezier(.2, .7, .2, 1), opacity .3s ease;
+  pointer-events: none;
+}
+body.is-ceremony .faq__item:hover .faq__btn::after,
+body.is-ceremony .faq__item:focus-within .faq__btn::after,
+body.is-ceremony .faq__item.is-open .faq__btn::after {
+  opacity: 1;
+  transform: translateX(-8px) scale(1);
+}
+@media (prefers-reduced-motion: reduce) {
+  body.is-ceremony .faq__item::before,
+  body.is-ceremony .faq__btn::after,
+  body.is-ceremony .faq__btn > span:not(.faq__mark),
+  body.is-ceremony .faq__inner p,
+  body.is-ceremony .faq__mark { transition: none; }
+  body.is-ceremony .faq__item:hover::before,
+  body.is-ceremony .faq__item.is-open::before { transform: none; }
+  body.is-ceremony .faq__item:hover .faq__btn > span:not(.faq__mark),
+  body.is-ceremony .faq__item.is-open .faq__btn > span:not(.faq__mark),
+  body.is-ceremony .faq__item.is-open .faq__inner p,
+  body.is-ceremony .faq__item:hover .faq__mark,
+  body.is-ceremony .faq__item.is-open .faq__mark { transform: none; }
+  body.is-ceremony .faq__item:hover .faq__btn::after,
+  body.is-ceremony .faq__item.is-open .faq__btn::after { transform: scale(1); }
+}
 
 /* the outcome passage: centred, serif, held before the closing line */
 body.is-ceremony .temple__band--outcome { padding-block: clamp(2rem, 5vh, 3.5rem); }
