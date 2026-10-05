@@ -3201,18 +3201,13 @@ body.is-ceremony { --t-measure: min(100% - 6rem, 47rem); }
    more green, the blue pulled down. Her screenshot of that card is wide-gamut,
    which is part of why the same value looks warmer in her capture than in the
    browser. #fbfbfb words and an 18px radius are hers. */
-body.is-ceremony { --t-indigo: #96591a; }
-/* AMBER TRIAL (2026-10-04): "lets try the amber" then "keep it more
-   monochromatic", so this is not a contrasting colour but the page's own hue
-   taken deep: #96591a sits at ~30 degrees, between the blush ground (#f7e7df,
-   ~23) and the gold (#c9a84c, ~43), so the coloured blocks read as the dark
-   end of the same family rather than a second colour. White clears 5:1 on it.
-   The token keeps its name so the swap back to the indigo is one line.
-   The gold label and script heading on the note band go cream for this
-   (gold-lite on amber is gold on gold); those rules are at the END of the
-   file, because the note band's own gold-lite rules live there and win on
-   order from here.
-   REVERT = `--t-indigo: #4226bd` here, and the amber block at the file end. */
+/* The indigo every coloured surface on this page shares: the two cards and
+   the note band. The amber trial of 2026-10-04 ("lets try the amber", then
+   "keep it more monochromatic") took this to #96591a, a deep version of the
+   page's own hue; she looked at it and said "go back to the blue", so the
+   blue stands and the amber is gone rather than left commented out.
+   See [[erin-northcott-client-site]] for why blue and not gold. */
+body.is-ceremony { --t-indigo: #4226bd; }
 body.is-ceremony .temple__band {
   width: min(100% - 5rem, 1000px);
   padding-block: clamp(2.6rem, 6vh, 4.2rem);
@@ -7528,12 +7523,3 @@ body.is-ceremony .temple__band--session .temple__pull {
    padding — so the lift has nothing to lift into and stays cancelled. */
 body.is-ceremony .temple__band--drift { margin-top: 0; }
 
-
-/* ── AMBER TRIAL, the part that has to come last (2026-10-04) ─────────────
-   The note band sets its label and "I've been where you are." to gold-lite
-   near the end of the file; on amber that is gold on gold, so they go cream.
-   These have to sit after that block to win on order. Delete this whole
-   block when the indigo comes back. */
-body.is-ceremony .temple__band--note .temple__label,
-body.is-ceremony .temple__notetext .temple__label,
-body.is-ceremony .temple__band--note .temple__noteline { color: #fdf4e6; }
