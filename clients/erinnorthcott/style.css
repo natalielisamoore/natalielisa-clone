@@ -6487,6 +6487,35 @@ body.is-ceremony .temple__meets .temple__hl {
     rgba(255, 213, 112, .92) 95%, rgba(255, 213, 112, 0) 100%);
   color: #1c1540;
 }
+
+/* ── THE TWO CLOSING QUOTES TAKE THE SAME INDIGO CARD (2026-10-04) ────────
+   "put this in the blue background - same style as 'should i stay'". Erin's
+   quote and the pull line were loose on the page ground at the end of The
+   Session; they now share one card with the same width, radius, padding and
+   indigo as the block above, which is why they carry `.temple__meets` itself
+   and only the quote-specific colours live here. Wording and order are
+   unchanged. */
+body.is-ceremony .temple__meets--quotes {
+  margin-top: clamp(3rem, 7vh, 5rem);
+}
+body.is-ceremony .temple__meets--quotes .temple__quote--work {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+body.is-ceremony .temple__meets--quotes .temple__quote blockquote,
+body.is-ceremony.try-instrument .temple__meets--quotes .temple__quote blockquote,
+body.is-ceremony .temple__meets--quotes .temple__pull,
+body.is-ceremony.try-instrument .temple__meets--quotes .temple__pull { color: #fbfbfb; }
+body.is-ceremony .temple__meets--quotes .temple__cite { color: rgba(251, 251, 251, .72); }
+/* the pull line closes the card, so it keeps its size but loses the big
+   outer margin it had when it stood alone on the page */
+body.is-ceremony .temple__meets--quotes .temple__pull {
+  width: min(100%, 46rem);
+  margin: clamp(2.4rem, 5vh, 3.4rem) auto 0;
+  padding-top: 0;
+  border-top: 0;
+}
 /* the two questions and the closing line stay centred, the paragraph between
    them keeps the justified setting every other paragraph on the page has */
 body.is-ceremony .temple__meets .temple__beat {
