@@ -7533,3 +7533,56 @@ body.is-ceremony .temple__band--session .temple__pull {
    padding — so the lift has nothing to lift into and stays cancelled. */
 body.is-ceremony .temple__band--drift { margin-top: 0; }
 
+
+/* --------------------------------------------------------------------------
+   THE POND (2026-10-05): "Like a raindrop ripples the pond" is her own line,
+   so the card performs it. Click anywhere on the indigo and three rings open
+   from that point; left alone, a quieter drop lands by itself every few
+   seconds so the water is already moving when you arrive. Scoped to this one
+   card: .temple__meets is also worn by the closing quotes card.
+   -------------------------------------------------------------------------- */
+body.is-ceremony .temple__band--meets .temple__meets {
+  position: relative;
+  overflow: hidden;              /* rings stop at the rounded corners */
+}
+/* the words stay above the water. The drops are excluded: this rule outranks
+   .drip's own position:absolute, which dropped them into the text flow. */
+body.is-ceremony .temple__band--meets .temple__meets > :not(.drip) { position: relative; z-index: 1; }
+
+.drip {
+  position: absolute;
+  top: 0; left: 0;
+  width: 0; height: 0;
+  pointer-events: none;
+  z-index: 0;
+  --drip-ink: rgba(255, 213, 112, .85);   /* her marigold, already on this card */
+  /* the card is only ~370px tall, so a ring wider than that clips to an arc
+     before it has read as a circle */
+  --drip-size: 300px;
+}
+.drip i {
+  position: absolute;
+  top: 0; left: 0;
+  width: var(--drip-size);
+  height: var(--drip-size);
+  margin: calc(var(--drip-size) / -2) 0 0 calc(var(--drip-size) / -2);
+  border: 1.5px solid var(--drip-ink);
+  border-radius: 50%;
+  opacity: 0;
+  animation: drip 2.6s cubic-bezier(.22,.61,.36,1) forwards;
+}
+.drip i:nth-child(2) { animation-delay: .26s; }
+.drip i:nth-child(3) { animation-delay: .52s; }
+/* a drop that falls by itself is quieter and spreads less far */
+.drip--rain { --drip-ink: rgba(255, 213, 112, .5); --drip-size: 200px; }
+.drip--rain i { animation-duration: 3.4s; }
+
+@keyframes drip {
+  0%   { transform: scale(.06); opacity: 0; }
+  14%  { opacity: 1; }
+  100% { transform: scale(1); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drip { display: none; }
+}
