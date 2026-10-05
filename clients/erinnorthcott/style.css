@@ -6448,8 +6448,11 @@ body.is-ceremony .temple__band--thresholds .temple__col > :last-child { margin-b
 body.is-ceremony .temple__band--meets {
   padding-block: clamp(1rem, 3vh, 2rem) clamp(2.5rem, 7vh, 4.5rem);
 }
+/* wider at her ask (2026-10-04): 48rem (768px) to 1080px, so the card sits
+   closer to the 1240px the consult band and the note grid take and stops
+   reading as a narrow panel floating in the middle of the band */
 body.is-ceremony .temple__meets {
-  width: min(100% - 3rem, 48rem);
+  width: min(100% - 5rem, 1080px);
   margin: 0 auto;
   padding: clamp(2.2rem, 5vw, 3.4rem) clamp(1.8rem, 4vw, 3.2rem);
   border-radius: 14px;
