@@ -6436,6 +6436,34 @@ body.is-ceremony .temple__band--thresholds .temple__beat {
 }
 body.is-ceremony .temple__band--thresholds .temple__lede { margin-bottom: clamp(1.1rem, 2.2vw, 1.5rem); line-height: 1.8; }
 body.is-ceremony .temple__band--thresholds .temple__col > :last-child { margin-bottom: 0; }
+
+/* ── "WHEREVER YOU'RE STANDING" ON ITS OWN WHITE BLOCK (2026-10-04) ───────
+   Her ask: "put this text on a separate white block section underneath -
+   centered to create some separation". It used to be the last paragraph of
+   the Thresholds left rail, where it read as more column copy. Now it is a
+   band of its own between Thresholds and The Work: a white card, centred,
+   with air above and below so the page takes a breath before the next
+   section. The card carries the same 14px radius and warm shadow the FAQ
+   rows take on hover, so the two white blocks on this page match. */
+body.is-ceremony .temple__band--meets {
+  padding-block: clamp(1rem, 3vh, 2rem) clamp(2.5rem, 7vh, 4.5rem);
+}
+body.is-ceremony .temple__meets {
+  width: min(100% - 3rem, 48rem);
+  margin: 0 auto;
+  padding: clamp(2rem, 4.5vw, 3.1rem) clamp(1.8rem, 4vw, 3rem);
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 14px 36px rgba(120, 80, 50, .12);
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1.18rem, 2.1vw, 1.55rem);
+  line-height: 1.5;
+  text-align: center;
+  text-wrap: balance;
+  color: var(--t-ink);
+}
 @media (max-width: 1140px) and (min-width: 821px) {
   body.is-ceremony .temple__band--thresholds .temple__cols { grid-template-columns: minmax(0, 30rem) minmax(0, 1fr); }
 }
