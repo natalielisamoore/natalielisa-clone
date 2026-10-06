@@ -1546,7 +1546,12 @@ body {
      WIDER of the two. align-items is stretch, not centre, because she asked
      for the photo to match the length of the text — stretch makes the row
      its own answer at every width instead of a height I guessed once. */
-  grid-template-columns: 1.15fr 1fr;
+  /* 2026-10-05, "make erins photo on the homepage slightly smaller, its a bit
+     too big": the photo column eases back from 1.15fr to 1.02fr. The row is
+     the text's height, so handing the words a little more width shortens
+     them, and the plate comes down in both directions rather than just
+     narrowing. It is still the wider column, which was her earlier ask. */
+  grid-template-columns: 1.02fr 1fr;
   gap: clamp(1.75rem, 4.6vw, 4.25rem);
   align-items: stretch;
   text-align: left;
