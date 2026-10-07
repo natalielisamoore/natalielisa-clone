@@ -1551,7 +1551,7 @@ body {
      the text's height, so handing the words a little more width shortens
      them, and the plate comes down in both directions rather than just
      narrowing. It is still the wider column, which was her earlier ask. */
-  grid-template-columns: 1.02fr 1fr;
+  grid-template-columns: .82fr 1fr;   /* 2026-10-06, smaller again, twice */
   gap: clamp(1.75rem, 4.6vw, 4.25rem);
   align-items: stretch;
   text-align: left;
