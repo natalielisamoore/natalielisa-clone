@@ -6956,6 +6956,22 @@ html body:not(.is-daniel):not(.is-ceremony):not(.is-connect) #sunset .btn-enter:
 html body:not(.is-daniel):not(.is-ceremony):not(.is-connect) #sunset .btn-enter:focus-visible { background: transparent; border-color: var(--hp-ink); color: var(--hp-ink); }
 html body:not(.is-daniel):not(.is-ceremony):not(.is-connect) #sunset .btn-enter:active { background: var(--hp-ink); color: var(--hp-paper); }
 
+/* ── LEARN MORE HOLDS ITS COLOUR (2026-10-07) ──────────────────────────────
+   "The learn more button on the homepage should stay the same colour and not
+   change when you scroll." The sky's crossfade is centred at --dusk .42,
+   which is almost exactly where The Becoming sits, so this one button did
+   its whole black-to-cream flip while you were reading the section. Pinning
+   --hp-t to 0 freezes it at the ink-on-cream-text state it already has when
+   the section arrives; everything downstream (hover, active) still works,
+   it just no longer moves. Only this button: the DANIEL outline above it and
+   the Collaborate button below still follow the sky. */
+html body:not(.is-daniel):not(.is-ceremony):not(.is-connect) #sunset .ceremony__cta .btn-enter,
+html body:not(.is-daniel):not(.is-ceremony):not(.is-connect) #sunset .ceremony__cta .btn-enter:hover,
+html body:not(.is-daniel):not(.is-ceremony):not(.is-connect) #sunset .ceremony__cta .btn-enter:focus-visible,
+html body:not(.is-daniel):not(.is-ceremony):not(.is-connect) #sunset .ceremony__cta .btn-enter:active {
+  --hp-t: 0;
+}
+
 /* ==========================================================================
    THE FOREST beside "When life is asking you to change" (2026-09-10). A
    trial: `.is-forest` on the Thresholds section shows a faded, warm-graded
@@ -7592,3 +7608,56 @@ body.is-ceremony .temple__band--meets .temple__meets > :not(.drip) { position: r
 @media (prefers-reduced-motion: reduce) {
   .drip { display: none; }
 }
+
+/* ==========================================================================
+   THE CARDS GO WARM (2026-10-07). "This is the colour I want for the blue
+   boxes instead." The three indigo surfaces (the "Should I stay" card, the
+   closing quotes card, and the full-bleed note stripe) take a warm ground
+   from her own palette instead of #4226bd.
+
+   Everything below is the consequence, not a second opinion: the copy on
+   those surfaces was set white, the labels gold, the highlighter opaque and
+   the shadows blue-violet, all of which were chosen FOR the navy and none of
+   which read on a light ground. Each one goes back to the value it had
+   before the card went indigo on 2026-10-04.
+   ========================================================================== */
+body.is-ceremony { --t-indigo: var(--t-peach); }
+
+/* the copy comes back to the page's warm ink */
+body.is-ceremony .temple__meets .temple__lede,
+body.is-ceremony .temple__meets .temple__beat,
+body.is-ceremony .temple__notetext .temple__lede,
+body.is-ceremony .temple__band--note .temple__lede { color: var(--t-ink); }
+body.is-ceremony .temple__meets .temple__lede strong { color: var(--t-ink); }
+body.is-ceremony .temple__meets .temple__lede em { color: var(--t-ink-soft); }
+body.is-ceremony .temple__meets .temple__beat--close { color: var(--t-ink); }
+
+/* the note stripe's label and its heading */
+body.is-ceremony .temple__band--note .temple__label,
+body.is-ceremony .temple__notetext .temple__label { color: var(--t-ink-soft); }
+body.is-ceremony .temple__band--note .temple__noteline { color: var(--t-ink); }
+
+/* 2026-10-07, "remove the yellow highlight from 'should i stay' and just bold
+   that part": no wash at all now, the questions carry themselves in weight.
+   The padding and the negative margins go too, or the span keeps the inset
+   the highlighter needed and the two lines sit off-centre. */
+body.is-ceremony .temple__meets .temple__hl {
+  background-image: none;
+  color: inherit;
+  font-weight: 700;
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+}
+
+/* the closing quotes card */
+body.is-ceremony .temple__meets--quotes .temple__quote blockquote,
+body.is-ceremony.try-instrument .temple__meets--quotes .temple__quote blockquote,
+body.is-ceremony .temple__meets--quotes .temple__pull,
+body.is-ceremony.try-instrument .temple__meets--quotes .temple__pull { color: var(--t-ink); }
+body.is-ceremony .temple__meets--quotes .temple__cite { color: var(--t-ink-soft); }
+
+/* the shadows were mixed for navy: a blue-violet under the cards and a near
+   black under the snapshot. Both go warm again. */
+body.is-ceremony .temple__meets { box-shadow: 0 18px 46px rgba(120,80,50,.2); }
+body.is-ceremony .temple__band--note .temple__snap img { box-shadow: 0 10px 28px rgba(120,80,50,.14); }
