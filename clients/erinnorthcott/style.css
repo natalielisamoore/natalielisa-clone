@@ -4209,8 +4209,12 @@ body.is-ceremony .temple__closing em { font-style: normal; }
 body.is-ceremony .rings { width: min(70vw, 34rem); }
 body.is-ceremony .temple__close { min-height: min(64vh, 36rem); }
 @media (max-width: 640px) { body.is-ceremony .temple__closing { white-space: normal; font-size: 2.4rem; } }
-/* Baxter has no question mark; this one is set on purpose, in Fraunces */
-body.is-ceremony .temple__q { font-family: var(--serif); font-weight: 300; font-size: .82em; margin-left: .04em; }
+/* The question mark used to be set apart because Baxter Clean had no glyph
+   for it. Ballerino, the script since 2026-09-09, does, and the override had
+   stopped doing what its note claimed anyway: --serif is remapped to Archivo
+   for this page further down the file, so the mark was rendering in the sans.
+   It now takes the script like the rest of the line (2026-10-09). */
+body.is-ceremony .temple__q { font: inherit; margin-left: 0; }
 
 /* footer links hover pink on Inner Ceremonies too, like the rest of the site
    (2026-09-08); the gold hover stays for the credit and the socials */
@@ -5828,8 +5832,28 @@ body.is-daniel .deck__stage .dan__sec--flip { grid-template-columns: minmax(0, 1
 body.is-daniel .deck__stage .dan__sec--flip { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); }
 body.is-daniel .deck__stage .dan__mount { width: min(100%, 520px, calc((100svh - 4rem) * .74)); }
 body.is-daniel .deck__stage .dan__mount img { max-height: none; height: auto; }
+/* 2026-10-09: Four and Five join Six here. Her Oct 9 copy made them longer,
+   and a deck card can never be taller than the screen it is pinned to, so
+   the text had begun scrolling inside its own card with the inner rule
+   sliding up through the words. The compaction Six already used closes it. */
+body.is-daniel .deck__stage .dan__sec[data-folio="4"] .dan__sectext,
+body.is-daniel .deck__stage .dan__sec[data-folio="5"] .dan__sectext,
 body.is-daniel .deck__stage .dan__sec[data-folio="6"] .dan__sectext { padding-top: clamp(1.4rem, 2.6vw, 2.2rem); padding-bottom: clamp(2.2rem, 3vw, 2.8rem); }
+body.is-daniel .deck__stage .dan__sec[data-folio="4"] .dan__sectext p,
+body.is-daniel .deck__stage .dan__sec[data-folio="5"] .dan__sectext p,
 body.is-daniel .deck__stage .dan__sec[data-folio="6"] .dan__sectext p { line-height: 1.66; font-size: clamp(.98rem, 1.12vw, 1.06rem); }
+
+/* Between the static column (<=820px) and a comfortable desktop the text
+   column is at its narrowest while the card is still a full screen, which is
+   where the long chapters run out of room. A touch more compaction just in
+   that band; above it nothing changes. */
+@media (min-width: 821px) and (max-width: 1200px) {
+  body.is-daniel .deck__stage .dan__sec[data-folio="4"] .dan__sectext p,
+  body.is-daniel .deck__stage .dan__sec[data-folio="5"] .dan__sectext p,
+  body.is-daniel .deck__stage .dan__sec[data-folio="6"] .dan__sectext p,
+  body.is-daniel .deck__stage .dan__sec[data-folio="7"] .dan__sectext p { line-height: 1.52; font-size: .95rem; }
+  body.is-daniel .deck__stage .dan__sec[data-folio="4"] .dan__sectext p { margin-bottom: .7em; }
+}
 
 /* every deck card the same height, the tallest one's (2026-09-09) */
 body.is-daniel .deck__stage .dan__sec { height: calc(100svh - 4rem); }
