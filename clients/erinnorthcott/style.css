@@ -7621,7 +7621,10 @@ body.is-ceremony .temple__band--meets .temple__meets > :not(.drip) { position: r
    which read on a light ground. Each one goes back to the value it had
    before the card went indigo on 2026-10-04.
    ========================================================================== */
-body.is-ceremony { --t-indigo: var(--t-peach); }
+/* 2026-10-08, "use this colour instead for the pink, this one is a bit
+   lighter": a pale petal pink, read off her swatch. Named so it is one line
+   to retune if the hex is not exact. */
+body.is-ceremony { --t-petal: #fae3df; --t-indigo: var(--t-petal); }
 
 /* the copy comes back to the page's warm ink */
 body.is-ceremony .temple__meets .temple__lede,
