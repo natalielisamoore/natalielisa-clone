@@ -7601,7 +7601,7 @@ body.is-ceremony .temple__band--meets .temple__meets > :not(.drip) { position: r
   width: 0; height: 0;
   pointer-events: none;
   z-index: 0;
-  --drip-ink: rgba(255, 213, 112, .85);   /* her marigold, already on this card */
+  --drip-ink: rgba(255, 255, 255, .95);   /* white, 2026-10-21: the marigold was lost on the pink */
   /* the card is only ~370px tall, so a ring wider than that clips to an arc
      before it has read as a circle */
   --drip-size: 300px;
@@ -7620,7 +7620,7 @@ body.is-ceremony .temple__band--meets .temple__meets > :not(.drip) { position: r
 .drip i:nth-child(2) { animation-delay: .26s; }
 .drip i:nth-child(3) { animation-delay: .52s; }
 /* a drop that falls by itself is quieter and spreads less far */
-.drip--rain { --drip-ink: rgba(255, 213, 112, .5); --drip-size: 200px; }
+.drip--rain { --drip-ink: rgba(255, 255, 255, .8); --drip-size: 200px; }
 .drip--rain i { animation-duration: 3.4s; }
 
 @keyframes drip {
